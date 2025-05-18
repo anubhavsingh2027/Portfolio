@@ -7,10 +7,24 @@
    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav class="nav">
+  
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#problem-solving">Skills</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li ><a href="#achievements">Achievements</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+
     <header class="header">
         <img src="Document/Anubhav singh img.jpg" alt="Anubhav Singh">
         <h1>Anubhav Singh</h1>
-        <p>I am a problem solver and web developer with a passion for building innovative solutions.</p>
+       <p>I am a <span class="typewriter-text" id="typewriter"></span></p>
     </header>
     <div class="container">
         <section id="education">
@@ -33,12 +47,29 @@
         </section>
         <section id="problem-solving">
             <h2>Problem-Solving</h2>
-            <ul>
-                <li><strong>C++:</strong> High proficiency</li>
-                <li><strong>C:</strong> High proficiency</li>
-                <li><strong>Python:</strong> Medium proficiency</li>
-                <li><strong>JavaScript:</strong> Medium proficiency</li>
-            </ul>
+           
+             <div class="grid">
+                <div class="card">
+                    <h3>C++</h3>
+                    <p>High proficiency</p>
+                </div>
+                <div class="card">
+                    <h3>C</h3>
+                    <p>High proficiency</p>
+                </div>
+                <div class="card">
+                    <h3>JavaScript</h3>
+                    <p>High proficiency</p>
+                </div>
+                <div class="card">
+                    <h3>Python</h3>
+                    <p>Medium proficiency</p>
+                </div>
+                <div class="card">
+                    <h3>Java</h3>
+                    <p>Medium proficiency</p>
+                </div>
+            </div>
         </section>                
         <section id="web-development">
             <h2>Web Development</h2>
@@ -57,24 +88,25 @@
                 </div>
             </div>
         </section>
-        <section id="achievements">
-            <h2>Achievements</h2>
-            <ul>
-                <li>LeetCode: Solved  200+ problems</li>
-                <li>HackerRank: Achieved 5-star rating in Problem Solving</li>
-                <li>LeetCode: Earned 5-star rating for problem-solving with C++</li>
-                <li>LeetCode: Earned 5-star rating for problem-solving with C</li>
-            </ul>
-        </section>
+       
         <section id="projects">
             <h2>Projects</h2>
             <div class="grid">
+               
                 <div class="card">
+                    <h3>PhishShield</h>
+                    <p>Technologies: HTML, CSS, JavaScript, NodeJs, MongoDB</p>
+                </div>
+                <div class="card">
+                    <h3>Kashika Tours and Travels</h3>
+                    <p>Technologies: HTML, CSS, JavaScript, NodeJs</p>
+                </div>
+                 <div class="card">
                     <h3>Toolexa.ai</h3>
                     <p>Role: Frontend | College Group Project</p>
                 </div>
                 <div class="card">
-                    <h3>Kashika Tours and Travels</h3>
+                    <h3>Weather Checker</h>
                     <p>Technologies: HTML, CSS, JavaScript</p>
                 </div>
                 <div class="card">
@@ -82,57 +114,86 @@
                     <p>Technologies: HTML, CSS, JavaScript</p>
                 </div>
                 <div class="card">
-                    <h3>Weather Checker</h>
-                    <p>Technologies: HTML, CSS, JavaScript</p>
-                </div>
-                <div class="card">
-                    <h3>Calculator</h>
-                    <p>Technologies: HTML, CSS, JavaScript</p>
-                </div>
-                <div class="card">
                     <h3>Amazon Clone</h>
-                    <p>Technologies: HTML, CSS</p>
+                    <p>Technologies: HTML, CSS, JavaScript</p>
                 </div>
             </div>
         </section>
+         <section id="achievements">
+            <h2>Achievements</h2>
+           
+             <div class="card">
+                   <p>LeetCode: Solved  500+ problems</p>
+                </div>
+                 <div class="card">
+                   <p>HackerRank: Achieved 5-star rating in Problem Solving</p>
+                </div>
+                 <div class="card">
+                    <p>LeetCode: Achieved 10+ monthly badges and a coding streak of 150+ days, including Constellation Challenge participation.</p>
+                </div>
+                 <div class="card">
+                    <p>Completed multiple full-stack projects, including weather apps, portfolio websites, PhishShield (a phishing detection tool), and AI tool directories using technologies like HTML, CSS, JavaScript, Node.js, MongoDB, and APIs.</p>
+                </div>
+        </section>
         <section id="certifications">
             <h2>Certifications</h2>
-            <ul>
-                <li>Infosys Certification in HTML, CSS, and JavaScript</li>
-                <li>Infosys Certification in Python Programming</li>
-                <li>LeetCode Certification in Problem Solving with C++</li>
-                <li>LeetCode Certification in Problem Solving with C</li>
-            </ul>
+           
+             <div class="card">
+                   <p>YHills: Completed a Cyber Security Bootcamp and earned a certification after intensive hands-on training conducted on January 11–12, 2025.</p>
+                </div>
+                 <div class="card">
+                   <p>Infosys Certification in HTML, CSS, and JavaScript<</p>
+                </div>
+                 <div class="card">
+                   <p>Infosys Certification in Python Programming</p>
+                </div>
+                 
         </section>
         <section id="resume">
             <h2>Download My Resume</h2>
             <a href="Document/Anubhav singh Resume.pdf" download>
                 <button>Download Resume</button>
             </a>
+           
         </section>
         <section id="contact">
             <h2>Contact Information</h2>
             <div class="contact">
-                <div class="contact-item">
+               <a href="mailto:anubhavsingh2027@gmail.com" target="_blank">
+                 <div class="contact-item">
                     <h3>Email</h3>
                     <p><a href="mailto:anubhavsingh2027@gmail.com">anubhavsingh2027</a></p>
                 </div>
-                <div class="contact-item">
+               </a>
+                 <a href="https://api.whatsapp.com/send?phone=7355026966" target="_blank">
+                    <div class="contact-item">
+                    <h3>whatsapp</h3>
+                    <p><a href="https://api.whatsapp.com/send?phone=7355026966" target="_blank">Send Message</a></p>
+                </div></a>
+                <a href="https://www.linkedin.com/in/anubhav-singh-09b71829b" target="_blank">
+                    <div class="contact-item">
                     <h3>LinkedIn</h3>
                     <p><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b" target="_blank">View Profile</a></p>
                 </div>
-                <div class="contact-item">
+                </a>
+                <a href="https://github.com/anubhavsingh2027" target="_blank">
+                    <div class="contact-item">
                     <h3>GitHub</h3>
                     <p><a href="https://github.com/anubhavsingh2027" target="_blank">View Repository</a></p>
                 </div>
-                <div class="contact-item">
+                </a>
+               <a href="https://www.hackerrank.com/profile/anubhavsingh2027" target="_blank">
+                 <div class="contact-item">
                     <h3>HackerRank</h3>
                     <p><a href="https://www.hackerrank.com/profile/anubhavsingh2027" target="_blank">View Profile</a></p>
                 </div>
-                <div class="contact-item">
+               </a>
+                <a href="https://leetcode.com/u/anubhav_singh_6966/" target="_blank">
+                    <div class="contact-item">
                     <h3>LeetCode</h3>
                     <p><a href="https://leetcode.com/u/anubhav_singh_6966/" target="_blank">View Profile</a></p>
                 </div>
+                </a>
             </div>
         </section>
     </div>
