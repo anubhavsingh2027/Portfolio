@@ -324,6 +324,10 @@ background: linear-gradient(135deg, #16a085, #2c3e50);
    .contact {
   padding: 0px;
 }
+    .header img {
+    width: 450px;
+    height: 650px;
+    }
 }
 
 @media (max-width: 600px) {
