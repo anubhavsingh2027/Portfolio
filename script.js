@@ -1,4 +1,44 @@
 
+  const phrases = ["Problem Solver ", "Full Stack Developer ", "Software Engineer ", "Creative Thinker ", "Passionate Coder "];
+
+    let i = 0; // current phrase index
+    let j = 0; // current letter index
+    let currentPhrase = [];
+    let isDeleting = false;
+    const speed = 50;
+    const element = document.getElementById("typewriter");
+
+    function loop() {
+      element.innerHTML = currentPhrase.join("");
+
+      if (!isDeleting && j < phrases[i].length) {
+        currentPhrase.push(phrases[i][j]);
+        j++;
+      }
+
+      if (isDeleting && j > 0) {
+        currentPhrase.pop();
+        j--;
+      }
+
+      if (j === phrases[i].length) {
+        isDeleting = true;
+        setTimeout(loop, 1500); // pause before deleting
+        return;
+      }
+
+      if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % phrases.length;
+      }
+
+      setTimeout(loop, speed);
+    }
+
+    loop();
+
+
+
 let angle = 0;
 function rotateBorder() {
     angle += 1;
