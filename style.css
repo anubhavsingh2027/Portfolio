@@ -96,8 +96,8 @@ a:hover {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 .header img {
-    width: 450px;
-    height: 650px;
+    width: 350px;
+    height: 430px;
     border-radius: 50%;
     position: relative;
     z-index: 1;
