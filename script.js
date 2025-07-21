@@ -1,0 +1,302 @@
+
+  const phrases = ["Problem Solver ", "Full Stack Developer ", "Software Engineer ", "Creative Thinker ", "Passionate Coder "];
+
+    let i = 0; // current phrase index
+    let j = 0; // current letter index
+    let currentPhrase = [];
+    let isDeleting = false;
+    const speed = 50;
+    const element = document.getElementById("typewriter");
+
+    function loop() {
+      element.innerHTML = currentPhrase.join("");
+
+      if (!isDeleting && j < phrases[i].length) {
+        currentPhrase.push(phrases[i][j]);
+        j++;
+      }
+
+      if (isDeleting && j > 0) {
+        currentPhrase.pop();
+        j--;
+      }
+
+      if (j === phrases[i].length) {
+        isDeleting = true;
+        setTimeout(loop, 1500); // pause before deleting
+        return;
+      }
+
+      if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % phrases.length;
+      }
+
+      setTimeout(loop, speed);
+    }
+
+    loop();
+
+
+
+      // Toggling Skill Tabs
+
+      const tabs = document.querySelectorAll("[data-target]");
+      const tabContent = document.querySelectorAll("[data-content]");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = document.querySelector(tab.dataset.target);
+
+          tabContent.forEach((tabContents) => {
+            tabContents.classList.remove("skills-active");
+          });
+
+          target.classList.add("skills-active");
+
+          tabs.forEach((tab) => {
+            tab.classList.remove("skills-active");
+          });
+
+          tab.classList.add("skills-active");
+        });
+      });
+
+      //Mix it up Sorting
+
+      let mixerPortfolio = mixitup(".work-container", {
+        selectors: {
+          target: ".work-card",
+        },
+        animation: {
+          duration: 300,
+        },
+      });
+
+      // Active link changing
+
+      const linkWork = document.querySelectorAll(".work-item");
+
+      function activeWork() {
+        linkWork.forEach((l) => l.classList.remove("active-work"));
+        this.classList.add("active-work");
+      }
+      linkWork.forEach((l) => l.addEventListener("click", activeWork));
+
+      //Portfolio Popup
+
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("work-button")) {
+          togglePortfolioPopup();
+          portfolioItemDetails(e.target.parentElement);
+        }
+      });
+
+      function togglePortfolioPopup() {
+        document.querySelector(".portfolio-popup").classList.toggle("open");
+      }
+
+      document
+        .querySelector(".portfolio-popup-close")
+        .addEventListener("click", togglePortfolioPopup);
+
+      function portfolioItemDetails(portfolioItem) {
+        document.querySelector(".pp-thumbnail img").src =
+          portfolioItem.querySelector(".work-img").src;
+        document.querySelector(".portfolio-popup-subtitle span").innerHTML =
+          portfolioItem.querySelector(".work-title").innerHTML;
+        document.querySelector(".portfolio-popup-body").innerHTML =
+          portfolioItem.querySelector(".portfolio-item-details").innerHTML;
+      }
+
+      //Services Popup
+      const modalViews = document.querySelectorAll(".services-modal");
+      const modelBtns = document.querySelectorAll(".services-button");
+      const modalCloses = document.querySelectorAll(".services-modal-close");
+
+      let modal = function (modalClick) {
+        modalViews[modalClick].classList.add("active-modal");
+      };
+
+      modelBtns.forEach((modelBtn, i) => {
+        modelBtn.addEventListener("click", () => {
+          modal(i);
+        });
+      });
+
+      modalCloses.forEach((modalClose) => {
+        modalClose.addEventListener("click", () => {
+          modalViews.forEach((modalView) => {
+            modalView.classList.remove("active-modal");
+          });
+        });
+      });
+
+      //Swiper Testimonial
+
+      let swiper = new Swiper(".testimonials-container", {
+        spaceBetween: 24,
+        loop: true,
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          576: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 48,
+          },
+        },
+      });
+
+      // Input Animation
+
+      const inputs = document.querySelectorAll(".input");
+
+      function focusFunc() {
+        let parent = this.parentNode;
+        parent.classList.add("focus");
+      }
+
+      function blurFunc() {
+        let parent = this.parentNode;
+        if (this.value == "") {
+          parent.classList.remove("focus");
+        }
+      }
+
+      inputs.forEach((input) => {
+        input.addEventListener("focus", focusFunc);
+        input.addEventListener("blur", blurFunc);
+      });
+
+      // Scroll Section Active Link
+
+      const sections = document.querySelectorAll("section[id]");
+
+      window.addEventListener("scroll", navHighlighter);
+
+      function navHighlighter() {
+        let scrollY = window.pageYOffset;
+        sections.forEach((current) => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 50;
+          const sectionId = current.getAttribute("id");
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document
+              .querySelector(".nav-menu a[href*=" + sectionId + "]")
+              .classList.add("active-link");
+          } else {
+            document
+              .querySelector(".nav-menu a[href*=" + sectionId + "]")
+              .classList.remove("active-link");
+          }
+        });
+      }
+
+      // Activating Sidebar
+
+      const navMenu = document.getElementById("sidebar");
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          navMenu.classList.add("show-sidebar");
+        });
+      }
+
+      if (navClose) {
+        navClose.addEventListener("click", () => {
+          navMenu.classList.remove("show-sidebar");
+        });
+      }
+
+      
+let angle = 0;
+function rotateBorder() {
+    angle += 1;
+    document.querySelector('.about-img').style.background = `linear-gradient(white, white) padding-box, 
+        linear-gradient(${angle}deg, #ff0000, #ff9900, #ffff00, #33cc33, #0099ff, #663399, #ff3399, #ff0000) border-box`;
+    requestAnimationFrame(rotateBorder);
+}
+rotateBorder();
+document.querySelectorAll('.card').forEach(card => {
+card.addEventListener('mousemove', e => {
+const rect = card.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+card.style.setProperty('--mouse-x', `${x}px`);
+card.style.setProperty('--mouse-y', `${y}px`);
+});
+});
+const contactItems = document.querySelectorAll('.contact-item');
+const observer = new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+    entry.target.classList.add('bounce');
+}
+});
+}, { threshold: 0.5 });
+contactItems.forEach(item => observer.observe(item));
+
+function openPopup() {
+  const popup = document.getElementById("sharePopup");
+  const thankYouMsg = document.getElementById("thankYouMsg");
+  popup.style.display = "flex"; // Show popup
+  thankYouMsg.style.display = "block"; // Always show thank you
+  document.body.style.overflow = "hidden"; // Prevent background scroll
+}
+
+function sharePortfolio() {
+  const shareData = {
+    title: 'Anubhav Singh Portfolio',
+    text: 'Check out this awesome portfolio!',
+    url: 'https://anubhavsingh2027.github.io/Portfolio'
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData)
+      .then(() => console.log('Portfolio shared successfully!'))
+      .catch((error) => console.error('Sharing failed:', error));
+  } else {
+    alert("Web Share API not supported. Please copy and share the link manually.");
+  }
+}
+
+function closePopup() {
+  document.getElementById("sharePopup").style.display = "none";
+  document.body.style.overflow = ""; // Restore scroll
+}
+
+window.addEventListener('click', function(event) {
+  const popup = document.getElementById("sharePopup");
+  const content = document.querySelector(".popup-content");
+  if (event.target === popup && !content.contains(event.target)) {
+    closePopup();
+  }
+});
+
+
+
+  
+  const downloadLink = document.getElementById('downloadLink');
+
+  downloadLink.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (downloadLink.classList.contains('disabled')) return;
+
+    downloadLink.classList.add('disabled', 'downloading');
+
+    setTimeout(() => {
+      window.open(downloadLink.href, '_blank');
+
+      downloadLink.classList.remove('disabled', 'downloading');
+    }, 1000); // 1 second fake download
+  });
