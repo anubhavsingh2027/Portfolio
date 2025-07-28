@@ -73,6 +73,8 @@
         },
       });
 
+
+
       // Active link changing
 
       const linkWork = document.querySelectorAll(".work-item");
@@ -132,27 +134,7 @@
         });
       });
 
-      //Swiper Testimonial
-
-      let swiper = new Swiper(".testimonials-container", {
-        spaceBetween: 24,
-        loop: true,
-        grabCursor: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          576: {
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 48,
-          },
-        },
-      });
-
+     
       // Input Animation
 
       const inputs = document.querySelectorAll(".input");
@@ -199,23 +181,45 @@
         });
       }
 
-      // Activating Sidebar
+     // Activating Sidebar
+const navMenu = document.getElementById("sidebar");
+const navToggle = document.getElementById("nav-toggle");
+const navClose = document.getElementById("nav-close");
+const navLinks = document.querySelectorAll(".nav-link");
 
-      const navMenu = document.getElementById("sidebar");
-      const navToggle = document.getElementById("nav-toggle");
-      const navClose = document.getElementById("nav-close");
+// Open sidebar
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    navMenu.classList.add("show-sidebar");
+  });
+}
 
-      if (navToggle) {
-        navToggle.addEventListener("click", () => {
-          navMenu.classList.add("show-sidebar");
-        });
-      }
+// Close sidebar via X icon
+if (navClose) {
+  navClose.addEventListener("click", () => {
+    navMenu.classList.remove("show-sidebar");
+  });
+}
 
-      if (navClose) {
-        navClose.addEventListener("click", () => {
-          navMenu.classList.remove("show-sidebar");
-        });
-      }
+// Smooth scroll + animated sidebar close
+navLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent instant jump
+
+    // Get the section ID from href
+    const targetId = link.getAttribute("href");
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      // Smooth scroll
+      targetSection.scrollIntoView({ behavior: "smooth" });
+
+      // Animate nav hide
+      navMenu.classList.remove("show-sidebar");
+    }
+  });
+});
+
 
       
 let angle = 0;
@@ -277,7 +281,7 @@ function closePopup() {
 window.addEventListener('click', function(event) {
   const popup = document.getElementById("sharePopup");
   const content = document.querySelector(".popup-content");
-  if (event.target === popup && !content.contains(event.target)) {
+  if (event.target === popup) {
     closePopup();
   }
 });
@@ -299,4 +303,29 @@ window.addEventListener('click', function(event) {
 
       downloadLink.classList.remove('disabled', 'downloading');
     }, 1000); // 1 second fake download
+  });
+
+   const form = document.getElementById("contactForm");
+  const loader = document.getElementById("loader");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    form.style.display = "none"; // hide form
+    loader.style.display = "block"; // show loader
+
+    setTimeout(() => {
+      loader.style.display = "none"; // hide loader
+      successMessage.style.display = "block"; // show success
+
+      // Optional: reset form
+      form.reset();
+
+      // Optional: show form again after 3 seconds
+      setTimeout(() => {
+        successMessage.style.display = "none";
+        form.style.display = "block";
+      }, 2000);
+    }, 800); // simulate 1 sec loading
   });
