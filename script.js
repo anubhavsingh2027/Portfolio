@@ -305,27 +305,62 @@ window.addEventListener('click', function(event) {
     }, 1000); // 1 second fake download
   });
 
-   const form = document.getElementById("contactForm");
-  const loader = document.getElementById("loader");
-  const successMessage = document.getElementById("successMessage");
+ 
+  //anubhav api call
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    form.style.display = "none"; // hide form
-    loader.style.display = "block"; // show loader
+      const name = document.getElementById("username").value;
+      const to = document.getElementById("email").value;
+      const phone= document.getElementById("phone").value;
+      const subject = document.getElementById("subject").value;
+      const messagev = document.getElementById("message").value;
+      const responseMsg = document.getElementById("responseMsg");
+      responseMsg.textContent = "Sending...";
+      const hostEmail = "anubhavsingh2027@gmail.com";
+      const customerSubject = "Thank you for visiting!";
+      const customerMessage = `Thank you for visiting, ${name}. We will respond to you shortly.`;
+      const hostSubject = "New customer enquiry";
+      const hostMessage = `
+        New customer details:
+        Name: ${name}
+        Email: ${to}
+        Phone no :${phone}
+        Subject: ${subject}
+        Message: ${messagev}
+      `;
 
-    setTimeout(() => {
-      loader.style.display = "none"; // hide loader
-      successMessage.style.display = "block"; // show success
+      try {
+        const res = await fetch("https://anubhav-api.onrender.com/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ to, subject: customerSubject, message: customerMessage }),
+        });
 
-      // Optional: reset form
-      form.reset();
+        const hostRes = await fetch("https://anubhav-api.onrender.com/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ to: hostEmail, subject: hostSubject, message: hostMessage }),
+        });
 
-      // Optional: show form again after 3 seconds
-      setTimeout(() => {
-        successMessage.style.display = "none";
-        form.style.display = "block";
-      }, 2000);
-    }, 800); // simulate 1 sec loading
-  });
+        const data = await res.json();
+        const hostData = await hostRes.json();
+
+        if (data.success && hostData.success) {
+          responseMsg.textContent = "✅ Emails sent successfully!";
+          responseMsg.className = "success";
+
+          setTimeout(() => {
+            document.getElementById("contactForm").reset();
+            responseMsg.textContent = "";
+          }, 2000);
+        } else {
+          responseMsg.textContent = "❌ Failed to send email(s).";
+          responseMsg.className = "error";
+        }
+      } catch (error) {
+        responseMsg.textContent = "❌ Error: " + error.message;
+        responseMsg.className = "error";
+      }
+    });
