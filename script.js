@@ -353,7 +353,7 @@ downloadLink.addEventListener('click', async (e) => {
           body: JSON.stringify({ to, subject: customerSubject, message: customerMessage }),
         });
 
-        const hostRes = await fetch("https://anubhav-api.onrender.com/send-email", {
+        const hostRes = await fetch("https://anubhav-api-vkce.onrender.com/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ to: hostEmail, subject: hostSubject, message: hostMessage }),
@@ -378,5 +378,4 @@ downloadLink.addEventListener('click', async (e) => {
         responseMsg.textContent = "❌ Error: " + error.message;
         responseMsg.className = "error";
       }
-
     });
