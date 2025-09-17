@@ -134,7 +134,7 @@
         });
       });
 
-     
+
       // Input Animation
 
       const inputs = document.querySelectorAll(".input");
@@ -143,8 +143,8 @@
        let parent = this.parentNode;
         parent.classList.add("focus");
       }
-     
-      
+
+
 
      function blurFunc() {
   let parent = this.parentNode;
@@ -157,7 +157,7 @@
 
 
       inputs.forEach((input) => {
-      
+
         input.addEventListener("focus", focusFunc);
         input.addEventListener("blur", blurFunc);
       });
@@ -227,11 +227,11 @@ navLinks.forEach(link => {
 });
 
 
-      
+
 let angle = 0;
 function rotateBorder() {
     angle += 1;
-    document.querySelector('.about-img').style.background = `linear-gradient(white, white) padding-box, 
+    document.querySelector('.about-img').style.background = `linear-gradient(white, white) padding-box,
         linear-gradient(${angle}deg, #ff0000, #ff9900, #ffff00, #33cc33, #0099ff, #663399, #ff3399, #ff0000) border-box`;
     requestAnimationFrame(rotateBorder);
 }
@@ -415,4 +415,293 @@ window.addEventListener('click', function(event) {
         responseMsg.textContent = "❌ Error: " + error.message;
         responseMsg.className = "error";
       }
+    });
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+    // Initialize all components
+
+
+    initChatbot();
+
+    // Advanced AI Chatbot - Fixed
+    function initChatbot() {
+        const chatFab = document.getElementById('chatFab');
+        const chatbot = document.getElementById('chatbot');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const quickBtns = document.querySelectorAll('.quick-btn');
+
+        if (!chatFab || !chatbot) {
+            console.log('Chatbot elements not found');
+            return;
+        }
+
+        // Comprehensive knowledge base
+        const knowledgeBase = {
+            personal: {
+                name: "Anubhav Singh",
+                age: 20,
+                dob: "June 5, 2005",
+                location: "Varanasi, India",
+                education: "Computer Science and Engineering with AI specialization (2023-2027)",
+                email: "anubhavsingh2027@gmail.com"
+            },
+            achievements: [
+                "Solved 500+ LeetCode problems across all difficulty levels",
+                "Achieved 5-Star rating in C++ on HackerRank platform",
+                "Built and deployed 15+ full-stack web applications",
+                "Specialized in AI and Machine Learning technologies"
+            ],
+            skills: {
+                frontend: {
+                    "HTML": "95% - Expert level with semantic markup",
+                    "CSS": "90% - Advanced styling and animations",
+                    "JavaScript": "85% - Modern ES6+ and async programming",
+                    "React": "80% - Component-based architecture"
+                },
+                backend: {
+                    "C++": "90% - Data structures and algorithms",
+                    "Node.js": "85% - Server-side JavaScript",
+                    "MongoDB": "80% - NoSQL database operations",
+                    "Python": "75% - AI/ML and web development"
+                }
+            },
+            projects: {
+                phishshield: {
+                    name: "PhishShield",
+                    description: "Advanced cybersecurity platform with real-time phishing detection using URL-scanning APIs. Features comprehensive user authentication system.",
+                    technologies: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MongoDB"],
+                    github: "https://github.com/anubhavsingh2027/PhishShield"
+                },
+                kashika: {
+                    name: "Kashika Tour & Travel",
+                    description: "Complete tourism platform for Varanasi offering car rental services and personalized tour packages.",
+                    technologies: ["HTML", "CSS", "JavaScript"],
+                    github: "https://github.com/anubhavsingh2027/Kashika-Travel"
+                },
+                weather: {
+                    name: "Weather Forecasting App",
+                    description: "Responsive weather application with real-time forecasts using OpenWeather API.",
+                    technologies: ["JavaScript", "OpenWeather API", "Responsive Design"],
+                    github: "https://github.com/anubhavsingh2027/Weather-App"
+                },
+                aitools: {
+                    name: "AI Tools Directory",
+                    description: "Comprehensive directory featuring 600+ categorized AI tools with advanced search filtering.",
+                    technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
+                    github: "https://github.com/anubhavsingh2027/AI-Tools"
+                },
+                typing: {
+                    name: "Typing Speed Test",
+                    description: "Interactive typing speed test with real-time WPM tracking and accuracy measurement.",
+                    technologies: ["JavaScript", "Real-time Tracking"],
+                    github: "https://github.com/anubhavsingh2027/Typing-Test"
+                },
+                stress: {
+                    name: "Stress Relief Website",
+                    description: "Interactive wellness platform with animations and sounds designed to help users relax.",
+                    technologies: ["JavaScript", "CSS Animations", "Audio API"],
+                    github: "https://github.com/anubhavsingh2027/Stress-Relief"
+                },
+                cpp: {
+                    name: "C++ String Methods Project",
+                    description: "Educational resource demonstrating C++ string methods and functions for DSA preparation.",
+                    technologies: ["C++", "String Manipulation", "Algorithm Design"],
+                    github: "https://github.com/anubhavsingh2027/CPP-Strings"
+                }
+            }
+        };
+
+        // Chat functionality - Fixed
+        chatFab.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Chat FAB clicked'); // Debug log
+            chatbot.classList.toggle('hidden');
+        });
+
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', (e) => {
+                e.preventDefault();
+                chatbot.classList.add('hidden');
+            });
+        }
+
+        // Send message functionality - Fixed
+        if (sendMessage) {
+            sendMessage.addEventListener('click', (e) => {
+                e.preventDefault();
+                sendChatMessage();
+            });
+        }
+
+        if (chatInput) {
+            // Ensure chat input is working
+            chatInput.removeAttribute('readonly');
+            chatInput.removeAttribute('disabled');
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    sendChatMessage();
+                }
+            });
+
+            chatInput.addEventListener('input', (e) => {
+                console.log('Chat input:', e.target.value); // Debug log
+            });
+        }
+
+        // Quick questions - Fixed
+        quickBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const question = btn.getAttribute('data-question');
+                console.log('Quick question:', question); // Debug log
+                addChatMessage(question, 'user');
+                setTimeout(() => {
+                    const response = getBotResponse(question);
+                    addChatMessage(response, 'bot');
+                }, 500);
+            });
+        });
+
+        function sendChatMessage() {
+            if (!chatInput) return;
+
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            console.log('Sending message:', message); // Debug log
+
+            addChatMessage(message, 'user');
+            chatInput.value = '';
+
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addChatMessage(response, 'bot');
+            }, 500);
+        }
+
+       function addChatMessage(message, sender) {
+    if (!chatMessages) return;
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'bot-avatar';
+    avatar.textContent = sender === 'user' ? '👤' : '🤖';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.innerHTML = message;
+    bubble.style.color='black'
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(bubble);
+
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+        function getBotResponse(message) {
+            const msg = message.toLowerCase();
+
+            if(msg.includes('anubhav')){
+                return `I'm Anubhav Singh, Full Stack Developer & AI Enthusiast from the historic city of Varanasi, India. Currently pursuing Computer Science and Engineering with AI specialization (2023-2027) from a prestigious institution.
+
+My journey in programming started with curiosity and has evolved into a passion for creating impactful digital solutions. From solving complex algorithms to building full-stack applications, I enjoy every aspect of software development.`
+            }
+
+            // Personal information
+            if (msg.includes('age') || msg.includes('old')) {
+                return `Anubhav is ${knowledgeBase.personal.age} years old, born on ${knowledgeBase.personal.dob}. Despite his young age, he has achieved remarkable milestones in programming!`;
+            }
+
+            if (msg.includes('where') || msg.includes('location') || msg.includes('from')) {
+                return `Anubhav is from ${knowledgeBase.personal.location}. Varanasi is one of India's oldest and most spiritual cities, known for its rich cultural heritage.`;
+            }
+
+            if (msg.includes('education') || msg.includes('study') || msg.includes('college')) {
+                return `Anubhav is currently pursuing ${knowledgeBase.personal.education} from PSIT Kanpur. His AI specialization reflects his passion for cutting-edge technology.`;
+            }
+
+            if (msg.includes('email') || msg.includes('contact') || msg.includes('reach')) {
+                return `You can reach Anubhav at ${knowledgeBase.personal.email}. He typically responds within 24 hours and is always excited to discuss new opportunities!`;
+            }
+            if(msg.includes('direct')){
+                return `Here is my personal Mobile & WhatsApp No: 7355026966`;
+            }
+            // Skills inquiries
+            if (msg.includes('skill')) {
+                return `Anubhav has strong skills are \n\n
+                Frontend Languages: \n1. HTML\n 2. CSS \n 3.  JavaScript \n 4.  React \n
+                 Backend Languages: \n 1. Node.js \n 2. Express Js\n
+                 Databse languages:\n 1. Mongo Db \n 2.MySql  \n
+                  Programming Language :\n1. Cpp\n2. C  \n 3. Java \n 4. Python`;
+            }
+            if(msg.includes('leetcode')){
+                return `Anubhav Singh Solve 500+ Leetcode Solve Question which ShowCase the Problem Solving Skills \n\n Link For Profile View :<a href="https://leetcode.com/u/anubhav_singh_6966/">LeetCode Profile</a>`;
+            }
+            if(msg.includes('hackerrank')){
+                return `Anubhav Singh is Currently 5 Star Coder on HackerRank which ShowCase the Problem Solving Skills \n\n Link For Profile View :<a href="https://www.hackerrank.com/profile/anubhavsingh2027">Hackerrank Profile</a>`;
+            }
+            if(msg.includes('technology') || msg.includes('tech')){
+                return `Anubhav Singh technology knows are :- \n
+                1. Blockchain \n
+                2. Artificial Intelligence \n
+                3. cyber Security`
+            }
+            if(msg.includes('contest')){
+                return`Anubhav singh regurly Participate all the contest on leetcode `
+            }
+            // Achievements
+            if (msg.includes('achievement') ) {
+                return `Anubhav's achievements include:\n\n🏆 ${knowledgeBase.achievements.join('\n🏆 ')}\n\n Hacker rank `;
+            }
+
+            // Projects
+            if (msg.includes('project') || msg.includes('work') || msg.includes('portfolio')) {
+                return `Anubhav has built 7 major projects:\n\n🛡️ PhishShield - Cybersecurity Platform\n🚗 Kashika Travel - Tourism Website\n🌤️ Weather App - API Integration\n🤖 AI Tools Directory - 600+ Tools\n⌨️ Typing Speed Test\n😌 Stress Relief Platform\n📚 C++ String Methods Guide\n\nWhich project interests you most?`;
+            }
+            if (msg.includes('number') || msg.includes('mobile') || msg.includes('whatsapp')) {
+                return `Anubhav singh Mob no is 7355026966`;
+            }
+
+            // Specific projects
+            if (msg.includes('phishshield') || msg.includes('security')) {
+                const project = knowledgeBase.projects.phishshield;
+                return `${project.name}: ${project.description}\n\nTech: ${project.technologies.join(', ')}\n\nGitHub: ${project.github}\n\nLink:<a href="https://phishshield-5lym.onrender.com">PhishShield On Render</a>`;
+            }
+
+            if (msg.includes('kashika') || msg.includes('travel')) {
+                const project = knowledgeBase.projects.kashika;
+                return `${project.name}: ${project.description}\n\nTech: ${project.technologies.join(', ')}\n\nGitHub: ${project.github}`;
+            }
+
+            if (msg.includes('weather')) {
+                const project = knowledgeBase.projects.weather;
+                return `${project.name}: ${project.description}\n\nTech: ${project.technologies.join(', ')}\n\nGitHub: ${project.github}`;
+            }
+
+            // Services
+            if (msg.includes('service') || msg.includes('hire') || msg.includes('freelance')) {
+                return `Anubhav offers:\n\n💻 Web Development - Full-stack solutions\n⚙️ Backend Development - Server architecture\n🧩 Problem Solving - Algorithm optimization\n\nContact him at ${knowledgeBase.personal.email} for collaborations!`;
+            }
+            if(msg.includes('dob')|| msg.includes('birth')){
+                return `Anubhav singh Born ${knowledgeBase.personal.dob}. In 2025 is he was 20 year old.`
+            }
+            if(msg.includes('date')){
+                return `current Date is ${new Date()};
+}`
+            }
+            // Default response
+            return `I can help you learn about Anubhav's:\n\n🚀  projects\n⚡ Technical skills\n🏆 Achievements\n🎓 Education\n📞 Contact info\n\n Ask Anubhav I Will Try To Tell \n\nWhat interests you most?`;
+        }
+    }
+
+
+
     });
