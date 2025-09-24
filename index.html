@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anubhav Singh - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div id="nav-image">
+                    <img id="temp-nav" src="image/nav-logo.png" alt="Anubhav singh">
+                </div>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <div class="theme-toggle-track">
+                    <div class="theme-toggle-thumb">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </div>
+                </div>
+            </button>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="hero">
+        <canvas id="networkCanvas" class="network-canvas"></canvas>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Hi There,</span>
+                        <span class="title-line">I'm <span class="name">Anubhav Singh</span></span>
+                    </h1>
+                    <div class="hero-subtitle">
+                        <span class="static-text">I Am Into</span>
+                        <span class="typing-text" id="typing-text"></span>
+                        <span class="cursor">|</span>
+                    </div>
+                    <p class="hero-description">
+                        Passionate software engineer crafting innovative solutions through code
+                    </p>
+                    <button class="btn btn--primary hero-btn" onclick="scrollToSection('about')">
+                        About Me
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="hero-image">
+                   <div class="image-container">
+                        <img  src="image/Anubhavsingh.jpg" alt="Anubhav Singh">
+                        <span class="tech react">React</span>
+                        <span class="tech cpp">C++</span>
+                        <span class="tech html">HTML</span>
+                        <span class="tech css">CSS</span>
+                        <span class="tech js">JavaScript</span>
+                        <span class="tech python">Python</span>
+                        <span class="tech java">Java</span>
+                        <span class="tech mysql">MySQL</span>
+                        <span class="tech mongodb">MongoDB</span>
+                        </div>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" class="social-icon" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/anubhavsingh2027" class="social-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/Anubhav7355" class="social-icon" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://t.me/Anubhav_singh7355" class="social-icon" target="_blank">
+                    <i class="fab fa-telegram-plane"></i>
+                </a>
+                <a href="https://instagram.com/anubhav_singh0506
+" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                         Hi, I’m Anubhav Singh — a passionate developer from Varanasi, India.
+                         <br>
+                          I am a skilled web developer with years of experience in crafting responsive, high-performance websites. My focus lies in delivering quality solutions using the latest web technologies.
+I have a strong foundation in HTML, CSS, JavaScript, and frameworks like React and Node.js. I’m passionate about clean code, scalability, and building projects that not only function well but also provide value to users.
+Whether working on front-end interfaces or back-end logic, I always aim for excellence and continuous improvement. I'm committed to learning new technologies and staying updated with industry trends.
+My achievements include building and deploying over 15 full-stack web projects, solving 500+ coding problems on LeetCode, and earning a 5-Star rating in C++ on HackerRank.
+                    </p>
+                    <p class="about-description">
+                        My journey in software development has led me to work with amazing companies like Amazon, Microsoft, and Google,
+                        where I've honed my skills in both frontend and backend technologies.
+                    </p>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="3">0</div>
+                            <div class="stat-label">Years Exp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-frame">
+                    <img id="temp" src="image/Anubhavsingh.jpg" alt="Anubhav Singh">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Technologies</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="skills-content">
+                <div class="skill-category">
+                    <h3 class="category-title">Frontend</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item" data-skill="90">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML5">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">HTML5</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="85">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS3">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">CSS3</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="88">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="82">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/000000/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png" alt="React">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="82">
+                            <div class="skill-icon">
+                                <img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind Css">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Tailwind Css</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Backend</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item" data-skill="95">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/nodejs.png" alt="Node.js">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Node.js</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="95">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/fluency/48/000000/node-js.png" alt="Express">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Express</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Database</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item" data-skill="78">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/mongodb.png" alt="MongoDB">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">MongoDB</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="70">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/mysql-logo.png" alt="MySQL">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">MySQL</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Programming Languages</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item" data-skill="95">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/c-plus-plus-logo.png" alt="C++">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">C++</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="80">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png" alt="Java">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Java</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="75">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/python--v1.png" alt="Python">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="70">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/c-programming.png" alt="C">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">C</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Tools</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item" data-skill="90">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VS Code">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">VS Code</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="85">
+                            <div class="skill-icon">
+                                <img src="https://img.icons8.com/color/48/000000/git.png" alt="Git">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">Git</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item" data-skill="85">
+                            <div class="skill-icon">
+                                <img src="https://toppng.com/uploads/preview/github-logo-11609362429jyqzrkf6k1.png" alt="GitHub">
+                            </div>
+                            <div class="skill-info">
+                                <span class="skill-name">GitHub</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="--width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="projects enhanced-projects">
+        <canvas id="projectsCanvas" class="projects-canvas"></canvas>
+        <div class="floating-shapes">
+            <div class="shape shape--circle"></div>
+            <div class="shape shape--triangle"></div>
+            <div class="shape shape--square"></div>
+            <div class="shape shape--hexagon"></div>
+        </div>
+        <div class="container">
+            <div class="section-title">
+                <h2>My Projects</h2>
+                <div class="title-underline enhanced"></div>
+            </div>
+            <div class="project-filters enhanced-filters">
+                <button class="filter-btn active" data-filter="*" data-count="6">
+                    <span class="filter-text">All Projects</span>
+                    <span class="filter-count">6</span>
+                    <div class="filter-glow"></div>
+                </button>
+                <button class="filter-btn" data-filter="fullStack" data-count="3">
+                    <span class="filter-text">Full Stack</span>
+                    <span class="filter-count">3</span>
+                    <div class="filter-glow"></div>
+                </button>
+                <button class="filter-btn" data-filter="mern" data-count="1">
+                    <span class="filter-text">MERN Stack</span>
+                    <span class="filter-count">1</span>
+                    <div class="filter-glow"></div>
+                </button>
+                <button class="filter-btn" data-filter="frontend" data-count="2">
+                    <span class="filter-text">Frontend</span>
+                    <span class="filter-count">2</span>
+                    <div class="filter-glow"></div>
+                </button>
+            </div>
+            <div class="projects-grid enhanced-grid">
+                <div class="project-card enhanced-card flip-3d" data-category="fullStack" data-completion="95">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Phishshield.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">PhishShield</h3>
+                                <p class="project-description"> PhishShield is a phishing detection platform that uses URL-scanning APIs for real-time threat analysis. It features user login and authentication powered by MongoDB, and is built with HTML, CSS, JavaScript, Node.js, Express, and MongoDB. Designed for speed, security, and simplicity.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="React"><i class="fab fa-html5"></i>Html</span>
+                                    <span class="tech-tag animated" data-tech="tailwindcss"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="20" height="20">
+                                    Tailwind Css</span>
+                                    <span class="tech-tag animated" data-tech="JavaScript"><i class="fab fa-js-square"></i>JavaScript</span>
+                                    <span class="tech-tag animated" data-tech="Node.js"><i class="fab fa-node-js"></i>Node.js</span>
+                                    <span class="tech-tag animated" data-tech="MongoDB"><i class="fas fa-database"></i>MongoDB</span>
+                                    <span class="tech-tag animated" data-tech="Express"><i class="fas fa-server"></i>Express</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="100"></div>
+                                    <span class="completion-text">100% Complete</span>
+                                </div>
+                                 <div   class="project-links">
+                                        <a href="https://phishshield-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Phishsheild" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>Responsive Design</li>
+                                    <li><i class="fas fa-check"></i>Real-time Security</li>
+                                    <li><i class="fas fa-check"></i>Login And Registration </li>
+                                    <li><i class="fas fa-check"></i>Download Report</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-react tech-icon"></i>
+                                    <i class="fab fa-node-js tech-icon"></i>
+                                    <i class="fas fa-database tech-icon"></i>
+                                </div>
+                                <br>
+                                <div class="project-links">
+                                        <a href="https://phishshield-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Phishsheild" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                <div class="project-card enhanced-card zoom-particle" data-category="fullStack" data-completion="90">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Airbnb.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Airbnb Clone</h3>
+                                <p class="project-description">Full-stack Airbnb clone with user and admin panels, featuring authentication, property listings with photos, search & filter, booking system, reviews, and responsive UI. Showcases end-to-end architecture, smooth performance, and modern full-stack skills.</p>
+                               <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="React"><i class="fab fa-html5"></i>Html</span>
+                                    <span class="tech-tag animated" data-tech="React"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="20" height="20">
+                                    Tailwind Css</span>
+                                    <span class="tech-tag animated" data-tech="JavaScript"><i class="fab fa-js-square"></i>JavaScript</span>
+                                    <span class="tech-tag animated" data-tech="Node.js"><i class="fab fa-node-js"></i>Node.js</span>
+                                    <span class="tech-tag animated" data-tech="MongoDB"><i class="fas fa-database"></i>MongoDB</span>
+                                    <span class="tech-tag animated" data-tech="Express"><i class="fas fa-server"></i>Express</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="95"></div>
+                                    <span class="completion-text">95% Complete</span>
+                                </div>
+                                <div  class="project-links">
+                                        <a href="https://airbnb-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Airbnb-Clone" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>Responsive Design</li>
+                                    <li><i class="fas fa-check"></i>User experience</li>
+                                    <li><i class="fas fa-check"></i>Favourite </li>
+                                    <li><i class="fas fa-check"></i>Adding Home and Delete</li>
+                                    <li><i class="fas fa-check"></i>Booking System</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-react tech-icon"></i>
+                                    <i class="fab fa-js-square tech-icon"></i>
+                                    <i class="fab fa-css3-alt tech-icon"></i>
+                                </div>
+                                <div   class="project-links">
+                                        <a href="https://airbnb-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Airbnb-Clone" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                <div class="project-card enhanced-card magnetic-hover" data-category="frontend" data-completion="100">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Portfolio.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Portfolio Website</h3>
+                                <p class="project-description">Portfolio website featuring an AI chatbot for interactive assistance, fully functional REST API for sending emails, and a sleek, user-friendly interface across all sections. Designed to showcase modern web development skills, responsive design, and engaging UX.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="HTML5"><i class="fab fa-html5"></i>HTML5</span>
+                                    <span class="tech-tag animated" data-tech="CSS3"><i class="fab fa-css3-alt"></i>CSS3</span>
+                                    <span class="tech-tag animated" data-tech="JavaScript"><i class="fab fa-js-square"></i>JavaScript</span>
+                                    <span class="tech-tag animated" data-tech="Canvas"><i class="fas fa-paint-brush"></i>Canvas</span>
+                                    <span class="tech-tag animated" data-tech="Stripe"><i class="fa-solid fa-globe" ></i>Rest Api</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="100"></div>
+                                    <span class="completion-text">100% Complete</span>
+                                </div>
+                                <div class="project-links">
+                                        <a href="https://anubhavsingh2027.github.io/Portfolio/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Portfolio" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>Interactive Animations</li>
+                                    <li><i class="fas fa-check"></i>Responsive Design</li>
+                                    <li><i class="fas fa-check"></i>Modern UI</li>
+                                    <li><i class="fas fa-check"></i>Performance Optimized</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-html5 tech-icon"></i>
+                                    <i class="fab fa-css3-alt tech-icon"></i>
+                                    <i class="fab fa-js-square tech-icon"></i>
+                                </div>
+                                <div   class="project-links">
+                                        <a href="https://anubhavsingh2027.github.io/Portfolio/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Portfolio" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                <div class="project-card enhanced-card parallax-3d" data-category="fullStack" data-completion="90">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Kashika_tour_and_travel.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Kashika Tours And Travel </h3>
+                                <p class="project-description">Kashika Tours & Travel is a responsive booking website for Varanasi, built with HTML, CSS, JS, and Node.js. It offers seamless tour and travel bookings, an intuitive interface, and smooth user experience, showcasing modern web development and interactive design.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="React"><i class="fab fa-html5"></i>Html</span>
+                                    <span class="tech-tag animated" data-tech="css"><i class="fab fa-css3"></i>Css</span>
+                                    <span class="tech-tag animated" data-tech="JavaScript"><i class="fab fa-js-square"></i>JavaScript</span>
+                                    <span class="tech-tag animated" data-tech="Node.js"><i class="fab fa-node-js"></i>Node.js</span>
+                                    <span class="tech-tag animated" data-tech="MongoDB"><i class="fas fa-database"></i>MongoDB</span>
+                                    <span class="tech-tag animated" data-tech="Express"><i class="fas fa-server"></i>Express</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="85"></div>
+                                    <span class="completion-text">85% Complete</span>
+                                </div>
+                                <div class="project-links">
+                                        <a href="#" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="#" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>Book Service</li>
+                                    <li><i class="fas fa-check"></i>Response time Fast</li>
+                                    <li><i class="fas fa-check"></i>Complete information</li>
+                                    <li><i class="fas fa-check"></i>Multiple Service</li>
+                                    <li><i class="fas fa-check"></i>Responsive Time</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-react tech-icon"></i>
+                                    <i class="fab fa-node-js tech-icon"></i>
+                                    <i class="fas fa-database tech-icon"></i>
+                                </div>
+                                <div   class="project-links">
+                                        <a href="https://kashika-tour-and-travels.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Kashika-Tours-and-Travels" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                <div class="project-card enhanced-card floating-glow" data-category="mern" data-completion="80">
+                    <div class="card-inner">
+                        <div class="card-front">
+                           <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Todo-App.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Todo App</h3>
+                                <p class="project-description">Full-featured To-Do app with REST API integration, allowing users to add, delete, and mark tasks as complete. Designed with a clean, responsive UI, it demonstrates modern web development practices and efficient task management functionality.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="React"><i class="fab fa-react"></i>React</span>
+                                    <span class="tech-tag animated" data-tech="React"><img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind CSS" width="20" height="20">
+                                    Tailwind Css</span>
+                                    <span class="tech-tag animated" data-tech="Node.js"><i class="fab fa-node-js"></i>Node.js</span>
+                                    <span class="tech-tag animated" data-tech="MongoDB"><i class="fas fa-database"></i>MongoDB</span>
+                                    <span class="tech-tag animated" data-tech="Express"><i class="fas fa-server"></i>Express</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="80"></div>
+                                    <span class="completion-text">80% Complete</span>
+                                </div>
+                                 <div class="project-links">
+                                        <a href="https://todo-app-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Todo-App" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>Real-time Updates</li>
+                                    <li><i class="fas fa-check"></i>Team Collaboration</li>
+                                    <li><i class="fas fa-check"></i>Task Tracking</li>
+                                    <li><i class="fas fa-check"></i>Notifications</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-react tech-icon"></i>
+                                    <i class="fab fa-node-js tech-icon"></i>
+                                    <i class="fas fa-database tech-icon"></i>
+                                </div>
+                                 <div   class="project-links">
+                                        <a href="https://todo-app-5lym.onrender.com/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/Todo-App" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+                <div class="project-card enhanced-card ripple-morph" data-category="frontend" data-completion="88">
+                    <div class="card-inner">
+                        <div class="card-front">
+                           <div class="project-image">
+                                <div class="image-placeholder travel">
+                                    <img id="project-image" src="image/Weather.png" alt="Phishsheild">
+                                </div>
+                                <div class="project-overlay">
+                                </div>
+                                <div class="glow-border"></div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Weather Dashboard</h3>
+                                <p class="project-description">Responsive weather website using real-time API data to display current weather, forecasts, and conditions for any location. Built with modern web technologies, it features an intuitive UI, smooth performance, and interactive design for an engaging user experience.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag animated" data-tech="React"><i class="fab fa-html5"></i>Html</span>
+                                    <span class="tech-tag animated" data-tech="css"><i class="fab fa-css3"></i>Css</span>
+                                    <span class="tech-tag animated" data-tech="JavaScript"><i class="fab fa-js-square"></i>JavaScript</span>
+                                    <span class="tech-tag animated" data-tech="API"><i class="fas fa-plug"></i>Weather API</span>
+                                    <span class="tech-tag animated" data-tech="CSS3"><i class="fab fa-css3-alt"></i>CSS3</span>
+                                </div>
+                                <div class="completion-bar">
+                                    <div class="completion-fill" data-completion="88"></div>
+                                    <span class="completion-text">88% Complete</span>
+                                </div>
+                                <div   class="project-links">
+                                        <a href="https://anubhavsingh2027.github.io/anubhavsingh2027-Weather-Website/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="back-content">
+                                <h3>Project Features</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>5-Day Forecast</li>
+                                    <li><i class="fas fa-check"></i>Weather Maps</li>
+                                    <li><i class="fas fa-check"></i>Location Detection</li>
+                                    <li><i class="fas fa-check"></i>Data Visualization</li>
+                                </ul>
+                                <div class="tech-icons">
+                                    <i class="fab fa-js-square tech-icon"></i>
+                                    <i class="fas fa-chart-bar tech-icon"></i>
+                                    <i class="fab fa-css3-alt tech-icon"></i>
+                                </div>
+                                <div class="project-links">
+                                        <a href="https://anubhavsingh2027.github.io/anubhavsingh2027-Weather-Website/" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>View Project</span>
+                                        </a>
+                                        <a href="https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website" class="project-link enhanced-link" target="_blank">
+                                            <i class="fas fa-code"></i>
+                                            <span>Source Code</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-particles"></div>
+                </div>
+            </div>
+<div class="more-projects">
+<h2>More Projects</h2>
+<a href="https://github.com/anubhavsingh2027" target="_blank"> Click</a>
+</div>
+    </section>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Services I Provide</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Web Development</h3>
+                        <p class="service-description">
+                            Full-stack web development using modern technologies like React, Node.js, and MongoDB.
+                            From concept to deployment, I create responsive and user-friendly applications.
+                        </p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Responsive Design</li>
+                            <li><i class="fas fa-check"></i> Modern Frameworks</li>
+                            <li><i class="fas fa-check"></i> Database Integration</li>
+                            <li><i class="fas fa-check"></i> API Development</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Algorithm Optimization</h3>
+                        <p class="service-description">
+                            Performance optimization and algorithm design to improve application speed and efficiency.
+                            Code review and refactoring for better maintainability.
+                        </p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Performance Analysis</li>
+                            <li><i class="fas fa-check"></i> Code Optimization</li>
+                            <li><i class="fas fa-check"></i> Algorithm Design</li>
+                            <li><i class="fas fa-check"></i> Best Practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="contact-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-reply"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" data-target="100">0</div>
+                        <div class="stat-text">% Response Rate</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value"> 2hrs</div>
+                        <div class="stat-text">Average Response</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" data-target="15">0</div>
+                        <div class="stat-text">+ Projects Delivered</div>
+                    </div>
+                </div>
+            </div>
+            <div class="availability-status">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Available for Projects</span>
+                </div>
+                <p>Within 24 hours response time</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <a href="tel:7355026966">
+                        <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>7355026966</p>
+                            <span class="contact-label">Call me anytime</span>
+                        </div>
+                    </div>
+                    </a>
+                        <a href="mailto:anubhavsingh2027@gmail.com">
+                        <div class="contact-card">
+                                                <div class="contact-icon">
+                                                    <i class="fas fa-envelope"></i>
+                                                    <div class="icon-ripple"></div>
+                                                </div>
+                                                <div class="contact-details">
+                                                    <h4>Email</h4>
+                                                    <p>anubhavsingh2027@gmail.com</p>
+                                                    <span class="contact-label">Send me an email</span>
+                                                </div>
+                                            </div>
+                        </a>
+                         <a href="https://api.whatsapp.com/send?phone=7355026966">
+                            <div class="contact-card">
+                                   <div class="contact-icon">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                  <div class="icon-ripple"></div>
+                               </div>
+                              <div class="contact-details">
+                                <h4>Whatsapp</h4>
+                                 <p>Anubhav Singh</p>
+                                 <span class="contact-label">Send me an Direct Whatsapp Message</span>
+                                 </div>
+                           </div>
+                        </a>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="icon-ripple"></div>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>India</p>
+                            <span class="contact-label">Remote work available</span>
+                        </div>
+                    </div>
+                    <div class="social-media-hub">
+                        <h4>Connect With Me</h4>
+                        <div class="social-grid">
+                            <a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" class="social-button linkedin" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>500+</span>
+                            </a>
+                            <a href="https://github.com/anubhavsingh2027" class="social-button github" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>200+</span>
+                            </a>
+                            <a href="https://x.com/Anubhav7355" class="social-button twitter" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                                <span>150+</span>
+                            </a>
+                            <a href="https://t.me/Anubhav_singh7355" class="social-button telegram" target="_blank">
+                                <i class="fab fa-telegram-plane"></i>
+                                <span>100+</span>
+                            </a>
+                            <a href="https://instagram.com/anubhav_singh0506" class="social-button instagram" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                                <span>300+</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <div class="form-tabs">
+                        <button class="tab-btn active" data-tab="contact">Contact Form</button>
+                    </div>
+                    <div class="contact-form" id="contact-tab">
+                        <form class="contact-form" id="contactForm" >
+                            <div class="input-container">
+                                <input type="text" class="input" name="username" id="username" required />
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-container">
+                                <input type="email" class="input" name="email" id="email" required />
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-container">
+                                <input type="tel" class="input" name="phone" id="phone" />
+                                <label for="phone">Phone</label>
+                            </div>
+                            <div class="input-container">
+                                <input type="text" class="input" name="subject" id="subject" required />
+                                <label for="subject" id="datas">Subject</label>
+                            </div>
+                            <div class="input-container textarea">
+                            <textarea class="input" id="message"  required></textarea>
+                            <label for="subject" id="datas">Message</label>
+                            </div>
+                            <div class="submit-btn">
+                                <button type="submit" class="btn btn--primary btn--animated">
+                                <span class="btn-text">Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                                <div class="btn-loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </button>
+                            </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="enhanced-footer">
+        <div class="container">
+            <div class="quick-links-section">
+                <h3>Quick Navigation</h3>
+                <div class="links-grid">
+                    <a href="#home" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <span>Home</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                    <a href="#about" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>About</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                    <a href="#skills" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span>Skills</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                    <a href="#projects" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span>Projects</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                    <a href="#services" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <span>Services</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                    <a href="#contact" class="link-tile">
+                        <div class="tile-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>Contact</span>
+                        <div class="tile-glow"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="newsletter-section">
+                <h3>Stay Updated</h3>
+                <p>Get notified about my latest projects and blog posts</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <div class="newsletter-input">
+                        <input type="email" id="fastemail" placeholder="Enter your email" required>
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="social-hub">
+                <h3>Follow My Journey</h3>
+                <div class="social-circle">
+                    <a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" class="social-orbit linkedin" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                        <div class="orbit-ring"></div>
+                    </a>
+                    <a href="https://github.com/anubhavsingh2027" class="social-orbit github" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <div class="orbit-ring"></div>
+                    </a>
+                    <a href="https://x.com/Anubhav7355" class="social-orbit twitter" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        <div class="orbit-ring"></div>
+                    </a>
+                    <a href="https://t.me/Anubhav_singh7355" class="social-orbit telegram" target="_blank">
+                        <i class="fab fa-telegram-plane"></i>
+                        <div class="orbit-ring"></div>
+                    </a>
+                    <a href="https://instagram.com/anubhav_singh0506" class="social-orbit instagram" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <div class="orbit-ring"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p class="copyright">&copy; 2025 Anubhav Singh. All rights reserved.</p>
+                <p class="made-with-love">
+                    Made with <span class="animated-heart">❤️</span> by <span class="typing-name">Anubhav Singh</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <button class="scroll-top enhanced" id="scroll-top">
+        <i class="fas fa-chevron-up"></i>
+        <div class="scroll-progress"></div>
+    </button>
+    <div class="floating-actions">
+        <button class="fab1 chat-fab" id="chatFab" title="AI Assistant">
+            <span class="fab1-icon">🤖</span>
+            <span class="fab1-text">AI Chat</span>
+        </button>
+    </div>
+    <div class="chatbot hidden" id="chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-profile">
+                <div class="bot-avatar">🤖</div>
+                <div class="bot-info">
+                    <h4>Anubhav's AI Assistant</h4>
+                    <span class="bot-status">Online</span>
+                </div>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="welcome-message">
+                <div class="bot-avatar">🤖</div>
+                <div class="message-content">
+                    <p id="message-content-color">👋 Hi! I'm Anubhav's AI assistant. I am hear to help you:</p>
+                    <ul>
+                        <li id="message-content-color">🚀 Projects & Technical Work</li>
+                        <li id="message-content-color">⚡ Skills & Technologies</li>
+                        <li id="message-content-color">🎓 Education & Background</li>
+                        <li id="message-content-color">📞 Contact Information</li>
+                    </ul>
+                    <p id="message-content-color">What would you like to know?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <div class="input-container">
+                <input type="text" id="chatInput" placeholder="Ask me anything about Anubhav..." autocomplete="off">
+                <button id="sendMessage" class="send-btn">
+                    <span ><i class="fa-solid fa-share fa-bounce" style="color: #ffffff;"></i></span>
+                </button>
+            </div>
+            <div class="quick-questions">
+                <button class="quick-btn" data-question="Who Is Anubhav Singh">Who ?</button>
+                <button class="quick-btn" data-question="Tell me about  projects">Projects</button>
+                <button class="quick-btn" data-question="What are his technical skills?">Skills</button>
+                <button class="quick-btn" data-question="How can I contact him?">Contact</button>
+                <button class="quick-btn" data-question="More Questions">Other Question</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal hidden" id="projectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Project Details</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
