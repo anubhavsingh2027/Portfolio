@@ -1,2 +1,53 @@
-# Portfolio
-A responsive and well-designed personal portfolio built with HTML, CSS, and JavaScript. It integrates with my custom API to showcase projects, skills, and experience. Fully optimized for all devices with a clean UI and smooth interactions.
+Anubhav Singh's Portfolio
+
+Welcome to my personal portfolio! I'm Anubhav Singh, a passionate web developer from Varanasi, India. This portfolio showcases my skills, projects, and achievements in web development. Built using HTML, CSS, JavaScript, and REST APIs, it features a fully responsive design and includes an interactive chatbot that provides all my personal and professional details.
+
+🚀 Live Demo
+
+Explore my portfolio here: https://anubhavsingh2027.github.io/Portfolio/
+
+💻 Technologies Used
+
+Frontend: HTML5, CSS3, JavaScript
+
+Backend: Node.js, Express.js
+
+APIs:
+
+RESTful APIs – for handling the contact form and sending emails using Nodemailer
+
+Interactive Feature: Chatbot to provide personal, contact, and project information
+
+Version Control: Git & GitHub
+
+🌐 Features
+
+Fully responsive design compatible with mobile, tablet, and desktop devices
+
+Modern UI/UX with smooth animations and interactive elements
+
+Interactive Chatbot: Provides all your personal, contact, and project information directly on the site
+
+Contact form integrated with REST API and Nodemailer for email functionality
+
+Clean, organized codebase for easy maintenance and scalability
+
+📚 Skills & Technologies
+
+Frontend: HTML, CSS, JavaScript, React
+
+Backend: Node.js, Express.js
+
+APIs: RESTful APIs, Nodemailer integration
+
+Database: MongoDB (for backend projects)
+
+Programming Languages: C++, C, Python, Java
+
+📬 Contact Me
+
+Email: anubhavsingh2027@gmail.com
+
+LinkedIn: [Click ](http://www.linkedin.com/in/anubhav-singh-09b71829b)/
+
+GitHub: https://github.com/anubhavsingh2027
