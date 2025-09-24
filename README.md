@@ -48,6 +48,6 @@ Programming Languages: C++, C, Python, Java
 
 Email: anubhavsingh2027@gmail.com
 
-LinkedIn: [Click ](http://www.linkedin.com/in/anubhav-singh-09b71829b)/
+LinkedIn: [Click ](http://www.linkedin.com/in/anubhav-singh-09b71829b)
 
 GitHub: https://github.com/anubhavsingh2027
