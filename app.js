@@ -1286,7 +1286,7 @@ const getHostMessage = () => `
 `;
   async function sendEmail(payload) {
     try {
-      const response = await fetch("https://mail-api-pa5q.onrender.com/sendMail", {
+      const response = await fetch("https://anubhavmail.anubhavsingh.website/sendMail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1346,7 +1346,7 @@ async function handlefastmessage(e) {
 `;
     async function sendEmail(payload) {
       try {
-        const response = await fetch("https://mail-api-pa5q.onrender.com/sendMail", {
+        const response = await fetch("https://anubhavmail.anubhavsingh.website/sendMail", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
