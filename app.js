@@ -1314,7 +1314,7 @@ const getHostMessage = () => `
     message: getCustomerMessage(),
   });
   await sendEmail({
-    to: "anubhavsingh2027@gmail.com",
+    to: "anubhavsinghcustomer@gmail.com",
     subject: "📩 New Customer Enquiry",
      websiteName: "Anubhav singh Portfolio ",
     message: getHostMessage(),
@@ -1344,7 +1344,7 @@ async function handlefastmessage(e) {
     </div>
   </div>
 `;
-    async function sendEmail1(payload) {
+    async function sendEmail(payload) {
       try {
         const response = await fetch("https://mail-api-pa5q.onrender.com/sendMail", {
           method: "POST",
@@ -1363,8 +1363,8 @@ async function handlefastmessage(e) {
         showNotification('Error Occurred !', 'error');
       }
     }
-    await sendEmail1({
-      to: "anubhavsingh2027@gmail.com",
+    await sendEmail({
+      to: "anubhavsinghcustomer@gmail.com",
       subject: "Urget Message ",
      websiteName: "Anubhav singh Portfolio ",
       message: getCustomerMessage(username),
