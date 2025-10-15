@@ -1314,7 +1314,7 @@ const getHostMessage = () => `
     message: getCustomerMessage(),
   });
   await sendEmail({
-    ailTo: "anubhavsingh2027@gmail.com",
+    mailTo: "anubhavsingh2027@gmail.com",
     subject: "📩 New Customer Enquiry",
      webSiteName: "Anubhav singh Portfolio ",
     message: getHostMessage(),
@@ -1364,7 +1364,7 @@ async function handlefastmessage(e) {
       }
     }
     await sendEmail({
-      to: "anubhavsingh2027@gmail.com",
+      mailTo: "anubhavsingh2027@gmail.com",
       subject: "Urget Message ",
      webSiteName: "Anubhav singh Portfolio ",
       message: getCustomerMessage(username),
