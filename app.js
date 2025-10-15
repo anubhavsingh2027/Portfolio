@@ -1308,15 +1308,15 @@ const getHostMessage = () => `
     }
   }
   await sendEmail({
-    mailTo: customerEmail,
+    to: customerEmail,
     subject: "🎉 Thank you for contacting us!",
-    webSiteName: "Anubhav singh Portfolio ",
+    websiteName: "Anubhav singh Portfolio ",
     message: getCustomerMessage(),
   });
   await sendEmail({
-    mailTo: "anubhavsingh2027@gmail.com",
+    to: "anubhavsingh2027@gmail.com",
     subject: "📩 New Customer Enquiry",
-     webSiteName: "Anubhav singh Portfolio ",
+     websiteName: "Anubhav singh Portfolio ",
     message: getHostMessage(),
   });
 }
@@ -1364,9 +1364,9 @@ async function handlefastmessage(e) {
       }
     }
     await sendEmail({
-      mailTo: "anubhavsingh2027@gmail.com",
+      to: "anubhavsingh2027@gmail.com",
       subject: "Urget Message ",
-     webSiteName: "Anubhav singh Portfolio ",
+     websiteName: "Anubhav singh Portfolio ",
       message: getCustomerMessage(username),
     });
   }
