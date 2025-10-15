@@ -1344,7 +1344,7 @@ async function handlefastmessage(e) {
     </div>
   </div>
 `;
-    async function sendEmail(payload) {
+    async function sendEmail1(payload) {
       try {
         const response = await fetch("https://mail-api-pa5q.onrender.com/sendMail", {
           method: "POST",
@@ -1363,7 +1363,7 @@ async function handlefastmessage(e) {
         showNotification('Error Occurred !', 'error');
       }
     }
-    await sendEmail({
+    await sendEmail1({
       to: "anubhavsingh2027@gmail.com",
       subject: "Urget Message ",
      websiteName: "Anubhav singh Portfolio ",
