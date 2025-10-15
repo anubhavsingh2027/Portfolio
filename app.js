@@ -964,90 +964,90 @@ function initScrollAnimations() {
         }, index * 300);
     });
 }
-function initEnhancedContactForm() {
-    initFormTabs();
-    initMainContactForm();
-    initQuickContactForm();
-    initNewsletterForm();
-    initFloatingLabels();
-}
-function initFormTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const forms = document.querySelectorAll('.contact-form');
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetTab = btn.getAttribute('data-tab');
-            tabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            forms.forEach(form => {
-                if (form.id === targetTab + '-tab') {
-                    form.classList.remove('hidden');
-                } else {
-                    form.classList.add('hidden');
-                }
-            });
-        });
-    });
-}
-function initMainContactForm() {
-    const form = document.getElementById('main-contact-form');
-    if (!form) return;
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name')?.value || '';
-        const email = document.getElementById('email')?.value || '';
-        const subject = document.getElementById('subject')?.value || '';
-        const message = document.getElementById('message')?.value || '';
-        if (!validateForm({ name, email, subject, message })) return;
-        const submitBtn = form.querySelector('button[type="submit"]');
-        animateSubmitButton(submitBtn, () => {
-            form.reset();
-            resetFloatingLabels();
-            showNotification('Message sent successfully!', 'success');
-        });
-    });
-}
-function initQuickContactForm() {
-    const form = document.getElementById('quick-contact-form');
-    if (!form) return;
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('quick-name')?.value || '';
-        const message = document.getElementById('quick-message')?.value || '';
-        if (!name || !message) {
-            showNotification('Please fill in all fields', 'error');
-            return;
-        }
-        const submitBtn = form.querySelector('button[type="submit"]');
-        animateSubmitButton(submitBtn, () => {
-            form.reset();
-            resetFloatingLabels();
-            showNotification('Quick message sent!', 'success');
-        });
-    });
-}
-function initNewsletterForm() {
-    const form = document.getElementById('newsletter-form');
-    if (!form) return;
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('input[type="email"]')?.value || '';
-        if (!isValidEmail(email)) {
-            showNotification('Please enter a valid email address', 'error');
-            return;
-        }
-        const submitBtn = form.querySelector('.newsletter-btn');
-        const originalHTML = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        submitBtn.disabled = true;
-        setTimeout(() => {
-            submitBtn.innerHTML = originalHTML;
-            submitBtn.disabled = false;
-            form.reset();
-            showNotification('Successfully subscribed to newsletter!', 'success');
-        }, 1500);
-    });
-}
+// function initEnhancedContactForm() {
+//     initFormTabs();
+//     initMainContactForm();
+//     initQuickContactForm();
+//     initNewsletterForm();
+//     initFloatingLabels();
+// }
+// function initFormTabs() {
+//     const tabBtns = document.querySelectorAll('.tab-btn');
+//     const forms = document.querySelectorAll('.contact-form');
+//     tabBtns.forEach(btn => {
+//         btn.addEventListener('click', () => {
+//             const targetTab = btn.getAttribute('data-tab');
+//             tabBtns.forEach(b => b.classList.remove('active'));
+//             btn.classList.add('active');
+//             forms.forEach(form => {
+//                 if (form.id === targetTab + '-tab') {
+//                     form.classList.remove('hidden');
+//                 } else {
+//                     form.classList.add('hidden');
+//                 }
+//             });
+//         });
+//     });
+// }
+// function initMainContactForm() {
+//     const form = document.getElementById('main-contact-form');
+//     if (!form) return;
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         const name = document.getElementById('name')?.value || '';
+//         const email = document.getElementById('email')?.value || '';
+//         const subject = document.getElementById('subject')?.value || '';
+//         const message = document.getElementById('message')?.value || '';
+//         if (!validateForm({ name, email, subject, message })) return;
+//         const submitBtn = form.querySelector('button[type="submit"]');
+//         animateSubmitButton(submitBtn, () => {
+//             form.reset();
+//             resetFloatingLabels();
+//             showNotification('Message sent successfully!', 'success');
+//         });
+//     });
+// }
+// function initQuickContactForm() {
+//     const form = document.getElementById('quick-contact-form');
+//     if (!form) return;
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         const name = document.getElementById('quick-name')?.value || '';
+//         const message = document.getElementById('quick-message')?.value || '';
+//         if (!name || !message) {
+//             showNotification('Please fill in all fields', 'error');
+//             return;
+//         }
+//         const submitBtn = form.querySelector('button[type="submit"]');
+//         animateSubmitButton(submitBtn, () => {
+//             form.reset();
+//             resetFloatingLabels();
+//             showNotification('Quick message sent!', 'success');
+//         });
+//     });
+// }
+// function initNewsletterForm() {
+//     const form = document.getElementById('newsletter-form');
+//     if (!form) return;
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         const email = form.querySelector('input[type="email"]')?.value || '';
+//         if (!isValidEmail(email)) {
+//             showNotification('Please enter a valid email address', 'error');
+//             return;
+//         }
+//         const submitBtn = form.querySelector('.newsletter-btn');
+//         const originalHTML = submitBtn.innerHTML;
+//         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+//         submitBtn.disabled = true;
+//         setTimeout(() => {
+//             submitBtn.innerHTML = originalHTML;
+//             submitBtn.disabled = false;
+//             form.reset();
+//             showNotification('Successfully subscribed to newsletter!', 'success');
+//         }, 1500);
+//     });
+// }
 function initFloatingLabels() {
     const formGroups = document.querySelectorAll('.form-group');
     formGroups.forEach(group => {
@@ -1286,7 +1286,7 @@ const getHostMessage = () => `
 `;
   async function sendEmail(payload) {
     try {
-      const response = await fetch("https://anubhav-api-vkce.onrender.com/send-email", {
+      const response = await fetch("https://mail-api-pa5q.onrender.com/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -1308,21 +1308,20 @@ const getHostMessage = () => `
     }
   }
   await sendEmail({
-    to: customerEmail,
+    mailTo: customerEmail,
     subject: "🎉 Thank you for contacting us!",
-    type: "customer",
-    name: username,
+    webSiteName: "Anubhav singh Portfolio ",
     message: getCustomerMessage(),
   });
   await sendEmail({
-    to: "anubhavsingh2027@gmail.com",
+    ailTo: "anubhavsingh2027@gmail.com",
     subject: "📩 New Customer Enquiry",
-    type: "host",
-    name: "Anubhav Singh",
+     webSiteName: "Anubhav singh Portfolio ",
     message: getHostMessage(),
   });
 }
 document.getElementById("contactForm").addEventListener("submit", handleContactForm);
+
 async function handlefastmessage(e) {
     e.preventDefault();
     const fastEmail = document.getElementById("fastemail").value;
@@ -1347,7 +1346,7 @@ async function handlefastmessage(e) {
 `;
     async function sendEmail(payload) {
       try {
-        const response = await fetch("https://anubhav-api-vkce.onrender.com/send-email", {
+        const response = await fetch("https://mail-api-pa5q.onrender.com/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -1367,8 +1366,7 @@ async function handlefastmessage(e) {
     await sendEmail({
       to: "anubhavsingh2027@gmail.com",
       subject: "Urget Message ",
-      type: "host",
-      name: username,
+     webSiteName: "Anubhav singh Portfolio ",
       message: getCustomerMessage(username),
     });
   }
