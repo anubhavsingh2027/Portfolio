@@ -1248,7 +1248,7 @@ function initEnhancedContactForm(){
     <ul style="padding-left: 18px; margin-bottom: 16px; font-size: 15px; line-height: 1.6;">
       <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Portfolio</a></li>
       <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn Profile</a></li>
-      <li><a href="https://anubhavsingh2027.github.io/Portfolio/" target="_blank" style="color: #6d28d9; text-decoration: none;">Personal Website</a></li>
+      <li><a href="https://portfolio.anubhavsingh.website/" target="_blank" style="color: #6d28d9; text-decoration: none;">Personal Website</a></li>
     </ul>
     <p style="line-height: 1.6; font-size: 15px;">We appreciate your interest!</p>
     <p style="line-height: 1.6; font-size: 15px; margin-top: 20px;">
@@ -1256,7 +1256,7 @@ function initEnhancedContactForm(){
       <strong style="color:#000;">Anubhav Singh</strong>
     </p>
     <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      📩 Sent via <strong>Anubhav API</strong>
+      📩 Sent via <strong>Anubhav mail</strong>
     </div>
   </div>
 `;
