@@ -1891,23 +1891,80 @@ section {
   gap: var(--space-8);
 }
 .more-projects {
+  perspective: 1200px;
+  transform-style: preserve-3d;
   text-align: center;
-  padding: 2rem 2rem;
-  background: linear-gradient(135deg, #560e8e, #c471ed, #f9d423);
+  /* background:var(--color-bg-2); */
+  padding: 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  max-width: 400px;
+  max-width: 1200px;
   margin: 3rem auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.6s cubic-bezier(.2,.9,.2,1), box-shadow 0.6s cubic-bezier(.2,.9,.2,1), filter 0.3s;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  will-change: transform;
+}
+
+/* glossy top surface for depth */
+.more-projects::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  pointer-events: none;
+  transform: translateZ(40px) scale(1.02);
+  z-index: 3;
+  mix-blend-mode: overlay;
+}
+
+/* subtle floating "back plate" to create a 3D card thickness */
+.more-projects::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -18%;
+  height: 140%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.28));
+  transform-origin: center top;
+  transform: rotateX(75deg) translateZ(-32px);
+  z-index: 1;
+  filter: blur(8px) saturate(0.9);
+  pointer-events: none;
+}
+
+/* hover tilt & lift with stronger shadow to emphasize 3D */
+.more-projects:hover {
+  transform: translateY(-12px) rotateX(8deg) rotateY(-12deg) translateZ(36px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.45),
+    0 12px 30px rgba(0,0,0,0.25);
+  filter: saturate(1.06);
+}
+
+/* small responsive adjustment so it doesn't over-tilt on small screens */
+@media (max-width: 480px) {
+  .more-projects {
+    transform: none;
+    perspective: 900px;
+  }
+  .more-projects:hover {
+    transform: translateY(-6px) rotateX(4deg) rotateY(-6deg) translateZ(18px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+  }
 }
 .more-projects:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 20px 50px rgba(86, 14, 142, 0.6);
 }
 .more-projects h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, #ff6246, #f21010, #db8012);
+  background: linear-gradient(90deg, #16c751, #c327ac, #40e13b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientMove 5s infinite linear;
@@ -1919,7 +1976,7 @@ section {
 }
 .more-projects a {
   display: inline-block;
-  padding: 0.8rem 2rem;
+  padding: 1rem 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
@@ -3077,6 +3134,7 @@ html {
     0 0 30px rgba(120, 70, 230, 0.9),
     inset 0 0 18px rgba(120, 70, 230, 0.4);
 }
+
 @keyframes ringPulse {
   0% {
     box-shadow:
@@ -3099,14 +3157,19 @@ html {
 }
 @keyframes rotateGlow {
   0% {
-    border-color: rgba(120, 70, 230, 0.6);
-    filter: hue-rotate(0deg);
+    border-color: rgba(173, 216, 230, 0.7); /* soft light blue */
+    filter: hue-rotate(0deg) brightness(1.1);
+  }
+  50% {
+    border-color: rgba(221, 160, 221, 0.7); /* soft lavender */
+    filter: hue-rotate(180deg) brightness(1.15);
   }
   100% {
-    border-color: rgba(120, 70, 230, 0.6);
-    filter: hue-rotate(360deg);
+    border-color: rgba(194, 187, 63, 0.7); /* back to blue */
+    filter: hue-rotate(360deg) brightness(1.1);
   }
 }
+
 .fab1 {
   background: linear-gradient(135deg, #4A90E2, #357ABD);
   color: #fff;
