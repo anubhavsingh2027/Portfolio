@@ -402,55 +402,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: var(--space-32);
-    text-align: center;
-    padding: var(--space-24);
-  }
-
-  .hero-subtitle {
-    justify-content: center;
-  }
-
-  .hero-image {
-    order: -1;
-  }
-
-  .image-container {
-    width: 300px;
-    height: 300px;
-  }
-
-  .hero-btn {
-    margin: 0 auto;
-  }
-}
-.hero-text {
-  color: white;
-}
-.hero-title {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin-bottom: var(--space-24);
-}
-.title-line {
-  display: block;
-  animation: slideInLeft 1s ease-out;
-}
-.title-line:nth-child(2) {
-  animation-delay: 0.3s;
-  animation-fill-mode: both;
-}
-.name {
-  background: linear-gradient(45deg, #FFD700, #FFA500);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@media (max-width: 768px) {
   .hero-title {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: var(--space-16);
@@ -565,6 +516,55 @@ body {
   box-shadow: 0 0 12px rgba(255,255,255,0.5);
   cursor: default;
   transition: transform 0.3s, box-shadow 0.3s;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+    text-align: center;
+    padding: var(--space-24);
+  }
+
+  .hero-subtitle {
+    justify-content: center;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .image-container {
+    width: 300px;
+    height: 330px;
+  }
+
+  .hero-btn {
+    margin: 0 auto;
+  }
+}
+.hero-text {
+  color: white;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--space-24);
+}
+.title-line {
+  display: block;
+  animation: slideInLeft 1s ease-out;
+}
+.title-line:nth-child(2) {
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+.name {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 768px) {
