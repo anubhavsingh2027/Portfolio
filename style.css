@@ -400,6 +400,32 @@ body {
   gap: var(--space-64);
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+    text-align: center;
+    padding: var(--space-24);
+  }
+
+  .hero-subtitle {
+    justify-content: center;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .image-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero-btn {
+    margin: 0 auto;
+  }
+}
 .hero-text {
   color: white;
 }
@@ -420,8 +446,29 @@ body {
 .name {
   background: linear-gradient(45deg, #FFD700, #FFA500);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: var(--space-16);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-24);
+  }
+
+  .typing-text {
+    min-width: 150px;
+  }
+
+  .hero-description {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-24);
+  }
 }
 .hero-subtitle {
   font-size: var(--font-size-xl);
@@ -518,6 +565,47 @@ body {
   box-shadow: 0 0 12px rgba(255,255,255,0.5);
   cursor: default;
   transition: transform 0.3s, box-shadow 0.3s;
+}
+
+@media (max-width: 768px) {
+  .tech {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .react { top: 20%; left: 0%; }
+  .cpp { top: 10%; right: 10%; }
+  .html { bottom: 10%; left: 10%; }
+  .css { top: 15%; left: 2%; }
+  .js { bottom: 15%; right: 8%; }
+  .python { top: 2%; right: 0%; }
+  .java { bottom: 2%; left: 8%; }
+  .mysql { top: 25%; right: 10%; }
+  .mongodb { top: 30%; left: 2%; }
+
+  @keyframes floatOut {
+    0% {
+      transform: translate(0,0) scale(0.8);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    60% {
+      transform: translate(
+        calc(var(--x, 75px)),
+        calc(var(--y, -75px))
+      ) scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(
+        calc(var(--x, 125px)),
+        calc(var(--y, -125px))
+      ) scale(0.8);
+      opacity: 0;
+    }
+  }
 }
 .tech:hover {
   transform: scale(1.2);
