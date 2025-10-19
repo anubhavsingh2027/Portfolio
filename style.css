@@ -826,7 +826,8 @@ section {
   font-size: var(--font-size-lg);
   line-height: 1.7;
   margin-bottom: var(--space-24);
-  color: var(--color-text-secondary);
+  /* color: rgb(47, 40, 40); */
+  font-weight: 700;
 }
 .stats-container {
   display: grid;
@@ -864,8 +865,8 @@ section {
   justify-content: center;
 }
 .image-frame {
-  width: 350px;
-  height: 350px;
+  width: 25rem;
+  height: 35rem;
   border-radius: var(--radius-xl);
   background: var(--secondary-gradient);
   display: flex;
@@ -2078,11 +2079,12 @@ section {
   font-size: var(--font-size-lg);
   line-height: 1.6;
   margin-bottom: var(--space-24);
-  color: var(--color-text-secondary);
+  color: black;
 }
 .service-features {
   list-style: none;
   text-align: left;
+  color: black;
 }
 .service-features li {
   display: flex;
@@ -2092,7 +2094,7 @@ section {
   font-weight: var(--font-weight-medium);
 }
 .service-features i {
-  color: var(--accent-color);
+  color: black;
 }
 .contact {
   background: var(--color-bg-6);
@@ -2298,10 +2300,12 @@ section {
   margin-bottom: var(--space-4);
 }
 .contact-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  font-size:1.1rem;
+  color: black;
   font-style: italic;
+  font-weight:500;
 }
+
 .contact-container {
   grid-template-columns: 300px 340px;
   column-gap: 3rem;
@@ -2313,10 +2317,11 @@ section {
   row-gap: 1rem;
 }
 .contact-card {
-  background-color: var(--box-color);
+  background-color: var(--color-bg-6);
   padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+
 }
 .contact-card-icon {
   font-size: 1.8rem;
@@ -2353,7 +2358,7 @@ section {
 .input-container {
   position: relative;
   margin-top: 1rem;
-  margin-bottom: 1.9rem;
+  margin-bottom: 3.0rem;
 }
 .input {
   width: 100%;
@@ -2368,6 +2373,7 @@ section {
   outline: none;
   transition: 0.4s;
 }
+
 textarea.input {
   padding: 0.8rem 1.2rem;
   min-height: 140px;
@@ -2381,7 +2387,7 @@ textarea.input {
   left: 1rem;
   transform: translateY(-50%);
   padding: 0 0.4rem;
-  color: var(--text-color);
+  color: black;
   font-size: 1rem;
   font-weight: var(--font-medium);
   pointer-events: none;
@@ -2393,11 +2399,11 @@ textarea.input {
   transform: translateY(0);
 }
 .input-container.focus label {
-  top: -10px;
+  top: -15px;
   transform: translateY(-50%);
   left: -1px;
-  font-size: var(--smaller-font-size);
-  color: rgb(51, 18, 184);
+  font-size:1.1rem;
+  color: rgb(71, 28, 240);
 }
 .input-container.focus span::before,
 .input-container.focus span::after {
@@ -2502,11 +2508,12 @@ textarea.input {
   padding: var(--space-16) var(--space-24);
   background: transparent;
   border: none;
-  font-weight: var(--font-weight-medium);
+  font-weight: bolder;
   color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.3s var(--ease-standard);
   position: relative;
+  font-size: 1.5rem;
 }
 .tab-btn.active {
   color: var(--accent-color);

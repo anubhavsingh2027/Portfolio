@@ -48,15 +48,70 @@ function applyTheme(theme) {
         if (themeToggle) {
             const track = themeToggle.querySelector('.theme-toggle-track');
             const thumb = themeToggle.querySelector('.theme-toggle-thumb');
+            const divColour = document.querySelectorAll('.skill-item');
+            const txtColor=document.querySelectorAll('.skill-name');
+            const serviceCard=document.querySelectorAll('.service-card');
+           const form=document.querySelector('.contact-form-container');
+           const contact=document.querySelector('.contact');
+           const Ccard=document.querySelectorAll('.contact-card');
+           const social=document.querySelector('.social-media-hub');
+           const projectS=document.querySelector('.projects');
+           const serviceS=document.querySelector('.services')
+           const skillsS=document.querySelector('.skills')
+           const aboutDes=document.querySelector('.about-description');
             if (track && thumb) {
                 if (theme === 'dark') {
                     track.style.backgroundColor = 'var(--color-primary)';
                     track.style.borderColor = 'var(--color-primary)';
                     thumb.style.transform = 'translateX(28px)';
+                    form.style.background='white';
+                    contact.style.background='black';
+                    social.style.background='white';
+                    projectS.style.background='black'
+                    serviceS.style.background='black';
+                    aboutDes.style.color='white';
+                    skillsS.style.background='black';
+                    divColour.forEach(div=>{
+                        div.style.backgroundColor='white';
+
+                    })
+                    serviceCard.forEach(div=>{
+                        div.style.backgroundColor='white';
+
+                    })
+                    txtColor.forEach(txt=>{
+                        txt.style.color='black';
+                    })
+                    Ccard.forEach(C=>{
+                        C.style.backgroundColor='#01e6ff2b';
+                    })
+
                 } else {
                     track.style.backgroundColor = 'var(--color-border)';
                     track.style.borderColor = 'var(--color-border)';
                     thumb.style.transform = 'translateX(0px)';
+                    form.style.background='var(--colour-surface';
+                    contact.style.background='var(--color-bg-6)';
+                    social.style.background='white';
+                    projectS.style.background='var(--color-bg-3)'
+                    serviceS.style.background='var(--colour-surface';
+                    skillsS.style.background='var(--colour-surface';
+                    aboutDes.style.color='black';
+                    divColour.forEach(div=>{
+                        div.style.background='var(--color-bg-2)';
+
+                    })
+                    serviceCard.forEach(div=>{
+                        div.style.background='var(--color-bg-4)';
+
+                    })
+                    txtColor.forEach(txt=>{
+                        txt.style.color='black';
+                    })
+                    Ccard.forEach(C=>{
+                        C.style.backgroundColor='var(--colour-bg-6';
+                    })
+
                 }
             }
         }
