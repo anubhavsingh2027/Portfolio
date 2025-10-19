@@ -525,7 +525,7 @@ function animateCounters() {
                 current = target;
                 clearInterval(timer);
             }
-            counter.textContent = Math.floor(current);
+            counter.textContent = `${Math.floor(current)} +`;
         }, 50);
     });
 }
