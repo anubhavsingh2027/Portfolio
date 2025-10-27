@@ -477,7 +477,7 @@ body {
   animation: ringPulse-nav 2s infinite ease-in-out;
 }
 .image-container img {
-  width: 75%;
+  width: 95%;
   height: 100%;
   object-fit: cover;
   z-index: 2;
@@ -865,8 +865,8 @@ section {
   justify-content: center;
 }
 .image-frame {
-  width: 25rem;
-  height: 35rem;
+  width: 32rem;
+  height: 37rem;
   border-radius: var(--radius-xl);
   background: var(--secondary-gradient);
   display: flex;
