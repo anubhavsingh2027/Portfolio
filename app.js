@@ -109,7 +109,7 @@ function applyTheme(theme) {
                         txt.style.color='black';
                     })
                     Ccard.forEach(C=>{
-                        C.style.backgroundColor='var(--colour-bg-6';
+                        C.style.backgroundColor='var(--color-bg-6';
                     })
 
                 }
