@@ -1,3 +1,78 @@
+/* Intro Animation Styles */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+    opacity: 1;
+}
+
+.intro-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    z-index: 999;
+    opacity: 0;
+}
+
+.intro-content {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.greeting, .name, .roles {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.9);
+}
+
+.greeting {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 1rem;
+    color: #9f9f9f;
+}
+
+.name {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.roles {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #9f9f9f;
+    margin-bottom: 0.5rem;
+}
+
+.name-underline {
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    margin: 1rem auto;
+    opacity: 0;
+    filter: blur(2px);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Hide intro section after animation */
+.intro-section.hidden {
+    display: none;
+}
+
 :root {
   --color-white: rgba(255, 255, 255, 1);
   --color-black: rgba(0, 0, 0, 1);

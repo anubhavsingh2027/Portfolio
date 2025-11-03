@@ -4,13 +4,12 @@ Welcome to my personal portfolio! I'm Anubhav Singh, a passionate web developer 
 
 🚀 Live Demo
 
-Explore my portfolio here: https://anubhavsingh2027.github.io/Portfolio/
+Explore my portfolio here: https://portfolio.anubhav.sbs/
 
 💻 Technologies Used
 
 Frontend: HTML5, CSS3, JavaScript
 
-Backend: Node.js, Express.js
 
 APIs:
 
@@ -36,13 +35,11 @@ Clean, organized codebase for easy maintenance and scalability
 
 Frontend: HTML, CSS, JavaScript, React
 
-Backend: Node.js, Express.js
 
-APIs: RESTful APIs, Nodemailer integration
 
-Database: MongoDB (for backend projects)
+APIs: RESTful APIs, mailer integration
 
-Programming Languages: C++, C, Python, Java
+
 
 📬 Contact Me
 
