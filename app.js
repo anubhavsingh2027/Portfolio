@@ -1376,7 +1376,7 @@ function initEnhancedContactForm() {
     async function sendEmail(payload) {
       try {
         const response = await fetch(
-          "https://mail-api-old-dew-3948.fly.dev/sendMail",
+          "https://mail-api-iuw1zw.fly.dev/sendMail",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -1441,7 +1441,7 @@ function initEnhancedContactForm() {
     async function sendEmail(payload) {
       try {
         const response = await fetch(
-          "https://mail-api-old-dew-3948.fly.dev/sendMail",
+          "https://mail-api-iuw1zw.fly.dev/sendMail",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
