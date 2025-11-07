@@ -552,7 +552,7 @@ body {
   animation: ringPulse-nav 2s infinite ease-in-out;
 }
 .image-container img {
-  width: 95%;
+  width: 82%;
   height: 100%;
   object-fit: cover;
   z-index: 2;

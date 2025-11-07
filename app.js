@@ -1337,7 +1337,7 @@ function initEnhancedContactForm() {
     <ul style="padding-left: 18px; margin-bottom: 16px; font-size: 15px; line-height: 1.6;">
       <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Portfolio</a></li>
       <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn Profile</a></li>
-      <li><a href="https://portfolio.anubhavsingh.website/" target="_blank" style="color: #6d28d9; text-decoration: none;">Personal Website</a></li>
+      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Personal Website</a></li>
     </ul>
     <p style="line-height: 1.6; font-size: 15px;">We appreciate your interest!</p>
     <p style="line-height: 1.6; font-size: 15px; margin-top: 20px;">
