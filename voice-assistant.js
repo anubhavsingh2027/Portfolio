@@ -482,6 +482,11 @@ function initVoiceAssistant() {
       return "Anubhav Singh is a 20-year-old Full Stack Developer from Varanasi, India. He's pursuing Computer Science with AI specialization. He has solved 500 plus LeetCode problems, achieved 5-Star rating in C++ on HackerRank, and built over 15 full-stack applications.";
     }
 
+    // If user just wants to open/show something but didn't specify what
+    if (wantsToOpen && cmd.length < 20) {
+      return "Which project would you like me to open? You can ask me to open PhishShield, Kashi Route, Airbnb Clone, Real-Time Chatting App, Typing Master, Weather App, or AI Tools Directory.";
+    }
+
     // Exit - Enhanced matching
     if (
       matchesAny(cmd, [
