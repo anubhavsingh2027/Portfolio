@@ -1763,6 +1763,7 @@ function addSmoothTransitions() {
   });
 }
 setTimeout(addSmoothTransitions, 2000);
+
 function initChatbot() {
   const chatFab = document.getElementById("chatFab");
   const chatbot = document.getElementById("chatbot");
@@ -1801,106 +1802,120 @@ function initChatbot() {
         Python: "75% - AI/ML and web development",
       },
     },
-   projects: {
-  phishshield: {
-    name: "PhishShield",
-    description:
-      "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-    ],
-    sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
-    liveLink: "https://phishshield.nav-code.com",
-  },
+    projects: {
+      phishshield: {
+        name: "PhishShield",
+        description:
+          "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
+        technologies: [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+        ],
+        sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
+        liveLink: "https://phishshield.nav-code.com",
+      },
 
-  todo: {
-    name: "Smart To-Do",
-    description:
-      "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
-    technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
-    github: "https://github.com/anubhavsingh2027/Todo-App",
-    liveLink: "https://todo-app-jade-six-65.vercel.app",
-  },
+      todo: {
+        name: "Smart To-Do",
+        description:
+          "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
+        technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
+        github: "https://github.com/anubhavsingh2027/Todo-App",
+        liveLink: "https://todo-app-jade-six-65.vercel.app",
+      },
 
-  kashika: {
-    name: "Kashi Route",
-    description:
-      "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/anubhavsingh2027/KashiRoute",
-    liveLink: "https://kashi-route.vercel.app/",
-  },
+      kashika: {
+        name: "Kashi Route",
+        description:
+          "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
+        technologies: ["HTML", "CSS", "JavaScript"],
+        github: "https://github.com/anubhavsingh2027/KashiRoute",
+        liveLink: "https://kashi-route.vercel.app/",
+      },
 
-  weather: {
-    name: "Weather Forecasting App",
-    description:
-      "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
-    technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
-    github:
-      "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
-    liveLink: "https://weather-website-rosy.vercel.app/",
-  },
+      weather: {
+        name: "Weather Forecasting App",
+        description:
+          "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
+        technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
+        github:
+          "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
+        liveLink: "https://weather-website-rosy.vercel.app/",
+      },
 
-  aitools: {
-    name: "AI Tools Directory",
-    description:
-      "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
-    technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
-    github: "https://github.com/anubhavsingh2027/typeMaster",
-    liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
-  },
+      aitools: {
+        name: "AI Tools Directory",
+        description:
+          "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
+        technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
+        github: "https://github.com/anubhavsingh2027/typeMaster",
+        liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
+      },
 
-  typingMaster: {
-    name: "Typing Master",
-    description:
-      "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
-    technologies: ["JavaScript", "Real-time Calculation"],
-    github: "https://github.com/anubhavsingh2027/TypingMaster",
-    liveLink:
-      "https://typingmaster.nav-code.com/",
-  },
+      typingMaster: {
+        name: "Typing Master",
+        description:
+          "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
+        technologies: ["JavaScript", "Real-time Calculation"],
+        github: "https://github.com/anubhavsingh2027/TypingMaster",
+        liveLink: "https://typingmaster.nav-code.com/",
+      },
 
-  stress: {
-    name: "Stress Relief Website",
-    description:
-      "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
-    technologies: ["JavaScript", "CSS Animations", "Audio API"],
-    github: "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
-    liveLink: "https://stress-relief-game-website.vercel.app/",
-  },
+      stress: {
+        name: "Stress Relief Website",
+        description:
+          "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
+        technologies: ["JavaScript", "CSS Animations", "Audio API"],
+        github:
+          "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
+        liveLink: "https://stress-relief-game-website.vercel.app/",
+      },
 
-  cpp: {
-    name: "C++ String Methods Project",
-    description:
-      "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
-    technologies: ["C++", "String Manipulation", "Algorithm Logic"],
-    github:
-      "https://github.com/anubhavsingh2027/String_method_and_function",
-  },
+      cpp: {
+        name: "C++ String Methods Project",
+        description:
+          "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
+        technologies: ["C++", "String Manipulation", "Algorithm Logic"],
+        github:
+          "https://github.com/anubhavsingh2027/String_method_and_function",
+      },
 
-  airbnb: {
-    name: "Airbnb Clone",
-    description:
-      "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
-    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs"],
-    github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
-    liveLink: "https://airbnb-clone-1u1y.onrender.com/",
-  },
+      airbnb: {
+        name: "Airbnb Clone",
+        description:
+          "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
+        technologies: [
+          "React.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "REST APIs",
+        ],
+        github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
+        liveLink: "https://airbnb-clone-1u1y.onrender.com/",
+      },
 
-  chatting: {
-    name: "Real-Time Chatting App",
-    description:
-      "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
-    technologies: ["WebSocket", "Node.js", "Express.js", "MongoDB", "HTML", "CSS", "JavaScript"],
-    github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
-    liveLink: "https://real-time-chatting.nav-code.com/",
-  }
-},
+      chatting: {
+        name: "Real-Time Chatting App",
+        description:
+          "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
+        technologies: [
+          "WebSocket",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "HTML",
+          "CSS",
+          "JavaScript",
+        ],
+        github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
+        liveLink: "https://real-time-chatting.nav-code.com/",
+      },
+    },
   };
   chatFab.addEventListener("click", (e) => {
     e.preventDefault();
@@ -1957,7 +1972,7 @@ function initChatbot() {
     messageDiv.className = `chat-message ${sender}`;
     const avatar = document.createElement("div");
     avatar.className = "bot-avatar";
-    avatar.textContent = sender === "user" ? "👤" : "🤖";
+    avatar.textContent = sender === "user" ? "👤" : "🎯";
     const bubble = document.createElement("div");
     bubble.className = "message-bubble";
     bubble.innerHTML = message;
@@ -1968,199 +1983,106 @@ function initChatbot() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
   function getBotResponse(message) {
-    const msg = message.toLowerCase();
-    if (msg.includes("anubhav")) {
-      return ` Anubhav Singh is a  Full Stack Developer & AI Enthusiast from the historic city of Varanasi, India. Currently pursuing Computer Science and Engineering with AI specialization (2023-2027) from a prestigious institution.
-            My journey in programming started with curiosity and has evolved into a passion for creating impactful digital solutions. From solving complex algorithms to building full-stack applications, I enjoy every aspect of software development.`;
+    const msg = message.toLowerCase().trim();
+
+    // Helper function for keyword matching
+    const matchesAny = (text, keywords) => {
+      return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
+    };
+
+    // Greeting responses
+    if (matchesAny(msg, ["hello", "hi", "hey", "greetings", "welcome"])) {
+      return "Certainly. I am NAV-JARVIS, Anubhav Singh's personal portfolio assistant. How may I assist you today?";
     }
-    if (msg.includes("age") || msg.includes("old")) {
-      return `Anubhav is ${knowledgeBase.personal.age} years old, born on ${knowledgeBase.personal.dob}. Despite his young age, he has achieved remarkable milestones in programming!`;
+
+    // Identity
+    if (matchesAny(msg, ["who are you", "your name", "identity", "who"])) {
+      return "I am NAV-JARVIS. I was created by Anubhav Singh to serve as his personal portfolio assistant and provide information about his professional profile.";
     }
-    if (
-      msg.includes("where") ||
-      msg.includes("location") ||
-      msg.includes("from")
-    ) {
-      return `Anubhav is from ${knowledgeBase.personal.location}. Varanasi is one of India's oldest and most spiritual cities, known for its rich cultural heritage.`;
+
+    // Profile/About
+    if (matchesAny(msg, ["anubhav", "about", "who is", "profile", "background"])) {
+      return "Anubhav Singh is a distinguished Full Stack Developer and AI Enthusiast based in Varanasi, India. Currently pursuing B.Tech in Computer Science with AI specialization from PSIT Kanpur (Expected: 2027). <br><br><strong>Key Achievements:</strong> 600+ LeetCode problems solved, 5-star rating in C++ on HackerRank, 15+ full-stack applications deployed. His expertise spans MERN stack development, real-time systems, and modern UI/UX design.";
     }
-    if (
-      msg.includes("education") ||
-      msg.includes("study") ||
-      msg.includes("college")
-    ) {
-      return `Anubhav is currently pursuing ${knowledgeBase.personal.education} from PSIT Kanpur. His AI specialization reflects his passion for cutting-edge technology.`;
+
+    // Education
+    if (matchesAny(msg, ["education", "college", "study", "university", "degree", "school"])) {
+      return "Anubhav is pursuing a Bachelor of Technology in Computer Science and Engineering with Artificial Intelligence specialization from PSIT Kanpur, Batch 2027. His academic focus includes advanced algorithms, machine learning, and full-stack development methodologies.";
     }
-    if (
-      msg.includes("email") ||
-      msg.includes("contact") ||
-      msg.includes("reach")
-    ) {
-      return `You can reach Anubhav at ${knowledgeBase.personal.email}. He typically responds within 24 hours and is always excited to discuss new opportunities!`;
+
+    // Skills - Comprehensive
+    if (matchesAny(msg, ["skill", "skills", "expertise", "technology", "technologies", "what can you do"])) {
+      return "<strong>Technical Stack:</strong><br><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Tailwind CSS<br><strong>Backend:</strong> Node.js, Express.js, WebSocket<br><strong>Databases:</strong> MongoDB, Firebase<br><strong>Programming Languages:</strong> C++, Java, Python, JavaScript<br><strong>Specializations:</strong> Full-stack MERN development, Data Structures &amp; Algorithms, Real-time systems, JWT Authentication, REST APIs, UI/UX Animations";
     }
-    if (msg.includes("direct")) {
-      return `Here is my personal Mobile & WhatsApp No: 7355026966`;
+
+    // Programming Languages
+    if (matchesAny(msg, ["c++", "cpp", "java", "python", "programming language"])) {
+      return "Anubhav demonstrates advanced proficiency in:<br> <strong>C++</strong>: 5-star HackerRank rating, 600+ problems solved<br> <strong>Java</strong>: Object-oriented design and backend development<br> <strong>Python</strong>: Data science and automation scripts<br> <strong>JavaScript</strong>: Full-stack web development with modern ES6+ standards";
     }
-    if (msg.includes("skill")) {
-      return `Anubhav has strong skills are \n
-            Frontend Languages: \n1. HTML\n 2. CSS \n 3.  JavaScript \n 4.  React \n
-            Backend Languages: \n 1. Node.js \n 2. Express Js\n
-            Databse languages:\n 1. Mongo Db \n 2.MySql  \n
-            Programming Language :\n1. Cpp\n2. C  \n 3. Java \n 4. Python`;
+
+    // LeetCode
+    if (matchesAny(msg, ["leetcode", "600", "problems", "dsa", "algorithms"])) {
+      return "Anubhav has solved <strong>600+ problems on LeetCode</strong>, demonstrating mastery across all difficulty levels. His solutions showcase proficiency in Data Structures, Algorithms, Dynamic Programming, and optimization techniques. His consistent practice reflects a deep commitment to computational excellence.";
     }
-    if (msg.includes("leetcode")) {
-      return `Anubhav Singh Solve 500+ Leetcode Solve Question which ShowCase the Problem Solving Skills \n\n Link For Profile View :<a href="https://leetcode.com/u/anubhav_singh_6966/">LeetCode Profile</a>`;
+
+    // HackerRank
+    if (matchesAny(msg, ["hackerrank", "5 star", "rating", "5-star"])) {
+      return "Anubhav maintains a <strong>5-star rating in C++ on HackerRank</strong>, validating his advanced expertise in the language, competitive programming, and problem-solving capabilities. This achievement reflects his commitment to technical excellence.";
     }
-    if (msg.includes("hackerrank")) {
-      return `Anubhav Singh is Currently 5 Star Coder on HackerRank which ShowCase the Problem Solving Skills \n\n Link For Profile View :<a href="https://www.hackerrank.com/profile/anubhavsingh2027">Hackerrank Profile</a>`;
+
+    // Projects - Overview
+    if (matchesAny(msg, ["project", "projects", "what have you built", "portfolio"])) {
+      return "<strong>Featured Projects:</strong><br> <strong>Real-Time Chatting App</strong> - WebSocket communication system<br> <strong>PhishShield</strong> - ML-based phishing detection platform<br> <strong>This Portfolio</strong> - Interactive showcase with NAV-JARVIS assistant<br><br>I can provide detailed information about any project. Which would interest you?";
     }
-    if (msg.includes("technology") || msg.includes("tech")) {
-      return `Anubhav Singh technology knows are :- \n
-            1. Blockchain \n
-            2. Artificial Intelligence \n
-            3. cyber Security`;
+
+    // Real-Time Chatting
+    if (matchesAny(msg, ["chatting", "chat app", "websocket", "real-time", "messenger"])) {
+      return "<strong>Real-Time Chatting Application</strong><br><br>A comprehensive WebSocket-powered messaging system featuring:<br> Instant message delivery with live user presence<br> JWT-based secure authentication<br> Room-based messaging architecture<br> Modern, responsive user interface<br><br><strong>Technologies:</strong> WebSocket, Node.js, Express.js, MongoDB, HTML, CSS, JavaScript";
     }
-    if (msg.includes("contest")) {
-      return `Anubhav singh regurly Participate all the contest on leetcode `;
+
+    // PhishShield
+    if (matchesAny(msg, ["phishshield", "phishing", "security", "threat", "detection"])) {
+      return "<strong>PhishShield - Intelligent Phishing Detection</strong><br><br>An advanced cybersecurity platform employing machine learning to detect fraudulent URLs and phishing threats:<br> URL pattern analysis and behavioral feature detection<br> Secure JWT-based user authentication<br> Interactive security dashboard<br> Automated threat analysis engine<br><br><strong>Technologies:</strong> HTML, Tailwind CSS, JavaScript, Node.js, Express.js, MongoDB";
     }
-    if (msg.includes("achievement")) {
-      return `Anubhav's achievements include:\n\n🏆 ${knowledgeBase.achievements.join(
-        "\n🏆 "
-      )}\n\n Hacker rank `;
+
+    // This Portfolio Website
+    if (matchesAny(msg, ["this site", "this website", "portfolio website", "my portfolio"])) {
+      return "<strong>Portfolio Website</strong><br><br>This interactive platform showcases Anubhav's professional capabilities through:<br> Smooth GSAP animations and canvas-based network effects<br> NAV-JARVIS intelligent assistant (myself)<br> Fully functional REST API for direct communication<br> Responsive, modern design demonstrating web development expertise<br><br>Built with HTML, CSS, JavaScript, and advanced animation libraries.";
     }
-    if (
-      msg.includes("project") ||
-      msg.includes("work")
-    ) {
-      return `✨ Here are some of Anubhav's featured projects:\n
- **Real Time Chatting ** – Chatting Platform **PhishShield** – Cybersecurity Platform
- **Kashi Route** – Tourism Website
- **Airbnb Clone** – Full-Stack Web App
- **Portfolio** - Personal Website
- **Todo App** – Productivity Tool
- **Weather App** – API-Powered Forecasts
- **Type Master** – Interactive Practice
- **AI Tools Directory** – 600+ AI Tools in One Place
- **Stress Relief Platform** – Calm & Focus Space
- <a style="color: red; font-weight: bold;" href="https://github.com/anubhavsingh2027" target="_blank">Click here to explore more on GitHub</a>
-👉 Which project would you like to know more about?`;
+
+    // Contact Information
+    if (matchesAny(msg, ["contact", "email", "phone", "reach", "call", "message", "how to contact"])) {
+      return "<strong>Contact Information:</strong><br><br> <strong>Email:</strong> anubhavsingh2027@gmail.com<br> <strong>Phone/WhatsApp:</strong> 7355026966<br><br>Response time: Typically within 24 hours. Anubhav welcomes inquiries regarding opportunities and professional collaborations.";
     }
-    if (
-      msg.includes("number") ||
-      msg.includes("mobile") ||
-      msg.includes("whatsapp")
-    ) {
-      return `Anubhav singh Mob no is 7355026966`;
+
+    // Direct Contact Number
+    if (matchesAny(msg, ["number", "mobile", "whatsapp", "direct"])) {
+      return "You can reach Anubhav directly at: <strong>7355026966</strong> via phone or WhatsApp.";
     }
-    if (msg.includes("phishshield") || msg.includes("security")) {
-      const project = knowledgeBase.projects.phishshield;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\nGitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://phishshield-5lym.onrender.com" target="_blank">Live Demo</a>`;
+
+    // GitHub
+    if (matchesAny(msg, ["github", "repository", "repositories", "code", "source code"])) {
+      return "Anubhav's GitHub profile: <strong>anubhavsingh2027</strong><br><br>His repositories contain comprehensive implementations of projects, algorithms, and open-source contributions. You can explore his complete portfolio at: <a href='https://github.com/anubhavsingh2027' target='_blank' style='color: #0066cc;'>github.com/anubhavsingh2027</a>";
     }
-    if (msg.includes("kashika") || msg.includes("travel")) {
-      const project = knowledgeBase.projects.kashika;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\nGitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://kashika-tour-and-travels.onrender.com/" target="_blank">Live Demo</a>`;
+
+    // Social Media
+    if (matchesAny(msg, ["linkedin", "twitter", "instagram", "social", "social media"])) {
+      return "<strong>Professional Presence:</strong><br> LinkedIn - Professional network and endorsements<br> Twitter - Tech insights and updates<br> Instagram - Personal and professional content<br><br>These platforms provide additional context into Anubhav's professional journey and expertise.";
     }
-    if (msg.includes("airbnb")) {
-      const project = knowledgeBase.projects.airbnb;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\nGitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://airbnb-anubhav.onrender.com" target="_blank">Live Demo</a>`;
+
+    // Creator Question
+    if (matchesAny(msg, ["who created you", "who made you", "creator", "developed"])) {
+      return "I am created by Anubhav Singh.";
     }
-    if (msg.includes("todo")) {
-      const project = knowledgeBase.projects.todo;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\nGitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://todo-anubhav.onrender.com" target="_blank">Live Demo</a>`;
+
+    // Services/Hire
+    if (matchesAny(msg, ["hire", "service", "freelance", "work", "collaborate", "opportunity"])) {
+      return "<strong>Services &amp; Collaboration:</strong><br> Full-Stack Web Development<br> Backend Architecture &amp; Optimization<br> Algorithm Problem Solving<br> UI/UX Implementation<br><br>For project inquiries and collaborations, contact: anubhavsingh2027@gmail.com";
     }
-    if (msg.includes("weather")) {
-      const project = knowledgeBase.projects.weather;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\n GitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://anubhavsingh2027.github.io/anubhavsingh2027-Weather-Website/" target="_blank">Live Demo</a>`;
-    }
-    if (
-      msg.includes("ai tools") ||
-      msg.includes("directory") ||
-      msg.includes("ai") ||
-      msg.includes("tools") ||
-      msg.includes("tool")
-    ) {
-      const project = knowledgeBase.projects.aitools;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\n GitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://anubhavsingh2027.github.io/-AI-Tools-Directory/" target="_blank">Live Demo</a>`;
-    }
-    if (msg.includes("typing") || msg.includes("speed")) {
-      const project = knowledgeBase.projects.typing;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\n GitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://anubhavsingh2027.github.io/TYPING-TEST/" target="_blank">Live Demo</a>`;
-    }
-    if (msg.includes("stress") || msg.includes("relief")) {
-      const project = knowledgeBase.projects.stress;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\n GitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>\n\n🔗 <a href="https://anubhavsingh2027.github.io/Stress-Relief-Game-Website/" target="_blank">Live Demo</a>`;
-    }
-    if (msg.includes("c++") || msg.includes("string") || msg.includes("cpp")) {
-      const project = knowledgeBase.projects.cpp;
-      return `${project.name}: ${
-        project.description
-      }\n\nTech: ${project.technologies.join(
-        ", "
-      )}\n\n GitHub: <a style="color: red;font-weight: bolder;" href="${
-        project.github
-      } " target="_blank> Click</a>`;
-    }
-    if (
-      msg.includes("service") ||
-      msg.includes("hire") ||
-      msg.includes("freelance")
-    ) {
-      return `Anubhav offers:\n\n💻 Web Development - Full-stack solutions\n⚙️ Backend Development - Server architecture\n🧩 Problem Solving - Algorithm optimization\n\nContact him at ${knowledgeBase.personal.email} for collaborations!`;
-    }
-    if (msg.includes("dob") || msg.includes("birth")) {
-      return `Anubhav singh Born ${knowledgeBase.personal.dob}. In 2025 is he was 20 year old.`;
-    }
-    if (msg.includes("date")) {
-      return `current Date is ${new Date()};
-}`;
-    }
-    return `I can help you learn about Anubhav's:\n\n🚀  projects\n⚡ Technical skills\n🏆 Achievements\n🎓 Education\n📞 Contact info\n\n Ask Anubhav I Will Try To Tell \n\nWhat interests you most?`;
+
+    // General fallback
+    return "I can assist with inquiries regarding Anubhav's professional profile, technical expertise, projects, education, skills, and contact information. Please ask me about any specific topic of interest.";
   }
 }
+
+

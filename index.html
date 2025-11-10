@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anubhav Singh - Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="voice-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -131,10 +132,10 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-description">
-                         Hi, I’m Anubhav Singh — a passionate developer from Varanasi, India.
+                         Hi, I'm Anubhav Singh — a passionate developer from Varanasi, India.
                          <br>
                           I am a skilled web developer with years of experience in crafting responsive, high-performance websites. My focus lies in delivering quality solutions using the latest web technologies.
-I have a strong foundation in HTML, CSS, JavaScript, and frameworks like React and Node.js. I’m passionate about clean code, scalability, and building projects that not only function well but also provide value to users.
+I have a strong foundation in HTML, CSS, JavaScript, and frameworks like React and Node.js. I'm passionate about clean code, scalability, and building projects that not only function well but also provide value to users.
 Whether working on front-end interfaces or back-end logic, I always aim for excellence and continuous improvement. I'm committed to learning new technologies and staying updated with industry trends.
 My achievements include building and deploying over 15 full-stack web projects, solving 500+ coding problems on LeetCode, and earning a 5-Star rating in C++ on HackerRank.
                     </p>
@@ -1124,18 +1125,20 @@ My achievements include building and deploying over 15 full-stack web projects, 
         <i class="fas fa-chevron-up"></i>
         <div class="scroll-progress"></div>
     </button>
+
+
     <div class="floating-actions">
-        <button class="fab1 chat-fab" id="chatFab" title="AI Assistant">
-            <span class="fab1-icon">🤖</span>
-            <span class="fab1-text">AI Chat</span>
+        <button class="fab1 chat-fab" id="chatFab" title="NAV-JARVIS">
+            <span class="fab1-icon">🎯</span>
+            <span class="fab1-text">NAV-JARVIS</span>
         </button>
     </div>
     <div class="chatbot hidden" id="chatbot">
         <div class="chatbot-header">
             <div class="chatbot-profile">
-                <div class="bot-avatar">🤖</div>
+                <div class="bot-avatar">🎯</div>
                 <div class="bot-info">
-                    <h4>Anubhav's AI Assistant</h4>
+                    <h4>NAV-JARVIS</h4>
                     <span class="bot-status">Online</span>
                 </div>
             </div>
@@ -1143,18 +1146,18 @@ My achievements include building and deploying over 15 full-stack web projects, 
         </div>
         <div class="chatbot-messages" id="chatMessages">
             <div class="welcome-message">
-                <div class="bot-avatar">🤖</div>
+                <div class="bot-avatar">🎯</div>
                 <div class="message-content">
-                    <p id="message-content-color">👋 Hi! I'm Anubhav's AI assistant. I am hear to help you:</p>
+                    <p id="message-content-color">Greetings. I am NAV-JARVIS, Anubhav Singh's personal portfolio assistant.</p>
+                    <p id="message-content-color">I am here to provide information on:</p>
                     <ul>
+                        <li id="message-content-color">🎯 Professional Profile & Background</li>
+                        <li id="message-content-color">💻 Technical Skills & Expertise</li>
                         <li id="message-content-color">🚀 Projects & Technical Work</li>
-                        <li id="message-content-color">⚡ Skills & Technologies</li>
-                        <li id="message-content-color">🎓 Education & Background</li>
+                        <li id="message-content-color">🏆 Achievements & Accomplishments</li>
                         <li id="message-content-color">📞 Contact Information</li>
                     </ul>
-                    <p id="message-content-color">What would you like to know?</p>
-                    <br>
-                    <h1>under Improvement</h1>
+                    <p id="message-content-color">How may I assist you today?</p>
                 </div>
             </div>
         </div>
@@ -1166,11 +1169,10 @@ My achievements include building and deploying over 15 full-stack web projects, 
                 </button>
             </div>
             <div class="quick-questions">
-                <button class="quick-btn" data-question="Who Is Anubhav Singh">Who ?</button>
-                <button class="quick-btn" data-question="Tell me about  projects">Projects</button>
+                <button class="quick-btn" data-question="Who is Anubhav Singh">Profile</button>
+                <button class="quick-btn" data-question="Tell me about his projects">Projects</button>
                 <button class="quick-btn" data-question="What are his technical skills?">Skills</button>
                 <button class="quick-btn" data-question="How can I contact him?">Contact</button>
-                <button class="quick-btn" data-question="More Questions">Other Question</button>
             </div>
         </div>
     </div>
@@ -1185,6 +1187,64 @@ My achievements include building and deploying over 15 full-stack web projects, 
             </div>
         </div>
     </div>
+
+    <!-- Mode Selection Modal -->
+    <div class="mode-selection-modal hidden" id="modeModal">
+        <div class="mode-selection-content">
+            <h2>Choose Your Experience</h2>
+            <p>Would you like to chat or use voice assistant mode?</p>
+            <div class="mode-buttons">
+                <button class="mode-btn" id="chatModeBtn">
+                    <div class="icon">💬</div>
+                    <div class="label">Chat Mode</div>
+                    <div class="description">Type your questions</div>
+                </button>
+                <button class="mode-btn" id="voiceModeBtn">
+                    <div class="icon">🎤</div>
+                    <div class="label">Voice Mode</div>
+                    <div class="description">Speak naturally</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Assistant UI -->
+    <div class="voice-assistant hidden" id="voiceAssistant">
+        <div class="voice-header">
+            <div class="voice-profile">
+                <div class="voice-avatar">�</div>
+                <div class="voice-info">
+                    <h4>NAV-JARVIS</h4>
+                    <span class="voice-status-text" id="voiceStatusText">Ready to listen</span>
+                </div>
+            </div>
+            <button class="voice-close" id="voiceClose">&times;</button>
+        </div>
+        <div class="voice-content">
+            <div class="mic-container" id="micContainer">
+                <div class="mic-pulse"></div>
+                <div class="mic-pulse-2"></div>
+                <div class="mic-circle" id="micCircle">
+                    <i class="fas fa-microphone"></i>
+                </div>
+            </div>
+            <p class="voice-prompt" id="voicePrompt">Tap the microphone to speak</p>
+            <div class="voice-transcript-container">
+                <div class="transcript-label">You said:</div>
+                <div class="voice-transcript" id="voiceTranscript">
+                    <p class="transcript-placeholder">Your speech will appear here...</p>
+                </div>
+            </div>
+            <div class="voice-response-container hidden" id="voiceResponseContainer">
+                <div class="response-label">
+                    <i class="fas fa-robot"></i> Assistant:
+                </div>
+                <div class="voice-response" id="voiceResponse"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
+    <script src="voice-assistant.js"></script>
 </body>
 </html>
