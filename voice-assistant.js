@@ -7,15 +7,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initModeSelection() {
   const chatFab = document.getElementById("chatFab");
+  const modeModal = document.getElementById("modeModal");
+  const chatModeBtn = document.getElementById("chatModeBtn");
+  const voiceModeBtn = document.getElementById("voiceModeBtn");
   const chatbot = document.getElementById("chatbot");
+  const voiceAssistant = document.getElementById("voiceAssistant");
 
-  if (!chatFab) return;
+  if (!chatFab || !modeModal) return;
 
-  // Show chatbot when chat button is clicked
+  // Show mode selection modal when chat button is clicked
   chatFab.addEventListener("click", (e) => {
     e.preventDefault();
-    if (chatbot) {
-      chatbot.classList.toggle("hidden");
+    modeModal.classList.add("active");
+  });
+
+  // Chat Mode selected
+  if (chatModeBtn) {
+    chatModeBtn.addEventListener("click", () => {
+      modeModal.classList.remove("active");
+      if (chatbot) {
+        chatbot.classList.remove("hidden");
+      }
+    });
+  }
+
+  // Voice Mode selected
+  if (voiceModeBtn) {
+    voiceModeBtn.addEventListener("click", () => {
+      modeModal.classList.remove("active");
+      if (voiceAssistant) {
+        voiceAssistant.classList.remove("hidden");
+      }
+    });
+  }
+
+  // Close modal when clicking outside
+  modeModal.addEventListener("click", (e) => {
+    if (e.target === modeModal) {
+      modeModal.classList.remove("active");
     }
   });
 }
@@ -180,98 +209,292 @@ function initVoiceAssistant() {
   function getVoiceResponse(command) {
     const cmd = command.toLowerCase().trim();
 
-    // Helper function for keyword matching
+    // Helper function for better matching
     const matchesAny = (text, keywords) => {
       return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
     };
 
-    // Greeting
-    if (matchesAny(cmd, ["hello", "hi", "hey", "greetings"])) {
-      return "Certainly. I am NAV-JARVIS, Anubhav Singh's personal portfolio assistant. How may I be of service?";
+    // Check if command wants to open/redirect
+    const wantsToOpen =
+      cmd.includes("open") ||
+      cmd.includes("live") ||
+      cmd.includes("show") ||
+      cmd.includes("redirect");
+
+    if (cmd.includes("hello") || cmd.includes("hi") || cmd.includes("hey")) {
+      return "Hello! I'm Anubhav's voice assistant. How can I help you today?";
     }
 
-    // Identity
-    if (matchesAny(cmd, ["who are you", "name", "who are", "what are you"])) {
-      return "I am NAV-JARVIS. I was created by Anubhav Singh to serve as his personal portfolio assistant.";
+    if (cmd.includes("name") || cmd.includes("who are you")) {
+      return "I'm the voice assistant for Anubhav Singh's portfolio. You can ask me about his projects, skills, or contact information.";
     }
 
-    // About Anubhav
-    if (matchesAny(cmd, ["about", "who is", "tell me about", "profile", "background"])) {
-      return "Anubhav Singh is a highly skilled Full Stack Developer and AI Enthusiast from Varanasi, India. He is pursuing a B.Tech in Computer Science with AI specialization from PSIT Kanpur. His accomplishments include solving over 600 problems on LeetCode and maintaining a 5-star rating in C++ on HackerRank. He has successfully developed and deployed more than 15 full-stack web applications.";
+    // PhishShield Project - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "phish",
+        "shield",
+        "phishing",
+        "security",
+        "fish",
+        "phishshield",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () => window.open("https://phishshield.nav-code.com/", "_blank"),
+          100
+        );
+      }
+      return "PhishShield is a cybersecurity platform with real-time phishing detection using advanced URL scanning and blacklisted domain checks. It includes secure authentication, user dashboard, and automated threat analysis. Built with HTML, Tailwind CSS, JavaScript, Node.js, Express, and MongoDB. Would you like me to open the live project for you?";
     }
 
-    // Education
-    if (matchesAny(cmd, ["education", "study", "college", "university", "degree"])) {
-      return "Anubhav is currently pursuing a Bachelor of Technology in Computer Science and Engineering with a specialization in Artificial Intelligence from PSIT Kanpur, with expected graduation in 2027.";
+    // Kashi Route Project - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, [
+        "kashi",
+        "route",
+        "kashiroute",
+        "kasi",
+        "she",
+        "varanasi",
+        "tourism",
+        "travel",
+        "tour",
+        "kashi route",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () => window.open("https://kashiroute.nav-code.com/", "_blank"),
+          100
+        );
+      }
+      return "Kashi Route is a tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support. Built with HTML, CSS, JavaScript, Node.js, Express, and MongoDB. It provides a complete booking experience for travelers. Would you like me to open the live website?";
     }
 
-    // Skills - General
-    if (matchesAny(cmd, ["skill", "skills", "technology", "technologies", "tech stack", "expertise"])) {
-      return "Anubhav's technical strengths encompass: Frontend technologies including HTML5, CSS3, JavaScript, and React with Tailwind CSS. Backend technologies including Node.js and Express.js. Databases including MongoDB and Firebase. Programming languages including C++, Java, and Python. He specializes in full-stack web development using the MERN stack and possesses expertise in real-time systems and modern UI/UX animations.";
+    // Airbnb Clone Project - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, ["airbnb", "air bnb", "rental", "accommodation", "bnb"])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () =>
+            window.open("https://airbnb-clone-1u1y.onrender.com/", "_blank"),
+          100
+        );
+      }
+      return "Airbnb Clone is a full-stack rental booking web application featuring property listings, authentication, reviews, booking workflows, and responsive UI. Built with React, Node.js, Express, and MongoDB. It replicates core Airbnb features with modern architecture. Would you like me to open the live application?";
     }
 
-    // Core Skills List
-    if (matchesAny(cmd, ["what do you know", "what can you do", "capabilities"])) {
-      return "I possess comprehensive knowledge of Anubhav's: Programming proficiency in C++, Java, Python, and JavaScript. Web technologies spanning HTML, CSS, React, Node.js, and Express.js. Database expertise with MongoDB and Firebase. Problem-solving abilities demonstrated through Data Structures and Algorithms. Full-stack development capabilities across the MERN stack.";
+    // Real-Time Chatting Project - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, [
+        "chatting",
+        "real time",
+        "realtime",
+        "websocket",
+        "messenger",
+        "messaging",
+        "real-time",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () =>
+            window.open("https://real-time-chatting.nav-code.com/", "_blank"),
+          100
+        );
+      }
+      return "Real-Time Chatting App is a WebSocket-powered platform with secure authentication, active user presence, and instant message delivery. Built with WebSocket, Node.js, Express, MongoDB, HTML, CSS, and JavaScript. It features clean UI and room-based messaging. Would you like me to open the live chat application?";
     }
 
-    // LeetCode
-    if (matchesAny(cmd, ["leetcode", "coding problems", "dsa", "algorithms"])) {
-      return "Anubhav has solved over 600 problems on LeetCode, demonstrating exceptional proficiency in Data Structures and Algorithms across all difficulty levels. His GitHub profile contains detailed implementations of these solutions.";
+    // Portfolio Project - Skip if asking about general portfolio/projects
+    if (
+      (matchesAny(cmd, [
+        "this site",
+        "your website",
+        "your portfolio",
+        "this portfolio",
+      ]) ||
+        (cmd.includes("portfolio") && !cmd.includes("project"))) &&
+      !cmd.includes("all project") &&
+      !cmd.includes("your project")
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () => window.open("https://anubhav.nav-code.com/", "_blank"),
+          100
+        );
+      }
+      return "This Portfolio website features an AI chatbot for interactive assistance, fully functional REST API for sending emails, and a sleek user-friendly interface. Built with HTML, CSS, JavaScript, and Canvas animations. It showcases modern web development skills and responsive design. Would you like me to open the live site?";
     }
 
-    // HackerRank
-    if (matchesAny(cmd, ["hackerrank", "5 star", "rating"])) {
-      return "Anubhav maintains a 5-star rating in C++ on HackerRank, validating his advanced expertise in the language and problem-solving capabilities.";
+    // Typing Master Project - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, [
+        "typing master",
+        "typemaster",
+        "typing test",
+        "speed test",
+        "wpm",
+        "typing speed",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () => window.open("https://typingmaster.nav-code.com/", "_blank"),
+          100
+        );
+      }
+      return "Typing Master is an interactive typing test platform that tracks typing speed in WPM and accuracy in real-time. Built with JavaScript, it provides instant feedback and detailed results. Perfect for improving typing skills. Would you like me to open the typing test?";
     }
 
-    // Projects - General
-    if (matchesAny(cmd, ["project", "projects", "work", "portfolio"])) {
-      return "Anubhav has developed several significant projects. His primary projects include: Real-Time Chatting Application featuring WebSocket communication. PhishShield, an intelligent phishing detection system using machine learning. This portfolio website with interactive animations and personalized assistance. I can provide detailed information about any specific project if you would like.";
+    // Weather App Project - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, [
+        "weather app",
+        "weather forecast",
+        "weather website",
+        "forecast app",
+        "climate app",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () =>
+            window.open("https://weather-website-rosy.vercel.app/", "_blank"),
+          100
+        );
+      }
+      return "Weather Forecasting App is a responsive application providing real-time forecasts and climate insights using OpenWeather API. Built with JavaScript, it delivers accurate weather information with a clean interface. Would you like me to open the weather app?";
     }
 
-    // Real-Time Chatting
-    if (matchesAny(cmd, ["chatting", "chat app", "websocket", "real-time"])) {
-      return "The Real-Time Chatting Web Application is a comprehensive messaging system featuring WebSocket-powered communication for instant message delivery. It includes secure JWT-based authentication, active user presence tracking, and a modern user interface built with HTML, CSS, and JavaScript. The architecture employs Node.js and Express.js for the backend, with MongoDB for persistent data storage.";
+    // AI Tools Directory - Enhanced matching with ANY keyword
+    if (
+      matchesAny(cmd, [
+        "ai tool",
+        "ai tools",
+        "tools directory",
+        "ai directory",
+        "artificial intelligence",
+      ])
+    ) {
+      if (wantsToOpen) {
+        setTimeout(
+          () =>
+            window.open(
+              "https://ai-tools-directory-seven-jade.vercel.app/",
+              "_blank"
+            ),
+          100
+        );
+      }
+      return "AI Tools Directory features over 600 AI tools with keyword-based search and filter for quick discovery. Built with HTML, CSS, and JavaScript, it helps users find the perfect AI tool for their needs. Would you like me to open the directory?";
     }
 
-    // PhishShield
-    if (matchesAny(cmd, ["phishshield", "phishing", "security", "detection"])) {
-      return "PhishShield is an intelligent cybersecurity platform employing machine learning to detect fraudulent URLs and phishing threats. It analyzes URL patterns and behavioral features to identify suspicious websites. The system includes secure user authentication, an interactive dashboard, and automated threat analysis capabilities. The technology stack comprises HTML, Tailwind CSS, JavaScript, Node.js, Express.js, and MongoDB.";
+    // General project query - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "all project",
+        "your project",
+        "what project",
+        "show project",
+        "list project",
+        "what have you built",
+        "what did you make",
+      ])
+    ) {
+      if (
+        cmd.includes("more") ||
+        cmd.includes("github") ||
+        cmd.includes("all")
+      ) {
+        setTimeout(
+          () => window.open("https://github.com/anubhavsingh2027", "_blank"),
+          100
+        );
+      }
+      return "Anubhav has built several amazing projects: PhishShield for cybersecurity, Kashi Route for tourism, Airbnb Clone for bookings, Real-Time Chat app, Portfolio website, Typing Master, Weather App, and AI Tools Directory. Would you like to hear details about any specific project? Or should I open his GitHub to see all projects?";
     }
 
-    // This Portfolio
-    if (matchesAny(cmd, ["this site", "this website", "portfolio website"])) {
-      return "This portfolio website showcases Anubhav's professional capabilities through a modern, interactive interface. It features smooth animations, a personalized chatbot assistant—myself, NAV-JARVIS—and comprehensive REST API integration for direct communication. The design demonstrates responsive architecture and modern web development practices.";
+    // GitHub redirect - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "github",
+        "git hub",
+        "more project",
+        "more projects",
+        "see all",
+        "show all",
+      ])
+    ) {
+      window.open("https://github.com/anubhavsingh2027", "_blank");
+      return "Opening Anubhav's GitHub profile where you can explore all his projects and contributions!";
     }
 
-    // Contact Information
-    if (matchesAny(cmd, ["contact", "email", "reach", "phone", "call", "message"])) {
-      return "You may reach Anubhav through the following channels: Email: anubhavsingh2027@gmail.com. Phone and WhatsApp: 7355026966. He typically responds to inquiries within 24 hours and welcomes discussions regarding opportunities and collaborations.";
+    // Skills - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "skill",
+        "skills",
+        "technology",
+        "technologies",
+        "tech stack",
+        "what do you know",
+        "what can you do",
+      ])
+    ) {
+      return "Anubhav is skilled in full-stack development. Frontend: HTML, CSS, JavaScript, React, Tailwind CSS. Backend: Node.js, Express. Databases: MongoDB, MySQL. Programming: C++, Java, Python, C. Tools: VS Code, Git, GitHub.";
     }
 
-    // GitHub
-    if (matchesAny(cmd, ["github", "repository", "repositories", "code", "source"])) {
-      return "Anubhav's GitHub profile, anubhavsingh2027, contains comprehensive repositories showcasing his projects and contributions. I can direct you to specific projects on request.";
+    // Contact - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "contact",
+        "email",
+        "phone",
+        "reach",
+        "call",
+        "message",
+        "get in touch",
+      ])
+    ) {
+      return "You can reach Anubhav at anubhavsingh2027@gmail.com or call him at 7355026966. He typically responds within 24 hours.";
     }
 
-    // Social Media
-    if (matchesAny(cmd, ["linkedin", "twitter", "instagram", "social"])) {
-      return "Anubhav maintains a professional presence across multiple platforms. His LinkedIn, Twitter, and Instagram profiles contain additional insights into his work and professional journey.";
+    // About Anubhav - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "about",
+        "who is",
+        "who's",
+        "tell me about",
+        "about anubhav",
+        "about him",
+      ])
+    ) {
+      return "Anubhav Singh is a 20-year-old Full Stack Developer from Varanasi, India. He's pursuing Computer Science with AI specialization. He has solved 500 plus LeetCode problems, achieved 5-Star rating in C++ on HackerRank, and built over 15 full-stack applications.";
     }
 
-    // Creator Question
-    if (matchesAny(cmd, ["who created you", "who made you", "creator"])) {
-      return "I am created by Anubhav Singh.";
+    // Exit - Enhanced matching
+    if (
+      matchesAny(cmd, [
+        "stop",
+        "close",
+        "exit",
+        "bye",
+        "goodbye",
+        "quit",
+        "end",
+      ])
+    ) {
+      stopListening();
+      voiceAssistant.classList.add("hidden");
+      return "Goodbye! Feel free to come back anytime.";
     }
 
-    // Closing
-    if (matchesAny(cmd, ["stop", "close", "exit", "bye", "goodbye", "thank you"])) {
-      return "Thank you for your inquiry. I remain available should you require further assistance regarding Anubhav's professional profile.";
-    }
-
-    // Default response
-    return "I can assist you with inquiries regarding Anubhav's professional background, technical expertise, project portfolio, skills, education, and contact information. What specific information would you like to explore?";
+    return "I can help you with information about Anubhav's projects, skills, education, and contact details. You can ask me about specific projects like PhishShield, Kashi Route, or Airbnb Clone. What would you like to know?";
   }
 
   // Mic circle click handler
