@@ -136,6 +136,9 @@ function initVoiceAssistant() {
     if (!recognition) {
       initRecognition();
     }
+    isListening = true;
+    micCircle.classList.add("active");
+    voiceStatusText.textContent = "Listening...";
     try {
       recognition.start();
     } catch (e) {
@@ -214,12 +217,14 @@ function initVoiceAssistant() {
       return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
     };
 
-    // Check if command wants to open/redirect
+    // Check if command wants to open/redirect (also check for "please")
     const wantsToOpen =
       cmd.includes("open") ||
       cmd.includes("live") ||
       cmd.includes("show") ||
-      cmd.includes("redirect");
+      cmd.includes("redirect") ||
+      cmd.includes("please") ||
+      cmd.includes("can you");
 
     if (cmd.includes("hello") || cmd.includes("hi") || cmd.includes("hey")) {
       return "Hello! I'm Anubhav's voice assistant. How can I help you today?";
