@@ -1801,86 +1801,106 @@ function initChatbot() {
         Python: "75% - AI/ML and web development",
       },
     },
-    projects: {
-      phishshield: {
-        name: "PhishShield",
-        description:
-          "Advanced cybersecurity platform with real-time phishing detection using URL-scanning APIs. Features comprehensive user authentication system.",
-        technologies: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-        ],
-        github: "https://github.com/anubhavsingh2027/Phishsheild",
-      },
-      todo: {
-        name: "Smart To-Do",
-        description:
-          "A full-stack MERN To-Do app with REST API support. Users can add, delete, and mark tasks complete. Features a responsive React frontend, Node.js & Express backend, and MongoDB database for efficient task management.",
-        technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
-        github: "https://github.com/anubhavsingh2027/Todo-App",
-      },
-      kashika: {
-        name: "Kashika Tour & Travel",
-        description:
-          "Complete tourism platform for Varanasi offering car rental services and personalized tour packages.",
-        technologies: ["HTML", "CSS", "JavaScript"],
-        github: "https://github.com/anubhavsingh2027/Kashika-Tours-and-Travels",
-      },
-      weather: {
-        name: "Weather Forecasting App",
-        description:
-          "Responsive weather application with real-time forecasts using OpenWeather API.",
-        technologies: ["JavaScript", "OpenWeather API", "Responsive Design"],
-        github:
-          "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
-      },
-      aitools: {
-        name: "AI Tools Directory",
-        description:
-          "Comprehensive directory featuring 600+ categorized AI tools with advanced search filtering.",
-        technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
-        github: "https://github.com/anubhavsingh2027/-AI-Tools-Directory",
-      },
-      typing: {
-        name: "Typing Speed Test",
-        description:
-          "Interactive typing speed test with real-time WPM tracking and accuracy measurement.",
-        technologies: ["JavaScript", "Real-time Tracking"],
-        github: "https://github.com/anubhavsingh2027/TYPING-TEST",
-      },
-      stress: {
-        name: "Stress Relief Website",
-        description:
-          "Interactive wellness platform with animations and sounds designed to help users relax.",
-        technologies: ["JavaScript", "CSS Animations", "Audio API"],
-        github: "https://github.com/anubhavsingh2027/Stress-relief",
-      },
-      cpp: {
-        name: "C++ String Methods Project",
-        description:
-          "Educational resource demonstrating C++ string methods and functions for DSA preparation.",
-        technologies: ["C++", "String Manipulation", "Algorithm Design"],
-        github:
-          "https://github.com/anubhavsingh2027/String_method_and_function",
-      },
-      airbnb: {
-        name: "Airbnb Clone",
-        description:
-          "Full-stack web application replicating Airbnb features including property listings, booking system, reviews, authentication, and responsive design.",
-        technologies: [
-          "React.js",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-          "REST APIs",
-        ],
-        github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
-      },
-    },
+   projects: {
+  phishshield: {
+    name: "PhishShield",
+    description:
+      "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
+    sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
+    liveLink: "https://phishshield.nav-code.com",
+  },
+
+  todo: {
+    name: "Smart To-Do",
+    description:
+      "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
+    technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
+    github: "https://github.com/anubhavsingh2027/Todo-App",
+    liveLink: "https://todo-app-jade-six-65.vercel.app",
+  },
+
+  kashika: {
+    name: "Kashi Route",
+    description:
+      "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    github: "https://github.com/anubhavsingh2027/KashiRoute",
+    liveLink: "https://kashi-route.vercel.app/",
+  },
+
+  weather: {
+    name: "Weather Forecasting App",
+    description:
+      "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
+    technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
+    github:
+      "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
+    liveLink: "https://weather-website-rosy.vercel.app/",
+  },
+
+  aitools: {
+    name: "AI Tools Directory",
+    description:
+      "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
+    technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
+    github: "https://github.com/anubhavsingh2027/typeMaster",
+    liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
+  },
+
+  typingMaster: {
+    name: "Typing Master",
+    description:
+      "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
+    technologies: ["JavaScript", "Real-time Calculation"],
+    github: "https://github.com/anubhavsingh2027/TypingMaster",
+    liveLink:
+      "https://typingmaster.nav-code.com/",
+  },
+
+  stress: {
+    name: "Stress Relief Website",
+    description:
+      "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
+    technologies: ["JavaScript", "CSS Animations", "Audio API"],
+    github: "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
+    liveLink: "https://stress-relief-game-website.vercel.app/",
+  },
+
+  cpp: {
+    name: "C++ String Methods Project",
+    description:
+      "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
+    technologies: ["C++", "String Manipulation", "Algorithm Logic"],
+    github:
+      "https://github.com/anubhavsingh2027/String_method_and_function",
+  },
+
+  airbnb: {
+    name: "Airbnb Clone",
+    description:
+      "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs"],
+    github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
+    liveLink: "https://airbnb-clone-1u1y.onrender.com/",
+  },
+
+  chatting: {
+    name: "Real-Time Chatting App",
+    description:
+      "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
+    technologies: ["WebSocket", "Node.js", "Express.js", "MongoDB", "HTML", "CSS", "JavaScript"],
+    github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
+    liveLink: "https://real-time-chatting.nav-code.com/",
+  }
+},
   };
   chatFab.addEventListener("click", (e) => {
     e.preventDefault();
@@ -2009,20 +2029,19 @@ function initChatbot() {
     }
     if (
       msg.includes("project") ||
-      msg.includes("work") ||
-      msg.includes("portfolio")
+      msg.includes("work")
     ) {
       return `✨ Here are some of Anubhav's featured projects:\n
-🛡️ **PhishShield** – Cybersecurity Platform
-    🚗 **Kashika Travel** – Tourism Website
-🏡 **Airbnb Clone** – Full-Stack Web App
-📝 **Todo App** – Productivity Tool
-🌤️ **Weather App** – API-Powered Forecasts
-🤖 **AI Tools Directory** – 600+ AI Tools in One Place
-⌨️ **Typing Speed Test** – Interactive Practice
-😌 **Stress Relief Platform** – Calm & Focus Space
-📚 **C++ String Methods Guide** – Developer Resource
-🔗 <a style="color: red; font-weight: bold;" href="https://github.com/anubhavsingh2027" target="_blank">Click here to explore more on GitHub</a>
+ **Real Time Chatting ** – Chatting Platform **PhishShield** – Cybersecurity Platform
+ **Kashi Route** – Tourism Website
+ **Airbnb Clone** – Full-Stack Web App
+ **Portfolio** - Personal Website
+ **Todo App** – Productivity Tool
+ **Weather App** – API-Powered Forecasts
+ **Type Master** – Interactive Practice
+ **AI Tools Directory** – 600+ AI Tools in One Place
+ **Stress Relief Platform** – Calm & Focus Space
+ <a style="color: red; font-weight: bold;" href="https://github.com/anubhavsingh2027" target="_blank">Click here to explore more on GitHub</a>
 👉 Which project would you like to know more about?`;
     }
     if (
