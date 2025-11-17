@@ -98,10 +98,10 @@
 /* ===== VOICE ASSISTANT ===== */
 .voice-assistant {
   position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 420px;
-  max-height: 600px;
+  bottom: 80px;
+  right: 20px;
+  width: 450px;
+  height: 650px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
   backdrop-filter: blur(20px);
   border-radius: 20px;
@@ -205,7 +205,12 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea, #764ba2);
   opacity: 0;
+}
+
+.mic-pulse.active,
+.mic-pulse-2.active {
   animation: pulse 2s infinite;
+  opacity: 0.8;
 }
 
 .mic-pulse-2 {
@@ -249,7 +254,7 @@
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
 }
 
-.mic-circle.active {
+.mic-circle {
   animation: glow 1.5s infinite;
 }
 

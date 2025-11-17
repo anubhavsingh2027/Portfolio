@@ -1917,14 +1917,13 @@ function initChatbot() {
       },
     },
   };
-  chatFab.addEventListener("click", (e) => {
-    e.preventDefault();
-    chatbot.classList.toggle("hidden");
-  });
+
   if (chatbotClose) {
     chatbotClose.addEventListener("click", (e) => {
       e.preventDefault();
       chatbot.classList.add("hidden");
+
+      chatFab.style.display = "";
     });
   }
   if (sendMessage) {
@@ -1972,7 +1971,7 @@ function initChatbot() {
     messageDiv.className = `chat-message ${sender}`;
     const avatar = document.createElement("div");
     avatar.className = "bot-avatar";
-    avatar.textContent = sender === "user" ? "👤" : "🎯";
+    avatar.textContent = sender === "user" ? "👤" : "🤖";
     const bubble = document.createElement("div");
     bubble.className = "message-bubble";
     bubble.innerHTML = message;
@@ -1990,18 +1989,18 @@ function initChatbot() {
       return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
     };
 
-    // Greeting responses
-    if (matchesAny(msg, ["hello", "hi", "hey", "greetings", "welcome"])) {
-      return "Certainly. I am NAV-JARVIS, Anubhav Singh's personal portfolio assistant. How may I assist you today?";
+    if// Greeting responses
+     (matchesAny(msg, ["hello",  "hey", "greetings", "welcome"])) {
+      return "Certainly. I am chat Bot, Anubhav Singh's personal portfolio assistant. How may I assist you today?";
     }
 
     // Identity
     if (matchesAny(msg, ["who are you", "your name", "identity", "who"])) {
-      return "I am NAV-JARVIS. I was created by Anubhav Singh to serve as his personal portfolio assistant and provide information about his professional profile.";
+      return "I am Chat Bot. I was created by Anubhav Singh to serve as his personal portfolio assistant and provide information about his professional profile.";
     }
 
     // Profile/About
-    if (matchesAny(msg, ["anubhav", "about", "who is", "profile", "background"])) {
+    if (matchesAny(msg, ["anubhav", "singh", "profile", "background"])) {
       return "Anubhav Singh is a distinguished Full Stack Developer and AI Enthusiast based in Varanasi, India. Currently pursuing B.Tech in Computer Science with AI specialization from PSIT Kanpur (Expected: 2027). <br><br><strong>Key Achievements:</strong> 600+ LeetCode problems solved, 5-star rating in C++ on HackerRank, 15+ full-stack applications deployed. His expertise spans MERN stack development, real-time systems, and modern UI/UX design.";
     }
 
