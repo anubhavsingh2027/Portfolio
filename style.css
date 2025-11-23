@@ -1702,6 +1702,7 @@ section {
   }
   .enhanced-card {
     height: 600px;
+    margin: 5px;
   }
   .project-description{
     font-size: 12px;
