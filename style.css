@@ -1701,7 +1701,7 @@ section {
     gap: var(--space-32);
   }
   .enhanced-card {
-    height: 450px;
+    height: 600px;
   }
   .enhanced-filters {
     gap: var(--space-16);
