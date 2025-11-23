@@ -1703,6 +1703,21 @@ section {
   .enhanced-card {
     height: 600px;
   }
+  .project-description{
+    font-size: 12px;
+  }
+  .project-tech{
+    gap: 0px;
+  }
+  .tech-tag.animated {
+    margin: 5px;
+    padding: 3px;
+    gap: 11px;
+  }
+  .tech-tag.animated i {
+    font-size: 10px;
+    padding: 3px;
+  }
   .enhanced-filters {
     gap: var(--space-16);
   }
