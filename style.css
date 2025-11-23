@@ -253,6 +253,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .theme-toggle {
   position: relative;
@@ -940,7 +942,7 @@ section {
   justify-content: center;
 }
 .image-frame {
-  width: 32rem;
+  width: 25rem;
   height: 37rem;
   border-radius: var(--radius-xl);
   background: var(--secondary-gradient);
