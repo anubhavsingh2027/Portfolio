@@ -1325,30 +1325,43 @@ function initEnhancedContactForm() {
     const userSubject = document.getElementById("subject").value;
     const userMessage = document.getElementById("message").value;
     showNotification("sending....", "send");
-    const getCustomerMessage = () => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
-    <h2 style="color: #6d28d9; margin-bottom: 16px;">Dear ${username},</h2>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 12px;">
-      Thank you for reaching out! We have received your message and our team will get back to you shortly.
+const getCustomerMessage = () => `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #333;">
+    <h2 style="color: #6d28d9; margin-bottom: 18px; font-size: 22px;">Hello ${username}, 👋</h2>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      Thank you for reaching out — your message has been successfully received!
     </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 12px;">
-      Meanwhile, feel free to explore our work and resources:
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      I truly appreciate your interest, and I'll get back to you as soon as possible.
     </p>
-    <ul style="padding-left: 18px; margin-bottom: 16px; font-size: 15px; line-height: 1.6;">
-      <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Portfolio</a></li>
-      <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn Profile</a></li>
-      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Personal Website</a></li>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      While you wait, feel free to take a look at my work and online presence:
+    </p>
+
+    <ul style="padding-left: 18px; margin-bottom: 18px; font-size: 15px; line-height: 1.7;">
+      <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Projects</a></li>
+      <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
+      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Portfolio Website</a></li>
     </ul>
-    <p style="line-height: 1.6; font-size: 15px;">We appreciate your interest!</p>
-    <p style="line-height: 1.6; font-size: 15px; margin-top: 20px;">
-      Best regards,<br/>
+
+    <p style="line-height: 1.7; font-size: 15px;">
+      Thanks again for getting in touch — talk soon!
+    </p>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-top: 24px;">
+      Warm regards,<br/>
       <strong style="color:#000;">Anubhav Singh</strong>
     </p>
-    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      📩 Sent via <strong>Anubhav mail</strong>
+
+    <div style="margin-top: 28px; padding: 12px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
+      ✉️ Sent from <strong>Anubhav Portfolio</strong>
     </div>
   </div>
 `;
+
     const getHostMessage = () => `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
     <h2 style="color: #6d28d9; margin-bottom: 16px;">📩 New Customer Enquiry</h2>
