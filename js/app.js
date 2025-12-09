@@ -2100,7 +2100,7 @@ function initChatbot() {
 //comment
 
 
-// when user visit website it tell me 
+// when user visit website it tell me
 
   window.addEventListener("load", () => {
     fetch("https://app.chatting.nav-code.com/portfolio/newUser", {
@@ -2108,9 +2108,9 @@ function initChatbot() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("New user tracked:", data);
+        console.log("Thank YOU For Visit");
       })
       .catch(err => {
-        console.error("Error tracking user:", err);
+        console.error("Thank YOU For Visiting My Portfolio ");
       });
   });
