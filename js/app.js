@@ -2100,3 +2100,17 @@ function initChatbot() {
 //comment
 
 
+// when user visit website it tell me 
+
+  window.addEventListener("load", () => {
+    fetch("https://app.chatting.nav-code.com/portfolio/newUser", {
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("New user tracked:", data);
+      })
+      .catch(err => {
+        console.error("Error tracking user:", err);
+      });
+  });
