@@ -1317,6 +1317,45 @@ function initFooterTypingAnimation() {
   }, 3000);
 }
 function initEnhancedContactForm() {
+  // Initialize message counter from localStorage
+  let messageCount = parseInt(
+    localStorage.getItem("contactFormMessageCount") || "0"
+  );
+
+  // Function to update message counter
+  function updateMessageCounter() {
+    messageCount++;
+    localStorage.setItem("contactFormMessageCount", messageCount.toString());
+
+    const counterElement = document.getElementById("messageCounter");
+    const counterBadge = document.getElementById("counterBadge");
+
+    if (counterElement && counterBadge) {
+      counterBadge.textContent = messageCount;
+      counterBadge.classList.add("new-message");
+
+      // Show counter if hidden
+      if (counterElement.style.display === "none") {
+        counterElement.style.display = "inline-flex";
+      }
+
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        counterBadge.classList.remove("new-message");
+      }, 1000);
+    }
+  }
+
+  // Restore counter on page load
+  if (messageCount > 0) {
+    const counterElement = document.getElementById("messageCounter");
+    const counterBadge = document.getElementById("counterBadge");
+    if (counterElement && counterBadge) {
+      counterBadge.textContent = messageCount;
+      counterElement.style.display = "inline-flex";
+    }
+  }
+
   async function handleContactForm(e) {
     e.preventDefault();
     const customerEmail = document.getElementById("email").value;
@@ -1325,7 +1364,7 @@ function initEnhancedContactForm() {
     const userSubject = document.getElementById("subject").value;
     const userMessage = document.getElementById("message").value;
     showNotification("sending....", "send");
-const getCustomerMessage = () => `
+    const getCustomerMessage = () => `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #333;">
     <h2 style="color: #6d28d9; margin-bottom: 18px; font-size: 22px;">Hello ${username}, 👋</h2>
 
@@ -1406,6 +1445,9 @@ const getCustomerMessage = () => `
               input.parentNode.classList.remove("focus");
             });
             showNotification("Message sent successfully!", "success");
+
+            // Update message counter
+            updateMessageCounter();
           }, 10);
         }
       } catch (err) {
@@ -2002,8 +2044,10 @@ function initChatbot() {
       return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
     };
 
-    if// Greeting responses
-     (matchesAny(msg, ["hello",  "hey", "greetings", "welcome"])) {
+    if (
+      // Greeting responses
+      matchesAny(msg, ["hello", "hey", "greetings", "welcome"])
+    ) {
       return "Certainly. I am chat Bot, Anubhav Singh's personal portfolio assistant. How may I assist you today?";
     }
 
@@ -2018,17 +2062,37 @@ function initChatbot() {
     }
 
     // Education
-    if (matchesAny(msg, ["education", "college", "study", "university", "degree", "school"])) {
+    if (
+      matchesAny(msg, [
+        "education",
+        "college",
+        "study",
+        "university",
+        "degree",
+        "school",
+      ])
+    ) {
       return "Anubhav is pursuing a Bachelor of Technology in Computer Science and Engineering with Artificial Intelligence specialization from PSIT Kanpur, Batch 2027. His academic focus includes advanced algorithms, machine learning, and full-stack development methodologies.";
     }
 
     // Skills - Comprehensive
-    if (matchesAny(msg, ["skill", "skills", "expertise", "technology", "technologies", "what can you do"])) {
+    if (
+      matchesAny(msg, [
+        "skill",
+        "skills",
+        "expertise",
+        "technology",
+        "technologies",
+        "what can you do",
+      ])
+    ) {
       return "<strong>Technical Stack:</strong><br><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Tailwind CSS<br><strong>Backend:</strong> Node.js, Express.js, WebSocket<br><strong>Databases:</strong> MongoDB, Firebase<br><strong>Programming Languages:</strong> C++, Java, Python, JavaScript<br><strong>Specializations:</strong> Full-stack MERN development, Data Structures &amp; Algorithms, Real-time systems, JWT Authentication, REST APIs, UI/UX Animations";
     }
 
     // Programming Languages
-    if (matchesAny(msg, ["c++", "cpp", "java", "python", "programming language"])) {
+    if (
+      matchesAny(msg, ["c++", "cpp", "java", "python", "programming language"])
+    ) {
       return "Anubhav demonstrates advanced proficiency in:<br> <strong>C++</strong>: 5-star HackerRank rating, 600+ problems solved<br> <strong>Java</strong>: Object-oriented design and backend development<br> <strong>Python</strong>: Data science and automation scripts<br> <strong>JavaScript</strong>: Full-stack web development with modern ES6+ standards";
     }
 
@@ -2043,27 +2107,67 @@ function initChatbot() {
     }
 
     // Projects - Overview
-    if (matchesAny(msg, ["project", "projects", "what have you built", "portfolio"])) {
+    if (
+      matchesAny(msg, [
+        "project",
+        "projects",
+        "what have you built",
+        "portfolio",
+      ])
+    ) {
       return "<strong>Featured Projects:</strong><br> <strong>Real-Time Chatting App</strong> - WebSocket communication system<br> <strong>PhishShield</strong> - ML-based phishing detection platform<br> <strong>This Portfolio</strong> - Interactive showcase with NAV-JARVIS assistant<br><br>I can provide detailed information about any project. Which would interest you?";
     }
 
     // Real-Time Chatting
-    if (matchesAny(msg, ["chatting", "chat app", "websocket", "real-time", "messenger"])) {
+    if (
+      matchesAny(msg, [
+        "chatting",
+        "chat app",
+        "websocket",
+        "real-time",
+        "messenger",
+      ])
+    ) {
       return "<strong>Real-Time Chatting Application</strong><br><br>A comprehensive WebSocket-powered messaging system featuring:<br> Instant message delivery with live user presence<br> JWT-based secure authentication<br> Room-based messaging architecture<br> Modern, responsive user interface<br><br><strong>Technologies:</strong> WebSocket, Node.js, Express.js, MongoDB, HTML, CSS, JavaScript";
     }
 
     // PhishShield
-    if (matchesAny(msg, ["phishshield", "phishing", "security", "threat", "detection"])) {
+    if (
+      matchesAny(msg, [
+        "phishshield",
+        "phishing",
+        "security",
+        "threat",
+        "detection",
+      ])
+    ) {
       return "<strong>PhishShield - Intelligent Phishing Detection</strong><br><br>An advanced cybersecurity platform employing machine learning to detect fraudulent URLs and phishing threats:<br> URL pattern analysis and behavioral feature detection<br> Secure JWT-based user authentication<br> Interactive security dashboard<br> Automated threat analysis engine<br><br><strong>Technologies:</strong> HTML, Tailwind CSS, JavaScript, Node.js, Express.js, MongoDB";
     }
 
     // This Portfolio Website
-    if (matchesAny(msg, ["this site", "this website", "portfolio website", "my portfolio"])) {
+    if (
+      matchesAny(msg, [
+        "this site",
+        "this website",
+        "portfolio website",
+        "my portfolio",
+      ])
+    ) {
       return "<strong>Portfolio Website</strong><br><br>This interactive platform showcases Anubhav's professional capabilities through:<br> Smooth GSAP animations and canvas-based network effects<br> NAV-JARVIS intelligent assistant (myself)<br> Fully functional REST API for direct communication<br> Responsive, modern design demonstrating web development expertise<br><br>Built with HTML, CSS, JavaScript, and advanced animation libraries.";
     }
 
     // Contact Information
-    if (matchesAny(msg, ["contact", "email", "phone", "reach", "call", "message", "how to contact"])) {
+    if (
+      matchesAny(msg, [
+        "contact",
+        "email",
+        "phone",
+        "reach",
+        "call",
+        "message",
+        "how to contact",
+      ])
+    ) {
       return "<strong>Contact Information:</strong><br><br> <strong>Email:</strong> anubhavsingh2027@gmail.com<br> <strong>Phone/WhatsApp:</strong> 7355026966<br><br>Response time: Typically within 24 hours. Anubhav welcomes inquiries regarding opportunities and professional collaborations.";
     }
 
@@ -2073,22 +2177,54 @@ function initChatbot() {
     }
 
     // GitHub
-    if (matchesAny(msg, ["github", "repository", "repositories", "code", "source code"])) {
+    if (
+      matchesAny(msg, [
+        "github",
+        "repository",
+        "repositories",
+        "code",
+        "source code",
+      ])
+    ) {
       return "Anubhav's GitHub profile: <strong>anubhavsingh2027</strong><br><br>His repositories contain comprehensive implementations of projects, algorithms, and open-source contributions. You can explore his complete portfolio at: <a href='https://github.com/anubhavsingh2027' target='_blank' style='color: #0066cc;'>github.com/anubhavsingh2027</a>";
     }
 
     // Social Media
-    if (matchesAny(msg, ["linkedin", "twitter", "instagram", "social", "social media"])) {
+    if (
+      matchesAny(msg, [
+        "linkedin",
+        "twitter",
+        "instagram",
+        "social",
+        "social media",
+      ])
+    ) {
       return "<strong>Professional Presence:</strong><br> LinkedIn - Professional network and endorsements<br> Twitter - Tech insights and updates<br> Instagram - Personal and professional content<br><br>These platforms provide additional context into Anubhav's professional journey and expertise.";
     }
 
     // Creator Question
-    if (matchesAny(msg, ["who created you", "who made you", "creator", "developed"])) {
+    if (
+      matchesAny(msg, [
+        "who created you",
+        "who made you",
+        "creator",
+        "developed",
+      ])
+    ) {
       return "I am created by Anubhav Singh.";
     }
 
     // Services/Hire
-    if (matchesAny(msg, ["hire", "service", "freelance", "work", "collaborate", "opportunity"])) {
+    if (
+      matchesAny(msg, [
+        "hire",
+        "service",
+        "freelance",
+        "work",
+        "collaborate",
+        "opportunity",
+      ])
+    ) {
       return "<strong>Services &amp; Collaboration:</strong><br> Full-Stack Web Development<br> Backend Architecture &amp; Optimization<br> Algorithm Problem Solving<br> UI/UX Implementation<br><br>For project inquiries and collaborations, contact: anubhavsingh2027@gmail.com";
     }
 
@@ -2099,18 +2235,17 @@ function initChatbot() {
 
 //comment
 
-
 // when user visit website it tell me
 
-  window.addEventListener("load", () => {
-    fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
-      method: "GET"
+window.addEventListener("load", () => {
+  fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
+    method: "GET"
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Thank YOU For Visit");
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log("Thank YOU For Visit");
-      })
-      .catch(err => {
-        console.error("Thank YOU For Visiting My Portfolio ");
-      });
-  });
+    .catch(err => {
+      console.error("Thank YOU For Visiting My Portfolio ");
+    });
+});
