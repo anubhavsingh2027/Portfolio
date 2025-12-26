@@ -2233,7 +2233,7 @@ function initChatbot() {
   }
 }
 
-//comment
+
 
 // when user visit website it tell me
 
