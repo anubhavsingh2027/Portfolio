@@ -1,7 +1,7 @@
 let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("readystatechange", function () {
   // Create GSAP timeline for intro animation
   const tl = gsap.timeline();
 
@@ -2237,15 +2237,15 @@ function initChatbot() {
 
 // when user visit website it tell me
 
-window.addEventListener("load", () => {
-  fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
-    method: "GET"
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Thank YOU For Visit");
-    })
-    .catch(err => {
-      console.error("Thank YOU For Visiting My Portfolio ");
-    });
-});
+// window.addEventListener("load", () => {
+//   fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
+//     method: "GET"
+//   })
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log("Thank YOU For Visit");
+//     })
+//     .catch(err => {
+//       console.error("Thank YOU For Visiting My Portfolio ");
+//     });
+// });
