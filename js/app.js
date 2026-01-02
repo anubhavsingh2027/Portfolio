@@ -2056,7 +2056,6 @@ function initChatbot() {
       return "I am Chat Bot. I was created by Anubhav Singh to serve as his personal portfolio assistant and provide information about his professional profile.";
     }
 
-    // Profile/About
     if (matchesAny(msg, ["anubhav", "singh", "profile", "background"])) {
       return "Anubhav Singh is a distinguished Full Stack Developer and AI Enthusiast based in Varanasi, India. Currently pursuing B.Tech in Computer Science with AI specialization from PSIT Kanpur (Expected: 2027). <br><br><strong>Key Achievements:</strong> 600+ LeetCode problems solved, 5-star rating in C++ on HackerRank, 15+ full-stack applications deployed. His expertise spans MERN stack development, real-time systems, and modern UI/UX design.";
     }
@@ -2118,7 +2117,6 @@ function initChatbot() {
       return "<strong>Featured Projects:</strong><br> <strong>Real-Time Chatting App</strong> - WebSocket communication system<br> <strong>PhishShield</strong> - ML-based phishing detection platform<br> <strong>This Portfolio</strong> - Interactive showcase with NAV-JARVIS assistant<br><br>I can provide detailed information about any project. Which would interest you?";
     }
 
-    // Real-Time Chatting
     if (
       matchesAny(msg, [
         "chatting",
@@ -2213,8 +2211,6 @@ function initChatbot() {
     ) {
       return "I am created by Anubhav Singh.";
     }
-
-    // Services/Hire
     if (
       matchesAny(msg, [
         "hire",
@@ -2228,12 +2224,9 @@ function initChatbot() {
       return "<strong>Services &amp; Collaboration:</strong><br> Full-Stack Web Development<br> Backend Architecture &amp; Optimization<br> Algorithm Problem Solving<br> UI/UX Implementation<br><br>For project inquiries and collaborations, contact: anubhavsingh2027@gmail.com";
     }
 
-    // General fallback
     return "I can assist with inquiries regarding Anubhav's professional profile, technical expertise, projects, education, skills, and contact information. Please ask me about any specific topic of interest.";
   }
 }
-
-
 
 // when user visit website it tell me
 
