@@ -2192,12 +2192,11 @@ function initChatbot() {
       matchesAny(msg, [
         "linkedin",
         "twitter",
-        "instagram",
         "social",
         "social media",
       ])
     ) {
-      return "<strong>Professional Presence:</strong><br> LinkedIn - Professional network and endorsements<br> Twitter - Tech insights and updates<br> Instagram - Personal and professional content<br><br>These platforms provide additional context into Anubhav's professional journey and expertise.";
+      return "<strong>Professional Presence:</strong><br> LinkedIn - Professional network and endorsements<br> Twitter - Tech insights and updates<br>  - Personal and professional content<br><br>These platforms provide additional context into Anubhav's professional journey and expertise.";
     }
 
     // Creator Question
@@ -2230,15 +2229,15 @@ function initChatbot() {
 
 // when user visit website it tell me
 
-window.addEventListener("load", () => {
-  fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
-    method: "GET"
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Thank YOU For Visit");
-    })
-    .catch(err => {
-      console.error("Thank YOU For Visiting My Portfolio ");
-    });
-});
+// window.addEventListener("load", () => {
+//   fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
+//     method: "GET"
+//   })
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log("Thank YOU For Visit");
+//     })
+//     .catch(err => {
+//       console.error("Thank YOU For Visiting My Portfolio ");
+//     });
+// });

@@ -2556,7 +2556,7 @@ textarea.input {
   background: rgba(0, 136, 204, 0.1);
   color: #0088cc;
 }
-.social-button.instagram {
+.social-button.hackerrank {
   background: rgba(228, 64, 95, 0.1);
   color: #e4405f;
 }
@@ -3032,8 +3032,8 @@ textarea.form-control {
   left: 25%;
   animation-delay: -12s;
 }
-.social-orbit.instagram {
-  background: linear-gradient(45deg, #e4405f, #833ab4);
+.social-orbit.hackerrank {
+  background: linear-gradient(45deg, #61e440, #1e2922);
   color: white;
   top: 50%;
   left: 0;
