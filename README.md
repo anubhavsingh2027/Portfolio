@@ -82,7 +82,9 @@ Copy code
 ## 📫 Contact Me
 
 📧 **Email:** [anubhavsingh2027@gmail.com](mailto:anubhavsingh2027@gmail.com)
+
 💼 **LinkedIn:** [linkedin.com/in/anubhav-singh-09b71829b](https://www.linkedin.com/in/anubhav-singh-09b71829b)
+
 🐙 **GitHub:** [github.com/anubhavsingh2027](https://github.com/anubhavsingh2027)
 
 ---
