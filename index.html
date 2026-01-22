@@ -11,115 +11,127 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-      <link rel="icon" type="image/svg+xml" href="image/icon.svg" />
+      <link rel="icon" type="source/image/svg+xml" href="source/image/icon.svg" />
 </head>
 
 <body>
-    <div class="intro-overlay"></div>
-    <section class="intro-section">
-        <div class="intro-content">
-            <h3 class="greeting">👋 Welcome to My Portfolio</h3>
-            <h1 class="name">Hi, I'm Anubhav Singh</h1>
-            <div class="role-wrapper">
-                <p class="roles">Full Stack Developer | MERN Developer | AI Enthusiast</p>
-                <div class="name-underline"></div>
-            </div>
-        </div>
-    </section>
     <nav class="navbar" id="navbar">
+        <div class="navbar-glow"></div>
+        <div class="navbar-border"></div>
         <div class="nav-container">
             <div class="nav-logo">
-                <div id="nav-image">
-                    <img id="temp-nav" src="image/nav-logo.png" alt="Anubhav singh">
+                <div id="nav-image" class="logo-wrapper">
+                    <img id="temp-nav" src="source/image/nav-logo.png" alt="Anubhav Singh">
+                    <div class="logo-glow"></div>
                 </div>
+                <span class="logo-pulse"></span>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link" data-section="home">
+                        <span class="link-text">Home</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                    <a href="#about" class="nav-link" data-section="about">
+                        <span class="link-text">About</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#skills" class="nav-link" data-section="skills">
+                        <span class="link-text">Skills</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#projects" class="nav-link" data-section="projects">
+                        <span class="link-text">Projects</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#services" class="nav-link" data-section="services">
+                        <span class="link-text">Services</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#contact" class="nav-link" data-section="contact">
+                        <span class="link-text">Contact</span>
+                        <span class="link-glow"></span>
+                    </a>
                 </li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <div class="theme-toggle-track">
-                    <div class="theme-toggle-thumb">
-                        <i class="fas fa-sun sun-icon"></i>
-                        <i class="fas fa-moon moon-icon"></i>
-                    </div>
-                </div>
+            <button class="cta-button" aria-label="Hire Me">
+                <span class="btn-text">Hire Me</span>
+                <span class="btn-glow"></span>
             </button>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                <span class="bar bar-top"></span>
+                <span class="bar bar-middle"></span>
+                <span class="bar bar-bottom"></span>
+                <span class="hamburger-glow"></span>
             </div>
         </div>
     </nav>
-    <section id="home" class="hero">
-        <canvas id="networkCanvas" class="network-canvas"></canvas>
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="title-line">Hi There,</span>
-                        <span class="title-line">I'm <span class="name">Anubhav Singh</span></span>
+    <section id="home" class="hero-video">
+        <div class="hero-video-container">
+            <video autoplay muted loop playsinline class="hero-video-element">
+                <source src="source/video/robot.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+        <div class="hero-video-content">
+            <div class="hero-content-wrapper">
+                <div class="hero-text-section">
+                    <h1 class="hero-main-title">
+                        <span class="title-word">Welcome</span>
+                        <span class="title-word">to My</span>
+                        <span class="title-word">Portfolio</span>
                     </h1>
-                    <div class="hero-subtitle">
-                        <span class="static-text">I Am Into</span>
-                        <span class="typing-text" id="typing-text"></span>
-                        <span class="cursor">|</span>
-                    </div>
-                    <p class="hero-description">
-                        Passionate software engineer crafting innovative solutions through code
+                    <p class="hero-subtitle-text">
+                        Full Stack Developer | MERN Specialist | AI Enthusiast
                     </p>
-                    <button class="btn btn--primary hero-btn" onclick="scrollToSection('about')">
-                        About Me
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <div class="hero-description">
+                        <p>Crafting innovative digital solutions with cutting-edge technology and creative design</p>
+                    </div>
+                    <div class="hero-cta-buttons">
+                        <button class="btn btn-primary btn-lg hero-btn-main" onclick="scrollToSection('projects')">
+                            Explore My Work
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-lg hero-btn-secondary" onclick="scrollToSection('contact')">
+                            Get In Touch
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button class="btn btn-resume btn-lg" onclick="openResumeModal()">
+                            Download Resume
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="hero-image">
-                   <div class="image-container">
-                        <img  src="image/anubhav1.png" alt="Anubhav Singh">
-                        <span class="tech react">React</span>
-                        <span class="tech cpp">C++</span>
-                        <span class="tech html">HTML</span>
-                        <span class="tech css">CSS</span>
-                        <span class="tech js">JavaScript</span>
-                        <span class="tech python">Python</span>
-                        <span class="tech java">Java</span>
-                        <span class="tech mysql">MySQL</span>
-                        <span class="tech mongodb">MongoDB</span>
-                        </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-text">Projects</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3+</span>
+                        <span class="stat-text">Years Exp</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-text">Problems Solved</span>
+                    </div>
+                </div>
             </div>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" class="social-icon" target="_blank">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/anubhavsingh2027" class="social-icon" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://x.com/Anubhav7355" class="social-icon" target="_blank">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://t.me/Anubhav_singh7355" class="social-icon" target="_blank">
-                    <i class="fab fa-telegram-plane"></i>
-                </a>
-                <a href="https://www.hackerrank.com/profile/anubhavsingh2027" class="social-icon" target="_blank">
-                    <i class="fa-brands fa-hackerrank fa-lg"></i>
-                </a>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll to explore</span>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </div>
     </section>
@@ -144,332 +156,240 @@
                     </p>
                     <div class="stats-container">
                         <div class="stat-item">
-                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-number" data-target="15">15+</div>
                             <div class="stat-label">Projects</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number" data-target="3">0</div>
+                            <div class="stat-number" data-target="3">3+</div>
                             <div class="stat-label">Years Exp</div>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
                     <div class="image-frame">
-                    <img id="temp" src="image/anubhavsingh.jpg" alt="Anubhav Singh">
+                    <img id="temp" src="source/image/anubhavsingh.jpg" alt="Anubhav Singh">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>Skills & Technologies</h2>
-                <div class="title-underline"></div>
+    <!-- Premium Futuristic Skills & Technologies Section -->
+    <section id="skills" class="skills-futuristic">
+        <div class="skills-container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-word">Skills</span>
+                    <span class="title-word">&</span>
+                    <span class="title-word">Technologies</span>
+                </h2>
+                <p class="section-subtitle">Full Stack Development | MERN Stack | AI/ML Integration</p>
+                <div class="header-accent-line"></div>
             </div>
-            <div class="skills-content">
-                <div class="skill-category">
-                    <h3 class="category-title">Frontend</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/html-5--v1.png" alt="HTML5">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">HTML5</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
+
+            <div class="skill-categories-wrapper">
+                <!-- Frontend Skills -->
+                <div class="skill-category-panel" data-category="frontend">
+                    <div class="panel-header">
+                        <i class="fas fa-paint-brush category-icon"></i>
+                        <h3>Frontend</h3>
+                        <div class="category-badge">5 Skills</div>
+                    </div>
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="90" data-skill-name="HTML5">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/html-5--v1.png" alt="HTML5"></span>
+                            <span class="chip-name">HTML5</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 90%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="85">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS3">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">CSS3</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 85%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="CSS3">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/css3.png" alt="CSS3"></span>
+                            <span class="chip-name">CSS3</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="88">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">JavaScript</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 88%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="88" data-skill-name="JavaScript">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/javascript--v1.png" alt="JavaScript"></span>
+                            <span class="chip-name">JavaScript</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 88%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="82">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/000000/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png" alt="React">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">React</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 82%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="82" data-skill-name="React">
+                            <span class="chip-icon"><img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/40/000000/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png" alt="React"></span>
+                            <span class="chip-name">React</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 82%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="82">
-                            <div class="skill-icon">
-                                <img src="https://cdn.simpleicons.org/tailwindcss" alt="Tailwind Css">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Tailwind Css</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 82%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="82" data-skill-name="Tailwind CSS">
+                            <span class="chip-icon"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16s7.16-16 16-16 16 7.16 16 16-7.16 16-16 16z" fill="#06b6d4"/></svg></span>
+                            <span class="chip-name">Tailwind</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 82%"></div></div>
                         </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Backend</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="95">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/nodejs.png" alt="Node.js">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Node.js</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 95%"></div>
-                                </div>
-                            </div>
+
+                <!-- Backend Skills -->
+                <div class="skill-category-panel" data-category="backend">
+                    <div class="panel-header">
+                        <i class="fas fa-server category-icon"></i>
+                        <h3>Backend</h3>
+                        <div class="category-badge">3 Skills</div>
+                    </div>
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="95" data-skill-name="Node.js">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/nodejs.png" alt="Node.js"></span>
+                            <span class="chip-name">Node.js</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 95%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="95">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/fluency/48/000000/node-js.png" alt="Express">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Express</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 95%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="95" data-skill-name="Express">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/express-js.png" alt="Express"></span>
+                            <span class="chip-name">Express</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 95%"></div></div>
+                        </div>
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="REST APIs">
+                            <span class="chip-icon"><i class="fas fa-cube" style="color: #b744ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">REST API</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Database</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="78">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/mongodb.png" alt="MongoDB">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">MongoDB</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 78%"></div>
-                                </div>
-                            </div>
+
+                <!-- Database Skills -->
+                <div class="skill-category-panel" data-category="database">
+                    <div class="panel-header">
+                        <i class="fas fa-database category-icon"></i>
+                        <h3>Database</h3>
+                        <div class="category-badge">3 Skills</div>
+                    </div>
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="88" data-skill-name="MongoDB">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/mongodb.png" alt="MongoDB"></span>
+                            <span class="chip-name">MongoDB</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 88%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="70">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/mysql-logo.png" alt="MySQL">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">MySQL</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 70%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="80" data-skill-name="MySQL">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/mysql-logo.png" alt="MySQL"></span>
+                            <span class="chip-name">MySQL</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 80%"></div></div>
+                        </div>
+
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="Mongoose">
+                            <span class="chip-icon"><i class="fas fa-link" style="color: #b744ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">Mongoose</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Programming Languages</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="95">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/c-plus-plus-logo.png" alt="C++">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">C++</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 95%"></div>
-                                </div>
-                            </div>
+
+                <!-- Programming Languages -->
+                <div class="skill-category-panel" data-category="languages">
+                    <div class="panel-header">
+                        <i class="fas fa-code category-icon"></i>
+                        <h3>Languages</h3>
+                        <div class="category-badge">5 Skills</div>
+                    </div>
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="90" data-skill-name="C">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/c-programming.png" alt="C"></span>
+                            <span class="chip-name">C</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 90%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="80">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png" alt="Java">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Java</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 80%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="95" data-skill-name="C++">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/c-plus-plus-logo.png" alt="C++"></span>
+                            <span class="chip-name">C++</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 95%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="75">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/python--v1.png" alt="Python">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Python</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 75%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="Java">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/java-coffee-cup-logo--v1.png" alt="Java"></span>
+                            <span class="chip-name">Java</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="70">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/c-programming.png" alt="C">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">C</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 70%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="80" data-skill-name="Python">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/python--v1.png" alt="Python"></span>
+                            <span class="chip-name">Python</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 80%"></div></div>
                         </div>
-                        <div class="skill-item" data-skill="88">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/javascript--v1.png" alt="JavaScript">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">JavaScript</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 88%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="JavaScript">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/javascript--v1.png" alt="JavaScript"></span>
+                            <span class="chip-name">JavaScript</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Tools</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="90">
-                        <div class="skill-icon">
-                            <img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VS Code">
-                        </div>
-                        <div class="skill-info">
-                            <span class="skill-name">VS Code</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--width: 90%"></div>
-                            </div>
-                        </div>
+
+                <!-- Tools & Platforms -->
+                <div class="skill-category-panel" data-category="tools">
+                    <div class="panel-header">
+                        <i class="fas fa-wrench category-icon"></i>
+                        <h3>Tools</h3>
+                        <div class="category-badge">6 Skills</div>
                     </div>
-
-                    <div class="skill-item" data-skill="85">
-                        <div class="skill-icon">
-                            <img src="https://img.icons8.com/color/48/000000/git.png" alt="Git">
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="95" data-skill-name="Git">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/git.png" alt="Git"></span>
+                            <span class="chip-name">Git</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 95%"></div></div>
                         </div>
-                        <div class="skill-info">
-                            <span class="skill-name">Git</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--width: 85%"></div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="90" data-skill-name="GitHub">
+                            <span class="chip-icon"><i class="fab fa-github" style="color: #1a1a1a; font-size: 24px;"></i></span>
+                            <span class="chip-name">GitHub</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 90%"></div></div>
                         </div>
-                    </div>
-
-                    <div class="skill-item" data-skill="85">
-                        <div class="skill-icon">
-                            <img src="https://toppng.com/uploads/preview/github-logo-11609362429jyqzrkf6k1.png" alt="GitHub">
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="Docker">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/docker.png" alt="Docker"></span>
+                            <span class="chip-name">Docker</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
                         </div>
-                        <div class="skill-info">
-                            <span class="skill-name">GitHub</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--width: 85%"></div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="88" data-skill-name="Postman">
+                            <span class="chip-icon"><img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/40/null/external-postman-is-the-only-complete-api-development-environment-logo-color-tal-revivo.png" alt="Postman"></span>
+                            <span class="chip-name">Postman</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 88%"></div></div>
                         </div>
-                    </div>
-
-                    <div class="skill-item" data-skill="80">
-                        <div class="skill-icon">
-                            <img src="https://img.icons8.com/color/48/000000/docker.png" alt="Docker">
+                        <div class="skill-chip" data-skill-level="80" data-skill-name="VS Code">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/visual-studio-code-2019.png" alt="VS Code"></span>
+                            <span class="chip-name">VS Code</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 80%"></div></div>
                         </div>
-                        <div class="skill-info">
-                            <span class="skill-name">Docker</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--width: 80%"></div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="82" data-skill-name="npm/yarn">
+                            <span class="chip-icon"><i class="fas fa-box" style="color: #b744ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">npm/yarn</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 82%"></div></div>
                         </div>
-                    </div>
-
-
-
-                    <div class="skill-item" data-skill="85">
-                        <div class="skill-icon">
-                            <img src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/48/null/external-postman-is-the-only-complete-api-development-environment-logo-color-tal-revivo.png" alt="Postman">
-                        </div>
-                        <div class="skill-info">
-                            <span class="skill-name">Postman</span>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="--width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Cloud</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">AWS</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <img src="https://img.icons8.com/color/48/000000/vercel.png" alt="Vercel">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Vercel</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
+                <!-- Cloud & Deployment -->
+                <div class="skill-category-panel" data-category="cloud">
+                    <div class="panel-header">
+                        <i class="fas fa-cloud category-icon"></i>
+                        <h3>Cloud</h3>
+                        <div class="category-badge">6 Skills</div>
+                    </div>
+                    <div class="skills-chips-grid">
+                        <div class="skill-chip" data-skill-level="92" data-skill-name="AWS">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/amazon-web-services.png" alt="AWS"></span>
+                            <span class="chip-name">AWS</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 92%"></div></div>
                         </div>
-
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <svg width="48" height="48" viewBox="0 0 110 21" fill="#000" xmlns="http://www.w3.org/2000/svg" aria-label="Render"><path d="M38.1801 3.45902C41.7067 3.45902 43.9994 5.45905 43.9994 8.67133C43.9994 11.0232 42.6512 12.7708 40.5375 13.5165L44.6811 20.6218H41.6077L37.7421 13.8798H33.4728V20.6218H30.8259V3.45902H38.1801ZM33.469 5.84911V11.5165H38.0544C40.1567 11.5165 41.2421 10.3387 41.2421 8.67133C41.2421 6.96576 40.1605 5.84911 38.0544 5.84911H33.469Z"></path><path d="M51.4145 8.22773C54.9412 8.22773 57.2339 10.8587 57.2339 14.1093C57.2339 14.4878 57.2073 14.8817 57.1349 15.2718H47.7508C47.865 17.0921 49.4151 18.5223 51.506 18.5223C53.0179 18.5223 54.2252 17.876 55.1316 16.4496L56.9711 17.7919C55.8514 19.8149 53.6463 20.878 51.506 20.878C47.8536 20.878 45.1686 18.1705 45.1686 14.5682C45.1686 10.9467 47.7508 8.22773 51.4145 8.22773ZM54.7013 13.398C54.5489 11.6924 53.1284 10.4878 51.3879 10.4878C49.537 10.4878 48.124 11.6886 47.8117 13.398H54.7013Z"></path><path d="M59.5495 20.6218V8.48012H62.0555V10.0098C62.4592 9.39027 63.6055 8.22773 65.7725 8.22773C69.0973 8.22773 70.8492 10.3004 70.8492 13.2488V20.6218H68.3547V13.7804C68.3547 11.7689 67.2578 10.6063 65.3803 10.6063C63.5408 10.6063 62.044 11.7689 62.044 13.7804V20.6218H59.5495Z"></path><path d="M78.9766 8.22773C81.0293 8.22773 82.389 8.98491 83.284 10.136V2.81274H85.7785V20.6218H83.284V18.9659C82.389 20.117 81.0293 20.8742 78.9766 20.8742C75.5375 20.8742 72.9058 18.2164 72.9058 14.4878C72.9058 10.7555 75.5375 8.22773 78.9766 8.22773ZM75.3966 14.4878C75.3966 16.725 76.9466 18.6217 79.2774 18.6217C81.6082 18.6217 83.2687 16.725 83.2687 14.4878C83.2687 12.2507 81.593 10.4801 79.2774 10.4801C76.9466 10.4763 75.3966 12.2469 75.3966 14.4878Z"></path><path d="M94.1382 8.22773C97.6648 8.22773 99.9575 10.8587 99.9575 14.1093C99.9575 14.4878 99.9309 14.8817 99.8585 15.2718H90.4744C90.5886 17.0921 92.1387 18.5223 94.2295 18.5223C95.7415 18.5223 96.9488 17.876 97.8552 16.4496L99.6947 17.7919C98.575 19.8149 96.3699 20.878 94.2295 20.878C90.5772 20.878 87.8922 18.1705 87.8922 14.5682C87.8884 10.9467 90.4706 8.22773 94.1382 8.22773ZM97.4249 13.398C97.2725 11.6924 95.852 10.4878 94.1115 10.4878C92.2606 10.4878 90.8476 11.6886 90.5353 13.398H97.4249Z"></path><path d="M102.368 20.6218V8.48012H104.874V10.136C105.556 8.809 106.702 8.22773 108.024 8.22773C108.968 8.22773 109.688 8.52983 109.688 8.52983L109.425 10.832C109.288 10.7823 108.744 10.5528 107.952 10.5528C106.615 10.5528 104.878 11.2603 104.878 14.006V20.6218H102.368Z"></path><path d="M15.6491 0.00582604C12.9679 -0.120371 10.7133 1.81847 10.3286 4.373C10.3134 4.49154 10.2905 4.60627 10.2715 4.72099C9.67356 7.90268 6.88955 10.3119 3.5457 10.3119C2.35364 10.3119 1.23395 10.006 0.258977 9.47058C0.140914 9.40557 0 9.4897 0 9.62354V10.3081V20.6218H10.2677V12.8894C10.2677 11.4668 11.4178 10.3119 12.8346 10.3119H15.4015C18.3074 10.3119 20.6458 7.89121 20.5315 4.94662C20.4287 2.29649 18.2884 0.132023 15.6491 0.00582604Z"></path></svg>
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Render</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="90" data-skill-name="Vercel">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/vercel.png" alt="Vercel"></span>
+                            <span class="chip-name">Vercel</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 90%"></div></div>
                         </div>
-
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/koyeb.svg" alt="Koyeb">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Koyeb</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="88" data-skill-name="Render">
+                            <span class="chip-icon"><i class="fas fa-arrow-right" style="color: #00f0ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">Render</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 88%"></div></div>
                         </div>
-
-                        <div class="skill-item" data-skill="90">
-                            <div class="skill-icon">
-                                <img src="https://seekvectors.com/files/download/9aacbb730ee4199b67d6d7242c505d9d.jpg" alt="Fly.io">
-                            </div>
-                            <div class="skill-info">
-                                <span class="skill-name">Fly.io</span>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="--width: 90%"></div>
-                                </div>
-                            </div>
+                        <div class="skill-chip" data-skill-level="85" data-skill-name="Railway">
+                            <span class="chip-icon"><i class="fas fa-train" style="color: #b744ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">Railway</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 85%"></div></div>
+                        </div>
+                        <div class="skill-chip" data-skill-level="82" data-skill-name="Netlify">
+                            <span class="chip-icon"><i class="fas fa-layer-group" style="color: #00f0ff; font-size: 24px;"></i></span>
+                            <span class="chip-name">Netlify</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 82%"></div></div>
+                        </div>
+                        <div class="skill-chip" data-skill-level="80" data-skill-name="MongoDB Atlas">
+                            <span class="chip-icon"><img src="https://img.icons8.com/color/40/000000/mongodb.png" alt="MongoDB Atlas"></span>
+                            <span class="chip-name">Atlas</span>
+                            <div class="skill-indicator"><div class="glow-ring" style="--skill-percent: 80%"></div></div>
                         </div>
                     </div>
                 </div>
@@ -521,7 +441,7 @@
                         <div class="card-front">
                             <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/Real-time-chatting.png" alt="Real Time Chatting">
+                                    <img id="project-image" src="source/image/Real-time-chatting.png" alt="Real Time Chatting">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -598,7 +518,7 @@
                         <div class="card-front">
                             <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/kashiRoute.png" alt="Kashi Route">
+                                    <img id="project-image" src="source/image/kashiRoute.png" alt="Kashi Route">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -674,7 +594,7 @@
                         <div class="card-front">
                             <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/Phishshield.png" alt="Phishsheild">
+                                    <img id="project-image" src="source/image/Phishshield.png" alt="Phishsheild">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -747,7 +667,7 @@
                         <div class="card-front">
                             <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/websiteImg.png" alt="Portfolio">
+                                    <img id="project-image" src="source/image/websiteImg.png" alt="Portfolio">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -819,7 +739,7 @@
                         <div class="card-front">
                             <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/Airbnb.png" alt="Phishsheild">
+                                    <img id="project-image" src="source/image/Airbnb.png" alt="Phishsheild">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -894,7 +814,7 @@
                         <div class="card-front">
                            <div class="project-image">
                                 <div class="image-placeholder travel">
-                                    <img id="project-image" src="image/typeMaster.png" alt="Type Master">
+                                    <img id="project-image" src="source/image/typeMaster.png" alt="Type Master">
                                 </div>
                                 <div class="project-overlay">
                                 </div>
@@ -1349,7 +1269,24 @@
         </div>
     </div>
 
-
+    <!-- Resume Modal -->
+    <div class="resume-modal" id="resumeModal">
+        <div class="resume-modal-overlay" onclick="closeResumeModal()"></div>
+        <div class="resume-modal-content">
+            <button class="modal-close-btn" onclick="closeResumeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="resume-preview-section">
+                <h3 class="modal-title">Resume Preview</h3>
+                <div class="resume-preview-container">
+                    <img src="source/image/preview-resume.png" alt="Resume Preview" class="resume-preview-img">
+                </div>
+                <a href="source/pdf/Anubhav-singh-Resume -Software-Engineer.pdf" download class="btn-download-resume">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="/js/app.js"></script><script src="/js/voice-assistant.js"></script>
 </body>
 </html>

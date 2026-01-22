@@ -1,7 +1,7 @@
 # 🌐 Anubhav Singh's Portfolio
 
 Welcome to my **personal portfolio website**!
-I'm **Anubhav Singh**, a passionate **Web Developer** from *Varanasi, India*, focused on building dynamic, user-friendly, and visually engaging digital experiences.
+I'm **Anubhav Singh**, a passionate **Web Developer** from _Varanasi, India_, focused on building dynamic, user-friendly, and visually engaging digital experiences.
 
 This portfolio showcases my **skills**, **projects**, and **achievements** — built with clean code, modern UI/UX, and an interactive **AI Chatbot** that shares my personal and professional details in real time.
 
@@ -12,19 +12,19 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 🎯 **Visit Now:** [https://anubhav.nav-code.com/](https://anubhav.nav-code.com/)
 
 🖼️ **Preview:**
-![Portfolio Preview](https://anubhav.nav-code.com/image/websiteImg.png)
+![Portfolio Preview](https://anubhav.nav-code.com//source/source/image/websiteImg.png)
 
 ---
 
 ## 🛠️ Built With
 
-| Category | Technologies |
-|-----------|--------------|
-| 🎨 **Frontend** | HTML5, CSS3, JavaScript |
-| 🔌 **APIs** | RESTful APIs for contact form and email functionality |
+| Category                   | Technologies                                                             |
+| -------------------------- | ------------------------------------------------------------------------ |
+| 🎨 **Frontend**            | HTML5, CSS3, JavaScript                                                  |
+| 🔌 **APIs**                | RESTful APIs for contact form and email functionality                    |
 | 🤖 **Interactive Feature** | Custom AI Chatbot for sharing personal, project, and contact information |
-| 🧰 **Version Control** | Git & GitHub for code management |
-| 📬 **Email Service** | Custom Mail API using Node.js & Nodemailer |
+| 🧰 **Version Control**     | Git & GitHub for code management                                         |
+| 📬 **Email Service**       | Custom Mail API using Node.js & Nodemailer                               |
 
 ---
 
@@ -42,16 +42,19 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 ## 🧠 Skills & Technologies
 
 ### 💻 Frontend Development
+
 - HTML5
 - CSS3 (Animations, Transitions, Flexbox, Grid)
 - JavaScript (ES6+)
 - React (for dynamic components)
 
 ### 🌐 APIs & Backend Integration
+
 - RESTful API creation & consumption
 - Custom Mail API (Node.js + Nodemailer)
 
 ### 🧩 Tools & Platforms
+
 - Git & GitHub
 - VS Code
 - Netlify / Vercel / Custom Hosting (via anubhav.sbs domain)
@@ -65,7 +68,7 @@ portfolio/
 ├── index.html # Main page
 ├── /css/ # Stylesheets
 ├── /js/ # Scripts and chatbot logic
-├── /image/ # Images and assets
+├── //source/source/image/ # /source/source/images and assets
 └── mailer/ # REST API mail handling
 
 yaml
@@ -94,6 +97,6 @@ Copy code
 My portfolio represents my journey in web development — a blend of creativity, logic, and design.
 It’s not just a static website, but a dynamic reflection of how I approach **innovation, interactivity, and clean coding**.
 
-> “Code is art — and every project is a canvas.” — *Anubhav Singh*
+> “Code is art — and every project is a canvas.” — _Anubhav Singh_
 
 ⭐ **If you like this project, please give it a star on GitHub!**
