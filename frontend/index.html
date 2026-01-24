@@ -1063,30 +1063,25 @@
                     </div>
                     <div class="contact-form" id="contact-tab">
                         <form class="contact-form" id="contactForm" >
-                            <div class="input-container floating-label-group">
+                            <div class="input-container">
                                 <input type="text" class="input" name="username" id="username" required />
-                                <label for="username" class="ldata floating-label">Username</label>
-                                <span class="input-underline"></span>
+                                <label for="username" class="ldata">Username</label>
                             </div>
-                            <div class="input-container floating-label-group">
+                            <div class="input-container">
                                 <input type="email" class="input" name="email" id="email" required />
-                                <label for="email" class="ldata floating-label">Email</label>
-                                <span class="input-underline"></span>
+                                <label for="email" class="ldata">Email</label>
                             </div>
-                            <div class="input-container floating-label-group">
+                            <div class="input-container">
                                 <input type="number" class="input" name="phone" id="phone" />
-                                <label for="phone" class="ldata floating-label">Phone</label>
-                                <span class="input-underline"></span>
+                                <label for="phone" class="ldata">Phone</label>
                             </div>
-                            <div class="input-container floating-label-group">
+                            <div class="input-container">
                                 <input type="text" class="input" name="subject" id="subject" required />
-                                <label for="subject" class="ldata floating-label">Subject</label>
-                                <span class="input-underline"></span>
+                                <label for="subject" id="datas" class="ldata">Subject</label>
                             </div>
-                            <div class="input-container textarea floating-label-group">
-                            <textarea class="input" id="message" required></textarea>
-                            <label for="message" class="ldata floating-label">Message</label>
-                            <span class="input-underline"></span>
+                            <div class="input-container textarea">
+                            <textarea class="input" id="message"  required></textarea>
+                            <label for="subject" id="datas" class="ldata">Message</label>
                             </div>
                             <div class="submit-btn">
                                 <button type="submit" class="btn btn--primary btn--animated">
@@ -1163,28 +1158,6 @@
   </button>
 </div>
 
-    <!-- Chat Assistant UI -->
-    <div class="chat-assistant hidden" id="chatAssistant">
-        <div class="chat-header">
-            <div class="chat-profile">
-                <div class="chat-avatar">🤖</div>
-                <div class="chat-info">
-                    <h4>Anubhav Assistant</h4>
-                    <span class="chat-status-text">Online</span>
-                </div>
-            </div>
-            <button class="chat-close" id="chatAssistantClose">&times;</button>
-        </div>
-        <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input-container">
-            <input type="text" id="chatInput" placeholder="Ask me anything..." autocomplete="off">
-            <button id="sendChatMessage" class="chat-send-btn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Old Chatbot (kept for backward compatibility if needed)-->
     <div class="chatbot hidden" id="chatbot">
         <div class="chatbot-header">
             <div class="chatbot-profile">
@@ -1244,25 +1217,21 @@
     <div class="mode-selection-modal" id="modeModal">
         <div class="mode-selection-content">
             <h2>Choose Your Experience</h2>
-            <p>Select how you'd like to interact with me</p>
+            <p>Would you like to chat or use voice assistant mode?</p>
             <div class="mode-buttons">
-                <button class="mode-btn" id="chatModeBtn" data-mode="chat">
+                <button class="mode-btn" id="chatModeBtn">
                     <div class="icon">💬</div>
                     <div class="label">Chat Mode</div>
                     <div class="description">Type your questions</div>
                 </button>
-                <button class="mode-btn" id="voiceModeBtn" data-mode="voice">
+                <button class="mode-btn" id="voiceModeBtn">
                     <div class="icon">🎤</div>
                     <div class="label">Voice Mode</div>
                     <div class="description">Speak naturally</div>
                 </button>
             </div>
-            <button class="mode-modal-close" id="modeModalClose">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
     </div>
-
     <!-- Voice Assistant UI -->
     <div class="voice-assistant hidden" id="voiceAssistant">
         <div class="voice-header">
@@ -1279,25 +1248,22 @@
             <div class="mic-container" id="micContainer">
                 <div class="mic-pulse"></div>
                 <div class="mic-pulse-2"></div>
-                <button class="mic-circle" id="micCircle" title="Click to speak">
+                <div class="mic-circle" id="micCircle">
                     <i class="fas fa-microphone"></i>
-                </button>
+                </div>
             </div>
             <p class="voice-prompt" id="voicePrompt">Tap the microphone to speak</p>
-            <div class="voice-transcript-container hidden" id="transcriptContainer">
+            <div class="voice-transcript-container">
                 <div class="transcript-label">You said:</div>
                 <div class="voice-transcript" id="voiceTranscript">
-                    <p class="transcript-placeholder">Processing your speech...</p>
+                    <p class="transcript-placeholder">Your speech will appear here...</p>
                 </div>
             </div>
             <div class="voice-response-container hidden" id="voiceResponseContainer">
                 <div class="response-label">
-                    <i class="fas fa-robot"></i> Response:
+                    <i class="fas fa-robot"></i> Assistant:
                 </div>
                 <div class="voice-response" id="voiceResponse"></div>
-                <button class="play-audio-btn" id="playAudioBtn" title="Play audio">
-                    <i class="fas fa-volume-up"></i> Play Audio
-                </button>
             </div>
         </div>
     </div>
