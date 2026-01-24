@@ -2,6 +2,25 @@ let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
 
+// ========== AI ASSISTANT STATE MANAGEMENT ==========
+let assistantState = {
+  isListening: false,
+  isSpeaking: false,
+  currentMode: null, // 'chat' or 'voice'
+  chatHistory: [],
+  voiceTranscript: '',
+  audioContext: null,
+};
+
+// ========== IMPORT SERVICE FUNCTIONS ==========
+import {
+  chatAssistant,
+  voiceAssistant,
+  contact,
+  speedResponse,
+  wakeup,
+} from "./service.js";
+
 // Resume Modal Functions
 function openResumeModal() {
   const modal = document.getElementById("resumeModal");
@@ -74,6 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initEnhancedFooter();
   initProjectsCanvasAnimation();
   initProjectCardAnimations();
+  
+  // Initialize new AI features
+  initAIAssistant();
+  initFloatingLabels();
 });
 function initLoader() {
   const loader = document.getElementById("loader");
@@ -1907,6 +1930,538 @@ function createChatModal() {
       }
     }
   `;
+}
+
+/* ========== AI ASSISTANT MAIN INITIALIZATION ========== */
+function initAIAssistant() {
+  const chatFab = document.getElementById("chatFab");
+  const modeModal = document.getElementById("modeModal");
+  const chatModeBtn = document.getElementById("chatModeBtn");
+  const voiceModeBtn = document.getElementById("voiceModeBtn");
+  const modeModalClose = document.getElementById("modeModalClose");
+
+  // Open mode selection on FAB click
+  if (chatFab) {
+    chatFab.addEventListener("click", () => {
+      if (modeModal) {
+        modeModal.classList.remove("hidden");
+      }
+    });
+  }
+
+  // Close mode modal
+  if (modeModalClose) {
+    modeModalClose.addEventListener("click", () => {
+      if (modeModal) {
+        modeModal.classList.add("hidden");
+      }
+    });
+  }
+
+  // Close modal when clicking outside
+  if (modeModal) {
+    modeModal.addEventListener("click", (e) => {
+      if (e.target === modeModal) {
+        modeModal.classList.add("hidden");
+      }
+    });
+  }
+
+  // Chat mode selection
+  if (chatModeBtn) {
+    chatModeBtn.addEventListener("click", () => {
+      assistantState.currentMode = "chat";
+      if (modeModal) modeModal.classList.add("hidden");
+      openChatAssistant();
+    });
+  }
+
+  // Voice mode selection
+  if (voiceModeBtn) {
+    voiceModeBtn.addEventListener("click", () => {
+      assistantState.currentMode = "voice";
+      if (modeModal) modeModal.classList.add("hidden");
+      openVoiceAssistant();
+    });
+  }
+
+  initChatAssistant();
+  initVoiceAssistant();
+}
+
+/* ========== CHAT ASSISTANT FUNCTIONS ========== */
+function initChatAssistant() {
+  const chatAssistantEl = document.getElementById("chatAssistant");
+  const chatCloseBtn = document.getElementById("chatAssistantClose");
+  const sendChatBtn = document.getElementById("sendChatMessage");
+  const chatInput = document.getElementById("chatInput");
+  const chatMessages = document.getElementById("chatMessages");
+
+  // Close chat
+  if (chatCloseBtn) {
+    chatCloseBtn.addEventListener("click", closeChatAssistant);
+  }
+
+  // Send message on button click
+  if (sendChatBtn) {
+    sendChatBtn.addEventListener("click", sendChatMessage);
+  }
+
+  // Send message on Enter key
+  if (chatInput) {
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    });
+  }
+
+  // Initialize with default message from localStorage
+  initializeChat();
+}
+
+function initializeChat() {
+  const chatMessages = document.getElementById("chatMessages");
+  const hasVisited = localStorage.getItem("chatAssistantVisited");
+
+  if (!hasVisited) {
+    const defaultMessage =
+      "Hi, I am Anubhav Assistant. How can I help you?";
+    addChatMessage(defaultMessage, "assistant");
+    localStorage.setItem("chatAssistantVisited", "true");
+  }
+}
+
+function openChatAssistant() {
+  const chatAssistantEl = document.getElementById("chatAssistant");
+  if (chatAssistantEl) {
+    chatAssistantEl.classList.remove("hidden");
+    const chatInput = document.getElementById("chatInput");
+    if (chatInput) {
+      setTimeout(() => chatInput.focus(), 300);
+    }
+  }
+}
+
+function closeChatAssistant() {
+  const chatAssistantEl = document.getElementById("chatAssistant");
+  if (chatAssistantEl) {
+    chatAssistantEl.classList.add("hidden");
+  }
+}
+
+function addChatMessage(text, sender = "user") {
+  const chatMessages = document.getElementById("chatMessages");
+  if (!chatMessages) return;
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `chat-message ${sender}`;
+
+  const bubble = document.createElement("div");
+  bubble.className = `message-bubble ${sender}`;
+
+  if (sender === "assistant") {
+    // Typewriter animation for assistant
+    bubble.innerHTML = "";
+    let charIndex = 0;
+    const typeWriter = setInterval(() => {
+      if (charIndex < text.length) {
+        bubble.innerHTML += text.charAt(charIndex);
+        charIndex++;
+      } else {
+        clearInterval(typeWriter);
+      }
+    }, 30);
+  } else {
+    bubble.textContent = text;
+  }
+
+  messageDiv.appendChild(bubble);
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function sendChatMessage() {
+  const chatInput = document.getElementById("chatInput");
+  if (!chatInput || !chatInput.value.trim()) return;
+
+  const userMessage = chatInput.value.trim();
+  chatInput.value = "";
+
+  // Add user message
+  addChatMessage(userMessage, "user");
+
+  // Show typing indicator
+  showTypingIndicator();
+
+  // Call API
+  callChatAPI(userMessage);
+}
+
+function showTypingIndicator() {
+  const chatMessages = document.getElementById("chatMessages");
+  if (!chatMessages) return;
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "chat-message assistant";
+  messageDiv.id = "typing-indicator";
+
+  const bubble = document.createElement("div");
+  bubble.className = "typing-indicator";
+  bubble.innerHTML = `
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+  `;
+
+  messageDiv.appendChild(bubble);
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function callChatAPI(question) {
+  try {
+    const response = await chatAssistant({ question });
+
+    // Remove typing indicator
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (typingIndicator) typingIndicator.remove();
+
+    if (response && response.success && response.data) {
+      addChatMessage(response.data, "assistant");
+    } else if (response && response.message) {
+      addChatMessage(response.message, "assistant");
+    } else {
+      addChatMessage("Sorry, I couldn't process your question. Please try again.", "assistant");
+    }
+  } catch (error) {
+    console.error("Chat API error:", error);
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (typingIndicator) typingIndicator.remove();
+    addChatMessage("An error occurred. Please try again later.", "assistant");
+  }
+}
+
+/* ========== FLOATING LABELS ANIMATION ========== */
+function initFloatingLabels() {
+  const floatingGroups = document.querySelectorAll(".floating-label-group");
+
+  floatingGroups.forEach((group) => {
+    const input = group.querySelector(".input");
+    const label = group.querySelector(".floating-label");
+
+    if (!input) return;
+
+    // Handle focus
+    input.addEventListener("focus", () => {
+      if (label) {
+        label.style.color = "#00f0ff";
+      }
+    });
+
+    // Handle blur
+    input.addEventListener("blur", () => {
+      if (!input.value && label) {
+        label.style.color = "rgba(255, 255, 255, 0.6)";
+      }
+    });
+
+    // Handle input
+    input.addEventListener("input", () => {
+      if (input.value && label) {
+        label.style.color = "#00f0ff";
+      }
+    });
+
+    // Check if has value on load
+    if (input.value && label) {
+      label.style.color = "#00f0ff";
+    }
+  });
+}
+
+/* ========== VOICE ASSISTANT FUNCTIONS ========== */
+function initVoiceAssistant() {
+  const micCircle = document.getElementById("micCircle");
+  const voiceClose = document.getElementById("voiceClose");
+  const playAudioBtn = document.getElementById("playAudioBtn");
+
+  if (voiceClose) {
+    voiceClose.addEventListener("click", closeVoiceAssistant);
+  }
+
+  if (micCircle) {
+    micCircle.addEventListener("click", () => {
+      if (!assistantState.isListening && !assistantState.isSpeaking) {
+        startListening();
+      }
+    });
+  }
+
+  if (playAudioBtn) {
+    playAudioBtn.addEventListener("click", playVoiceResponse);
+  }
+}
+
+function openVoiceAssistant() {
+  const voiceAssistantEl = document.getElementById("voiceAssistant");
+  if (voiceAssistantEl) {
+    voiceAssistantEl.classList.remove("hidden");
+  }
+}
+
+function closeVoiceAssistant() {
+  const voiceAssistantEl = document.getElementById("voiceAssistant");
+  if (voiceAssistantEl) {
+    voiceAssistantEl.classList.add("hidden");
+  }
+
+  // Stop listening if active
+  if (assistantState.isListening) {
+    stopListening();
+  }
+}
+
+function startListening() {
+  // Prevent simultaneous listening and speaking
+  if (assistantState.isSpeaking) {
+    console.warn("Currently speaking, cannot listen");
+    return;
+  }
+
+  assistantState.isListening = true;
+  const micCircle = document.getElementById("micCircle");
+  const voicePrompt = document.getElementById("voicePrompt");
+  const transcriptContainer = document.getElementById("transcriptContainer");
+  const responseContainer = document.getElementById("voiceResponseContainer");
+
+  if (micCircle) {
+    micCircle.classList.add("listening");
+  }
+  if (voicePrompt) {
+    voicePrompt.textContent = "🎙️ Listening...";
+  }
+  if (transcriptContainer) {
+    transcriptContainer.classList.remove("hidden");
+  }
+  if (responseContainer) {
+    responseContainer.classList.add("hidden");
+  }
+
+  // Simulate speech recognition
+  simulateVoiceInput();
+}
+
+function stopListening() {
+  assistantState.isListening = false;
+  const micCircle = document.getElementById("micCircle");
+
+  if (micCircle) {
+    micCircle.classList.remove("listening");
+  }
+}
+
+function simulateVoiceInput() {
+  // Using Web Speech API for speech recognition
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    console.warn("Speech Recognition not supported in this browser");
+    showVoiceError("Speech Recognition not supported");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-US";
+
+  recognition.onstart = () => {
+    console.log("Listening started");
+  };
+
+  recognition.onresult = (event) => {
+    let transcript = "";
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+
+    assistantState.voiceTranscript = transcript;
+    displayVoiceTranscript(transcript);
+    stopListening();
+    callVoiceAPI(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Speech Recognition error", event.error);
+    showVoiceError(`Error: ${event.error}`);
+    stopListening();
+  };
+
+  recognition.onend = () => {
+    console.log("Listening ended");
+  };
+
+  recognition.start();
+}
+
+function displayVoiceTranscript(transcript) {
+  const voiceTranscript = document.getElementById("voiceTranscript");
+  if (voiceTranscript) {
+    voiceTranscript.innerHTML = `<p>${transcript}</p>`;
+  }
+
+  const voicePrompt = document.getElementById("voicePrompt");
+  if (voicePrompt) {
+    voicePrompt.textContent = "Processing your request...";
+  }
+}
+
+async function callVoiceAPI(transcript) {
+  try {
+    // Prevent multiple API calls
+    if (assistantState.isSpeaking) {
+      console.warn("Already processing voice response");
+      return;
+    }
+
+    assistantState.isSpeaking = true;
+    const micCircle = document.getElementById("micCircle");
+    if (micCircle) {
+      micCircle.disabled = true;
+      micCircle.style.opacity = "0.5";
+    }
+
+    const response = await voiceAssistant({ question: transcript });
+
+    if (response && response.success && response.data) {
+      displayVoiceResponse(response.data);
+      if (response.audio) {
+        playAudio(response.audio);
+      }
+    } else if (response && response.message) {
+      displayVoiceResponse(response.message);
+    } else {
+      showVoiceError("Could not process voice response");
+    }
+  } catch (error) {
+    console.error("Voice API error:", error);
+    showVoiceError("Error processing your voice request");
+  } finally {
+    assistantState.isSpeaking = false;
+    const micCircle = document.getElementById("micCircle");
+    if (micCircle) {
+      micCircle.disabled = false;
+      micCircle.style.opacity = "1";
+    }
+  }
+}
+
+function displayVoiceResponse(responseText) {
+  const responseContainer = document.getElementById("voiceResponseContainer");
+  const voiceResponse = document.getElementById("voiceResponse");
+  const voicePrompt = document.getElementById("voicePrompt");
+
+  if (voiceResponse) {
+    voiceResponse.textContent = responseText;
+  }
+
+  if (responseContainer) {
+    responseContainer.classList.remove("hidden");
+  }
+
+  if (voicePrompt) {
+    voicePrompt.textContent = "Tap the microphone to ask again";
+  }
+}
+
+function showVoiceError(errorMessage) {
+  const responseContainer = document.getElementById("voiceResponseContainer");
+  const voiceResponse = document.getElementById("voiceResponse");
+  const voicePrompt = document.getElementById("voicePrompt");
+
+  if (voiceResponse) {
+    voiceResponse.innerHTML = `<p style="color: #ff4500;">${errorMessage}</p>`;
+  }
+
+  if (responseContainer) {
+    responseContainer.classList.remove("hidden");
+  }
+
+  if (voicePrompt) {
+    voicePrompt.textContent = "Tap the microphone to try again";
+  }
+}
+
+function playVoiceResponse() {
+  const playAudioBtn = document.getElementById("playAudioBtn");
+  const voiceResponse = document.getElementById("voiceResponse");
+
+  if (!voiceResponse) return;
+
+  const text = voiceResponse.textContent || voiceResponse.innerText;
+
+  // Using Web Speech API for text-to-speech
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 1;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  utterance.onstart = () => {
+    assistantState.isSpeaking = true;
+    if (playAudioBtn) {
+      playAudioBtn.disabled = true;
+      playAudioBtn.style.opacity = "0.5";
+    }
+  };
+
+  utterance.onend = () => {
+    assistantState.isSpeaking = false;
+    if (playAudioBtn) {
+      playAudioBtn.disabled = false;
+      playAudioBtn.style.opacity = "1";
+    }
+  };
+
+  speechSynthesis.speak(utterance);
+}
+
+function playAudio(audioUrl) {
+  // If backend provides audio URL, play it
+  const audio = new Audio(audioUrl);
+  audio.onplay = () => {
+    assistantState.isSpeaking = true;
+  };
+  audio.onended = () => {
+    assistantState.isSpeaking = false;
+  };
+  audio.play().catch((err) => {
+    console.warn("Could not play audio:", err);
+    // Fallback to text-to-speech
+    playVoiceResponse();
+  });
+}
+
+// Keyboard shortcut to close modals
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const modeModal = document.getElementById("modeModal");
+    const chatAssistant = document.getElementById("chatAssistant");
+    const voiceAssistant = document.getElementById("voiceAssistant");
+
+    if (modeModal && !modeModal.classList.contains("hidden")) {
+      modeModal.classList.add("hidden");
+    }
+    if (chatAssistant && !chatAssistant.classList.contains("hidden")) {
+      chatAssistant.classList.add("hidden");
+    }
+    if (voiceAssistant && !voiceAssistant.classList.contains("hidden")) {
+      voiceAssistant.classList.add("hidden");
+    }
+  }
+});
 
   const styleSheet = document.createElement("style");
   styleSheet.textContent = styles;

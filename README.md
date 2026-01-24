@@ -12,7 +12,7 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 🎯 **Visit Now:** [https://anubhav.nav-code.com/](https://anubhav.nav-code.com/)
 
 🖼️ **Preview:**
-![Portfolio Preview](https://anubhav.nav-code.com//source/source/image/websiteImg.png)
+![Portfolio Preview](https://anubhav.nav-code.com/source/image/websiteImg.png)
 
 ---
 
