@@ -1,3 +1,5 @@
+import { contact, speedResponse, chatAssistant } from './service.js';
+
 let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
@@ -69,11 +71,13 @@ document.addEventListener("DOMContentLoaded", function () {
   initTypingAnimation();
   initScrollAnimations();
   initEnhancedProjectFilters();
+  initEnhancedContactForm();
   initScrollToTop();
   initCounters();
   initEnhancedFooter();
   initProjectsCanvasAnimation();
   initProjectCardAnimations();
+  initChatbot();
 });
 function initLoader() {
   const loader = document.getElementById("loader");
@@ -795,6 +799,162 @@ function animateCompletionBar(card) {
     }, 800);
   }
 }
+function initTypingAnimation() {
+  const typingText = document.getElementById("typing-text");
+  if (!typingText) return;
+  const roles = [
+    "Software Engineer",
+    "Full Stack Developer",
+    "Frontend Developer",
+    "Backend Developer",
+  ];
+  let currentRoleIndex = 0;
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 150;
+  let isAnimating = false;
+  function type() {
+    if (isAnimating) return;
+    isAnimating = true;
+    const currentRole = roles[currentRoleIndex];
+    if (isDeleting) {
+      typingText.textContent = currentRole.substring(0, currentCharIndex - 1);
+      currentCharIndex--;
+      typingSpeed = 75;
+    } else {
+      typingText.textContent = currentRole.substring(0, currentCharIndex + 1);
+      currentCharIndex++;
+      typingSpeed = 150;
+    }
+    if (!isDeleting && currentCharIndex === currentRole.length) {
+      setTimeout(() => {
+        isDeleting = true;
+        isAnimating = false;
+        type();
+      }, 2000);
+      return;
+    } else if (isDeleting && currentCharIndex === 0) {
+      isDeleting = false;
+      currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+      typingSpeed = 500;
+    }
+    setTimeout(() => {
+      isAnimating = false;
+      type();
+    }, typingSpeed);
+  }
+  setTimeout(() => {
+    type();
+  }, 1500);
+}
+function initEnhancedProjectFilters() {
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".enhanced-card");
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-filter");
+      btn.style.transform = "scale(0.95)";
+      btn.style.boxShadow = "0 0 20px rgba(255, 215, 0, 0.6)";
+      setTimeout(() => {
+        btn.style.transform = "scale(1.05)";
+        setTimeout(() => {
+          btn.style.transform = "";
+          btn.style.boxShadow = "";
+        }, 200);
+      }, 150);
+      animateProjectFilter(projectCards, filter);
+    });
+  });
+}
+function animateProjectFilter(cards, filter) {
+  cards.forEach((card, index) => {
+    const category = card.getAttribute("data-category");
+    const shouldShow = filter === "*" || category === filter;
+    if (!shouldShow) {
+      card.style.transform = "scale(0.8) rotateY(90deg)";
+      card.style.opacity = "0";
+      setTimeout(() => {
+        card.style.display = "none";
+      }, 500);
+    }
+  });
+  setTimeout(() => {
+    let visibleIndex = 0;
+    cards.forEach((card) => {
+      const category = card.getAttribute("data-category");
+      const shouldShow = filter === "*" || category === filter;
+      if (shouldShow) {
+        card.style.display = "block";
+        setTimeout(() => {
+          card.style.transform = "scale(1) rotateY(0deg)";
+          card.style.opacity = "1";
+          setTimeout(() => {
+            card.style.transform = "scale(1.05) rotateY(0deg)";
+            setTimeout(() => {
+              card.style.transform = "scale(1) rotateY(0deg)";
+            }, 100);
+          }, 200);
+        }, visibleIndex * 150);
+        visibleIndex++;
+      }
+    });
+  }, 300);
+}
+function startHeroAnimations() {
+  const heroElements = document.querySelectorAll(".hero-text > *");
+  heroElements.forEach((element, index) => {
+    setTimeout(() => {
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+    }, index * 200);
+  });
+}
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate");
+        if (entry.target.classList.contains("skills")) {
+          setTimeout(() => {
+            animateSkills();
+          }, 300);
+        }
+        if (entry.target.classList.contains("about")) {
+          setTimeout(() => {
+            animateCounters();
+          }, 300);
+        }
+        if (entry.target.classList.contains("contact")) {
+          setTimeout(() => {
+            animateContactStats();
+          }, 300);
+        }
+      }
+    });
+  }, observerOptions);
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+  const skillItems = document.querySelectorAll(".skill-item");
+  skillItems.forEach((item, index) => {
+    setTimeout(() => {
+      observer.observe(item);
+    }, index * 100);
+  });
+  const serviceCards = document.querySelectorAll(".service-card");
+  serviceCards.forEach((card, index) => {
+    setTimeout(() => {
+      observer.observe(card);
+    }, index * 300);
+  });
+}
 function initFloatingLabels() {
   const formGroups = document.querySelectorAll(".form-group");
   formGroups.forEach((group) => {
@@ -975,6 +1135,168 @@ function initFooterTypingAnimation() {
   setTimeout(() => {
     typeFooterName();
   }, 3000);
+}
+function initEnhancedContactForm() {
+  // Initialize message counter from localStorage
+  let messageCount = parseInt(
+    localStorage.getItem("contactFormMessageCount") || "0",
+  );
+
+  // Function to update message counter
+  function updateMessageCounter() {
+    messageCount++;
+    localStorage.setItem("contactFormMessageCount", messageCount.toString());
+
+    const counterElement = document.getElementById("messageCounter");
+    const counterBadge = document.getElementById("counterBadge");
+
+    if (counterElement && counterBadge) {
+      counterBadge.textContent = messageCount;
+      counterBadge.classList.add("new-message");
+
+      // Show counter if hidden
+      if (counterElement.style.display === "none") {
+        counterElement.style.display = "inline-flex";
+      }
+
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        counterBadge.classList.remove("new-message");
+      }, 1000);
+    }
+  }
+
+  // Restore counter on page load
+  if (messageCount > 0) {
+    const counterElement = document.getElementById("messageCounter");
+    const counterBadge = document.getElementById("counterBadge");
+    if (counterElement && counterBadge) {
+      counterBadge.textContent = messageCount;
+      counterElement.style.display = "inline-flex";
+    }
+  }
+
+  async function handleContactForm(e) {
+    e.preventDefault();
+    const customerEmail = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const phone = document.getElementById("phone").value;
+    const userSubject = document.getElementById("subject").value;
+    const userMessage = document.getElementById("message").value;
+    showNotification("sending....", "info");
+    
+    try {
+      const contactData = {
+        name: username,
+        email: customerEmail,
+        phone: phone,
+        subject: userSubject,
+        message: userMessage
+      };
+      
+      const response = await contact(contactData);
+      
+      if (!response.error) {
+        setTimeout(() => {
+          const form = document.getElementById("contactForm");
+          form.reset();
+          const inputs = form.querySelectorAll(".input");
+          inputs.forEach((input) => {
+            input.parentNode.classList.remove("focus");
+          });
+          showNotification("Message sent successfully!", "success");
+          updateMessageCounter();
+        }, 10);
+      } else {
+        showNotification("Error: " + (response.message || "Failed to send message"), "error");
+      }
+    } catch (err) {
+      showNotification("Error occurred while sending message!", "error");
+    }
+  }
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", handleContactForm);
+
+  async function handlefastmessage(e) {
+    e.preventDefault();
+    const fastEmail = document.getElementById("fastemail").value;
+    showNotification("sending....", "info");
+    
+    try {
+      const speedData = {
+        email: fastEmail,
+        subject: "⚡ Fast Response Request",
+        message: `Fast response requested from ${fastEmail}`
+      };
+      
+      const response = await speedResponse(speedData);
+      
+      if (!response.error) {
+        setTimeout(() => {
+          const form = document.getElementById("newsletter-form");
+          form.reset();
+          showNotification("Message sent successfully!", "success");
+        }, 10);
+      } else {
+        showNotification("Error: " + (response.message || "Failed to send"), "error");
+      }
+    } catch (err) {
+      showNotification("Error occurred!", "error");
+    }
+  }
+  document
+    .getElementById("newsletter-form")
+    .addEventListener("submit", handlefastmessage);
+  const inputs = document.querySelectorAll(".input");
+  function focusFunc() {
+    let parent = this.parentNode;
+    parent.classList.add("focus");
+  }
+  function blurFunc() {
+    let parent = this.parentNode;
+    if (this.value === "") {
+      parent.classList.remove("focus");
+    } else {
+      parent.classList.add("focus");
+    }
+  }
+  inputs.forEach((input) => {
+    input.addEventListener("focus", focusFunc);
+    input.addEventListener("blur", blurFunc);
+  });
+  const sections = document.querySelectorAll("section[id]");
+  window.addEventListener("scroll", navHighlighter);
+  function navHighlighter() {
+    let scrollY = window.pageYOffset;
+    sections.forEach((current) => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 50;
+      const sectionId = current.getAttribute("id");
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        document
+          .querySelector(".nav-menu a[href*=" + sectionId + "]")
+          .classList.add("active-link");
+      } else {
+        document
+          .querySelector(".nav-menu a[href*=" + sectionId + "]")
+          .classList.remove("active-link");
+      }
+    });
+  }
+  const textarea = document.getElementById("message");
+  const shadow = document.createElement("div");
+  shadow.style.position = "absolute";
+  shadow.style.visibility = "hidden";
+  shadow.style.whiteSpace = "pre-wrap";
+  shadow.style.wordWrap = "break-word";
+  shadow.style.width = textarea.offsetWidth + "px";
+  shadow.style.font = window.getComputedStyle(textarea).font;
+  document.body.appendChild(shadow);
+  textarea.addEventListener("input", () => {
+    shadow.textContent = textarea.value + "\u200b";
+    textarea.style.height = shadow.scrollHeight + "px";
+  });
 }
 function initScrollToTop() {
   const scrollTopBtn = document.getElementById("scroll-top");
@@ -1220,6 +1542,252 @@ function addSmoothTransitions() {
 }
 setTimeout(addSmoothTransitions, 2000);
 
+function initChatbot() {
+  const chatFab = document.getElementById("chatFab");
+  const chatbot = document.getElementById("chatbot");
+  const chatbotClose = document.getElementById("chatbotClose");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+  const sendMessage = document.getElementById("sendMessage");
+  const quickBtns = document.querySelectorAll(".quick-btn");
+  const knowledgeBase = {
+    personal: {
+      name: "Anubhav Singh",
+      age: 20,
+      dob: "June 5, 2005",
+      location: "Varanasi, India",
+      education:
+        "Computer Science and Engineering with AI specialization (2023-2027)",
+      email: "anubhavsingh2027@gmail.com",
+    },
+    achievements: [
+      "Solved 500+ LeetCode problems across all difficulty levels",
+      "Achieved 5-Star rating in C++ on HackerRank platform",
+      "Built and deployed 15+ full-stack web applications",
+      "Specialized in AI and Machine Learning technologies",
+    ],
+    skills: {
+      frontend: {
+        HTML: "95% - Expert level with semantic markup",
+        CSS: "90% - Advanced styling and animations",
+        JavaScript: "85% - Modern ES6+ and async programming",
+        React: "80% - Component-based architecture",
+      },
+      backend: {
+        "C++": "90% - Data structures and algorithms",
+        "Node.js": "85% - Server-side JavaScript",
+        MongoDB: "80% - NoSQL database operations",
+        Python: "75% - AI/ML and web development",
+      },
+    },
+    projects: {
+      phishshield: {
+        name: "PhishShield",
+        description:
+          "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
+        technologies: [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+        ],
+        sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
+        liveLink: "https://phishshield.nav-code.com",
+      },
+
+      todo: {
+        name: "Smart To-Do",
+        description:
+          "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
+        technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
+        github: "https://github.com/anubhavsingh2027/Todo-App",
+        liveLink: "https://todo-app-jade-six-65.vercel.app",
+      },
+
+      kashika: {
+        name: "Kashi Route",
+        description:
+          "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
+        technologies: ["HTML", "CSS", "JavaScript"],
+        github: "https://github.com/anubhavsingh2027/KashiRoute",
+        liveLink: "https://kashi-route.vercel.app/",
+      },
+
+      weather: {
+        name: "Weather Forecasting App",
+        description:
+          "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
+        technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
+        github:
+          "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
+        liveLink: "https://weather-website-rosy.vercel.app/",
+      },
+
+      aitools: {
+        name: "AI Tools Directory",
+        description:
+          "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
+        technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
+        github: "https://github.com/anubhavsingh2027/typeMaster",
+        liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
+      },
+
+      typingMaster: {
+        name: "Typing Master",
+        description:
+          "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
+        technologies: ["JavaScript", "Real-time Calculation"],
+        github: "https://github.com/anubhavsingh2027/TypingMaster",
+        liveLink: "https://typingmaster.nav-code.com/",
+      },
+
+      stress: {
+        name: "Stress Relief Website",
+        description:
+          "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
+        technologies: ["JavaScript", "CSS Animations", "Audio API"],
+        github:
+          "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
+        liveLink: "https://stress-relief-game-website.vercel.app/",
+      },
+
+      cpp: {
+        name: "C++ String Methods Project",
+        description:
+          "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
+        technologies: ["C++", "String Manipulation", "Algorithm Logic"],
+        github:
+          "https://github.com/anubhavsingh2027/String_method_and_function",
+      },
+
+      airbnb: {
+        name: "Airbnb Clone",
+        description:
+          "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
+        technologies: [
+          "React.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "REST APIs",
+        ],
+        github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
+        liveLink: "https://airbnb-clone-1u1y.onrender.com/",
+      },
+
+      chatting: {
+        name: "Real-Time Chatting App",
+        description:
+          "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
+        technologies: [
+          "WebSocket",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "HTML",
+          "CSS",
+          "JavaScript",
+        ],
+        github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
+        liveLink: "https://real-time-chatting.nav-code.com/",
+      },
+    },
+  };
+
+  if (chatbotClose) {
+    chatbotClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      chatbot.classList.add("hidden");
+
+      chatFab.style.display = "";
+    });
+  }
+  if (sendMessage) {
+    sendMessage.addEventListener("click", async (e) => {
+      e.preventDefault();
+      await sendChatMessage();
+    });
+  }
+  if (chatInput) {
+    chatInput.removeAttribute("readonly");
+    chatInput.removeAttribute("disabled");
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    });
+    chatInput.addEventListener("input", (e) => {});
+  }
+  quickBtns.forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const question = btn.getAttribute("data-question");
+      addChatMessage(question, "user");
+      setTimeout(async () => {
+        const response = await getBotResponse(question);
+        addChatMessage(response, "bot");
+      }, 500);
+    });
+  });
+  async function sendChatMessage() {
+    if (!chatInput) return;
+    const message = chatInput.value.trim();
+    if (!message) return;
+    addChatMessage(message, "user");
+    chatInput.value = "";
+    setTimeout(async () => {
+      const response = await getBotResponse(message);
+      addChatMessage(response, "bot");
+    }, 500);
+  }
+  function addChatMessage(message, sender) {
+    if (!chatMessages) return;
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `chat-message ${sender}`;
+    const avatar = document.createElement("div");
+    avatar.className = "bot-avatar";
+    avatar.textContent = sender === "user" ? "👤" : "🤖";
+    const bubble = document.createElement("div");
+    bubble.className = "message-bubble";
+    bubble.innerHTML = message;
+    bubble.style.color = "black";
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(bubble);
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  async function getBotResponse(message) {
+    try {
+      const response = await chatAssistant({ question: message });
+      if (response && response.answer && !response.error) {
+        return response.answer;
+      }
+      return "Sorry, I couldn't process your request. Please try again.";
+    } catch (err) {
+      console.error("Chat API error:", err);
+      return "An error occurred while processing your message. Please try again.";
+    }
+  }
+}
+
+// when user visit website it tell me
+
+// window.addEventListener("load", () => {
+//   fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
+//     method: "GET"
+//   })
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log("Thank YOU For Visit");
+//     })
+//     .catch(err => {
+//       console.error("Thank YOU For Visiting My Portfolio ");
+//     });
+// });
+
 /* ===== PREMIUM FUTURISTIC SKILLS SECTION - ADVANCED INTERACTIONS ===== */
 
 function initializeSkillsSection() {
@@ -1444,486 +2012,4 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeSkillsSection);
 } else {
   initializeSkillsSection();
-}
-
-//Api calling start
-import {
-  wakeup,
-  chatAssistant,
-  voiceAssistant,
-  contact,
-  speedResponse,
-} from "./service.js";
-
-// ===== CONTACT FORM HANDLER =====
-document.addEventListener("DOMContentLoaded", () => {
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      // Get form values
-      const name = document.getElementById("username")?.value;
-      const email = document.getElementById("email")?.value;
-      const phone = document.getElementById("phone")?.value;
-      const subject = document.getElementById("subject")?.value;
-      const message = document.getElementById("message")?.value;
-
-      // Validate all fields
-      if (!name || !email || !phone || !subject || !message) {
-        showNotification("Please fill in all fields", "error");
-        return;
-      }
-
-      // Get submit button
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-
-      try {
-        // Show loading state
-        if (submitBtn) {
-          animateSubmitButton(submitBtn);
-        }
-
-        // Send data to API
-        const result = await contact({
-          name,
-          email,
-          phone,
-          subject,
-          message,
-        });
-
-        if (result.success) {
-          showNotification(
-            "Message sent successfully! I'll get back to you soon.",
-            "success",
-          );
-          contactForm.reset();
-          resetFloatingLabels();
-        } else {
-          showNotification(result.message || "Failed to send message", "error");
-        }
-      } catch (error) {
-        console.error("Contact form error:", error);
-        showNotification("Error sending message. Please try again.", "error");
-      }
-    });
-  }
-});
-
-// ===== NEWSLETTER/FAST EMAIL HANDLER =====
-document.addEventListener("DOMContentLoaded", () => {
-  const newsletterForm = document.getElementById("newsletter-form");
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const fastemail = document.getElementById("fastemail")?.value;
-
-      if (!fastemail) {
-        showNotification("Please enter your email", "error");
-        return;
-      }
-
-      // Validate email format
-      if (!isValidEmail(fastemail)) {
-        showNotification("Please enter a valid email", "error");
-        return;
-      }
-
-      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
-
-      try {
-        // Show loading state
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = "0.6";
-        }
-
-        const result = await speedResponse({ email: fastemail });
-
-        if (result.success) {
-          showNotification(
-            "I Get Back to You Shortly",
-          );
-          newsletterForm.reset();
-        } else {
-          showNotification(result.message || "Try Again", "error");
-        }
-      } catch (error) {
-        showNotification("try Again", "error");
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.style.opacity = "1";
-        }
-      }
-    });
-  }
-});
-
-// ===== CHAT ASSISTANT HANDLER =====
-document.addEventListener("DOMContentLoaded", () => {
-  const chatFab = document.getElementById("chatFab");
-  if (chatFab) {
-    chatFab.addEventListener("click", async () => {
-      // Check if chat modal exists
-      let chatModal = document.getElementById("chatModal");
-
-      if (!chatModal) {
-        // Create chat modal if it doesn't exist
-        chatModal = createChatModal();
-        document.body.appendChild(chatModal);
-      }
-
-      chatModal.style.display = "flex";
-      const chatInput = chatModal.querySelector("#chatInput");
-      if (chatInput) chatInput.focus();
-    });
-
-    // Handle chat form submission
-    document.addEventListener("submit", async (e) => {
-      if (e.target.id === "chatForm") {
-        e.preventDefault();
-
-        const chatInput = document.getElementById("chatInput");
-        const chatMessages = document.getElementById("chatMessages");
-        const question = chatInput.value.trim();
-
-        if (!question) return;
-
-        // Add user message to chat
-        addChatMessage(question, "user");
-        chatInput.value = "";
-
-        try {
-          // Show loading indicator
-          addChatMessage("Thinking...", "bot-loading");
-
-          const result = await chatAssistant({ question });
-
-          // Remove loading message
-          const loadingMsg = chatMessages.querySelector(".bot-loading");
-          if (loadingMsg) loadingMsg.remove();
-
-          if (result.error) {
-            addChatMessage(
-              "Sorry, I encountered an error. Please try again.",
-              "bot",
-            );
-          } else {
-            addChatMessage(result.answer || "No response received", "bot");
-          }
-        } catch (error) {
-          console.error("Chat error:", error);
-          const loadingMsg = chatMessages.querySelector(".bot-loading");
-          if (loadingMsg) loadingMsg.remove();
-          addChatMessage(
-            "Sorry, something went wrong. Please try again.",
-            "bot",
-          );
-        }
-
-        // Auto scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-    });
-  }
-});
-
-// ===== VOICE ASSISTANT HANDLER =====
-document.addEventListener("DOMContentLoaded", () => {
-  // Check if browser supports Web Speech API
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = "en-US";
-
-    let voiceFab = document.getElementById("voiceFab");
-
-    // Create voice FAB if it doesn't exist
-    if (!voiceFab) {
-      voiceFab = document.createElement("button");
-      voiceFab.id = "voiceFab";
-      voiceFab.className = "neo-ai-btn voice-fab";
-      voiceFab.title = "Voice Assistant";
-      voiceFab.innerHTML = `
-        <span class="neo-icon">🎤</span>
-        <span class="neo-text">Voice</span>
-      `;
-      document.querySelector(".floating-actions").appendChild(voiceFab);
-    }
-
-    voiceFab.addEventListener("click", () => {
-      if (recognition.isListening) {
-        recognition.abort();
-        voiceFab.classList.remove("listening");
-        return;
-      }
-
-      voiceFab.classList.add("listening");
-      recognition.start();
-    });
-
-    recognition.onstart = () => {
-      voiceFab.classList.add("listening");
-      showNotification("Listening...", "info");
-    };
-
-    recognition.onend = () => {
-      voiceFab.classList.remove("listening");
-    };
-
-    recognition.onresult = async (event) => {
-      let interimTranscript = "";
-      let finalTranscript = "";
-
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript + " ";
-        } else {
-          interimTranscript += transcript;
-        }
-      }
-
-      if (finalTranscript) {
-        showNotification(`You said: ${finalTranscript}`, "info");
-
-        try {
-          const result = await voiceAssistant({ question: finalTranscript });
-
-          if (result.error) {
-            showNotification("Voice assistant error", "error");
-          } else {
-            const answer = result.answer || "I didn't catch that";
-            showNotification(answer, "success");
-
-            // Optionally: Use Text-to-Speech
-            if ("speechSynthesis" in window) {
-              const utterance = new SpeechSynthesisUtterance(answer);
-              utterance.lang = "en-US";
-              speechSynthesis.speak(utterance);
-            }
-          }
-        } catch (error) {
-          console.error("Voice assistant error:", error);
-          showNotification("Error processing voice request", "error");
-        }
-      }
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error", event.error);
-      showNotification(`Error: ${event.error}`, "error");
-    };
-  }
-});
-
-// ===== HELPER FUNCTIONS =====
-
-function createChatModal() {
-  const modal = document.createElement("div");
-  modal.id = "chatModal";
-  modal.className = "chat-modal";
-  modal.innerHTML = `
-    <div class="chat-modal-content">
-      <div class="chat-modal-header">
-        <h3>AI Chat Assistant</h3>
-        <button class="chat-close" onclick="document.getElementById('chatModal').style.display='none'">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <form id="chatForm" class="chat-form">
-        <input
-          type="text"
-          id="chatInput"
-          placeholder="Ask me anything..."
-          autocomplete="off"
-          required
-        />
-        <button type="submit" class="chat-send-btn">
-          <i class="fas fa-paper-plane"></i>
-        </button>
-      </form>
-    </div>
-  `;
-
-  // Add styles
-  const styles = `
-    .chat-modal {
-      display: none;
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      width: 350px;
-      height: 500px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
-      flex-direction: column;
-      z-index: 9999;
-      animation: slideUp 0.3s ease;
-    }
-
-    @media (max-width: 600px) {
-      .chat-modal {
-        width: 90vw;
-        height: 70vh;
-        right: 5vw;
-      }
-    }
-
-    .chat-modal-header {
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border-radius: 12px 12px 0 0;
-    }
-
-    .chat-modal-header h3 {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .chat-close {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .chat-message {
-      padding: 10px 15px;
-      border-radius: 8px;
-      max-width: 80%;
-      word-wrap: break-word;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .chat-message.user {
-      align-self: flex-end;
-      background: #667eea;
-      color: white;
-    }
-
-    .chat-message.bot {
-      align-self: flex-start;
-      background: #f0f0f0;
-      color: #333;
-    }
-
-    .chat-message.bot-loading {
-      align-self: flex-start;
-      background: #f0f0f0;
-      color: #999;
-      font-style: italic;
-    }
-
-    .chat-form {
-      display: flex;
-      gap: 10px;
-      padding: 15px;
-      border-top: 1px solid #eee;
-    }
-
-    .chat-form input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      font-size: 14px;
-    }
-
-    .chat-send-btn {
-      background: #667eea;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .chat-send-btn:hover {
-      background: #764ba2;
-      transform: scale(1.05);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .neo-ai-btn.listening {
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
-      }
-    }
-  `;
-
-  const styleSheet = document.createElement("style");
-  styleSheet.textContent = styles;
-  document.head.appendChild(styleSheet);
-
-  return modal;
-}
-
-function addChatMessage(message, sender = "bot") {
-  const chatMessages = document.getElementById("chatMessages");
-  if (!chatMessages) return;
-
-  const messageDiv = document.createElement("div");
-  messageDiv.className = `chat-message ${sender}`;
-  messageDiv.textContent = message;
-  chatMessages.appendChild(messageDiv);
-
-  // Auto scroll to bottom
-  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
