@@ -1,4 +1,4 @@
-const handleVoiceQuery = async (contentData) => {
+export const groqcalling = async (contentData) => {
   try {
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",

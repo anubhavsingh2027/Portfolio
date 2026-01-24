@@ -1,6 +1,6 @@
-import { handleVoiceQuery } from "../middlewares/groqCall.middlewares.js";
+import { groqcalling } from "../middlewares/groqCall.middlewares.js";
 import { myDB } from "../middlewares/myData.middlewares.js";
-import voiceAssitant from "../model/voiceAssitant.js";
+import chatAssist from "../model/chatAssistant.js";
 
 export const chatAssistant = async (req, res) => {
   try {
@@ -10,32 +10,43 @@ export const chatAssistant = async (req, res) => {
       return res.status(400).json({ error: "Question is required" });
     }
 
-    const query = `
-You are a voice assistant and the personal assistant of Anubhav Singh.
-I am providing you Anubhav's personal portfolio data below.
+   const query = `
+You are a chat assistant and a personal assistant.
 
-If the user's question is related to Anubhav Singh, answer using the given data only.
-If the question is not related to Anubhav, answer it normally using your general knowledge.
+Rules you must strictly follow:
+- Do NOT explain how you are answering the question.
+- Do NOT mention whether the question is related to any person or not.
+- Do NOT repeatedly use the name "Anubhav Singh" unless it is necessary for the answer.
+- If the answer exists in the provided data, answer ONLY from that data.
+- If the answer is not present in the provided data, answer normally using your own knowledge.
+- Do NOT add extra statements like "this question is not related" or similar explanations.
 
-Do not include any links in your response.
-Keep the answer clear, simple, and limited to 2–3 lines.
-The response should be in English, with a neutral tone (not too formal, not too casual).
+You may include relevant links if they are useful.
+Keep the response short and clear (2–3 lines maximum).
+Write the answer in English with a neutral tone.
 
 User Question:
 ${question}
 
-Anubhav's Data:
+Provided Data:
 ${myDB}
 `;
 
 
-    const answer = await handleVoiceQuery(query);
 
-    await voiceAssitant.save({ question, answer });
+
+
+    const answer = await groqcalling(query);
+    const data = new chatAssist({
+      question,
+      answer
+    });
+    await data.save();
+
 
     res.json({ answer });
   } catch (error) {
     console.error("Error in chatAssistant:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: `Internal server error ${error}` });
   }
 };

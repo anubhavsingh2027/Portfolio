@@ -1,20 +1,17 @@
 // External Module
-const express = require("express");
+import express from "express";
 const handleAcess = express.Router();
 
 // controllers
-const acessHandler= require("../controllers/hello.controller");
-const acessHandler= require("../controllers/chatAssistant.controller");
-const acessHandler= require("../controllers/voiceAssistant..controller");
-const acessHandler= require("../controllers/contactMail.controller");
+import { wakeup } from "../controllers/hello.controller.js";
+import { chatAssistant } from "../controllers/chatAssistant.controller.js";
+import { chatAssistant as voiceAssistant } from "../controllers/voiceAssistant..controller.js";
+import { contact, speedMail } from "../controllers/contactMail.controller.js";
 
-handleAcess.get("/", adminResourcesSetController.createCar);
-acessHandler.post("/", adminResourcesSetController.deleteCar);
-acessHandler.post("/chatAssistant", adminResourcesSetController.createPackage);
-acessHandler.post("/voiceAssistant",adminResourcesSetController.deletepackage);
-acessHandler.post("/contact",)
-acessHandler.post("/speedResponse",)
+handleAcess.get("/", wakeup);
+handleAcess.post("/chatAssistant", chatAssistant);
+handleAcess.post("/voiceAssistant", voiceAssistant);
+handleAcess.post("/contact", contact);
+handleAcess.post("/speedResponse", speedMail);
 
-
-
-module.exports = handleAcess;
+export default handleAcess;

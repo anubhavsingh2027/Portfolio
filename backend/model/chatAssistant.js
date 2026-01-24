@@ -1,17 +1,17 @@
-const mongoose=require('mongoose');
+import mongoose from "mongoose";
 
-const chatSchema=new mongoose.Schema({
-  question:{
-    type:String,
-    required:true
+const chatSchema = new mongoose.Schema(
+  {
+    question: {
+      type: String,
+      required: true,
+    },
+    answer: {
+      type: String,
+      required: true,
+    },
   },
-  answer:{
-    type:String,
-    required:true
-  },
-  
-},
-    {timeStamp:true}
+  { timeStamp: true },
 );
 
-module.exports=mongoose.model("chatData",chatSchema);
+export default mongoose.model("chatData", chatSchema);

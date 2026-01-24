@@ -5,16 +5,23 @@ export async function sendMail(data) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    const data = await response.json();
-    if (data.success) {
+    const result = await response.json();
+    if (result.success) {
       return {
         success: true,
-        message: "Contact Send Successfully",
+        message: "Email sent successfully",
+      };
+    } else {
+      return {
+        success: false,
+        message: result.message || "Failed to send email",
       };
     }
   } catch (err) {
+    console.error("Email sending error:", err);
     return {
-      success:false
-    }
+      success: false,
+      message: "Error sending email",
+    };
   }
 }

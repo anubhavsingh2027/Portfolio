@@ -69,13 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
   initTypingAnimation();
   initScrollAnimations();
   initEnhancedProjectFilters();
-  initEnhancedContactForm();
   initScrollToTop();
   initCounters();
   initEnhancedFooter();
   initProjectsCanvasAnimation();
   initProjectCardAnimations();
-  initChatbot();
 });
 function initLoader() {
   const loader = document.getElementById("loader");
@@ -797,162 +795,6 @@ function animateCompletionBar(card) {
     }, 800);
   }
 }
-function initTypingAnimation() {
-  const typingText = document.getElementById("typing-text");
-  if (!typingText) return;
-  const roles = [
-    "Software Engineer",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
-  ];
-  let currentRoleIndex = 0;
-  let currentCharIndex = 0;
-  let isDeleting = false;
-  let typingSpeed = 150;
-  let isAnimating = false;
-  function type() {
-    if (isAnimating) return;
-    isAnimating = true;
-    const currentRole = roles[currentRoleIndex];
-    if (isDeleting) {
-      typingText.textContent = currentRole.substring(0, currentCharIndex - 1);
-      currentCharIndex--;
-      typingSpeed = 75;
-    } else {
-      typingText.textContent = currentRole.substring(0, currentCharIndex + 1);
-      currentCharIndex++;
-      typingSpeed = 150;
-    }
-    if (!isDeleting && currentCharIndex === currentRole.length) {
-      setTimeout(() => {
-        isDeleting = true;
-        isAnimating = false;
-        type();
-      }, 2000);
-      return;
-    } else if (isDeleting && currentCharIndex === 0) {
-      isDeleting = false;
-      currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-      typingSpeed = 500;
-    }
-    setTimeout(() => {
-      isAnimating = false;
-      type();
-    }, typingSpeed);
-  }
-  setTimeout(() => {
-    type();
-  }, 1500);
-}
-function initEnhancedProjectFilters() {
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const projectCards = document.querySelectorAll(".enhanced-card");
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      const filter = btn.getAttribute("data-filter");
-      btn.style.transform = "scale(0.95)";
-      btn.style.boxShadow = "0 0 20px rgba(255, 215, 0, 0.6)";
-      setTimeout(() => {
-        btn.style.transform = "scale(1.05)";
-        setTimeout(() => {
-          btn.style.transform = "";
-          btn.style.boxShadow = "";
-        }, 200);
-      }, 150);
-      animateProjectFilter(projectCards, filter);
-    });
-  });
-}
-function animateProjectFilter(cards, filter) {
-  cards.forEach((card, index) => {
-    const category = card.getAttribute("data-category");
-    const shouldShow = filter === "*" || category === filter;
-    if (!shouldShow) {
-      card.style.transform = "scale(0.8) rotateY(90deg)";
-      card.style.opacity = "0";
-      setTimeout(() => {
-        card.style.display = "none";
-      }, 500);
-    }
-  });
-  setTimeout(() => {
-    let visibleIndex = 0;
-    cards.forEach((card) => {
-      const category = card.getAttribute("data-category");
-      const shouldShow = filter === "*" || category === filter;
-      if (shouldShow) {
-        card.style.display = "block";
-        setTimeout(() => {
-          card.style.transform = "scale(1) rotateY(0deg)";
-          card.style.opacity = "1";
-          setTimeout(() => {
-            card.style.transform = "scale(1.05) rotateY(0deg)";
-            setTimeout(() => {
-              card.style.transform = "scale(1) rotateY(0deg)";
-            }, 100);
-          }, 200);
-        }, visibleIndex * 150);
-        visibleIndex++;
-      }
-    });
-  }, 300);
-}
-function startHeroAnimations() {
-  const heroElements = document.querySelectorAll(".hero-text > *");
-  heroElements.forEach((element, index) => {
-    setTimeout(() => {
-      element.style.opacity = "1";
-      element.style.transform = "translateY(0)";
-    }, index * 200);
-  });
-}
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate");
-        if (entry.target.classList.contains("skills")) {
-          setTimeout(() => {
-            animateSkills();
-          }, 300);
-        }
-        if (entry.target.classList.contains("about")) {
-          setTimeout(() => {
-            animateCounters();
-          }, 300);
-        }
-        if (entry.target.classList.contains("contact")) {
-          setTimeout(() => {
-            animateContactStats();
-          }, 300);
-        }
-      }
-    });
-  }, observerOptions);
-  const sections = document.querySelectorAll("section");
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
-  const skillItems = document.querySelectorAll(".skill-item");
-  skillItems.forEach((item, index) => {
-    setTimeout(() => {
-      observer.observe(item);
-    }, index * 100);
-  });
-  const serviceCards = document.querySelectorAll(".service-card");
-  serviceCards.forEach((card, index) => {
-    setTimeout(() => {
-      observer.observe(card);
-    }, index * 300);
-  });
-}
 function initFloatingLabels() {
   const formGroups = document.querySelectorAll(".form-group");
   formGroups.forEach((group) => {
@@ -1133,265 +975,6 @@ function initFooterTypingAnimation() {
   setTimeout(() => {
     typeFooterName();
   }, 3000);
-}
-function initEnhancedContactForm() {
-  // Initialize message counter from localStorage
-  let messageCount = parseInt(
-    localStorage.getItem("contactFormMessageCount") || "0",
-  );
-
-  // Function to update message counter
-  function updateMessageCounter() {
-    messageCount++;
-    localStorage.setItem("contactFormMessageCount", messageCount.toString());
-
-    const counterElement = document.getElementById("messageCounter");
-    const counterBadge = document.getElementById("counterBadge");
-
-    if (counterElement && counterBadge) {
-      counterBadge.textContent = messageCount;
-      counterBadge.classList.add("new-message");
-
-      // Show counter if hidden
-      if (counterElement.style.display === "none") {
-        counterElement.style.display = "inline-flex";
-      }
-
-      // Remove animation class after animation completes
-      setTimeout(() => {
-        counterBadge.classList.remove("new-message");
-      }, 1000);
-    }
-  }
-
-  // Restore counter on page load
-  if (messageCount > 0) {
-    const counterElement = document.getElementById("messageCounter");
-    const counterBadge = document.getElementById("counterBadge");
-    if (counterElement && counterBadge) {
-      counterBadge.textContent = messageCount;
-      counterElement.style.display = "inline-flex";
-    }
-  }
-
-  async function handleContactForm(e) {
-    e.preventDefault();
-    const customerEmail = document.getElementById("email").value;
-    const username = document.getElementById("username").value;
-    const phone = document.getElementById("phone").value;
-    const userSubject = document.getElementById("subject").value;
-    const userMessage = document.getElementById("message").value;
-    showNotification("sending....", "send");
-    const getCustomerMessage = () => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #333;">
-    <h2 style="color: #6d28d9; margin-bottom: 18px; font-size: 22px;">Hello ${username}, 👋</h2>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      Thank you for reaching out — your message has been successfully received!
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      I truly appreciate your interest, and I'll get back to you as soon as possible.
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      While you wait, feel free to take a look at my work and online presence:
-    </p>
-
-    <ul style="padding-left: 18px; margin-bottom: 18px; font-size: 15px; line-height: 1.7;">
-      <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Projects</a></li>
-      <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
-      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Portfolio Website</a></li>
-    </ul>
-
-    <p style="line-height: 1.7; font-size: 15px;">
-      Thanks again for getting in touch — talk soon!
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-top: 24px;">
-      Warm regards,<br/>
-      <strong style="color:#000;">Anubhav Singh</strong>
-    </p>
-
-    <div style="margin-top: 28px; padding: 12px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      ✉️ Sent from <strong>Anubhav Portfolio</strong>
-    </div>
-  </div>
-`;
-
-    const getHostMessage = () => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
-    <h2 style="color: #6d28d9; margin-bottom: 16px;">📩 New Customer Enquiry</h2>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Name:</strong> ${username}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Email:</strong> <a href="mailto:${customerEmail}" style="color: #6d28d9; text-decoration: none;">${customerEmail}</a>
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Phone:</strong> ${phone}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Subject:</strong> ${userSubject}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-top: 16px;"><strong>Message:</strong></p>
-    <blockquote style="border-left: 4px solid #6d28d9; margin: 12px 0; padding-left: 12px; color: #444; font-style: italic; background: #fafafa; border-radius: 4px;">
-      ${userMessage}
-    </blockquote>
-    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      🚀 Sent from Contact Form
-    </div>
-  </div>
-`;
-    async function sendEmail(payload) {
-      try {
-        const response = await fetch(
-          "https://mail-api-iuw1zw.fly.dev/sendMail",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          },
-        );
-        const data = await response.json();
-        if (data.success) {
-          setTimeout(() => {
-            const form = document.getElementById("contactForm");
-            form.reset();
-            const inputs = form.querySelectorAll(".input");
-            inputs.forEach((input) => {
-              input.parentNode.classList.remove("focus");
-            });
-            showNotification("Message sent successfully!", "success");
-
-            // Update message counter
-            updateMessageCounter();
-          }, 10);
-        }
-      } catch (err) {
-        showNotification("Error Occurred !", "error");
-      }
-    }
-    await sendEmail({
-      to: customerEmail,
-      subject: "🎉 Thank you for contacting us!",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getCustomerMessage(),
-    });
-    await sendEmail({
-      to: "anubhavsinghcustomer@gmail.com",
-      subject: "📩 New Customer Enquiry",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getHostMessage(),
-    });
-  }
-  document
-    .getElementById("contactForm")
-    .addEventListener("submit", handleContactForm);
-
-  async function handlefastmessage(e) {
-    e.preventDefault();
-    const fastEmail = document.getElementById("fastemail").value;
-    showNotification("sending....", "send");
-    const getCustomerMessage = (name) => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
-    <h1 style="color: #dc2626; margin-bottom: 20px; font-size: 22px; text-align: center;">
-      🚀 Fast Response Request
-    </h1>
-    <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-      You can reply directly via email:
-    </p>
-    <p style="text-align: center; margin-bottom: 20px;">
-      <a href="mailto:${fastEmail}" style="display: inline-block; padding: 12px 20px; background: #dc2626; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">
-        📧 Reply Now
-      </a>
-    </p>
-    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      ⚡ Fast-response system notification
-    </div>
-  </div>
-`;
-    async function sendEmail(payload) {
-      try {
-        const response = await fetch(
-          "https://mail-api-iuw1zw.fly.dev/sendMail",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          },
-        );
-        const data = await response.json();
-        if (data.success) {
-          setTimeout(() => {
-            const form = document.getElementById("newsletter-form");
-            form.reset();
-            showNotification("Message sent successfully!", "success");
-          }, 10);
-        }
-      } catch (err) {
-        showNotification("Error Occurred !", "error");
-      }
-    }
-    await sendEmail({
-      to: "anubhavsinghcustomer@gmail.com",
-      subject: "Urget Message ",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getCustomerMessage(username),
-    });
-  }
-  document
-    .getElementById("newsletter-form")
-    .addEventListener("submit", handlefastmessage);
-  const inputs = document.querySelectorAll(".input");
-  function focusFunc() {
-    let parent = this.parentNode;
-    parent.classList.add("focus");
-  }
-  function blurFunc() {
-    let parent = this.parentNode;
-    if (this.value === "") {
-      parent.classList.remove("focus");
-    } else {
-      parent.classList.add("focus");
-    }
-  }
-  inputs.forEach((input) => {
-    input.addEventListener("focus", focusFunc);
-    input.addEventListener("blur", blurFunc);
-  });
-  const sections = document.querySelectorAll("section[id]");
-  window.addEventListener("scroll", navHighlighter);
-  function navHighlighter() {
-    let scrollY = window.pageYOffset;
-    sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 50;
-      const sectionId = current.getAttribute("id");
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        document
-          .querySelector(".nav-menu a[href*=" + sectionId + "]")
-          .classList.add("active-link");
-      } else {
-        document
-          .querySelector(".nav-menu a[href*=" + sectionId + "]")
-          .classList.remove("active-link");
-      }
-    });
-  }
-  const textarea = document.getElementById("message");
-  const shadow = document.createElement("div");
-  shadow.style.position = "absolute";
-  shadow.style.visibility = "hidden";
-  shadow.style.whiteSpace = "pre-wrap";
-  shadow.style.wordWrap = "break-word";
-  shadow.style.width = textarea.offsetWidth + "px";
-  shadow.style.font = window.getComputedStyle(textarea).font;
-  document.body.appendChild(shadow);
-  textarea.addEventListener("input", () => {
-    shadow.textContent = textarea.value + "\u200b";
-    textarea.style.height = shadow.scrollHeight + "px";
-  });
 }
 function initScrollToTop() {
   const scrollTopBtn = document.getElementById("scroll-top");
@@ -1637,422 +1220,6 @@ function addSmoothTransitions() {
 }
 setTimeout(addSmoothTransitions, 2000);
 
-function initChatbot() {
-  const chatFab = document.getElementById("chatFab");
-  const chatbot = document.getElementById("chatbot");
-  const chatbotClose = document.getElementById("chatbotClose");
-  const chatMessages = document.getElementById("chatMessages");
-  const chatInput = document.getElementById("chatInput");
-  const sendMessage = document.getElementById("sendMessage");
-  const quickBtns = document.querySelectorAll(".quick-btn");
-  const knowledgeBase = {
-    personal: {
-      name: "Anubhav Singh",
-      age: 20,
-      dob: "June 5, 2005",
-      location: "Varanasi, India",
-      education:
-        "Computer Science and Engineering with AI specialization (2023-2027)",
-      email: "anubhavsingh2027@gmail.com",
-    },
-    achievements: [
-      "Solved 500+ LeetCode problems across all difficulty levels",
-      "Achieved 5-Star rating in C++ on HackerRank platform",
-      "Built and deployed 15+ full-stack web applications",
-      "Specialized in AI and Machine Learning technologies",
-    ],
-    skills: {
-      frontend: {
-        HTML: "95% - Expert level with semantic markup",
-        CSS: "90% - Advanced styling and animations",
-        JavaScript: "85% - Modern ES6+ and async programming",
-        React: "80% - Component-based architecture",
-      },
-      backend: {
-        "C++": "90% - Data structures and algorithms",
-        "Node.js": "85% - Server-side JavaScript",
-        MongoDB: "80% - NoSQL database operations",
-        Python: "75% - AI/ML and web development",
-      },
-    },
-    projects: {
-      phishshield: {
-        name: "PhishShield",
-        description:
-          "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
-        technologies: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-        ],
-        sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
-        liveLink: "https://phishshield.nav-code.com",
-      },
-
-      todo: {
-        name: "Smart To-Do",
-        description:
-          "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
-        technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
-        github: "https://github.com/anubhavsingh2027/Todo-App",
-        liveLink: "https://todo-app-jade-six-65.vercel.app",
-      },
-
-      kashika: {
-        name: "Kashi Route",
-        description:
-          "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
-        technologies: ["HTML", "CSS", "JavaScript"],
-        github: "https://github.com/anubhavsingh2027/KashiRoute",
-        liveLink: "https://kashi-route.vercel.app/",
-      },
-
-      weather: {
-        name: "Weather Forecasting App",
-        description:
-          "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
-        technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
-        github:
-          "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
-        liveLink: "https://weather-website-rosy.vercel.app/",
-      },
-
-      aitools: {
-        name: "AI Tools Directory",
-        description:
-          "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
-        technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
-        github: "https://github.com/anubhavsingh2027/typeMaster",
-        liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
-      },
-
-      typingMaster: {
-        name: "Typing Master",
-        description:
-          "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
-        technologies: ["JavaScript", "Real-time Calculation"],
-        github: "https://github.com/anubhavsingh2027/TypingMaster",
-        liveLink: "https://typingmaster.nav-code.com/",
-      },
-
-      stress: {
-        name: "Stress Relief Website",
-        description:
-          "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
-        technologies: ["JavaScript", "CSS Animations", "Audio API"],
-        github:
-          "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
-        liveLink: "https://stress-relief-game-website.vercel.app/",
-      },
-
-      cpp: {
-        name: "C++ String Methods Project",
-        description:
-          "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
-        technologies: ["C++", "String Manipulation", "Algorithm Logic"],
-        github:
-          "https://github.com/anubhavsingh2027/String_method_and_function",
-      },
-
-      airbnb: {
-        name: "Airbnb Clone",
-        description:
-          "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
-        technologies: [
-          "React.js",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-          "REST APIs",
-        ],
-        github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
-        liveLink: "https://airbnb-clone-1u1y.onrender.com/",
-      },
-
-      chatting: {
-        name: "Real-Time Chatting App",
-        description:
-          "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
-        technologies: [
-          "WebSocket",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-          "HTML",
-          "CSS",
-          "JavaScript",
-        ],
-        github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
-        liveLink: "https://real-time-chatting.nav-code.com/",
-      },
-    },
-  };
-
-  if (chatbotClose) {
-    chatbotClose.addEventListener("click", (e) => {
-      e.preventDefault();
-      chatbot.classList.add("hidden");
-
-      chatFab.style.display = "";
-    });
-  }
-  if (sendMessage) {
-    sendMessage.addEventListener("click", (e) => {
-      e.preventDefault();
-      sendChatMessage();
-    });
-  }
-  if (chatInput) {
-    chatInput.removeAttribute("readonly");
-    chatInput.removeAttribute("disabled");
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        sendChatMessage();
-      }
-    });
-    chatInput.addEventListener("input", (e) => {});
-  }
-  quickBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const question = btn.getAttribute("data-question");
-      addChatMessage(question, "user");
-      setTimeout(() => {
-        const response = getBotResponse(question);
-        addChatMessage(response, "bot");
-      }, 500);
-    });
-  });
-  function sendChatMessage() {
-    if (!chatInput) return;
-    const message = chatInput.value.trim();
-    if (!message) return;
-    addChatMessage(message, "user");
-    chatInput.value = "";
-    setTimeout(() => {
-      const response = getBotResponse(message);
-      addChatMessage(response, "bot");
-    }, 500);
-  }
-  function addChatMessage(message, sender) {
-    if (!chatMessages) return;
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `chat-message ${sender}`;
-    const avatar = document.createElement("div");
-    avatar.className = "bot-avatar";
-    avatar.textContent = sender === "user" ? "👤" : "🤖";
-    const bubble = document.createElement("div");
-    bubble.className = "message-bubble";
-    bubble.innerHTML = message;
-    bubble.style.color = "black";
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(bubble);
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-  function getBotResponse(message) {
-    const msg = message.toLowerCase().trim();
-
-    // Helper function for keyword matching
-    const matchesAny = (text, keywords) => {
-      return keywords.some((keyword) => text.includes(keyword.toLowerCase()));
-    };
-
-    if (
-      // Greeting responses
-      matchesAny(msg, ["hello", "hey", "greetings", "welcome"])
-    ) {
-      return "Certainly. I am chat Bot, Anubhav Singh's personal portfolio assistant. How may I assist you today?";
-    }
-
-    // Identity
-    if (matchesAny(msg, ["who are you", "your name", "identity", "who"])) {
-      return "I am Chat Bot. I was created by Anubhav Singh to serve as his personal portfolio assistant and provide information about his professional profile.";
-    }
-
-    if (matchesAny(msg, ["anubhav", "singh", "profile", "background"])) {
-      return "Anubhav Singh is a distinguished Full Stack Developer and AI Enthusiast based in Varanasi, India. Currently pursuing B.Tech in Computer Science with AI specialization from PSIT Kanpur (Expected: 2027). <br><br><strong>Key Achievements:</strong> 600+ LeetCode problems solved, 5-star rating in C++ on HackerRank, 15+ full-stack applications deployed. His expertise spans MERN stack development, real-time systems, and modern UI/UX design.";
-    }
-
-    // Education
-    if (
-      matchesAny(msg, [
-        "education",
-        "college",
-        "study",
-        "university",
-        "degree",
-        "school",
-      ])
-    ) {
-      return "Anubhav is pursuing a Bachelor of Technology in Computer Science and Engineering with Artificial Intelligence specialization from PSIT Kanpur, Batch 2027. His academic focus includes advanced algorithms, machine learning, and full-stack development methodologies.";
-    }
-
-    // Skills - Comprehensive
-    if (
-      matchesAny(msg, [
-        "skill",
-        "skills",
-        "expertise",
-        "technology",
-        "technologies",
-        "what can you do",
-      ])
-    ) {
-      return "<strong>Technical Stack:</strong><br><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Tailwind CSS<br><strong>Backend:</strong> Node.js, Express.js, WebSocket<br><strong>Databases:</strong> MongoDB, Firebase<br><strong>Programming Languages:</strong> C++, Java, Python, JavaScript<br><strong>Specializations:</strong> Full-stack MERN development, Data Structures &amp; Algorithms, Real-time systems, JWT Authentication, REST APIs, UI/UX Animations";
-    }
-
-    // Programming Languages
-    if (
-      matchesAny(msg, ["c++", "cpp", "java", "python", "programming language"])
-    ) {
-      return "Anubhav demonstrates advanced proficiency in:<br> <strong>C++</strong>: 5-star HackerRank rating, 600+ problems solved<br> <strong>Java</strong>: Object-oriented design and backend development<br> <strong>Python</strong>: Data science and automation scripts<br> <strong>JavaScript</strong>: Full-stack web development with modern ES6+ standards";
-    }
-
-    // LeetCode
-    if (matchesAny(msg, ["leetcode", "600", "problems", "dsa", "algorithms"])) {
-      return "Anubhav has solved <strong>600+ problems on LeetCode</strong>, demonstrating mastery across all difficulty levels. His solutions showcase proficiency in Data Structures, Algorithms, Dynamic Programming, and optimization techniques. His consistent practice reflects a deep commitment to computational excellence.";
-    }
-
-    // HackerRank
-    if (matchesAny(msg, ["hackerrank", "5 star", "rating", "5-star"])) {
-      return "Anubhav maintains a <strong>5-star rating in C++ on HackerRank</strong>, validating his advanced expertise in the language, competitive programming, and problem-solving capabilities. This achievement reflects his commitment to technical excellence.";
-    }
-
-    // Projects - Overview
-    if (
-      matchesAny(msg, [
-        "project",
-        "projects",
-        "what have you built",
-        "portfolio",
-      ])
-    ) {
-      return "<strong>Featured Projects:</strong><br> <strong>Real-Time Chatting App</strong> - WebSocket communication system<br> <strong>PhishShield</strong> - ML-based phishing detection platform<br> <strong>This Portfolio</strong> - Interactive showcase with NAV-JARVIS assistant<br><br>I can provide detailed information about any project. Which would interest you?";
-    }
-
-    if (
-      matchesAny(msg, [
-        "chatting",
-        "chat app",
-        "websocket",
-        "real-time",
-        "messenger",
-      ])
-    ) {
-      return "<strong>Real-Time Chatting Application</strong><br><br>A comprehensive WebSocket-powered messaging system featuring:<br> Instant message delivery with live user presence<br> JWT-based secure authentication<br> Room-based messaging architecture<br> Modern, responsive user interface<br><br><strong>Technologies:</strong> WebSocket, Node.js, Express.js, MongoDB, HTML, CSS, JavaScript";
-    }
-
-    // PhishShield
-    if (
-      matchesAny(msg, [
-        "phishshield",
-        "phishing",
-        "security",
-        "threat",
-        "detection",
-      ])
-    ) {
-      return "<strong>PhishShield - Intelligent Phishing Detection</strong><br><br>An advanced cybersecurity platform employing machine learning to detect fraudulent URLs and phishing threats:<br> URL pattern analysis and behavioral feature detection<br> Secure JWT-based user authentication<br> Interactive security dashboard<br> Automated threat analysis engine<br><br><strong>Technologies:</strong> HTML, Tailwind CSS, JavaScript, Node.js, Express.js, MongoDB";
-    }
-
-    // This Portfolio Website
-    if (
-      matchesAny(msg, [
-        "this site",
-        "this website",
-        "portfolio website",
-        "my portfolio",
-      ])
-    ) {
-      return "<strong>Portfolio Website</strong><br><br>This interactive platform showcases Anubhav's professional capabilities through:<br> Smooth GSAP animations and canvas-based network effects<br> NAV-JARVIS intelligent assistant (myself)<br> Fully functional REST API for direct communication<br> Responsive, modern design demonstrating web development expertise<br><br>Built with HTML, CSS, JavaScript, and advanced animation libraries.";
-    }
-
-    // Contact Information
-    if (
-      matchesAny(msg, [
-        "contact",
-        "email",
-        "phone",
-        "reach",
-        "call",
-        "message",
-        "how to contact",
-      ])
-    ) {
-      return "<strong>Contact Information:</strong><br><br> <strong>Email:</strong> anubhavsingh2027@gmail.com<br> <strong>Phone/WhatsApp:</strong> 7355026966<br><br>Response time: Typically within 24 hours. Anubhav welcomes inquiries regarding opportunities and professional collaborations.";
-    }
-
-    // Direct Contact Number
-    if (matchesAny(msg, ["number", "mobile", "whatsapp", "direct"])) {
-      return "You can reach Anubhav directly at: <strong>7355026966</strong> via phone or WhatsApp.";
-    }
-
-    // GitHub
-    if (
-      matchesAny(msg, [
-        "github",
-        "repository",
-        "repositories",
-        "code",
-        "source code",
-      ])
-    ) {
-      return "Anubhav's GitHub profile: <strong>anubhavsingh2027</strong><br><br>His repositories contain comprehensive implementations of projects, algorithms, and open-source contributions. You can explore his complete portfolio at: <a href='https://github.com/anubhavsingh2027' target='_blank' style='color: #0066cc;'>github.com/anubhavsingh2027</a>";
-    }
-
-    // Social Media
-    if (matchesAny(msg, ["linkedin", "twitter", "social", "social media"])) {
-      return "<strong>Professional Presence:</strong><br> LinkedIn - Professional network and endorsements<br> Twitter - Tech insights and updates<br>  - Personal and professional content<br><br>These platforms provide additional context into Anubhav's professional journey and expertise.";
-    }
-
-    // Creator Question
-    if (
-      matchesAny(msg, [
-        "who created you",
-        "who made you",
-        "creator",
-        "developed",
-      ])
-    ) {
-      return "I am created by Anubhav Singh.";
-    }
-    if (
-      matchesAny(msg, [
-        "hire",
-        "service",
-        "freelance",
-        "work",
-        "collaborate",
-        "opportunity",
-      ])
-    ) {
-      return "<strong>Services &amp; Collaboration:</strong><br> Full-Stack Web Development<br> Backend Architecture &amp; Optimization<br> Algorithm Problem Solving<br> UI/UX Implementation<br><br>For project inquiries and collaborations, contact: anubhavsingh2027@gmail.com";
-    }
-
-    return "I can assist with inquiries regarding Anubhav's professional profile, technical expertise, projects, education, skills, and contact information. Please ask me about any specific topic of interest.";
-  }
-}
-
-// when user visit website it tell me
-
-// window.addEventListener("load", () => {
-//   fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
-//     method: "GET"
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log("Thank YOU For Visit");
-//     })
-//     .catch(err => {
-//       console.error("Thank YOU For Visiting My Portfolio ");
-//     });
-// });
-
 /* ===== PREMIUM FUTURISTIC SKILLS SECTION - ADVANCED INTERACTIONS ===== */
 
 function initializeSkillsSection() {
@@ -2277,4 +1444,486 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeSkillsSection);
 } else {
   initializeSkillsSection();
+}
+
+//Api calling start
+import {
+  wakeup,
+  chatAssistant,
+  voiceAssistant,
+  contact,
+  speedResponse,
+} from "./service.js";
+
+// ===== CONTACT FORM HANDLER =====
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Get form values
+      const name = document.getElementById("username")?.value;
+      const email = document.getElementById("email")?.value;
+      const phone = document.getElementById("phone")?.value;
+      const subject = document.getElementById("subject")?.value;
+      const message = document.getElementById("message")?.value;
+
+      // Validate all fields
+      if (!name || !email || !phone || !subject || !message) {
+        showNotification("Please fill in all fields", "error");
+        return;
+      }
+
+      // Get submit button
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+      try {
+        // Show loading state
+        if (submitBtn) {
+          animateSubmitButton(submitBtn);
+        }
+
+        // Send data to API
+        const result = await contact({
+          name,
+          email,
+          phone,
+          subject,
+          message,
+        });
+
+        if (result.success) {
+          showNotification(
+            "Message sent successfully! I'll get back to you soon.",
+            "success",
+          );
+          contactForm.reset();
+          resetFloatingLabels();
+        } else {
+          showNotification(result.message || "Failed to send message", "error");
+        }
+      } catch (error) {
+        console.error("Contact form error:", error);
+        showNotification("Error sending message. Please try again.", "error");
+      }
+    });
+  }
+});
+
+// ===== NEWSLETTER/FAST EMAIL HANDLER =====
+document.addEventListener("DOMContentLoaded", () => {
+  const newsletterForm = document.getElementById("newsletter-form");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const fastemail = document.getElementById("fastemail")?.value;
+
+      if (!fastemail) {
+        showNotification("Please enter your email", "error");
+        return;
+      }
+
+      // Validate email format
+      if (!isValidEmail(fastemail)) {
+        showNotification("Please enter a valid email", "error");
+        return;
+      }
+
+      const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+
+      try {
+        // Show loading state
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = "0.6";
+        }
+
+        const result = await speedResponse({ email: fastemail });
+
+        if (result.success) {
+          showNotification(
+            "I Get Back to You Shortly",
+          );
+          newsletterForm.reset();
+        } else {
+          showNotification(result.message || "Try Again", "error");
+        }
+      } catch (error) {
+        showNotification("try Again", "error");
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = "1";
+        }
+      }
+    });
+  }
+});
+
+// ===== CHAT ASSISTANT HANDLER =====
+document.addEventListener("DOMContentLoaded", () => {
+  const chatFab = document.getElementById("chatFab");
+  if (chatFab) {
+    chatFab.addEventListener("click", async () => {
+      // Check if chat modal exists
+      let chatModal = document.getElementById("chatModal");
+
+      if (!chatModal) {
+        // Create chat modal if it doesn't exist
+        chatModal = createChatModal();
+        document.body.appendChild(chatModal);
+      }
+
+      chatModal.style.display = "flex";
+      const chatInput = chatModal.querySelector("#chatInput");
+      if (chatInput) chatInput.focus();
+    });
+
+    // Handle chat form submission
+    document.addEventListener("submit", async (e) => {
+      if (e.target.id === "chatForm") {
+        e.preventDefault();
+
+        const chatInput = document.getElementById("chatInput");
+        const chatMessages = document.getElementById("chatMessages");
+        const question = chatInput.value.trim();
+
+        if (!question) return;
+
+        // Add user message to chat
+        addChatMessage(question, "user");
+        chatInput.value = "";
+
+        try {
+          // Show loading indicator
+          addChatMessage("Thinking...", "bot-loading");
+
+          const result = await chatAssistant({ question });
+
+          // Remove loading message
+          const loadingMsg = chatMessages.querySelector(".bot-loading");
+          if (loadingMsg) loadingMsg.remove();
+
+          if (result.error) {
+            addChatMessage(
+              "Sorry, I encountered an error. Please try again.",
+              "bot",
+            );
+          } else {
+            addChatMessage(result.answer || "No response received", "bot");
+          }
+        } catch (error) {
+          console.error("Chat error:", error);
+          const loadingMsg = chatMessages.querySelector(".bot-loading");
+          if (loadingMsg) loadingMsg.remove();
+          addChatMessage(
+            "Sorry, something went wrong. Please try again.",
+            "bot",
+          );
+        }
+
+        // Auto scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+  }
+});
+
+// ===== VOICE ASSISTANT HANDLER =====
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if browser supports Web Speech API
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    let voiceFab = document.getElementById("voiceFab");
+
+    // Create voice FAB if it doesn't exist
+    if (!voiceFab) {
+      voiceFab = document.createElement("button");
+      voiceFab.id = "voiceFab";
+      voiceFab.className = "neo-ai-btn voice-fab";
+      voiceFab.title = "Voice Assistant";
+      voiceFab.innerHTML = `
+        <span class="neo-icon">🎤</span>
+        <span class="neo-text">Voice</span>
+      `;
+      document.querySelector(".floating-actions").appendChild(voiceFab);
+    }
+
+    voiceFab.addEventListener("click", () => {
+      if (recognition.isListening) {
+        recognition.abort();
+        voiceFab.classList.remove("listening");
+        return;
+      }
+
+      voiceFab.classList.add("listening");
+      recognition.start();
+    });
+
+    recognition.onstart = () => {
+      voiceFab.classList.add("listening");
+      showNotification("Listening...", "info");
+    };
+
+    recognition.onend = () => {
+      voiceFab.classList.remove("listening");
+    };
+
+    recognition.onresult = async (event) => {
+      let interimTranscript = "";
+      let finalTranscript = "";
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript + " ";
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+
+      if (finalTranscript) {
+        showNotification(`You said: ${finalTranscript}`, "info");
+
+        try {
+          const result = await voiceAssistant({ question: finalTranscript });
+
+          if (result.error) {
+            showNotification("Voice assistant error", "error");
+          } else {
+            const answer = result.answer || "I didn't catch that";
+            showNotification(answer, "success");
+
+            // Optionally: Use Text-to-Speech
+            if ("speechSynthesis" in window) {
+              const utterance = new SpeechSynthesisUtterance(answer);
+              utterance.lang = "en-US";
+              speechSynthesis.speak(utterance);
+            }
+          }
+        } catch (error) {
+          console.error("Voice assistant error:", error);
+          showNotification("Error processing voice request", "error");
+        }
+      }
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event.error);
+      showNotification(`Error: ${event.error}`, "error");
+    };
+  }
+});
+
+// ===== HELPER FUNCTIONS =====
+
+function createChatModal() {
+  const modal = document.createElement("div");
+  modal.id = "chatModal";
+  modal.className = "chat-modal";
+  modal.innerHTML = `
+    <div class="chat-modal-content">
+      <div class="chat-modal-header">
+        <h3>AI Chat Assistant</h3>
+        <button class="chat-close" onclick="document.getElementById('chatModal').style.display='none'">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <form id="chatForm" class="chat-form">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Ask me anything..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="chat-send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  `;
+
+  // Add styles
+  const styles = `
+    .chat-modal {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
+      flex-direction: column;
+      z-index: 9999;
+      animation: slideUp 0.3s ease;
+    }
+
+    @media (max-width: 600px) {
+      .chat-modal {
+        width: 90vw;
+        height: 70vh;
+        right: 5vw;
+      }
+    }
+
+    .chat-modal-header {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .chat-modal-header h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .chat-close {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-message {
+      padding: 10px 15px;
+      border-radius: 8px;
+      max-width: 80%;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .chat-message.user {
+      align-self: flex-end;
+      background: #667eea;
+      color: white;
+    }
+
+    .chat-message.bot {
+      align-self: flex-start;
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .chat-message.bot-loading {
+      align-self: flex-start;
+      background: #f0f0f0;
+      color: #999;
+      font-style: italic;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .chat-form input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .chat-send-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .chat-send-btn:hover {
+      background: #764ba2;
+      transform: scale(1.05);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .neo-ai-btn.listening {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+      }
+    }
+  `;
+
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
+
+  return modal;
+}
+
+function addChatMessage(message, sender = "bot") {
+  const chatMessages = document.getElementById("chatMessages");
+  if (!chatMessages) return;
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `chat-message ${sender}`;
+  messageDiv.textContent = message;
+  chatMessages.appendChild(messageDiv);
+
+  // Auto scroll to bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
