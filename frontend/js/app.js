@@ -1,8 +1,9 @@
-import { contact, speedResponse, chatAssistant } from './service.js';
-
+import { chatAssistant } from "./service.js";
+import { initChatbot } from "./chat-assistant.js";
 let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
+let projectsAnimation = null;
 
 // Resume Modal Functions
 function openResumeModal() {
@@ -799,54 +800,6 @@ function animateCompletionBar(card) {
     }, 800);
   }
 }
-function initTypingAnimation() {
-  const typingText = document.getElementById("typing-text");
-  if (!typingText) return;
-  const roles = [
-    "Software Engineer",
-    "Full Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
-  ];
-  let currentRoleIndex = 0;
-  let currentCharIndex = 0;
-  let isDeleting = false;
-  let typingSpeed = 150;
-  let isAnimating = false;
-  function type() {
-    if (isAnimating) return;
-    isAnimating = true;
-    const currentRole = roles[currentRoleIndex];
-    if (isDeleting) {
-      typingText.textContent = currentRole.substring(0, currentCharIndex - 1);
-      currentCharIndex--;
-      typingSpeed = 75;
-    } else {
-      typingText.textContent = currentRole.substring(0, currentCharIndex + 1);
-      currentCharIndex++;
-      typingSpeed = 150;
-    }
-    if (!isDeleting && currentCharIndex === currentRole.length) {
-      setTimeout(() => {
-        isDeleting = true;
-        isAnimating = false;
-        type();
-      }, 2000);
-      return;
-    } else if (isDeleting && currentCharIndex === 0) {
-      isDeleting = false;
-      currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-      typingSpeed = 500;
-    }
-    setTimeout(() => {
-      isAnimating = false;
-      type();
-    }, typingSpeed);
-  }
-  setTimeout(() => {
-    type();
-  }, 1500);
-}
 function initEnhancedProjectFilters() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const projectCards = document.querySelectorAll(".enhanced-card");
@@ -901,59 +854,6 @@ function animateProjectFilter(cards, filter) {
       }
     });
   }, 300);
-}
-function startHeroAnimations() {
-  const heroElements = document.querySelectorAll(".hero-text > *");
-  heroElements.forEach((element, index) => {
-    setTimeout(() => {
-      element.style.opacity = "1";
-      element.style.transform = "translateY(0)";
-    }, index * 200);
-  });
-}
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate");
-        if (entry.target.classList.contains("skills")) {
-          setTimeout(() => {
-            animateSkills();
-          }, 300);
-        }
-        if (entry.target.classList.contains("about")) {
-          setTimeout(() => {
-            animateCounters();
-          }, 300);
-        }
-        if (entry.target.classList.contains("contact")) {
-          setTimeout(() => {
-            animateContactStats();
-          }, 300);
-        }
-      }
-    });
-  }, observerOptions);
-  const sections = document.querySelectorAll("section");
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
-  const skillItems = document.querySelectorAll(".skill-item");
-  skillItems.forEach((item, index) => {
-    setTimeout(() => {
-      observer.observe(item);
-    }, index * 100);
-  });
-  const serviceCards = document.querySelectorAll(".service-card");
-  serviceCards.forEach((card, index) => {
-    setTimeout(() => {
-      observer.observe(card);
-    }, index * 300);
-  });
 }
 function initFloatingLabels() {
   const formGroups = document.querySelectorAll(".form-group");
@@ -1183,36 +1083,109 @@ function initEnhancedContactForm() {
     const phone = document.getElementById("phone").value;
     const userSubject = document.getElementById("subject").value;
     const userMessage = document.getElementById("message").value;
-    showNotification("sending....", "info");
-    
-    try {
-      const contactData = {
-        name: username,
-        email: customerEmail,
-        phone: phone,
-        subject: userSubject,
-        message: userMessage
-      };
-      
-      const response = await contact(contactData);
-      
-      if (!response.error) {
-        setTimeout(() => {
-          const form = document.getElementById("contactForm");
-          form.reset();
-          const inputs = form.querySelectorAll(".input");
-          inputs.forEach((input) => {
-            input.parentNode.classList.remove("focus");
-          });
-          showNotification("Message sent successfully!", "success");
-          updateMessageCounter();
-        }, 10);
-      } else {
-        showNotification("Error: " + (response.message || "Failed to send message"), "error");
+    showNotification("sending....", "send");
+    const getCustomerMessage = () => `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #333;">
+    <h2 style="color: #6d28d9; margin-bottom: 18px; font-size: 22px;">Hello ${username}, 👋</h2>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      Thank you for reaching out — your message has been successfully received!
+    </p>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      I truly appreciate your interest, and I'll get back to you as soon as possible.
+    </p>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
+      While you wait, feel free to take a look at my work and online presence:
+    </p>
+
+    <ul style="padding-left: 18px; margin-bottom: 18px; font-size: 15px; line-height: 1.7;">
+      <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Projects</a></li>
+      <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
+      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Portfolio Website</a></li>
+    </ul>
+
+    <p style="line-height: 1.7; font-size: 15px;">
+      Thanks again for getting in touch — talk soon!
+    </p>
+
+    <p style="line-height: 1.7; font-size: 15px; margin-top: 24px;">
+      Warm regards,<br/>
+      <strong style="color:#000;">Anubhav Singh</strong>
+    </p>
+
+    <div style="margin-top: 28px; padding: 12px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
+      ✉️ Sent from <strong>Anubhav Portfolio</strong>
+    </div>
+  </div>
+`;
+
+    const getHostMessage = () => `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
+    <h2 style="color: #6d28d9; margin-bottom: 16px;">📩 New Customer Enquiry</h2>
+    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
+      <strong>Name:</strong> ${username}
+    </p>
+    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
+      <strong>Email:</strong> <a href="mailto:${customerEmail}" style="color: #6d28d9; text-decoration: none;">${customerEmail}</a>
+    </p>
+    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
+      <strong>Phone:</strong> ${phone}
+    </p>
+    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
+      <strong>Subject:</strong> ${userSubject}
+    </p>
+    <p style="line-height: 1.6; font-size: 15px; margin-top: 16px;"><strong>Message:</strong></p>
+    <blockquote style="border-left: 4px solid #6d28d9; margin: 12px 0; padding-left: 12px; color: #444; font-style: italic; background: #fafafa; border-radius: 4px;">
+      ${userMessage}
+    </blockquote>
+    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
+      🚀 Sent from Contact Form
+    </div>
+  </div>
+`;
+    async function sendEmail(payload) {
+      try {
+        const response = await fetch(
+          "https://mail-api-iuw1zw.fly.dev/sendMail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          },
+        );
+        const data = await response.json();
+        if (data.success) {
+          setTimeout(() => {
+            const form = document.getElementById("contactForm");
+            form.reset();
+            const inputs = form.querySelectorAll(".input");
+            inputs.forEach((input) => {
+              input.parentNode.classList.remove("focus");
+            });
+            showNotification("Message sent successfully!", "success");
+
+            // Update message counter
+            updateMessageCounter();
+          }, 10);
+        }
+      } catch (err) {
+        showNotification("Error Occurred !", "error");
       }
-    } catch (err) {
-      showNotification("Error occurred while sending message!", "error");
     }
+    await sendEmail({
+      to: customerEmail,
+      subject: "🎉 Thank you for contacting us!",
+      websiteName: "Anubhav singh Portfolio ",
+      message: getCustomerMessage(),
+    });
+    await sendEmail({
+      to: "anubhavsinghcustomer@gmail.com",
+      subject: "📩 New Customer Enquiry",
+      websiteName: "Anubhav singh Portfolio ",
+      message: getHostMessage(),
+    });
   }
   document
     .getElementById("contactForm")
@@ -1221,29 +1194,53 @@ function initEnhancedContactForm() {
   async function handlefastmessage(e) {
     e.preventDefault();
     const fastEmail = document.getElementById("fastemail").value;
-    showNotification("sending....", "info");
-    
-    try {
-      const speedData = {
-        email: fastEmail,
-        subject: "⚡ Fast Response Request",
-        message: `Fast response requested from ${fastEmail}`
-      };
-      
-      const response = await speedResponse(speedData);
-      
-      if (!response.error) {
-        setTimeout(() => {
-          const form = document.getElementById("newsletter-form");
-          form.reset();
-          showNotification("Message sent successfully!", "success");
-        }, 10);
-      } else {
-        showNotification("Error: " + (response.message || "Failed to send"), "error");
+    showNotification("sending....", "send");
+    const getCustomerMessage = (name) => `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
+    <h1 style="color: #dc2626; margin-bottom: 20px; font-size: 22px; text-align: center;">
+      🚀 Fast Response Request
+    </h1>
+    <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+      You can reply directly via email:
+    </p>
+    <p style="text-align: center; margin-bottom: 20px;">
+      <a href="mailto:${fastEmail}" style="display: inline-block; padding: 12px 20px; background: #dc2626; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        📧 Reply Now
+      </a>
+    </p>
+    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
+      ⚡ Fast-response system notification
+    </div>
+  </div>
+`;
+    async function sendEmail(payload) {
+      try {
+        const response = await fetch(
+          "https://mail-api-iuw1zw.fly.dev/sendMail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          },
+        );
+        const data = await response.json();
+        if (data.success) {
+          setTimeout(() => {
+            const form = document.getElementById("newsletter-form");
+            form.reset();
+            showNotification("Message sent successfully!", "success");
+          }, 10);
+        }
+      } catch (err) {
+        showNotification("Error Occurred !", "error");
       }
-    } catch (err) {
-      showNotification("Error occurred!", "error");
     }
+    await sendEmail({
+      to: "anubhavsinghcustomer@gmail.com",
+      subject: "Urget Message ",
+      websiteName: "Anubhav singh Portfolio ",
+      message: getCustomerMessage(username),
+    });
   }
   document
     .getElementById("newsletter-form")
@@ -1468,16 +1465,7 @@ function preloadImages() {
 }
 preloadImages();
 function handleMissingElements() {
-  const requiredElements = [
-    "navbar",
-    "nav-toggle",
-    "nav-menu",
-    "networkCanvas",
-    "typing-text",
-    "main-contact-form",
-    "scroll-top",
-    "theme-toggle",
-  ];
+  const requiredElements = ["navbar", "nav-toggle", "nav-menu", "scroll-top"];
   requiredElements.forEach((id) => {
     const element = document.getElementById(id);
     if (!element) {
@@ -1541,252 +1529,6 @@ function addSmoothTransitions() {
   });
 }
 setTimeout(addSmoothTransitions, 2000);
-
-function initChatbot() {
-  const chatFab = document.getElementById("chatFab");
-  const chatbot = document.getElementById("chatbot");
-  const chatbotClose = document.getElementById("chatbotClose");
-  const chatMessages = document.getElementById("chatMessages");
-  const chatInput = document.getElementById("chatInput");
-  const sendMessage = document.getElementById("sendMessage");
-  const quickBtns = document.querySelectorAll(".quick-btn");
-  const knowledgeBase = {
-    personal: {
-      name: "Anubhav Singh",
-      age: 20,
-      dob: "June 5, 2005",
-      location: "Varanasi, India",
-      education:
-        "Computer Science and Engineering with AI specialization (2023-2027)",
-      email: "anubhavsingh2027@gmail.com",
-    },
-    achievements: [
-      "Solved 500+ LeetCode problems across all difficulty levels",
-      "Achieved 5-Star rating in C++ on HackerRank platform",
-      "Built and deployed 15+ full-stack web applications",
-      "Specialized in AI and Machine Learning technologies",
-    ],
-    skills: {
-      frontend: {
-        HTML: "95% - Expert level with semantic markup",
-        CSS: "90% - Advanced styling and animations",
-        JavaScript: "85% - Modern ES6+ and async programming",
-        React: "80% - Component-based architecture",
-      },
-      backend: {
-        "C++": "90% - Data structures and algorithms",
-        "Node.js": "85% - Server-side JavaScript",
-        MongoDB: "80% - NoSQL database operations",
-        Python: "75% - AI/ML and web development",
-      },
-    },
-    projects: {
-      phishshield: {
-        name: "PhishShield",
-        description:
-          "A cybersecurity platform with real-time phishing detection using advanced URL-scanning and blacklisted domain checks. Includes secure authentication, user dashboard, and automated threat analysis.",
-        technologies: [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-        ],
-        sourceCode: "https://github.com/anubhavsingh2027/Phishsheild",
-        liveLink: "https://phishshield.nav-code.com",
-      },
-
-      todo: {
-        name: "Smart To-Do",
-        description:
-          "A MERN-based task manager application that allows users to add, update, and organize everyday tasks with clean UI and persistent database storage.",
-        technologies: ["MongoDB", "Express.js", "React", "Node.js", "REST API"],
-        github: "https://github.com/anubhavsingh2027/Todo-App",
-        liveLink: "https://todo-app-jade-six-65.vercel.app",
-      },
-
-      kashika: {
-        name: "Kashi Route",
-        description:
-          "Tourism and travel platform for Varanasi offering car rentals, guided tours, heritage highlights, and seamless navigation support.",
-        technologies: ["HTML", "CSS", "JavaScript"],
-        github: "https://github.com/anubhavsingh2027/KashiRoute",
-        liveLink: "https://kashi-route.vercel.app/",
-      },
-
-      weather: {
-        name: "Weather Forecasting App",
-        description:
-          "Responsive weather application providing real-time forecasts and climate insights using OpenWeather API.",
-        technologies: ["JavaScript", "OpenWeather API", "Responsive UI"],
-        github:
-          "https://github.com/anubhavsingh2027/anubhavsingh2027-Weather-Website",
-        liveLink: "https://weather-website-rosy.vercel.app/",
-      },
-
-      aitools: {
-        name: "AI Tools Directory",
-        description:
-          "A categorized directory with 600+ AI tools featuring keyword-based search and filter for quick discovery.",
-        technologies: ["HTML", "CSS", "JavaScript", "Search Algorithms"],
-        github: "https://github.com/anubhavsingh2027/typeMaster",
-        liveLink: "https://ai-tools-directory-seven-jade.vercel.app/",
-      },
-
-      typingMaster: {
-        name: "Typing Master",
-        description:
-          "Interactive typing test platform that tracks typing speed (WPM) and accuracy in real-time.",
-        technologies: ["JavaScript", "Real-time Calculation"],
-        github: "https://github.com/anubhavsingh2027/TypingMaster",
-        liveLink: "https://typingmaster.nav-code.com/",
-      },
-
-      stress: {
-        name: "Stress Relief Website",
-        description:
-          "Relaxation experience website with calming animations and soothing audio interactions to reduce stress.",
-        technologies: ["JavaScript", "CSS Animations", "Audio API"],
-        github:
-          "https://github.com/anubhavsingh2027/Stress-Relief-Game-Website",
-        liveLink: "https://stress-relief-game-website.vercel.app/",
-      },
-
-      cpp: {
-        name: "C++ String Methods Project",
-        description:
-          "Reference-based project demonstrating commonly used C++ string methods for DSA learners.",
-        technologies: ["C++", "String Manipulation", "Algorithm Logic"],
-        github:
-          "https://github.com/anubhavsingh2027/String_method_and_function",
-      },
-
-      airbnb: {
-        name: "Airbnb Clone",
-        description:
-          "Full-stack rental booking web application replicating Airbnb features — property listings, authentication, reviews, booking workflows, and responsive UI.",
-        technologies: [
-          "React.js",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-          "REST APIs",
-        ],
-        github: "https://github.com/anubhavsingh2027/Airbnb-Clone",
-        liveLink: "https://airbnb-clone-1u1y.onrender.com/",
-      },
-
-      chatting: {
-        name: "Real-Time Chatting App",
-        description:
-          "WebSocket-powered real-time chat platform with secure authentication, active user presence, and instant message delivery. Includes clean UI and room-based messaging.",
-        technologies: [
-          "WebSocket",
-          "Node.js",
-          "Express.js",
-          "MongoDB",
-          "HTML",
-          "CSS",
-          "JavaScript",
-        ],
-        github: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
-        liveLink: "https://real-time-chatting.nav-code.com/",
-      },
-    },
-  };
-
-  if (chatbotClose) {
-    chatbotClose.addEventListener("click", (e) => {
-      e.preventDefault();
-      chatbot.classList.add("hidden");
-
-      chatFab.style.display = "";
-    });
-  }
-  if (sendMessage) {
-    sendMessage.addEventListener("click", async (e) => {
-      e.preventDefault();
-      await sendChatMessage();
-    });
-  }
-  if (chatInput) {
-    chatInput.removeAttribute("readonly");
-    chatInput.removeAttribute("disabled");
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        sendChatMessage();
-      }
-    });
-    chatInput.addEventListener("input", (e) => {});
-  }
-  quickBtns.forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const question = btn.getAttribute("data-question");
-      addChatMessage(question, "user");
-      setTimeout(async () => {
-        const response = await getBotResponse(question);
-        addChatMessage(response, "bot");
-      }, 500);
-    });
-  });
-  async function sendChatMessage() {
-    if (!chatInput) return;
-    const message = chatInput.value.trim();
-    if (!message) return;
-    addChatMessage(message, "user");
-    chatInput.value = "";
-    setTimeout(async () => {
-      const response = await getBotResponse(message);
-      addChatMessage(response, "bot");
-    }, 500);
-  }
-  function addChatMessage(message, sender) {
-    if (!chatMessages) return;
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `chat-message ${sender}`;
-    const avatar = document.createElement("div");
-    avatar.className = "bot-avatar";
-    avatar.textContent = sender === "user" ? "👤" : "🤖";
-    const bubble = document.createElement("div");
-    bubble.className = "message-bubble";
-    bubble.innerHTML = message;
-    bubble.style.color = "black";
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(bubble);
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-  async function getBotResponse(message) {
-    try {
-      const response = await chatAssistant({ question: message });
-      if (response && response.answer && !response.error) {
-        return response.answer;
-      }
-      return "Sorry, I couldn't process your request. Please try again.";
-    } catch (err) {
-      console.error("Chat API error:", err);
-      return "An error occurred while processing your message. Please try again.";
-    }
-  }
-}
-
-// when user visit website it tell me
-
-// window.addEventListener("load", () => {
-//   fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
-//     method: "GET"
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log("Thank YOU For Visit");
-//     })
-//     .catch(err => {
-//       console.error("Thank YOU For Visiting My Portfolio ");
-//     });
-// });
 
 /* ===== PREMIUM FUTURISTIC SKILLS SECTION - ADVANCED INTERACTIONS ===== */
 

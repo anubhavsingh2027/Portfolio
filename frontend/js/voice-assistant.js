@@ -1,6 +1,4 @@
-// ===== MODE SELECTION AND VOICE ASSISTANT =====
-
-import { voiceAssistant as voiceAssistantAPI } from './service.js';
+import { voiceAssistant } from "./service.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   initModeSelection();
@@ -14,7 +12,6 @@ function initModeSelection() {
   const voiceModeBtn = document.getElementById("voiceModeBtn");
   const chatbot = document.getElementById("chatbot");
   const voiceAssistant = document.getElementById("voiceAssistant");
-
 
   if (!chatFab || !modeModal) return;
 
@@ -40,42 +37,33 @@ function initModeSelection() {
   });
 }
 
-
 // ======================= VOICE ASSISTANT =======================
 
 function initVoiceAssistant() {
-  const voiceAssistant = document.getElementById("voiceAssistant");
+  const voiceAssistantElement = document.getElementById("voiceAssistant");
   const micCircle = document.getElementById("micCircle");
   const voiceClose = document.getElementById("voiceClose");
   const voiceStatusText = document.getElementById("voiceStatusText");
   const voiceTranscript = document.getElementById("voiceTranscript");
   const voiceResponse = document.getElementById("voiceResponse");
-  const voiceResponseContainer = document.getElementById("voiceResponseContainer");
- const micPulse = document.querySelector(".mic-pulse");
-const micPulse2 = document.querySelector(".mic-pulse-2");
-const chatFab = document.getElementById("chatFab");
-  if (!voiceAssistant) return;
+  const voiceResponseContainer = document.getElementById(
+    "voiceResponseContainer",
+  );
+  const micPulse = document.querySelector(".mic-pulse");
+  const micPulse2 = document.querySelector(".mic-pulse-2");
+  const chatFab = document.getElementById("chatFab");
+  if (!voiceAssistantElement) return;
 
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
   const synthesis = window.speechSynthesis;
 
-  if (!SpeechRecognition) return console.warn("Speech Recognition not supported.");
+  if (!SpeechRecognition)
+    return console.warn("Speech Recognition not supported.");
 
   let recognition = null;
   let isListening = false;
   let isSpeaking = false;
-  let lastProjectURL = null;
-
-
-  // ---------- 📌 Smooth Section Scroll Function ----------
-  function scrollToSection(sectionId) {
-    const target = document.getElementById(sectionId);
-    if (!target) return false;
-
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    return true;
-  }
-
 
   // ---------- 🎤 Speech Recognition Setup ----------
   function initRecognition() {
@@ -87,9 +75,9 @@ const chatFab = document.getElementById("chatFab");
     recognition.onstart = () => {
       synthesis.cancel();
       isSpeaking = false;
-        micCircle.classList.add("active");
-        micPulse.classList.add("active");
-        micPulse2.classList.add("active");
+      micCircle.classList.add("active");
+      micPulse.classList.add("active");
+      micPulse2.classList.add("active");
       isListening = true;
 
       voiceStatusText.textContent = "Listening...";
@@ -106,10 +94,7 @@ const chatFab = document.getElementById("chatFab");
 
       if (finalTranscript.trim()) {
         voiceTranscript.innerHTML = `<p>${finalTranscript}</p>`;
-        handleCommand(finalTranscript.trim()).catch((err) => {
-          console.error("Command error:", err);
-          speakBack("Sorry, I encountered an error. Please try again.");
-        });
+        handleCommand(finalTranscript.trim());
       }
     };
 
@@ -125,12 +110,11 @@ const chatFab = document.getElementById("chatFab");
   function stopListening() {
     isListening = false;
     recognition?.stop();
-     micCircle.classList.remove("active");
-  micPulse.classList.remove("active");
-  micPulse2.classList.remove("active");
+    micCircle.classList.remove("active");
+    micPulse.classList.remove("active");
+    micPulse2.classList.remove("active");
     voiceStatusText.textContent = "Tap to speak";
   }
-
 
   // ---------- 🗣 Text-To-Speech ----------
   function speak(text) {
@@ -147,42 +131,41 @@ const chatFab = document.getElementById("chatFab");
   }
 
   function speakBack(text) {
-  voiceResponseContainer.classList.remove("hidden");
-  voiceResponse.innerHTML = `<p>${text}</p>`;
-
-  // Delay response for natural feel
-  setTimeout(() => {
-    speak(text);
-  }, 500); // 800ms delay
-}
-
-
-  // ---------- 🤖 Command Handler ----------
-  async function handleCommand(cmdRaw) {
-    const cmd = cmdRaw.toLowerCase().trim();
     voiceResponseContainer.classList.remove("hidden");
+    voiceResponse.innerHTML = `<p>${text}</p>`;
 
-    // 🛑 Stop Speaking Voice Command
-    if (["stop speaking", "stop voice", "mute", "be quiet"].some(w => cmd.includes(w))) {
-      synthesis.cancel();
-      isSpeaking = false;
-      return speakBack("Okay, I stopped speaking.");
-    }
-
-    // 🌐 Call API only for all other commands
-    try {
-      const apiResponse = await voiceAssistantAPI({ question: cmd });
-      if (apiResponse && apiResponse.answer && !apiResponse.error) {
-        return speakBack(apiResponse.answer);
-      }
-    } catch (err) {
-      console.error("Voice API error:", err);
-    }
-
-    // Fallback response if API fails
-    return speakBack("Sorry, I couldn't process that. Please try again.");
+    setTimeout(() => {
+      speak(text);
+    }, 500);
   }
 
+  // ---------- 🔄 API Call Handler ----------
+  async function queryAPI(userInput) {
+    try {
+      voiceStatusText.textContent = "Thinking...";
+
+      const data = await voiceAssistant({ question: userInput });
+
+      if (data.error) {
+        throw new Error(data.message);
+      }
+
+      const answer = data.answer || data.response || "No response received";
+
+      voiceStatusText.textContent = "Tap to speak";
+      speakBack(answer);
+    } catch (error) {
+      console.error("API Error:", error);
+      voiceStatusText.textContent = "Tap to speak";
+      speakBack("Sorry, I couldn't reach the server. Please try again.");
+    }
+  }
+
+  // ---------- 🤖 Command Handler ----------
+  function handleCommand(userInput) {
+    voiceResponseContainer.classList.remove("hidden");
+    queryAPI(userInput);
+  }
 
   // ---------- 🎛 UI Buttons ----------
   micCircle?.addEventListener("click", () => {
@@ -199,10 +182,8 @@ const chatFab = document.getElementById("chatFab");
     stopListening();
     synthesis.cancel();
     isSpeaking = false;
-    voiceAssistant.classList.add("hidden");
+    voiceAssistantElement.classList.add("hidden");
     chatFab.style.display = "";
-
-
   });
 
   synthesis.onvoiceschanged = () => synthesis.getVoices();
