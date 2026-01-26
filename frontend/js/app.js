@@ -41,6 +41,10 @@ function closeResumeModal() {
   }
 }
 
+// Expose functions to global scope for onclick handlers
+window.openResumeModal = openResumeModal;
+window.closeResumeModal = closeResumeModal;
+
 // Close modal on Escape key
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -63,6 +67,9 @@ function scrollToSection(sectionId) {
     }, 500);
   }
 }
+
+// Expose to global scope for onclick handlers
+window.scrollToSection = scrollToSection;
 
 // Initialize when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
