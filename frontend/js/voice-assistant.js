@@ -182,6 +182,56 @@ function initVoiceAssistant() {
     recognition.onend = () => {
       stopListening();
     };
+
+    // Add permission change listener
+    try {
+      navigator.permissions
+        .query({ name: "microphone" })
+        .then((permission) => {
+          permission.addEventListener("change", () => {
+            if (permission.state === "denied" && isListening) {
+              console.warn("Microphone permission was revoked");
+              stopListening();
+              voiceStatusText.textContent = "❌ Microphone permission revoked";
+            }
+          });
+        })
+        .catch((err) =>
+          console.warn("Permission API not fully supported:", err),
+        );
+    } catch (err) {
+      console.warn("Permission monitoring not available:", err);
+    }
+  }
+
+  async function checkMicrophonePermission() {
+    try {
+      const permission = await navigator.permissions.query({
+        name: "microphone",
+      });
+
+      if (permission.state === "denied") {
+        voiceStatusText.textContent = "❌ Microphone permission denied";
+        return false;
+      }
+
+      if (permission.state === "granted") {
+        return true;
+      }
+
+      // For 'prompt' state, try to get permission
+      if (permission.state === "prompt") {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        stream.getTracks().forEach((track) => track.stop());
+        return true;
+      }
+    } catch (error) {
+      console.error("Microphone permission check failed:", error);
+      voiceStatusText.textContent = "❌ Cannot access microphone";
+      return false;
+    }
   }
 
   function startListening() {
@@ -197,22 +247,30 @@ function initVoiceAssistant() {
       return;
     }
 
-    // Reset transcript display
-    voiceTranscript.innerHTML =
-      '<p class="transcript-placeholder" style="color: #667eea; font-style: italic;">Listening for your voice...</p>';
-    voiceStatusText.textContent = "🎤 Listening...";
-
-    // Change icon to microphone
-    circleIcon.className = "fas fa-microphone";
-
-    try {
-      recognition.start();
-    } catch (e) {
-      // Handle case where recognition is already listening
-      if (e.name !== "InvalidStateError") {
-        voiceStatusText.textContent = "❌ Microphone error";
+    // Check microphone permission first
+    checkMicrophonePermission().then((hasPermission) => {
+      if (!hasPermission) {
+        return;
       }
-    }
+
+      // Reset transcript display
+      voiceTranscript.innerHTML =
+        '<p class="transcript-placeholder" style="color: #667eea; font-style: italic;">Listening for your voice...</p>';
+      voiceStatusText.textContent = "🎤 Listening...";
+
+      // Change icon to microphone
+      circleIcon.className = "fas fa-microphone";
+
+      try {
+        recognition.start();
+      } catch (e) {
+        // Handle case where recognition is already listening
+        if (e.name !== "InvalidStateError") {
+          console.error("Speech recognition error:", e);
+          voiceStatusText.textContent = "❌ Microphone error - try again";
+        }
+      }
+    });
   }
 
   function stopListening() {
@@ -315,6 +373,9 @@ function initVoiceAssistant() {
     voiceAssistantElement.classList.add("hidden");
     chatFab.style.display = "";
   });
+
+  // Initialize speech recognition
+  initRecognition();
 
   // Initialize the preferred Indian female voice
   if (synthesis.getVoices().length > 0) {
