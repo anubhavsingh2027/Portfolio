@@ -42,6 +42,7 @@ function initModeSelection() {
 function initVoiceAssistant() {
   const voiceAssistantElement = document.getElementById("voiceAssistant");
   const micCircle = document.getElementById("micCircle");
+  const circleIcon = document.getElementById("circleIcon");
   const voiceClose = document.getElementById("voiceClose");
   const voiceStatusText = document.getElementById("voiceStatusText");
   const voiceTranscript = document.getElementById("voiceTranscript");
@@ -64,6 +65,41 @@ function initVoiceAssistant() {
   let recognition = null;
   let isListening = false;
   let isSpeaking = false;
+  let preferredVoice = null;
+
+  // ---------- 🎙️ Initialize Preferred Indian Female Voice ----------
+  function initPreferredVoice() {
+    const voices = synthesis.getVoices();
+
+    // Priority order for Indian female voices
+    const voicePriorities = [
+      // Google Cloud voices - highest priority
+      (v) => v.name === "Aditi" && v.lang.includes("hi"),
+      (v) => v.name === "Aditi",
+      // Indian English voices
+      (v) => v.lang === "en-IN" && !v.name.toLowerCase().includes("male"),
+      // Hindi voices
+      (v) => v.lang === "hi-IN" && !v.name.toLowerCase().includes("male"),
+      (v) => v.lang.startsWith("hi") && !v.name.toLowerCase().includes("male"),
+      // Fallback: Any female voice
+      (v) =>
+        v.name.toLowerCase().includes("female") ||
+        v.name.toLowerCase().includes("woman") ||
+        v.name.toLowerCase().includes("samantha") ||
+        v.name.toLowerCase().includes("victoria") ||
+        v.name.toLowerCase().includes("moira"),
+    ];
+
+    for (let priority of voicePriorities) {
+      preferredVoice = voices.find(priority);
+      if (preferredVoice) break;
+    }
+
+    // If still no voice, use first available
+    if (!preferredVoice && voices.length > 0) {
+      preferredVoice = voices[0];
+    }
+  }
 
   // ---------- 🎤 Speech Recognition Setup ----------
   function initRecognition() {
@@ -80,31 +116,103 @@ function initVoiceAssistant() {
       micPulse2.classList.add("active");
       isListening = true;
 
-      voiceStatusText.textContent = "Listening...";
+      voiceStatusText.textContent = "🎤 Listening...";
+      voiceTranscript.innerHTML =
+        '<p class="transcript-placeholder" style="color: #667eea; font-style: italic;">Speak now...</p>';
     };
 
     recognition.onresult = (event) => {
+      let interimTranscript = "";
       let finalTranscript = "";
 
+      // Process all results (interim and final)
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
+        const transcript = event.results[i][0].transcript;
+        const isFinal = event.results[i].isFinal;
+        const confidence = Math.round(event.results[i][0].confidence * 100);
+
+        if (isFinal) {
+          finalTranscript += transcript + " ";
+        } else {
+          interimTranscript += transcript;
         }
       }
 
+      // Display interim results in real-time
+      if (interimTranscript || finalTranscript) {
+        const displayText = (finalTranscript || interimTranscript).trim();
+        const confidenceIndicator = interimTranscript ? " 👂" : " ✓";
+        voiceTranscript.innerHTML = `<p><strong>${displayText}</strong>${confidenceIndicator}</p>`;
+      }
+
+      // When final result is detected
       if (finalTranscript.trim()) {
-        voiceTranscript.innerHTML = `<p>${finalTranscript}</p>`;
+        voiceStatusText.textContent = "✓ Understood! Processing...";
         handleCommand(finalTranscript.trim());
       }
     };
 
-    recognition.onerror = stopListening;
-    recognition.onend = stopListening;
+    recognition.onerror = (event) => {
+      let errorMessage = "Listening...";
+
+      switch (event.error) {
+        case "network":
+          errorMessage = "❌ Network error - check internet";
+          break;
+        case "no-speech":
+          errorMessage = "⚠️ No sound detected - try again";
+          break;
+        case "audio-capture":
+          errorMessage = "❌ Microphone not available";
+          break;
+        case "not-allowed":
+          errorMessage = "❌ Microphone permission denied";
+          break;
+        case "bad-grammar":
+          errorMessage = "❌ Speech recognition error";
+          break;
+        default:
+          errorMessage = "⚠️ Error - try again";
+      }
+
+      voiceStatusText.textContent = errorMessage;
+      stopListening();
+    };
+
+    recognition.onend = () => {
+      stopListening();
+    };
   }
 
   function startListening() {
-    if (!recognition) initRecognition();
-    recognition.start();
+    // Check if server is awake
+    if (!window.serverAwake) {
+      voiceStatusText.textContent = "⏳ Server waking up...";
+      voiceResponseContainer.classList.remove("hidden");
+      speakBack("Server is currently waking up. Please wait a few seconds.");
+      // Block listening for 3 seconds
+      setTimeout(() => {
+        voiceStatusText.textContent = "👂 Ready to listen";
+      }, 3000);
+      return;
+    }
+
+    // Reset transcript display
+    voiceTranscript.innerHTML =
+      '<p class="transcript-placeholder" style="color: #667eea; font-style: italic;">Listening for your voice...</p>';
+    voiceStatusText.textContent = "🎤 Listening...";
+
+    // Change icon to microphone
+    circleIcon.className = "fas fa-microphone";
+
+    try {
+      recognition.start();
+    } catch (e) {
+      // Handle case where recognition is already listening
+      if (e.name !== "InvalidStateError") {
+        voiceStatusText.textContent = "❌ Microphone error";
+      }
+    }
   }
 
   function stopListening() {
@@ -113,19 +221,41 @@ function initVoiceAssistant() {
     micCircle.classList.remove("active");
     micPulse.classList.remove("active");
     micPulse2.classList.remove("active");
-    voiceStatusText.textContent = "Tap to speak";
+    voiceStatusText.textContent = "👂 Ready to listen";
+
+    // Reset icon to microphone
+    circleIcon.className = "fas fa-microphone";
   }
 
-  // ---------- 🗣 Text-To-Speech ----------
+  // ---------- 🗣 Text-To-Speech with Fixed Sweet Indian Female Voice ----------
   function speak(text) {
     synthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
-    utter.rate = 0.9;
-    utter.pitch = 1.05;
-    utter.volume = 1;
+
+    // Apply the preferred Indian female voice (same for all users)
+    if (preferredVoice) {
+      utter.voice = preferredVoice;
+    }
+
+    // Optimize parameters for soft, sweet, pleasant, warm tone
+    utter.rate = 0.82; // Slower (0.82) - calm, natural, easy to follow, gentle pacing
+    utter.pitch = 1.4; // Higher pitch (1.4) - warm, sweet, friendly, approachable, pyaari feel
+    utter.volume = 1; // Full volume - studio-quality clarity, no distortion
 
     isSpeaking = true;
-    utter.onend = () => (isSpeaking = false);
+
+    // Add speaking animation and change icon to speaker
+    micCircle.classList.add("speaking");
+    circleIcon.className = "fas fa-volume-up";
+    voiceStatusText.textContent = "🎤 Speaking...";
+
+    utter.onend = () => {
+      isSpeaking = false;
+      // Remove speaking animation and reset icon
+      micCircle.classList.remove("speaking");
+      circleIcon.className = "fas fa-microphone";
+      voiceStatusText.textContent = "👂 Ready to listen";
+    };
 
     synthesis.speak(utter);
   }
@@ -186,5 +316,10 @@ function initVoiceAssistant() {
     chatFab.style.display = "";
   });
 
-  synthesis.onvoiceschanged = () => synthesis.getVoices();
+  // Initialize the preferred Indian female voice
+  if (synthesis.getVoices().length > 0) {
+    initPreferredVoice();
+  }
+  // Handle async voice loading for browsers that load voices asynchronously
+  synthesis.onvoiceschanged = initPreferredVoice;
 }

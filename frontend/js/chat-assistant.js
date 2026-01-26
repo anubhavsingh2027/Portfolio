@@ -7,7 +7,6 @@ export function initChatbot() {
   const chatMessages = document.getElementById("chatMessages");
   const chatInput = document.getElementById("chatInput");
   const sendMessage = document.getElementById("sendMessage");
-  const quickBtns = document.querySelectorAll(".quick-btn");
 
   if (chatbotClose) {
     chatbotClose.addEventListener("click", (e) => {
@@ -36,18 +35,25 @@ export function initChatbot() {
     chatInput.addEventListener("input", (e) => {});
   }
 
-  quickBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const question = btn.getAttribute("data-question");
-      addChatMessage(question, "user");
-      setTimeout(() => {
-        sendQuestionToAPI(question);
-      }, 500);
-    });
-  });
-
   function sendChatMessage() {
+    // Check if server is awake
+    if (!window.serverAwake) {
+      addChatMessage(
+        "⏳ Server is currently waking up. Please wait a few seconds...",
+        "bot",
+      );
+      // Disable input temporarily
+      if (chatInput) {
+        chatInput.disabled = true;
+        chatInput.placeholder = "Waiting for server...";
+        setTimeout(() => {
+          chatInput.disabled = false;
+          chatInput.placeholder = "Type a message...";
+        }, 3000);
+      }
+      return;
+    }
+
     if (!chatInput) return;
     const message = chatInput.value.trim();
     if (!message) return;
@@ -81,15 +87,12 @@ export function initChatbot() {
   function addChatMessage(message, sender) {
     if (!chatMessages) return;
     const messageDiv = document.createElement("div");
-    messageDiv.className = `chat-message ${sender}`;
-    const avatar = document.createElement("div");
-    avatar.className = "bot-avatar";
-    avatar.textContent = sender === "user" ? "👤" : "🤖";
+    messageDiv.className = `chat-message chat-message-${sender}`;
+
     const bubble = document.createElement("div");
-    bubble.className = "message-bubble";
+    bubble.className = `message-bubble message-bubble-${sender}`;
     bubble.innerHTML = message;
-    bubble.style.color = "black";
-    messageDiv.appendChild(avatar);
+
     messageDiv.appendChild(bubble);
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;

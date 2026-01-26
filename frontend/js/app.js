@@ -1,9 +1,13 @@
-import { chatAssistant } from "./service.js";
+import { wakeup, contact, speedResponse } from "./service.js";
 import { initChatbot } from "./chat-assistant.js";
 let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
 let projectsAnimation = null;
+let serverAwake = false;
+
+// Global wakeup indicator
+window.serverAwake = false;
 
 // Resume Modal Functions
 function openResumeModal() {
@@ -65,6 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize navbar
   gsap.set("nav.navbar", { opacity: 1 });
 
+  // Initialize wakeup first
+  initWakeup();
+
   // Initialize other features
   initLoader();
   initNavigation();
@@ -80,6 +87,38 @@ document.addEventListener("DOMContentLoaded", function () {
   initProjectCardAnimations();
   initChatbot();
 });
+
+// Initialize server wakeup
+async function initWakeup() {
+  const activeOnBadge = document.getElementById("activeon");
+  const statusText = activeOnBadge?.querySelector(".status-text");
+
+  try {
+    const response = await wakeup();
+    if (response && response.success) {
+      window.serverAwake = true;
+      serverAwake = true;
+      if (activeOnBadge) {
+        activeOnBadge.style.backgroundColor = "#7cf77c";
+        if (statusText) statusText.textContent = "Active";
+      }
+    } else {
+      window.serverAwake = false;
+      if (activeOnBadge) {
+        activeOnBadge.style.backgroundColor = "red";
+        if (statusText) statusText.textContent = "Server Loading...";
+      }
+    }
+  } catch (error) {
+    console.error("Wakeup error:", error);
+    window.serverAwake = false;
+    if (activeOnBadge) {
+      activeOnBadge.style.backgroundColor = "red";
+      if (statusText) statusText.textContent = "Server Loading...";
+    }
+  }
+}
+
 function initLoader() {
   const loader = document.getElementById("loader");
   window.addEventListener("load", () => {
@@ -97,46 +136,49 @@ function initNavigation() {
   const navbar = document.getElementById("navbar");
   const navToggle = document.getElementById("nav-toggle");
   const navMenu = document.getElementById("nav-menu");
+  const navItems = document.querySelectorAll(".nav-item");
   const navLinks = document.querySelectorAll(".nav-link");
   const ctaButton = document.querySelector(".cta-button");
   let isMenuOpen = false;
-  let lastScrollPos = 0;
 
-  // Mobile menu toggle with futuristic animations
+  // Helper function to close menu
+  function closeMenu() {
+    if (isMenuOpen) {
+      isMenuOpen = false;
+      navToggle?.classList.remove("active");
+      navMenu?.classList.remove("active");
+    }
+  }
+
+  // Helper function to open menu
+  function openMenu() {
+    if (!isMenuOpen) {
+      isMenuOpen = true;
+      navToggle?.classList.add("active");
+      navMenu?.classList.add("active");
+
+      // Staggered entrance animation for nav items
+      navItems.forEach((item, index) => {
+        gsap.fromTo(
+          item,
+          { opacity: 0, y: -20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            delay: index * 0.08,
+            ease: "power2.out",
+          },
+        );
+      });
+    }
+  }
+
+  // Toggle menu on button click
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      isMenuOpen = !isMenuOpen;
-      navToggle.classList.toggle("active", isMenuOpen);
-
-      if (isMenuOpen) {
-        navMenu.style.display = "flex";
-        navMenu.style.maxHeight = navMenu.scrollHeight + "px";
-        navMenu.style.opacity = "1";
-        navMenu.style.visibility = "visible";
-
-        // Staggered entrance animation
-        navLinks.forEach((link, index) => {
-          gsap.fromTo(
-            link,
-            { opacity: 0, y: -20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.4,
-              delay: index * 0.08,
-              ease: "power2.out",
-            },
-          );
-        });
-      } else {
-        navMenu.style.maxHeight = "0";
-        navMenu.style.opacity = "0";
-        setTimeout(() => {
-          navMenu.style.visibility = "hidden";
-          navMenu.style.display = "none";
-        }, 300);
-      }
+      isMenuOpen ? closeMenu() : openMenu();
     });
 
     // Close menu when clicking outside
@@ -146,14 +188,7 @@ function initNavigation() {
         !navMenu.contains(e.target) &&
         !navToggle.contains(e.target)
       ) {
-        isMenuOpen = false;
-        navToggle.classList.remove("active");
-        navMenu.style.maxHeight = "0";
-        navMenu.style.opacity = "0";
-        setTimeout(() => {
-          navMenu.style.visibility = "hidden";
-          navMenu.style.display = "none";
-        }, 300);
+        closeMenu();
       }
     });
   }
@@ -166,16 +201,7 @@ function initNavigation() {
 
       if (href && href.startsWith("#")) {
         // Close mobile menu
-        if (isMenuOpen) {
-          isMenuOpen = false;
-          navToggle.classList.remove("active");
-          navMenu.style.maxHeight = "0";
-          navMenu.style.opacity = "0";
-          setTimeout(() => {
-            navMenu.style.visibility = "hidden";
-            navMenu.style.display = "none";
-          }, 300);
-        }
+        closeMenu();
 
         const targetId = href.substring(1);
         const section = document.getElementById(targetId);
@@ -1078,114 +1104,31 @@ function initEnhancedContactForm() {
 
   async function handleContactForm(e) {
     e.preventDefault();
-    const customerEmail = document.getElementById("email").value;
-    const username = document.getElementById("username").value;
+    const name = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
-    const userSubject = document.getElementById("subject").value;
-    const userMessage = document.getElementById("message").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
     showNotification("sending....", "send");
-    const getCustomerMessage = () => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #333;">
-    <h2 style="color: #6d28d9; margin-bottom: 18px; font-size: 22px;">Hello ${username}, 👋</h2>
 
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      Thank you for reaching out — your message has been successfully received!
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      I truly appreciate your interest, and I'll get back to you as soon as possible.
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-bottom: 14px;">
-      While you wait, feel free to take a look at my work and online presence:
-    </p>
-
-    <ul style="padding-left: 18px; margin-bottom: 18px; font-size: 15px; line-height: 1.7;">
-      <li><a href="https://github.com/anubhavsingh2027" target="_blank" style="color: #6d28d9; text-decoration: none;">GitHub Projects</a></li>
-      <li><a href="https://www.linkedin.com/in/anubhav-singh-09b71829b/" target="_blank" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
-      <li><a href="https://anubhav.nav-code.com/" target="_blank" style="color: #6d28d9; text-decoration: none;">Portfolio Website</a></li>
-    </ul>
-
-    <p style="line-height: 1.7; font-size: 15px;">
-      Thanks again for getting in touch — talk soon!
-    </p>
-
-    <p style="line-height: 1.7; font-size: 15px; margin-top: 24px;">
-      Warm regards,<br/>
-      <strong style="color:#000;">Anubhav Singh</strong>
-    </p>
-
-    <div style="margin-top: 28px; padding: 12px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      ✉️ Sent from <strong>Anubhav Portfolio</strong>
-    </div>
-  </div>
-`;
-
-    const getHostMessage = () => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
-    <h2 style="color: #6d28d9; margin-bottom: 16px;">📩 New Customer Enquiry</h2>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Name:</strong> ${username}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Email:</strong> <a href="mailto:${customerEmail}" style="color: #6d28d9; text-decoration: none;">${customerEmail}</a>
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Phone:</strong> ${phone}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-bottom: 8px;">
-      <strong>Subject:</strong> ${userSubject}
-    </p>
-    <p style="line-height: 1.6; font-size: 15px; margin-top: 16px;"><strong>Message:</strong></p>
-    <blockquote style="border-left: 4px solid #6d28d9; margin: 12px 0; padding-left: 12px; color: #444; font-style: italic; background: #fafafa; border-radius: 4px;">
-      ${userMessage}
-    </blockquote>
-    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      🚀 Sent from Contact Form
-    </div>
-  </div>
-`;
-    async function sendEmail(payload) {
-      try {
-        const response = await fetch(
-          "https://mail-api-iuw1zw.fly.dev/sendMail",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          },
-        );
-        const data = await response.json();
-        if (data.success) {
-          setTimeout(() => {
-            const form = document.getElementById("contactForm");
-            form.reset();
-            const inputs = form.querySelectorAll(".input");
-            inputs.forEach((input) => {
-              input.parentNode.classList.remove("focus");
-            });
-            showNotification("Message sent successfully!", "success");
-
-            // Update message counter
-            updateMessageCounter();
-          }, 10);
-        }
-      } catch (err) {
-        showNotification("Error Occurred !", "error");
+    try {
+      const response = await contact({ name, email, phone, subject, message });
+      if (response) {
+        setTimeout(() => {
+          const form = document.getElementById("contactForm");
+          form.reset();
+          const inputs = form.querySelectorAll(".input");
+          inputs.forEach((input) => {
+            input.parentNode.classList.remove("focus");
+          });
+          showNotification("Message sent successfully!", "success");
+          updateMessageCounter();
+        }, 10);
       }
+    } catch (err) {
+      showNotification("Error Occurred!", "error");
     }
-    await sendEmail({
-      to: customerEmail,
-      subject: "🎉 Thank you for contacting us!",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getCustomerMessage(),
-    });
-    await sendEmail({
-      to: "anubhavsinghcustomer@gmail.com",
-      subject: "📩 New Customer Enquiry",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getHostMessage(),
-    });
   }
   document
     .getElementById("contactForm")
@@ -1193,54 +1136,22 @@ function initEnhancedContactForm() {
 
   async function handlefastmessage(e) {
     e.preventDefault();
-    const fastEmail = document.getElementById("fastemail").value;
+    const email = document.getElementById("fastemail").value;
+
     showNotification("sending....", "send");
-    const getCustomerMessage = (name) => `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; background: #ffffff; color: #333;">
-    <h1 style="color: #dc2626; margin-bottom: 20px; font-size: 22px; text-align: center;">
-      🚀 Fast Response Request
-    </h1>
-    <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-      You can reply directly via email:
-    </p>
-    <p style="text-align: center; margin-bottom: 20px;">
-      <a href="mailto:${fastEmail}" style="display: inline-block; padding: 12px 20px; background: #dc2626; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">
-        📧 Reply Now
-      </a>
-    </p>
-    <div style="margin-top: 25px; padding: 10px; background: #f9f9f9; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
-      ⚡ Fast-response system notification
-    </div>
-  </div>
-`;
-    async function sendEmail(payload) {
-      try {
-        const response = await fetch(
-          "https://mail-api-iuw1zw.fly.dev/sendMail",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          },
-        );
-        const data = await response.json();
-        if (data.success) {
-          setTimeout(() => {
-            const form = document.getElementById("newsletter-form");
-            form.reset();
-            showNotification("Message sent successfully!", "success");
-          }, 10);
-        }
-      } catch (err) {
-        showNotification("Error Occurred !", "error");
+
+    try {
+      const response = await speedResponse({ email });
+      if (response) {
+        setTimeout(() => {
+          const form = document.getElementById("newsletter-form");
+          form.reset();
+          showNotification("Message sent successfully!", "success");
+        }, 10);
       }
+    } catch (err) {
+      showNotification("Error Occurred!", "error");
     }
-    await sendEmail({
-      to: "anubhavsinghcustomer@gmail.com",
-      subject: "Urget Message ",
-      websiteName: "Anubhav singh Portfolio ",
-      message: getCustomerMessage(username),
-    });
   }
   document
     .getElementById("newsletter-form")

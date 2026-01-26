@@ -87,7 +87,7 @@ export const speedMail = async (req, res) => {
 
     const emailTemplate = createSpeedMailTemplate(email);
     const speedPayload = {
-      to: email,
+      to: "anubhavsinghcustomer@gmail.com",
       subject: "Urgent Message Fast Reply",
       websiteName: "Anubhav singh Portfolio ",
       message: emailTemplate,
