@@ -1666,3 +1666,18 @@ if (document.readyState === "loading") {
 } else {
   initializeSkillsSection();
 }
+
+// when user visit website it tell me
+
+window.addEventListener("load", () => {
+  fetch("https://app.chatting.nav-code.com/detector/newUser/portfolio", {
+    method: "GET"
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Thank YOU For Visit");
+    })
+    .catch(err => {
+      console.error("Thank YOU For Visiting My Portfolio ");
+    });
+});
