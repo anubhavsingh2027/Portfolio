@@ -18,21 +18,21 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 
 ## 🛠️ Built With
 
-| Category                   | Technologies                                                             |
-| -------------------------- | ------------------------------------------------------------------------ |
-| 🎨 **Frontend**            | HTML5, CSS3, JavaScript                                                  |
-| 🔌 **APIs**                | RESTful APIs for contact form and email functionality                    |
-| 🤖 **Interactive Feature** | Custom AI Chatbot for sharing personal, project, and contact information |
-| 🧰 **Version Control**     | Git & GitHub for code management                                         |
-| 📬 **Email Service**       | Custom Mail API using Node.js & Nodemailer                               |
+| Category                   | Technologies                                                      |
+| -------------------------- | ----------------------------------------------------------------- |
+| 🎨 **Frontend**            | HTML5, CSS3, JavaScript                                           |
+| 🔌 **Backend**             | Node.js, RESTful APIs for contact form and email functionality    |
+| 🤖 **Interactive Feature** | AI Chatbot for sharing personal, project, and contact information |
+| 🧰 **Version Control**     | Git & GitHub for code management                                  |
+| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                    |
 
 ---
 
 ## ✨ Features
 
 - 💎 **Fully Responsive Design** — Works perfectly on desktop, tablet, and mobile.
-- 🧠 **AI Chatbot Integration** — Interactive chatbot that shares my personal, professional, and project details.
-- 📬 **REST API–Powered Contact Form** — Integrated with my own mailing system for direct communication.
+- 🧠 **AI Chatbot** — Interactive chatbot that shares my personal, professional, and project details.
+- 📬 **Contact Form** — Integrated with custom email service for direct communication.
 - 🎨 **Modern UI/UX** — Smooth animations, elegant layout, and intuitive navigation.
 - 🧱 **Clean Code Architecture** — Organized and scalable for future enhancements.
 - ⚡ **Fast Performance** — Optimized loading speed and lightweight scripts.
@@ -46,18 +46,16 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 - HTML5
 - CSS3 (Animations, Transitions, Flexbox, Grid)
 - JavaScript (ES6+)
-- React (for dynamic components)
-
 ### 🌐 APIs & Backend Integration
 
 - RESTful API creation & consumption
-- Custom Mail API (Node.js + Nodemailer)
+- Custom Mail Service (Node.js + Nodemailer)
 
 ### 🧩 Tools & Platforms
 
 - Git & GitHub
 - VS Code
-- Netlify / Vercel / Custom Hosting (via anubhav.sbs domain)
+-  Vercel /Render  Custom Hosting (via anubhav.nav-code.com  Subdomain)
 
 ---
 
