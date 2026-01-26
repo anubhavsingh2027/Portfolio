@@ -1,5 +1,6 @@
 import { wakeup, contact, speedResponse } from "./service.js";
 import { initChatbot } from "./chat-assistant.js";
+
 let currentSection = "home";
 let isScrolling = false;
 let networkAnimation = null;
@@ -41,17 +42,6 @@ function closeResumeModal() {
   }
 }
 
-// Expose functions to global scope for onclick handlers
-window.openResumeModal = openResumeModal;
-window.closeResumeModal = closeResumeModal;
-
-// Close modal on Escape key
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeResumeModal();
-  }
-});
-
 // Scroll to Section Function
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
@@ -68,8 +58,18 @@ function scrollToSection(sectionId) {
   }
 }
 
-// Expose to global scope for onclick handlers
+// IMMEDIATELY expose functions to global scope for onclick handlers
+// This must happen synchronously before any other code
+window.openResumeModal = openResumeModal;
+window.closeResumeModal = closeResumeModal;
 window.scrollToSection = scrollToSection;
+
+// Close modal on Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeResumeModal();
+  }
+});
 
 // Initialize when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
