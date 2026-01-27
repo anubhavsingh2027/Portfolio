@@ -1,4 +1,4 @@
-const apiurl = "http://localhost:8000/portfolio/";
+const apiurl = "https://anubhav-portfolio-backend.onrender.com/portfolio/";
 
 export async function wakeup() {
   try {
