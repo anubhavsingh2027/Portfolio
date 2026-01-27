@@ -8,6 +8,25 @@ export function initChatbot() {
   const chatInput = document.getElementById("chatInput");
   const sendMessage = document.getElementById("sendMessage");
 
+  // Check access before opening assistant
+  if (chatFab) {
+    chatFab.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // If user has NOT filled the access form, show access modal
+      if (!window.assistantAccessGranted) {
+        window.openAssistantAccessModal();
+      } else {
+        // If user HAS filled the form, show mode selection modal
+        const modeModal = document.getElementById("modeModal");
+        if (modeModal) {
+          modeModal.classList.remove("hidden");
+          modeModal.classList.add("active");
+        }
+      }
+    });
+  }
+
   if (chatbotClose) {
     chatbotClose.addEventListener("click", (e) => {
       e.preventDefault();

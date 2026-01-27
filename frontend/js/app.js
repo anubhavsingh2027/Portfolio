@@ -1,5 +1,6 @@
 import { wakeup, contact, speedResponse } from "./service.js";
 import { initChatbot } from "./chat-assistant.js";
+import { resumeAccess, assistantAccess } from "./service.js";
 
 let currentSection = "home";
 let isScrolling = false;
@@ -10,7 +11,100 @@ let serverAwake = false;
 // Global wakeup indicator
 window.serverAwake = false;
 
-// Resume Modal Functions
+// Assistant access control flag
+window.assistantAccessGranted = false;
+
+// ============ RESUME ACCESS MODAL ============
+function openResumeAccessModal() {
+  const modal = document.getElementById("resumeAccessModal");
+  const overlay = document.getElementById("resumeAccessOverlay");
+  if (modal && overlay) {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    gsap.fromTo(
+      modal,
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" },
+    );
+    gsap.fromTo(
+      overlay,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.3, ease: "power2.out" },
+    );
+  }
+}
+
+function closeResumeAccessModal() {
+  const modal = document.getElementById("resumeAccessModal");
+  const overlay = document.getElementById("resumeAccessOverlay");
+  if (modal && overlay) {
+    gsap.to(modal, {
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.2,
+      ease: "power2.in",
+    });
+    gsap.to(overlay, {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      },
+    });
+  }
+}
+
+// ============ ASSISTANT ACCESS MODAL ============
+function openAssistantAccessModal() {
+  const modal = document.getElementById("assistantAccessModal");
+  const overlay = document.getElementById("assistantAccessOverlay");
+  if (modal && overlay) {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    gsap.fromTo(
+      modal,
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" },
+    );
+    gsap.fromTo(
+      overlay,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.3, ease: "power2.out" },
+    );
+  }
+}
+
+function closeAssistantAccessModal() {
+  const modal = document.getElementById("assistantAccessModal");
+  const overlay = document.getElementById("assistantAccessOverlay");
+  if (modal && overlay) {
+    gsap.to(modal, {
+      opacity: 0,
+      scale: 0.9,
+      duration: 0.2,
+      ease: "power2.in",
+    });
+    gsap.to(overlay, {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      },
+    });
+  }
+}
+
+// Resume Modal Functions (Download Resume Button)
 function openResumeModal() {
   const modal = document.getElementById("resumeModal");
   if (modal) {
@@ -63,6 +157,10 @@ function scrollToSection(sectionId) {
 window.openResumeModal = openResumeModal;
 window.closeResumeModal = closeResumeModal;
 window.scrollToSection = scrollToSection;
+window.openResumeAccessModal = openResumeAccessModal;
+window.closeResumeAccessModal = closeResumeAccessModal;
+window.openAssistantAccessModal = openAssistantAccessModal;
+window.closeAssistantAccessModal = closeAssistantAccessModal;
 
 // Close modal on Escape key
 document.addEventListener("keydown", (e) => {
@@ -93,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initProjectsCanvasAnimation();
   initProjectCardAnimations();
   initChatbot();
+  initAccessModals();
 });
 
 // Initialize server wakeup
@@ -1651,6 +1750,219 @@ scalePulseStyle.textContent = `
     100% { transform: scale(1); }
   }
 `;
+// ============ INITIALIZE ACCESS MODALS ============
+function initAccessModals() {
+  // Resume Access Modal
+  const resumeAccessForm = document.getElementById("resumeAccessForm");
+  const resumeAccessClose = document.getElementById("resumeAccessClose");
+  const resumeAccessOverlay = document.getElementById("resumeAccessOverlay");
+
+  // Assistant Access Modal
+  const assistantAccessForm = document.getElementById("assistantAccessForm");
+  const assistantAccessClose = document.getElementById("assistantAccessClose");
+  const assistantAccessOverlay = document.getElementById(
+    "assistantAccessOverlay",
+  );
+
+  // ====== FLOATING LABEL HANDLERS ======
+  function setupFloatingLabels(form) {
+    if (!form) return;
+
+    const inputs = form.querySelectorAll(".form-input");
+    inputs.forEach((input) => {
+      const label = input.nextElementSibling;
+      if (!label || !label.classList.contains("floating-label")) return;
+
+      // Animate label on input
+      input.addEventListener("input", () => {
+        if (input.value.trim() !== "") {
+          label.style.top = "0";
+          label.style.fontSize = "11px";
+          label.style.transform = "translateY(-8px)";
+        } else {
+          label.style.top = "12px";
+          label.style.fontSize = "14px";
+          label.style.transform = "translateY(0)";
+        }
+      });
+
+      // Animate label on focus
+      input.addEventListener("focus", () => {
+        label.style.top = "0";
+        label.style.fontSize = "11px";
+        label.style.color = "rgba(37, 99, 235, 0.8)";
+        label.style.transform = "translateY(-8px)";
+      });
+
+      // Animate label on blur
+      input.addEventListener("blur", () => {
+        if (input.value.trim() === "") {
+          label.style.top = "12px";
+          label.style.fontSize = "14px";
+          label.style.color = "#b0b0b0";
+          label.style.transform = "translateY(0)";
+        } else {
+          label.style.color = "rgba(255, 255, 255, 0.7)";
+        }
+      });
+    });
+  }
+
+  // ====== RESUME ACCESS HANDLERS ======
+  if (resumeAccessForm) {
+    setupFloatingLabels(resumeAccessForm);
+
+    resumeAccessForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("resumeName").value.trim();
+      const email = document.getElementById("resumeEmail").value.trim();
+      const role = document.getElementById("resumeRole").value.trim();
+
+      // Validation
+      if (!name || !email || !role) {
+        showAccessError("Please fill all fields");
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = resumeAccessForm.querySelector(".access-submit-btn");
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+      // Call API without waiting (fire-and-forget)
+      resumeAccess({ name, email, role });
+
+      // Reset form and show preview after short delay
+      setTimeout(() => {
+        resumeAccessForm.reset();
+        closeResumeAccessModal();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+
+        // Show resume preview modal
+        openResumeModal();
+
+        // Show success notification
+        showAccessSuccess("Resume access request sent! Check your email.");
+      }, 800);
+    });
+  }
+
+  if (resumeAccessClose) {
+    resumeAccessClose.addEventListener("click", closeResumeAccessModal);
+  }
+
+  if (resumeAccessOverlay) {
+    resumeAccessOverlay.addEventListener("click", closeResumeAccessModal);
+  }
+
+  // ====== ASSISTANT ACCESS HANDLERS ======
+  if (assistantAccessForm) {
+    setupFloatingLabels(assistantAccessForm);
+
+    assistantAccessForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("assistantName").value.trim();
+      const email = document.getElementById("assistantEmail").value.trim();
+
+      // Validation
+      if (!name || !email) {
+        showAccessError("Please fill all fields");
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = assistantAccessForm.querySelector(".access-submit-btn");
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Unlocking...';
+
+      // Call API without waiting (fire-and-forget)
+      assistantAccess({ name, email });
+
+      // Set access flag
+      window.assistantAccessGranted = true;
+
+      // Reset form and close modal after short delay, then show mode selection
+      setTimeout(() => {
+        assistantAccessForm.reset();
+        closeAssistantAccessModal();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+
+        // Show mode selection modal with .active class
+        const modeModal = document.getElementById("modeModal");
+        if (modeModal) {
+          modeModal.classList.remove("hidden");
+          modeModal.classList.add("active");
+        }
+
+        // Show success notification
+        showAccessSuccess("Assistant access granted! Choose your mode.");
+      }, 800);
+    });
+  }
+
+  if (assistantAccessClose) {
+    assistantAccessClose.addEventListener("click", closeAssistantAccessModal);
+  }
+
+  if (assistantAccessOverlay) {
+    assistantAccessOverlay.addEventListener("click", closeAssistantAccessModal);
+  }
+}
+
+// Helper function to show access errors
+function showAccessError(message) {
+  const notification = document.createElement("div");
+  notification.className = "access-notification error";
+  notification.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+  document.body.appendChild(notification);
+
+  gsap.fromTo(
+    notification,
+    { opacity: 0, y: -20 },
+    { opacity: 1, y: 0, duration: 0.3, delay: 0.1 },
+  );
+
+  setTimeout(() => {
+    gsap.to(notification, {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      onComplete: () => notification.remove(),
+    });
+  }, 4000);
+}
+
+// Helper function to show access success
+function showAccessSuccess(message) {
+  const notification = document.createElement("div");
+  notification.className = "access-notification success";
+  notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+  document.body.appendChild(notification);
+
+  gsap.fromTo(
+    notification,
+    { opacity: 0, y: -20 },
+    { opacity: 1, y: 0, duration: 0.3, delay: 0.1 },
+  );
+
+  setTimeout(() => {
+    gsap.to(notification, {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      onComplete: () => notification.remove(),
+    });
+  }, 4000);
+}
+
 document.head.appendChild(scalePulseStyle);
 
 // Helper function to check if element is in viewport

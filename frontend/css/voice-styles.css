@@ -16,7 +16,12 @@
   transition: all 0.3s ease;
 }
 
+.mode-selection-modal.hidden {
+  display: none;
+}
+
 .mode-selection-modal.active {
+  display: flex;
   opacity: 1;
   visibility: visible;
 }

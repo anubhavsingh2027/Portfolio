@@ -15,25 +15,29 @@ function initModeSelection() {
 
   if (!chatFab || !modeModal) return;
 
-  chatFab.addEventListener("click", (e) => {
-    e.preventDefault();
-    modeModal.classList.add("active");
-  });
+  // Don't open modal on FAB click - let chat-assistant.js handle access control
+  // Just handle mode selection button clicks
 
   chatModeBtn?.addEventListener("click", () => {
     modeModal.classList.remove("active");
+    modeModal.classList.add("hidden");
     chatbot?.classList.remove("hidden");
     chatFab.style.display = "none";
   });
 
   voiceModeBtn?.addEventListener("click", () => {
     modeModal.classList.remove("active");
+    modeModal.classList.add("hidden");
     voiceAssistant?.classList.remove("hidden");
     chatFab.style.display = "none";
   });
 
+  // Close modal on overlay click
   modeModal.addEventListener("click", (e) => {
-    if (e.target === modeModal) modeModal.classList.remove("active");
+    if (e.target === modeModal) {
+      modeModal.classList.remove("active");
+      modeModal.classList.add("hidden");
+    }
   });
 }
 

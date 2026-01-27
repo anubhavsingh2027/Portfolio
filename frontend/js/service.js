@@ -1,4 +1,4 @@
-const apiurl = "https://anubhav-portfolio-backend.onrender.com/portfolio/";
+const apiurl = "http://localhost:8000/portfolio/";
 
 export async function wakeup() {
   try {
@@ -74,6 +74,42 @@ export async function speedResponse(emailData) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(emailData),
+    });
+
+    const responseData = await response.json();
+
+    return responseData;
+  } catch (error) {
+    return { error: true, message: "Network Error " };
+  }
+}
+
+export async function assistantAccess(Data) {
+  try {
+    const response = await fetch(`${apiurl}assitantAccess`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Data),
+    });
+
+    const responseData = await response.json();
+
+    return responseData;
+  } catch (error) {
+    return { error: true, message: "Network Error " };
+  }
+}
+
+export async function resumeAccess(Data) {
+  try {
+    const response = await fetch(`${apiurl}resumeAccess`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Data),
     });
 
     const responseData = await response.json();

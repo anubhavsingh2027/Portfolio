@@ -958,7 +958,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease-out 0.6s both;
-  height: 80px;
+  min-height: 80px;
 }
 
 .btn-primary {
@@ -1321,12 +1321,17 @@ body {
   .hero-cta-buttons {
     flex-direction: column;
     width: 100%;
+    min-height: auto;
+    gap: 12px;
   }
 
   .btn-primary,
-  .btn-secondary {
+  .btn-secondary,
+  .btn-resume {
     width: 100%;
     justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
   }
 
   .hero-stats {
@@ -5110,6 +5115,327 @@ html {
 
   .chip-name {
     font-size: 0.75rem;
+  }
+}
+
+/* ============ ACCESS MODALS STYLES ============ */
+.access-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.access-modal-overlay.hidden {
+  display: none;
+}
+
+.access-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.access-modal.hidden {
+  display: none;
+}
+
+.access-modal-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.access-modal-content::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.access-modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.access-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 50%;
+  font-size: 40px;
+  color: white;
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.4);
+  animation: float 3s ease-in-out infinite;
+}
+
+.access-modal-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  background: linear-gradient(135deg, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.access-subtitle {
+  color: #b0b0b0;
+  font-size: 14px;
+  margin: 0;
+}
+
+.access-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.access-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(90deg);
+}
+
+.access-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Floating Label Wrapper */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Floating Label Styles */
+.floating-label {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: left center;
+}
+
+/* Input Field Styles */
+.form-input {
+  padding: 18px 16px 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  color: transparent;
+}
+
+/* Label Animation - When Input Has Focus */
+.form-input:focus + .floating-label {
+  top: 0;
+  font-size: 11px;
+  color: rgba(37, 99, 235, 0.8);
+  font-weight: 700;
+  transform: translateY(-8px);
+  text-transform: uppercase;
+}
+
+/* Label Animation - When Input Has Value */
+.form-input:not(:placeholder-shown) + .floating-label {
+  top: 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 700;
+  transform: translateY(-8px);
+  text-transform: uppercase;
+}
+
+.form-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+.form-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  display: none;
+}
+
+.form-error.show {
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+.access-submit-btn {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.access-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1d4ed8, #1540c5);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+}
+
+.access-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-consent {
+  font-size: 12px;
+  color: #808080;
+  text-align: center;
+  margin: 0;
+}
+
+/* Notification Styles */
+.access-notification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.access-notification.success {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+}
+
+.access-notification.error {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: white;
+  border: 1px solid rgba(220, 38, 38, 0.5);
+}
+
+.access-notification i {
+  font-size: 18px;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .access-modal-content {
+    padding: 30px 20px;
+  }
+
+  .access-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+  }
+
+  .access-modal-header h2 {
+    font-size: 24px;
+  }
+
+  .access-notification {
+    right: 15px;
+    left: 15px;
+    top: 15px;
   }
 }
 

@@ -106,7 +106,7 @@
                             Get In Touch
                             <i class="fas fa-envelope"></i>
                         </button>
-                        <button class="btn btn-resume btn-lg" onclick="openResumeModal()">
+                        <button class="btn btn-resume btn-lg" onclick="openResumeAccessModal()">
                             Download Resume
                             <i class="fas fa-download"></i>
                         </button>
@@ -1208,7 +1208,7 @@
     </div>
 
     <!--  Modal Selection -->
-    <div class="mode-selection-modal" id="modeModal">
+    <div class="mode-selection-modal hidden" id="modeModal">
         <div class="mode-selection-content">
             <h2>Choose Your Experience</h2>
             <p>Would you like to chat or use voice assistant mode?</p>
@@ -1280,6 +1280,85 @@
             </div>
         </div>
     </div>
+    <!-- Resume Access Modal -->
+    <div class="access-modal-overlay hidden" id="resumeAccessOverlay"></div>
+    <div class="access-modal hidden" id="resumeAccessModal">
+        <div class="access-modal-content">
+            <div class="access-modal-header">
+                <div class="access-icon-wrapper">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h2>Get Resume Access</h2>
+                <p class="access-subtitle">Share your details to download my resume</p>
+                <button class="access-close-btn" id="resumeAccessClose">&times;</button>
+            </div>
+            <form class="access-form" id="resumeAccessForm">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="resumeName" class="form-input" placeholder=" " required>
+                        <label for="resumeName" class="floating-label">Full Name</label>
+                    </div>
+                    <span class="form-error" id="resumeNameError"></span>
+                </div>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="email" id="resumeEmail" class="form-input" placeholder=" " required>
+                        <label for="resumeEmail" class="floating-label">Email Address</label>
+                    </div>
+                    <span class="form-error" id="resumeEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="resumeRole" class="form-input" placeholder=" " required>
+                        <label for="resumeRole" class="floating-label">Your Role/Position</label>
+                    </div>
+                    <span class="form-error" id="resumeRoleError"></span>
+                </div>
+                <button type="submit" class="access-submit-btn">
+                    <span class="btn-text">Request Resume Access</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <p class="form-consent">Your information will only be used for the resume access request.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assistant Access Modal -->
+    <div class="access-modal-overlay hidden" id="assistantAccessOverlay"></div>
+    <div class="access-modal hidden" id="assistantAccessModal">
+        <div class="access-modal-content">
+            <div class="access-modal-header">
+                <div class="access-icon-wrapper">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h2>Unlock AI Assistant</h2>
+                <p class="access-subtitle">Share your details to access the AI assistant</p>
+                <button class="access-close-btn" id="assistantAccessClose">&times;</button>
+            </div>
+            <form class="access-form" id="assistantAccessForm">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="assistantName" class="form-input" placeholder=" " required>
+                        <label for="assistantName" class="floating-label">Full Name</label>
+                    </div>
+                    <span class="form-error" id="assistantNameError"></span>
+                </div>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="email" id="assistantEmail" class="form-input" placeholder=" " required>
+                        <label for="assistantEmail" class="floating-label">Email Address</label>
+                    </div>
+                    <span class="form-error" id="assistantEmailError"></span>
+                </div>
+                <button type="submit" class="access-submit-btn">
+                    <span class="btn-text">Unlock Assistant</span>
+                    <i class="fas fa-unlock"></i>
+                </button>
+                <p class="form-consent">Your information will only be used for the assistant access request.</p>
+            </form>
+        </div>
+    </div>
+
     <script src="/js/app.js" type="module"></script><script type="module" src="/js/voice-assistant.js"></script>
 </body>
 </html>
