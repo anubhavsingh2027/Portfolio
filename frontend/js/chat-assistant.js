@@ -107,7 +107,6 @@ export function initChatbot() {
       const response = data.answer || data.response || "No response received";
       addChatMessage(response, "bot", false, true);
     } catch (error) {
-      console.error("Chat API Error:", error);
       addChatMessage("Sorry, something went wrong. Please try again.", "bot");
     }
   }
@@ -124,7 +123,7 @@ export function initChatbot() {
   function typewriterEffect(bubble, text, htmlText, speed = 30) {
     let index = 0;
     bubble.innerHTML = "";
-    
+
     function typeNextCharacter() {
       if (index < text.length) {
         // Build the current text up to this point
@@ -133,11 +132,14 @@ export function initChatbot() {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = htmlText;
         const fullHtmlText = tempDiv.innerHTML;
-        
+
         // Apply linkify and update display
-        const displayText = htmlText.substring(0, findHtmlLength(htmlText, currentPlainText.length));
+        const displayText = htmlText.substring(
+          0,
+          findHtmlLength(htmlText, currentPlainText.length),
+        );
         bubble.innerHTML = displayText;
-        
+
         index++;
         chatMessages.scrollTop = chatMessages.scrollHeight;
         setTimeout(typeNextCharacter, speed);
@@ -146,7 +148,7 @@ export function initChatbot() {
         bubble.innerHTML = htmlText;
       }
     }
-    
+
     typeNextCharacter();
   }
 
@@ -154,7 +156,7 @@ export function initChatbot() {
   function findHtmlLength(htmlText, plainTextLength) {
     const tempDiv = document.createElement("div");
     let count = 0;
-    
+
     for (let i = 0; i < htmlText.length; i++) {
       tempDiv.innerHTML = htmlText.substring(0, i + 1);
       const plainText = tempDiv.textContent || tempDiv.innerText || "";

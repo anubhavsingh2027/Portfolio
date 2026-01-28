@@ -216,7 +216,6 @@ async function initWakeup() {
       }
     }
   } catch (error) {
-    console.error("Wakeup error:", error);
     window.serverAwake = false;
     if (activeOnBadge) {
       activeOnBadge.style.backgroundColor = "red";
@@ -400,7 +399,7 @@ function initHeroVideoAnimations() {
   const videoElement = document.querySelector(".hero-video-element");
   if (videoElement) {
     videoElement.play().catch(function (error) {
-      console.log("Autoplay prevented:", error);
+      // Autoplay prevented
     });
   }
 
@@ -1252,7 +1251,7 @@ function initEnhancedContactForm() {
         setTimeout(() => {
           const form = document.getElementById("newsletter-form");
           form.reset();
-          showNotification("Message sent successfully!", "success");
+          showNotification("Thank you for request ", "success");
         }, 10);
       }
     } catch (err) {
@@ -1486,7 +1485,7 @@ function handleMissingElements() {
   requiredElements.forEach((id) => {
     const element = document.getElementById(id);
     if (!element) {
-      console.warn(`Element with id '${id}' not found`);
+      // Element not found
     }
   });
 }
@@ -1547,7 +1546,7 @@ function addSmoothTransitions() {
 }
 setTimeout(addSmoothTransitions, 2000);
 
-/* ===== PREMIUM FUTURISTIC SKILLS SECTION - ADVANCED INTERACTIONS ===== */
+/* ===== SKILLS SECTION  ===== */
 
 function initializeSkillsSection() {
   const skillsSection = document.querySelector(".skills-futuristic");
@@ -1699,7 +1698,6 @@ function initializeSkillsSection() {
         "scale-pulse 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)";
 
       // Optional: Add feedback (could integrate with toast notification)
-      console.log(`Hovered: ${skillName} (${skillLevel}%)`);
     });
   });
 
@@ -1846,7 +1844,7 @@ function initAccessModals() {
         openResumeModal();
 
         // Show success notification
-        showAccessSuccess("Resume access request sent! Check your email.");
+        showAccessSuccess("Access Grant");
       }, 800);
     });
   }
@@ -1903,7 +1901,7 @@ function initAccessModals() {
         }
 
         // Show success notification
-        showAccessSuccess("Assistant access granted! Choose your mode.");
+        showAccessSuccess("Assistant access granted Now  Choose your model");
       }, 800);
     });
   }
@@ -1994,9 +1992,9 @@ window.addEventListener("load", () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Thank YOU For Visit");
+      // User visited
     })
     .catch((err) => {
-      console.error("Thank YOU For Visiting My Portfolio ");
+      // Visit tracking failed
     });
 });

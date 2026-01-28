@@ -63,8 +63,7 @@ function initVoiceAssistant() {
     window.SpeechRecognition || window.webkitSpeechRecognition;
   const synthesis = window.speechSynthesis;
 
-  if (!SpeechRecognition)
-    return console.warn("Speech Recognition not supported.");
+  if (!SpeechRecognition) return;
 
   let recognition = null;
   let isListening = false;
@@ -194,17 +193,16 @@ function initVoiceAssistant() {
         .then((permission) => {
           permission.addEventListener("change", () => {
             if (permission.state === "denied" && isListening) {
-              console.warn("Microphone permission was revoked");
               stopListening();
               voiceStatusText.textContent = "❌ Microphone permission revoked";
             }
           });
         })
-        .catch((err) =>
-          console.warn("Permission API not fully supported:", err),
-        );
+        .catch((err) => {
+          // Permission API not fully supported
+        });
     } catch (err) {
-      console.warn("Permission monitoring not available:", err);
+      // Permission monitoring not available
     }
   }
 
@@ -232,7 +230,6 @@ function initVoiceAssistant() {
         return true;
       }
     } catch (error) {
-      console.error("Microphone permission check failed:", error);
       voiceStatusText.textContent = "❌ Cannot access microphone";
       return false;
     }
@@ -270,7 +267,6 @@ function initVoiceAssistant() {
       } catch (e) {
         // Handle case where recognition is already listening
         if (e.name !== "InvalidStateError") {
-          console.error("Speech recognition error:", e);
           voiceStatusText.textContent = "❌ Microphone error - try again";
         }
       }
@@ -347,7 +343,6 @@ function initVoiceAssistant() {
       voiceStatusText.textContent = "Tap to speak";
       speakBack(answer);
     } catch (error) {
-      console.error("API Error:", error);
       voiceStatusText.textContent = "Tap to speak";
       speakBack("Sorry, I couldn't reach the server. Please try again.");
     }
