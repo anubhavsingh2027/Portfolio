@@ -87,8 +87,10 @@ export function initChatbot() {
     try {
       // Show loading skeleton
       const loadingMessageId = addChatMessage("", "bot", true);
-      const loadingMessage = chatMessages.querySelector(`[data-message-id="${loadingMessageId}"]`);
-      
+      const loadingMessage = chatMessages.querySelector(
+        `[data-message-id="${loadingMessageId}"]`,
+      );
+
       const data = await chatAssistant({ question: userMessage });
 
       if (data.error) {
@@ -118,28 +120,61 @@ export function initChatbot() {
     });
   }
 
-  // Typewriter effect function
-  function typewriterEffect(bubble, text, speed = 30) {
+  // Typewriter effect function with HTML support
+  function typewriterEffect(bubble, text, htmlText, speed = 30) {
     let index = 0;
     bubble.innerHTML = "";
     
     function typeNextCharacter() {
       if (index < text.length) {
-        bubble.innerHTML += text.charAt(index);
+        // Build the current text up to this point
+        const currentPlainText = text.substring(0, index + 1);
+        // Find the corresponding portion of HTML text
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlText;
+        const fullHtmlText = tempDiv.innerHTML;
+        
+        // Apply linkify and update display
+        const displayText = htmlText.substring(0, findHtmlLength(htmlText, currentPlainText.length));
+        bubble.innerHTML = displayText;
+        
         index++;
         chatMessages.scrollTop = chatMessages.scrollHeight;
         setTimeout(typeNextCharacter, speed);
+      } else {
+        // When done, show the final version with all links active
+        bubble.innerHTML = htmlText;
       }
     }
     
     typeNextCharacter();
   }
 
-  function addChatMessage(message, sender, isLoading = false, isTypewriter = false) {
+  // Helper function to find the HTML length that corresponds to plain text length
+  function findHtmlLength(htmlText, plainTextLength) {
+    const tempDiv = document.createElement("div");
+    let count = 0;
+    
+    for (let i = 0; i < htmlText.length; i++) {
+      tempDiv.innerHTML = htmlText.substring(0, i + 1);
+      const plainText = tempDiv.textContent || tempDiv.innerText || "";
+      if (plainText.length >= plainTextLength) {
+        return i + 1;
+      }
+    }
+    return htmlText.length;
+  }
+
+  function addChatMessage(
+    message,
+    sender,
+    isLoading = false,
+    isTypewriter = false,
+  ) {
     if (!chatMessages) return;
     const messageDiv = document.createElement("div");
     messageDiv.className = `chat-message chat-message-${sender}`;
-    
+
     // Generate unique ID for loading messages
     const messageId = isLoading ? `loading-${Date.now()}` : null;
     if (messageId) {
@@ -148,26 +183,23 @@ export function initChatbot() {
 
     const bubble = document.createElement("div");
     bubble.className = `message-bubble message-bubble-${sender}`;
-    
+
     if (isLoading) {
       bubble.classList.add("loading-skeleton");
-      bubble.innerHTML = '<span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>';
+      bubble.innerHTML =
+        '<span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>';
     } else {
       // Convert links to clickable anchors
       const linkedText = linkifyText(message);
-      
+
       if (isTypewriter && sender === "bot") {
-        // For typewriter effect, we need to strip HTML and type plain text
+        // For typewriter effect, type out the plain text while showing links
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = linkedText;
         const plainText = tempDiv.textContent || tempDiv.innerText || "";
-        
-        typewriterEffect(bubble, plainText);
-        
-        // Add links after typewriter effect completes
-        setTimeout(() => {
-          bubble.innerHTML = linkedText;
-        }, plainText.length * 30);
+
+        // Start with empty bubble and type character by character with links
+        typewriterEffect(bubble, plainText, linkedText);
       } else {
         bubble.innerHTML = linkedText;
       }
@@ -176,7 +208,7 @@ export function initChatbot() {
     messageDiv.appendChild(bubble);
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
     return messageId;
   }
 }
