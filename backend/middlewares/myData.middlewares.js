@@ -8,7 +8,9 @@ export const myDB = `
     "experienceYears": 3+,
     "projectsCompleted": 20+,
     "problemsSolvedInLeetcode": 700+,
-    "availability": "Available for Projects"
+    "availability": "Available for Projects".
+    "DOB":05 june 2005,
+    "current age":20 years
   },
 
   "about": {
@@ -65,6 +67,7 @@ export const myDB = `
         "Custom user profiles",
         "Responsive UI"
       ],
+      "problem faced":conection stablish between user or websocket connection,
       "status": "100% Complete",
       "liveUrl": "https://real-time-chatting.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Real-Time-Chatting"
@@ -80,6 +83,7 @@ export const myDB = `
         "Fast response time",
         "Fully responsive"
       ],
+      "problem faced":pagination of history, making diffrent pages , adding diffrentlogic
       "status": "100% Complete",
       "liveUrl": "https://kashiroute.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/KashiRoute"
@@ -95,6 +99,7 @@ export const myDB = `
         "Report download",
         "Secure system"
       ],
+      "problem faced" : pagination and answer preparing
       "status": "100% Complete",
       "liveUrl": "https://phishshield.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Phishsheild"
@@ -110,6 +115,7 @@ export const myDB = `
         "Modern UI",
         "Optimized performance"
       ],
+      "problem faced": ui makes animation ,
       "status": "100% Complete",
       "liveUrl": "https://anubhav.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Portfolio"
@@ -125,6 +131,7 @@ export const myDB = `
         "Booking system",
         "Search & filters"
       ],
+      "problem faced":"booking system pages,implementing favourite logic"
       "status": "95% Complete",
       "liveUrl": "https://airbnb-clone-1u1y.onrender.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Airbnb-Clone"
@@ -140,6 +147,7 @@ export const myDB = `
         "Performance summary",
         "Minimal UI"
       ],
+      "problem faced": visulization of data of current data or real time data graph of typeing speed
       "status": "90% Complete",
       "liveUrl": "https://typing-master-eta.vercel.app/",
       "sourceCode": "https://github.com/anubhavsingh2027/TypingMaster"
@@ -173,9 +181,8 @@ export const myDB = `
     "phone": "7355026966",
     "whatsapp no":7355026966
     "email": "anubhavsingh2027@gmail.com",
-    "whatsapp ": "https://api.whatsapp.com/send?phone=7355026966",
-    "responseRate": "80%",
-    "averageResponseTime": "2 hours"
+    "whatsapp link ": "https://api.whatsapp.com/send?phone=7355026966",
+
   },
 
   "socialLinks": {
@@ -186,6 +193,11 @@ export const myDB = `
     "instagram": "https://instagram.com/anubhav_singh0506",
     "hackerrank": "https://www.hackerrank.com/profile/anubhavsingh2027"
   },
+  "more information"{
+  "best project is currently": real time chatting,
+  "more probject and current projrect": visit to github
+
+  }
 
 
 }

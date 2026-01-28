@@ -20,7 +20,10 @@ Rules you must strictly follow:
 - If the answer exists in the provided data, answer ONLY from that data.
 - If the answer is not present in the provided data, answer normally using your own knowledge.
 - Do NOT add extra statements like "this question is not related" or similar explanations.
-
+- Do Not use these word - provided data,based on data,based on provided data.
+- do not show any message like json data
+- make it properly answer releated question and do not distract related question
+- make the answer like doest feel i havw send data.
 You may include relevant links if they are useful.
 Keep the response short and clear (2–3 lines maximum).
 Write the answer in English with a neutral tone.
@@ -31,10 +34,6 @@ ${question}
 Provided Data:
 ${myDB}
 `;
-
-
-
-
 
     const answer = await groqcalling(query);
     const data = new chatAssist({
