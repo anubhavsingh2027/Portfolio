@@ -85,9 +85,14 @@ export function initChatbot() {
 
   async function sendQuestionToAPI(userMessage) {
     try {
+      // Show loading skeleton
+      const loadingMessageId = addChatMessage("", "bot", true);
+      const loadingMessage = chatMessages.querySelector(`[data-message-id="${loadingMessageId}"]`);
+      
       const data = await chatAssistant({ question: userMessage });
 
       if (data.error) {
+        loadingMessage.remove();
         addChatMessage(
           "Sorry, I couldn't reach the server. Please try again.",
           "bot",
@@ -95,25 +100,83 @@ export function initChatbot() {
         return;
       }
 
+      // Replace loading skeleton with actual response
+      loadingMessage.remove();
       const response = data.answer || data.response || "No response received";
-      addChatMessage(response, "bot");
+      addChatMessage(response, "bot", false, true);
     } catch (error) {
       console.error("Chat API Error:", error);
       addChatMessage("Sorry, something went wrong. Please try again.", "bot");
     }
   }
 
-  function addChatMessage(message, sender) {
+  // Function to convert URLs to clickable links
+  function linkifyText(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, (url) => {
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${url}</a>`;
+    });
+  }
+
+  // Typewriter effect function
+  function typewriterEffect(bubble, text, speed = 30) {
+    let index = 0;
+    bubble.innerHTML = "";
+    
+    function typeNextCharacter() {
+      if (index < text.length) {
+        bubble.innerHTML += text.charAt(index);
+        index++;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        setTimeout(typeNextCharacter, speed);
+      }
+    }
+    
+    typeNextCharacter();
+  }
+
+  function addChatMessage(message, sender, isLoading = false, isTypewriter = false) {
     if (!chatMessages) return;
     const messageDiv = document.createElement("div");
     messageDiv.className = `chat-message chat-message-${sender}`;
+    
+    // Generate unique ID for loading messages
+    const messageId = isLoading ? `loading-${Date.now()}` : null;
+    if (messageId) {
+      messageDiv.setAttribute("data-message-id", messageId);
+    }
 
     const bubble = document.createElement("div");
     bubble.className = `message-bubble message-bubble-${sender}`;
-    bubble.innerHTML = message;
+    
+    if (isLoading) {
+      bubble.classList.add("loading-skeleton");
+      bubble.innerHTML = '<span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>';
+    } else {
+      // Convert links to clickable anchors
+      const linkedText = linkifyText(message);
+      
+      if (isTypewriter && sender === "bot") {
+        // For typewriter effect, we need to strip HTML and type plain text
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = linkedText;
+        const plainText = tempDiv.textContent || tempDiv.innerText || "";
+        
+        typewriterEffect(bubble, plainText);
+        
+        // Add links after typewriter effect completes
+        setTimeout(() => {
+          bubble.innerHTML = linkedText;
+        }, plainText.length * 30);
+      } else {
+        bubble.innerHTML = linkedText;
+      }
+    }
 
     messageDiv.appendChild(bubble);
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    return messageId;
   }
 }
