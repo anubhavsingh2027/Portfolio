@@ -17,7 +17,7 @@ export const myDB = `
     "summary": "I am a passionate Full Stack Developer specializing in MERN stack and AI-driven applications. I focus on building scalable, clean, and high-performance web solutions that provide real-world value.",
     "highlights": [
       "15+ full-stack projects deployed",
-      "500+ coding problems solved",
+      "700+ coding problems solved",
       "5-Star C++ rating on HackerRank",
       "Strong frontend & backend expertise",
       "Focus on scalability, performance, and clean code"
@@ -34,11 +34,12 @@ export const myDB = `
       "university": "Dr. A.P.J. Abdul Kalam Technical University (AKTU)",
       "location": "Kanpur, Uttar Pradesh, India",
       "status": "Currently Pursuing",
-      "expectedCompletionYear": 2027
+      "expectedCompletionYear": 2027,
+      "lastSemesterCGPA": 7.8
     },
     {
       "degree": "Intermediate (12th)",
-      "stream": "Science",
+      "stream": "pcm",
       "board": "CBSE",
       "institution": "Varanasi Public School",
       "location": "Varanasi, Uttar Pradesh, India",
@@ -195,7 +196,8 @@ export const myDB = `
   },
   "more information"{
   "best project is currently": real time chatting,
-  "more probject and current projrect": visit to github
+  "more probject and current projrect": visit to github,
+  current project working on dsa visulization
 
   }
 
