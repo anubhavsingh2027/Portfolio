@@ -104,7 +104,7 @@ function closeAssistantAccessModal() {
   }
 }
 
-// Resume Modal Functions (Download Resume Button)
+// Download Resume Button
 function openResumeModal() {
   const modal = document.getElementById("resumeModal");
   if (modal) {
