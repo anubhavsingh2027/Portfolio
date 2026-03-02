@@ -167,11 +167,11 @@ function About() {
               <div className="relative w-80 h-96 md:w-96 md:h-[500px] rounded-3xl overflow-hidden image-reveal image-glow image-float">
                 <img
                   ref={imageRef}
-                  src="/src/assets/images/anubhavsingh.png"
+                  src="/assets/images/anubhavsingh.png"
                   alt="Anubhav Singh"
                   className="w-full h-full object-cover object-center shimmer relative z-10"
                   onError={(e) =>
-                    (e.target.src = "/src/assets/images/anubhavsingh.png")
+                    (e.target.src = "/assets/images/anubhavsingh.png")
                   }
                 />
 
