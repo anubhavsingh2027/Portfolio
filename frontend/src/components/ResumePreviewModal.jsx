@@ -1,7 +1,7 @@
 import React from "react";
 import { FaDownload, FaTimes } from "react-icons/fa";
 import Modal from "./Modal";
-import previewImage from "../assets/images/preview-resume.png";
+import previewImage from "/assets/images/preview-resume.png";
 
 function ResumePreviewModal({ isOpen, onClose, onDownload }) {
   return (
