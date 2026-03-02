@@ -56,7 +56,7 @@ function Navbar({ onResumeClick, onAssistantClick }) {
         <div className="flex items-center gap-3 flex-shrink-0">
           <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center shadow-neon-cyan">
             <img
-              src="/src/assets/images/nav-logo.png"
+              src="/assets/images/nav-logo.png"
               alt="Logo"
               className="w-10 h-10 object-contain"
               onError={(e) => (e.target.style.display = "none")}
