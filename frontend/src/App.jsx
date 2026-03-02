@@ -114,7 +114,7 @@ function App() {
             objectPosition: "center",
           }}
         >
-          <source src="/robot.mp4" type="video/mp4" />
+          <source src="/assets/video/robot.mp4" type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
 

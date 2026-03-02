@@ -1,7 +1,7 @@
 import React from "react";
 import { FaDownload, FaTimes } from "react-icons/fa";
 import Modal from "./Modal";
-import previewImage from "../assets/images/preview-resume.png";
+
 
 function ResumePreviewModal({ isOpen, onClose, onDownload }) {
   return (
@@ -15,7 +15,7 @@ function ResumePreviewModal({ isOpen, onClose, onDownload }) {
         {/* Preview Image */}
         <div className="flex justify-center">
           <img
-            src={previewImage}
+            src="/assets/images/preview-resume.png"
             alt="Resume Preview"
             className="max-w-full h-auto rounded-lg shadow-lg border border-neon-cyan/30"
           />
