@@ -60,7 +60,7 @@ function App() {
   const handleResumeDownload = () => {
     // Download the resume PDF
     window.location.href =
-      "/src/assets/pdf/Anubhav-singh-Resume -Software-Engineer.pdf";
+      "/assets/pdf/Anubhav-singh-Resume -Software-Engineer.pdf";
   };
 
   const handleAssistantClick = () => {

@@ -8,7 +8,7 @@ const projectsData = [
     title: "Real Time Chatting",
     description:
       "A real-time chat application that enables instant messaging using WebSockets. It features a clean, responsive interface with smooth live updates.",
-    image: "/src/assets/images/Real-time-chatting.png",
+    image: "/assets/images/Real-time-chatting.png",
     technologies: [
       "HTML5",
       "Tailwind CSS",
@@ -33,7 +33,7 @@ const projectsData = [
     title: "Kashi Route",
     description:
       "Kashi Route is a responsive booking website for Varanasi, built with HTML, Tailwind CSS, JS, and Node.js. It offers seamless tour and travel bookings.",
-    image: "/src/assets/images/kashiRoute.png",
+    image: "/assets/images/kashiRoute.png",
     technologies: [
       "HTML5",
       "CSS3",
@@ -59,7 +59,7 @@ const projectsData = [
     title: "PhishShield",
     description:
       "PhishShield is a phishing detection platform that uses URL-scanning APIs for real-time threat analysis. It features user login and authentication powered by MongoDB.",
-    image: "/src/assets/images/Phishshield.png",
+    image: "/assets/images/Phishshield.png",
     technologies: [
       "HTML5",
       "Tailwind CSS",
@@ -84,7 +84,7 @@ const projectsData = [
     title: "Portfolio Website",
     description:
       "Portfolio website featuring an AI chatbot for interactive assistance, fully functional REST API for sending emails, and a sleek, user-friendly interface.",
-    image: "/src/assets/images/websiteImg.png",
+    image: "/assets/images/websiteImg.png",
     technologies: ["HTML5", "CSS3", "JavaScript", "Canvas", "Rest Api"],
     liveLink: "https://anubhav.nav-code.com/",
     codeLink: "https://github.com/anubhavsingh2027/Portfolio",
@@ -102,7 +102,7 @@ const projectsData = [
     title: "Airbnb Clone",
     description:
       "Full-stack Airbnb clone with user and admin panels, featuring authentication, property listings with photos, search & filter, booking system, and reviews.",
-    image: "/src/assets/images/Airbnb.png",
+    image: "/assets/images/Airbnb.png",
     technologies: [
       "HTML5",
       "Tailwind CSS",
@@ -128,7 +128,7 @@ const projectsData = [
     title: "Type Master",
     description:
       "TypeMaster is a front-end typing test website designed to improve typing speed and accuracy. Users can track their performance with detailed results shown at the end.",
-    image: "/src/assets/images/typeMaster.png",
+    image: "/assets/images/typeMaster.png",
     technologies: ["HTML5", "CSS3", "JavaScript"],
     liveLink: "https://typing-master-eta.vercel.app/",
     codeLink: "https://github.com/anubhavsingh2027/TypingMaster",
