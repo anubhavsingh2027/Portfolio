@@ -12,7 +12,7 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 🎯 **Visit Now:** [https://anubhav.nav-code.com/](https://anubhav.nav-code.com/)
 
 🖼️ **Preview:**
-![Portfolio Preview](https://anubhav.nav-code.com/assets/image/websiteImg.png)
+![Portfolio Preview](https://anubhav.nav-code.com/assets/images/websiteImg.png)
 
 ---
 
@@ -46,6 +46,7 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 - HTML5
 - CSS3 (Animations, Transitions, Flexbox, Grid)
 - JavaScript (ES6+)
+
 ### 🌐 APIs & Backend Integration
 
 - RESTful API creation & consumption
@@ -55,7 +56,7 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 
 - Git & GitHub
 - VS Code
--  Vercel /Render  Custom Hosting (via anubhav.nav-code.com  Subdomain)
+- Vercel /Render Custom Hosting (via anubhav.nav-code.com Subdomain)
 
 ---
 
