@@ -170,6 +170,16 @@ const skillsData = {
         icon: "https://img.icons8.com/color/40/000000/npm.png",
         level: 82,
       },
+      {
+        name: "JWT",
+        icon: "https://img.icons8.com/color/40/000000/key.png",
+        level: 92,
+      },
+      {
+        name: "Session Auth",
+        icon: "https://img.icons8.com/color/40/000000/lock.png",
+        level: 90,
+      },
     ],
   },
   cloud: {
