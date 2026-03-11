@@ -153,7 +153,7 @@ const skillsData = {
       {
         name: "Docker",
         icon: "https://img.icons8.com/color/40/000000/docker.png",
-        level: 85,
+        level: 90,
       },
       {
         name: "Postman",
@@ -163,7 +163,7 @@ const skillsData = {
       {
         name: "VS Code",
         icon: "https://img.icons8.com/color/40/000000/visual-studio-code-2019.png",
-        level: 80,
+        level: 95,
       },
       {
         name: "npm/yarn",
