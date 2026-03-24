@@ -82,6 +82,16 @@ const skillsData = {
         icon: "https://img.icons8.com/color/40/000000/api-settings.png",
         level: 85,
       },
+      {
+        name: "Redis",
+        icon: "https://img.icons8.com/color/40/000000/redis.png",
+        level: 90,
+      },
+      {
+        name: "WebSocket",
+        icon: "https://img.icons8.com/color/40/000000/network.png",
+        level: 88,
+      },
     ],
   },
   database: {
@@ -215,6 +225,16 @@ const skillsData = {
         name: "MongoDB Atlas",
         icon: "https://img.icons8.com/color/40/000000/mongodb.png",
         level: 80,
+      },
+      {
+        name: "Redis Cache",
+        icon: "https://img.icons8.com/color/40/000000/redis.png",
+        level: 90,
+      },
+      {
+        name: "Load Balancing",
+        icon: "https://img.icons8.com/color/40/000000/server.png",
+        level: 85,
       },
     ],
   },

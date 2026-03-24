@@ -18,24 +18,26 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 
 ## 🛠️ Built With
 
-| Category                   | Technologies                                                      |
-| -------------------------- | ----------------------------------------------------------------- |
-| 🎨 **Frontend**            | HTML5, CSS3, JavaScript                                           |
-| 🔌 **Backend**             | Node.js, RESTful APIs for contact form and email functionality    |
-| 🤖 **Interactive Feature** | AI Chatbot for sharing personal, project, and contact information |
-| 🧰 **Version Control**     | Git & GitHub for code management                                  |
-| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                    |
+| Category                   | Technologies                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------- |
+| 🎨 **Frontend**            | React, Vite, Tailwind CSS, JavaScript, Responsive Design                            |
+| 🔌 **Backend**             | Node.js, Express, RESTful APIs, Redis Cache, Load Balancing, Scalable Architecture   |
+| 🤖 **Interactive Feature** | AI Chatbot (Voice & Text), WebSocket for Real-Time Updates, AI Integration           |
+| 🧰 **Version Control**     | Git & GitHub for code management                                                     |
+| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                                       |
+| ☁️ **Cloud Deployment**    | Vercel (Frontend), Render/Custom Cloud Hosting (Backend), Full Cloud Infrastructure  |
 
 ---
 
 ## ✨ Features
 
-- 💎 **Fully Responsive Design** — Works perfectly on desktop, tablet, and mobile.
-- 🧠 **AI Chatbot** — Interactive chatbot that shares my personal, professional, and project details.
+- 💎 **Fully Responsive Design** — Works perfectly on desktop, tablet, and mobile with modern UI.
+- 🧠 **AI Chatbot** — Voice & Text interactive chatbot powered by Groq API for real-time responses.
 - 📬 **Contact Form** — Integrated with custom email service for direct communication.
-- 🎨 **Modern UI/UX** — Smooth animations, elegant layout, and intuitive navigation.
-- 🧱 **Clean Code Architecture** — Organized and scalable for future enhancements.
-- ⚡ **Fast Performance** — Optimized loading speed and lightweight scripts.
+- 🎨 **Modern UI/UX** — Smooth animations, elegant layout, light/dark mode toggle, and intuitive navigation.
+- 🧱 **Scalable Architecture** — Redis caching, load balancing, and optimized database queries for production.
+- ⚡ **Fast Performance** — Optimized loading, real-time WebSocket updates, and efficient API responses.
+- ☁️ **Cloud Deployment** — All projects deployed on cloud infrastructure with continuous availability.
 
 ---
 
@@ -56,7 +58,9 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 
 - Git & GitHub
 - VS Code
-- Vercel /Render Custom Hosting (via anubhav.nav-code.com Subdomain)
+- **Cloud Platforms:** Vercel (Frontend), Render, Custom Cloud Hosting
+- **Backend Tools:** Redis, Load Balancers, MongoDB Atlas
+- **Real-Time:** WebSockets, AI APIs (Groq, OpenAI)
 
 ---
 
@@ -75,9 +79,13 @@ Copy code
 
 ---
 
-## 🔮 Future Improvements
+## 🔮 Recent Improvements
 
-- 🌗 **Dark/Light Mode Toggle** for better accessibility
+- ✅ **Enhanced Frontend** — Modern React-based UI with Tailwind CSS, animations, and responsive design
+- ✅ **Scalable Backend** — Redis caching, load balancing, and optimized data handling
+- ✅ **Real-Time Features** — WebSockets for instant messaging and live updates
+- ✅ **Cloud Deployment** — All projects now running on cloud infrastructure
+- ✅ **Dark/Light Mode** — Full theme toggle support for accessibility
 
 ---
 

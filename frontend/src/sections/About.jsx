@@ -70,7 +70,7 @@ function About() {
             </span>
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-            Passionate Full Stack Developer | MERN Specialist | Problem Solver
+            Full Stack Developer | MERN Specialist | Cloud Architect | Scalable Backend Expert
           </p>
           <div className="h-1.5 w-24 bg-gradient-to-r from-neon-cyan to-neon-purple mx-auto mt-6 rounded-full" />
         </div>
@@ -107,11 +107,7 @@ function About() {
                   </div>
                 </div>
                 <p className="text-black text-lg leading-relaxed">
-                  I have a strong foundation in HTML, CSS, JavaScript, and
-                  frameworks like React and Node.js. I'm passionate about clean
-                  code, scalability, and building projects that not only
-                  function well but also provide value to users. Every project
-                  is an opportunity to learn and grow.
+                  I have a strong foundation in HTML, CSS, JavaScript, React, Node.js, Express, and MongoDB. Recently, I've expanded my expertise to include <span className="font-semibold text-white">Redis caching, load balancing, and production-grade scalable architectures</span>. I'm passionate about clean code, performance optimization, and building cloud-native applications that scale seamlessly.
                 </p>
               </div>
             </div>
@@ -125,10 +121,7 @@ function About() {
                   </div>
                 </div>
                 <p className="text-black text-lg leading-relaxed">
-                  My journey in software development has led me to work with
-                  amazing teams where I've honed my skills in both frontend and
-                  backend technologies. I'm constantly exploring new
-                  technologies and methodologies to deliver better solutions.
+                  My journey has evolved into mastering <span className="font-semibold text-white">cloud deployment (Vercel, Render, Custom Hosting)</span>, backend scalability with <span className="font-semibold text-white">Redis and load balancing</span>, and real-time features using WebSockets. All my projects are now cloud-deployed with production-ready infrastructure, ensuring reliability and performance at scale.
                 </p>
               </div>
             </div>
