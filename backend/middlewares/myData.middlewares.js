@@ -5,12 +5,12 @@ export const myDB = `
     "title": "Full Stack Developer | MERN Specialist | AI Enthusiast",
     "tagline": "Crafting innovative digital solutions with cutting-edge technology and creative design",
     "location": "Varanasi, India",
-    "experienceYears": 3+,
-    "projectsCompleted": 20+,
-    "problemsSolvedInLeetcode": 700+,
-    "availability": "Available for Projects".
-    "DOB":05 june 2005,
-    "current age":20 years
+    "experienceYears": 3,
+    "projectsCompleted": 20,
+    "problemsSolvedInLeetcode": 700,
+    "availability": "Available for Projects",
+    "DOB": "05 June 2005",
+    "currentAge": "20 years"
   },
 
   "about": {
@@ -21,8 +21,7 @@ export const myDB = `
       "5-Star C++ rating on HackerRank",
       "Strong frontend & backend expertise",
       "Focus on scalability, performance, and clean code"
-    ],
-
+    ]
   },
 
   "education": [
@@ -59,80 +58,85 @@ export const myDB = `
   "projects": [
     {
       "name": "Real Time Chatting",
-      "category": ["Full Stack", "Real-Time"],
-      "description": "A real-time chat application using WebSockets with instant messaging and live updates.",
-      "techStack": ["HTML", "Tailwind CSS", "JavaScript", "MongoDB", "Express", "WebSocket"],
+      "category": ["Full Stack", "Real-Time", "MERN"],
+      "description": "A real-time chat application using WebSockets with instant messaging and live updates. Features Redis caching for optimized performance.",
+      "techStack": ["React", "JavaScript", "MongoDB", "Express", "WebSocket", "Redis", "Node.js"],
       "features": [
         "Real-time messaging",
-        "Chat history",
+        "Redis-cached chat history",
         "Custom user profiles",
-        "Responsive UI"
+        "Responsive UI",
+        "Scalable backend"
       ],
-      "problem faced":conection stablish between user or websocket connection,
+      "problemFaced": "Connection establishment between users via WebSocket, handling concurrent connections",
       "status": "100% Complete",
       "liveUrl": "https://real-time-chatting.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Real-Time-Chatting"
     },
     {
-      "name": "Kashi Route",
-      "category": ["Full Stack", "Booking Platform"],
-      "description": "A responsive travel and tour booking website for Varanasi.",
-      "techStack": ["HTML", "Tailwind CSS", "JavaScript", "Node.js", "MongoDB", "Express"],
-      "features": [
-        "Service booking",
-        "Multiple services",
-        "Fast response time",
-        "Fully responsive"
-      ],
-      "problem faced":pagination of history, making diffrent pages , adding diffrentlogic
-      "status": "100% Complete",
-      "liveUrl": "https://kashiroute.nav-code.com/",
-      "sourceCode": "https://github.com/anubhavsingh2027/KashiRoute"
-    },
-    {
       "name": "PhishShield",
-      "category": ["Cyber Security", "Full Stack"],
-      "description": "A phishing detection platform using real-time URL scanning APIs.",
-      "techStack": ["HTML", "Tailwind CSS", "JavaScript", "Node.js", "MongoDB", "Express"],
+      "category": ["Cyber Security", "MERN"],
+      "description": "A phishing detection platform using real-time URL scanning APIs for threat analysis.",
+      "techStack": ["React", "JavaScript", "Node.js", "MongoDB", "Express"],
       "features": [
         "Real-time phishing detection",
         "User authentication",
         "Report download",
-        "Secure system"
+        "Secure system",
+        "Advanced threat analysis"
       ],
-      "problem faced" : pagination and answer preparing
+      "problemFaced": "Pagination implementation, answer preparation and validation",
       "status": "100% Complete",
       "liveUrl": "https://phishshield.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Phishsheild"
     },
     {
-      "name": "Portfolio Website",
-      "category": ["Frontend", "Personal Brand"],
-      "description": "Personal portfolio with AI assistant and email REST API integration.",
-      "techStack": ["HTML5", "CSS3", "JavaScript", "Canvas", "REST API"],
+      "name": "Kashi Route",
+      "category": ["Full Stack", "Booking Platform"],
+      "description": "A responsive travel and tour booking website for Varanasi with seamless service bookings.",
+      "techStack": ["React", "Tailwind CSS", "JavaScript", "Node.js", "MongoDB", "Express"],
       "features": [
-        "AI chatbot",
-        "Email integration",
-        "Modern UI",
-        "Optimized performance"
+        "Service booking",
+        "Multiple services",
+        "Fast response time",
+        "Fully responsive",
+        "Pagination system"
       ],
-      "problem faced": ui makes animation ,
+      "problemFaced": "Pagination of history, creating different pages, implementing different routing logic",
+      "status": "100% Complete",
+      "liveUrl": "https://kashiroute.nav-code.com/",
+      "sourceCode": "https://github.com/anubhavsingh2027/KashiRoute"
+    },
+    {
+      "name": "Advanced Portfolio",
+      "category": ["Full Stack", "MERN", "AI-Powered"],
+      "description": "Personal portfolio with AI-powered voice & text chatbot, REST API email service, and modern animated UI.",
+      "techStack": ["React", "Tailwind CSS", "JavaScript", "Node.js", "Express", "MongoDB", "AI Chatbot"],
+      "features": [
+        "AI voice & text chatbot",
+        "Email integration via REST API",
+        "Modern UI with animations",
+        "Light/Dark mode",
+        "Performance optimized"
+      ],
+      "problemFaced": "UI animations and chatbot integration, voice recognition handling",
       "status": "100% Complete",
       "liveUrl": "https://anubhav.nav-code.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Portfolio"
     },
     {
       "name": "Airbnb Clone",
-      "category": ["Full Stack", "MERN"],
-      "description": "A full-stack Airbnb clone with authentication, booking, reviews, and admin panel.",
-      "techStack": ["HTML", "Tailwind CSS", "JavaScript", "Node.js", "MongoDB", "Express"],
+      "category": ["Full Stack"],
+      "description": "A full-stack Airbnb clone with authentication, property listings, booking system, reviews, and admin panel.",
+      "techStack": ["HTML5", "CSS3", "JavaScript", "Node.js", "MongoDB", "Express"],
       "features": [
         "User & admin panels",
         "Property listing",
         "Booking system",
-        "Search & filters"
+        "Search & filters",
+        "Review system"
       ],
-      "problem faced":"booking system pages,implementing favourite logic"
+      "problemFaced": "Booking system workflow, implementing favourite/wishlist logic",
       "status": "95% Complete",
       "liveUrl": "https://airbnb-clone-1u1y.onrender.com/",
       "sourceCode": "https://github.com/anubhavsingh2027/Airbnb-Clone"
@@ -146,9 +150,10 @@ export const myDB = `
         "Live WPM & accuracy",
         "Error tracking",
         "Performance summary",
-        "Minimal UI"
+        "Minimal UI",
+        "Results analytics"
       ],
-      "problem faced": visulization of data of current data or real time data graph of typeing speed
+      "problemFaced": "Data visualization of typing speed graphs in real-time",
       "status": "90% Complete",
       "liveUrl": "https://typing-master-eta.vercel.app/",
       "sourceCode": "https://github.com/anubhavsingh2027/TypingMaster"
@@ -180,10 +185,9 @@ export const myDB = `
 
   "contact": {
     "phone": "7355026966",
-    "whatsapp no":7355026966
+    "whatsappNo": "7355026966",
     "email": "anubhavsingh2027@gmail.com",
-    "whatsapp link ": "https://api.whatsapp.com/send?phone=7355026966",
-
+    "whatsappLink": "https://api.whatsapp.com/send?phone=7355026966"
   },
 
   "socialLinks": {
@@ -194,14 +198,11 @@ export const myDB = `
     "instagram": "https://instagram.com/anubhav_singh0506",
     "hackerrank": "https://www.hackerrank.com/profile/anubhavsingh2027"
   },
-  "more information"{
-  "best project is currently": real time chatting,
-  "more probject and current projrect": visit to github,
-  current project working on dsa visulization
-
+  "moreInformation": {
+    "bestProjectCurrently": "Real Time Chatting",
+    "moreProjectsLocation": "Visit GitHub for more projects",
+    "currentProjectWorking": "DSA Visualization"
   }
-
-
 }
 
 `;

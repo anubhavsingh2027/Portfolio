@@ -243,7 +243,6 @@ button,
   align-items: center;
   justify-content: center;
   gap: 80px;
-  padding: 0 60px;
   overflow: visible;
   z-index: 1;
 }
@@ -253,11 +252,11 @@ button,
   #hero {
     flex-direction: column;
     gap: 30px;
-    padding: 20px 20px;
     justify-content: flex-start;
-    padding-top: 80px;
     min-height: auto;
     overflow: visible;
+
+    padding-bottom: 200px;
   }
 }
 
@@ -265,13 +264,12 @@ button,
   #hero {
     flex-direction: column;
     gap: 20px;
-    padding: 20px 16px 40px 16px;
     justify-content: flex-start;
     align-items: stretch;
     min-height: auto;
-    padding-top: 60px;
-    padding-bottom: 80px;
+    padding-bottom: 200px;
     overflow: visible;
+    padding-top: 60px;
   }
 }
 
@@ -534,7 +532,10 @@ button,
 
 @media (max-width: 768px) {
   .cube-ui {
-    margin-top: 20px;
+    margin-top: 110px;
+  }
+  #rubiksCube3DContainer {
+    height: 44vh;
   }
 }
 

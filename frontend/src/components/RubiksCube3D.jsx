@@ -9,7 +9,7 @@ function RubiksCube3D() {
   return (
     <div
       id="rubiksCube3DContainer"
-      className="relative w-full min-h-screen overflow-hidden"
+      className="relative w-full  overflow-hidden"
     >
       {/* Particles Canvas */}
       <canvas id="bg-canvas"></canvas>

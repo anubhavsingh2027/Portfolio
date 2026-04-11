@@ -7,17 +7,16 @@ const projectsData = [
     id: 1,
     title: "Real Time Chatting",
     description:
-      "A scalable real-time chat application with modern React frontend (Tailwind CSS, animations) and production-grade backend (Redis caching, load balancing). Enables instant messaging with WebSockets for seamless live updates. Cloud deployed with optimized performance.",
+      "A scalable real-time chat application with modern React frontend (animations) and production-grade backend (Redis caching, load balancing). Enables instant messaging with WebSockets for seamless live updates. Cloud deployed with optimized performance.",
     image: "/assets/images/Real-time-chatting.png",
     technologies: [
       "React",
-      "Tailwind CSS",
       "JavaScript",
       "MongoDB",
       "Express",
       "WebSocket",
       "Redis",
-      "Cloud Deployment"
+      "Cloud Deployment",
     ],
     liveLink: "https://real-time-chatting.nav-code.com/",
     codeLink: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
@@ -27,89 +26,42 @@ const projectsData = [
       "Redis-Cached Chat History",
       "Customizable User Profiles",
       "Scalable Backend Architecture",
-      "Cloud Deployment Ready"
+      "Cloud Deployment Ready",
     ],
     completion: 100,
   },
   {
     id: 2,
-    title: "Kashi Route",
-    description:
-      "A responsive booking website for Varanasi tours with seamless tour and travel bookings. Built with modern frontend stack and scalable backend. Cloud deployed with fast response times and optimized database queries.",
-    image: "/assets/images/kashiRoute.png",
-    technologies: [
-      "HTML5",
-      "Tailwind CSS",
-      "JavaScript",
-      "Node.js",
-      "MongoDB",
-      "Express",
-      "Cloud Hosting"
-    ],
-    liveLink: "https://kashiroute.nav-code.com/",
-    codeLink: "https://github.com/anubhavsingh2027/KashiRoute",
-    category: "mern",
-    features: [
-      "Seamless Booking Service",
-      "Fast Response Times",
-      "Complete Service Information",
-      "Multiple Tour Packages",
-      "Cloud Deployed"
-    ],
-    completion: 100,
-  },
-  {
-    id: 3,
     title: "PhishShield",
     description:
       "A phishing detection platform using advanced URL-scanning APIs for real-time threat analysis. Features secure user authentication and cloud deployment with reliable security infrastructure. Provides comprehensive security reports and threat analysis.",
     image: "/assets/images/Phishshield.png",
     technologies: [
-      "HTML5",
-      "Tailwind CSS",
+      "React",
       "JavaScript",
       "Node.js",
       "MongoDB",
       "Express",
-      "Cloud Security"
+      "Cloud Security",
     ],
     liveLink: "https://phishshield.nav-code.com/",
     codeLink: "https://github.com/anubhavsingh2027/Phishsheild",
-    category: "fullStack",
+    category: "mern",
     features: [
       "Real-time Threat Detection",
       "Secure Authentication",
       "URL Scanning APIs",
       "Security Reports",
-      "Cloud Deployed"
-    ],
-    completion: 100,
-  },
-  {
-    id: 4,
-    title: "Advanced Portfolio",
-    description: "Advanced portfolio featuring AI-powered voice & text chatbot, REST API email service, and modern animated UI. Cloud deployed with light/dark mode support, smooth animations, and fully responsive design for all devices.",
-    image: "/assets/images/websiteImg.png",
-    technologies: ["React", "Tailwind CSS", "JavaScript", "REST API", "AI Chatbot", "Cloud Deployment"],
-    liveLink: "https://anubhav.nav-code.com/",
-    codeLink: "https://github.com/anubhavsingh2027/Portfolio",
-    category: "frontend",
-    features: [
-      "AI Voice & Text Chatbot",
-      "Interactive Animations",
-      "Light/Dark Mode",
       "Cloud Deployed",
-      "Performance Optimized",
-      "Modern UI",
-      "Performance Optimized",
     ],
     completion: 100,
   },
   {
-    id: 5,
-    title: "Airbnb Clone",
-    description: "Secure authentication, property listings with photos, advanced search & filter, complete booking system with reviews. Cloud deployed with scalable backend and optimized performance.",
-    image: "/assets/images/Airbnb.png",
+    id: 3,
+    title: "Kashi Route",
+    description:
+      "A responsive booking website for Varanasi tours with seamless tour and travel bookings. Built with modern frontend stack and scalable backend. Cloud deployed with fast response times and optimized database queries.",
+    image: "/assets/images/kashiRoute.png",
     technologies: [
       "React",
       "Tailwind CSS",
@@ -117,7 +69,64 @@ const projectsData = [
       "Node.js",
       "MongoDB",
       "Express",
-      "Cloud Deployment"
+      "Cloud Hosting",
+    ],
+    liveLink: "https://kashiroute.nav-code.com/",
+    codeLink: "https://github.com/anubhavsingh2027/KashiRoute",
+    category: "fullStack",
+    features: [
+      "Seamless Booking Service",
+      "Fast Response Times",
+      "Complete Service Information",
+      "Multiple Tour Packages",
+      "Cloud Deployed",
+    ],
+    completion: 100,
+  },
+  {
+    id: 4,
+    title: "Advanced Portfolio",
+    description:
+      "Advanced portfolio featuring AI-powered voice & text chatbot, REST API email service, and modern animated UI. Cloud deployed with light/dark mode support, smooth animations, and fully responsive design for all devices.",
+    image: "/assets/images/websiteImg.png",
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "AI Chatbot",
+      "Voice & Chat",
+      "Cloud Deployment",
+    ],
+    liveLink: "https://anubhav.nav-code.com/",
+    codeLink: "https://github.com/anubhavsingh2027/Portfolio",
+    category: "mern",
+    features: [
+      "AI Voice & Text Chatbot",
+      "Interactive Animations",
+      "Light/Dark Mode",
+      "Cloud Deployed",
+      "Performance Optimized",
+      "Modern UI",
+      "Backend API Integration",
+    ],
+    completion: 100,
+  },
+  {
+    id: 5,
+    title: "Airbnb Clone",
+    description:
+      "Secure authentication, property listings with photos, advanced search & filter, complete booking system with reviews. Cloud deployed with scalable backend and optimized performance.",
+    image: "/assets/images/Airbnb.png",
+    technologies: [
+      "HTML5",
+      "JavaScript",
+      "Node.js",
+      "MongoDB",
+      "Express",
+      "Cloud Deployment",
     ],
     liveLink: "https://airbnb-clone-1u1y.onrender.com/",
     codeLink: "https://github.com/anubhavsingh2027/Airbnb-Clone",
@@ -127,14 +136,15 @@ const projectsData = [
       "Property Listings",
       "Advanced Search",
       "Booking System",
-      "Cloud Deployed"
+      "Cloud Deployed",
     ],
     completion: 95,
   },
   {
     id: 6,
     title: "TypingMaster",
-    description: "A typing test platform designed to improve typing speed and accuracy with real-time performance tracking. Features a clean, distraction-free interface with detailed analytics. Cloud deployed on Vercel for fast, reliable access.",
+    description:
+      "A typing test platform designed to improve typing speed and accuracy with real-time performance tracking. Features a clean, distraction-free interface with detailed analytics. Cloud deployed on Vercel for fast, reliable access.",
     image: "/assets/images/typeMaster.png",
     technologies: ["React", "CSS3", "JavaScript", "Vercel"],
     liveLink: "https://typing-master-eta.vercel.app/",
@@ -145,7 +155,7 @@ const projectsData = [
       "WPM & Accuracy Metrics",
       "Detailed Analytics",
       "Cloud Deployed",
-      "Fast Load Times"
+      "Fast Load Times",
     ],
     completion: 90,
   },
@@ -157,15 +167,16 @@ function Projects() {
 
   const filters = [
     { label: "All Projects", value: "*", count: projectsData.length },
-    {
-      label: "Full Stack",
-      value: "fullStack",
-      count: projectsData.filter((p) => p.category === "fullStack").length,
-    },
+
     {
       label: "MERN Stack",
       value: "mern",
       count: projectsData.filter((p) => p.category === "mern").length,
+    },
+    {
+      label: "Full Stack",
+      value: "fullStack",
+      count: projectsData.filter((p) => p.category === "fullStack").length,
     },
     {
       label: "Frontend",

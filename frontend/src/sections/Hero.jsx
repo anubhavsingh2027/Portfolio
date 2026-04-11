@@ -66,7 +66,7 @@ function Hero({ onResumeClick, onAssistantClick }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="relative min-h-screen flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-start overflow-hidden"
       style={{
         width: "100%",
         minHeight: "100vh",
@@ -75,7 +75,7 @@ function Hero({ onResumeClick, onAssistantClick }) {
       }}
     >
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 md:px-8 text-center z-20 relative pt-20 pb-32 md:pb-40 w-full">
+      <div className="max-w-4xl lg:max-w-2xl mx-auto lg:mx-0 px-4 md:px-8 lg:px-12 text-center lg:text-left z-20 relative pt-20 pb-32 md:pb-40 lg:pt-32 lg:pb-32 w-full lg:w-1/2">
         <h1
           ref={titleRef}
           className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight"
@@ -103,7 +103,7 @@ function Hero({ onResumeClick, onAssistantClick }) {
         {/* Call-to-Action Buttons */}
         <div
           ref={buttonsRef}
-          className="flex flex-wrap gap-2 sm:gap-4 justify-center mb-12"
+          className="flex flex-wrap gap-2 sm:gap-4 justify-center lg:justify-start mb-12"
         >
           <button
             onClick={() => scrollTo("projects")}
@@ -128,7 +128,7 @@ function Hero({ onResumeClick, onAssistantClick }) {
         {/* Stats */}
         <div
           ref={statsRef}
-          className="flex justify-center gap-4 md:gap-8 lg:gap-16 flex-wrap"
+          className="flex justify-center lg:justify-start gap-4 md:gap-8 lg:gap-16 flex-wrap"
         >
           <div className="stat-item text-center">
             <p className="text-3xl sm:text-4xl font-bold text-cyan-400">15+</p>
@@ -148,6 +148,13 @@ function Hero({ onResumeClick, onAssistantClick }) {
               Problems Solved
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Right side - Image/Graphic placeholder for large screens */}
+      <div className="hidden lg:flex w-1/2 items-start justify-center pt-32 pb-32">
+        <div className="w-80 h-80 rounded-lg bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 backdrop-blur-sm border border-neon-cyan/30 flex items-center justify-center">
+          <span className="text-neon-cyan/50 text-lg">Graphic Area</span>
         </div>
       </div>
 

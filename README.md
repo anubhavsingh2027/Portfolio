@@ -18,14 +18,14 @@ This portfolio showcases my **skills**, **projects**, and **achievements** — b
 
 ## 🛠️ Built With
 
-| Category                   | Technologies                                                                          |
-| -------------------------- | -------------------------------------------------------------------------------------- |
+| Category                   | Technologies                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------- |
 | 🎨 **Frontend**            | React, Vite, Tailwind CSS, JavaScript, Responsive Design                            |
-| 🔌 **Backend**             | Node.js, Express, RESTful APIs, Redis Cache, Load Balancing, Scalable Architecture   |
-| 🤖 **Interactive Feature** | AI Chatbot (Voice & Text), WebSocket for Real-Time Updates, AI Integration           |
-| 🧰 **Version Control**     | Git & GitHub for code management                                                     |
-| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                                       |
-| ☁️ **Cloud Deployment**    | Vercel (Frontend), Render/Custom Cloud Hosting (Backend), Full Cloud Infrastructure  |
+| 🔌 **Backend**             | Node.js, Express, RESTful APIs, Redis Cache, Load Balancing, Scalable Architecture  |
+| 🤖 **Interactive Feature** | AI Chatbot (Voice & Text), WebSocket for Real-Time Updates, AI Integration          |
+| 🧰 **Version Control**     | Git & GitHub for code management                                                    |
+| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                                      |
+| ☁️ **Cloud Deployment**    | Vercel (Frontend), Render/Custom Cloud Hosting (Backend), Full Cloud Infrastructure |
 
 ---
 
@@ -107,5 +107,3 @@ It’s not just a static website, but a dynamic reflection of how I approach **i
 > “Code is art — and every project is a canvas.” — _Anubhav Singh_
 
 ⭐ **If you like this project, please give it a star on GitHub!**
-
-![ThankYou For Visiting My GitHub Profile](https://app.chatting.nav-code.com/detector/newUser/portfolio-github)

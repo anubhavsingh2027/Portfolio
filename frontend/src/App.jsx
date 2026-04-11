@@ -88,12 +88,11 @@ function App() {
         className="relative w-full flex flex-col lg:flex-row overflow-visible"
         style={{
           backgroundColor: "#0a0a0f",
-          minHeight: "auto",
-          paddingTop: "60px",
         }}
       >
+
         {/* Left Side - Content */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 lg:px-16 py-12 sm:py-16 md:py-20 relative z-10">
+         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 pb-8 sm:pb-12 md:pb-16 relative z-10">
           <div className="w-full max-w-lg lg:max-w-xl">
             {/* Welcome Title */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
@@ -168,7 +167,7 @@ function App() {
 
         {/* Right Side - Rubik's Cube (Responsive) */}
         <div
-          className="w-full lg:w-1/2 flex items-center justify-center relative py-12 sm:py-16 md:py-16 lg:py-20"
+          className="w-full lg:w-1/2 flex items-center justify-center relative py-12 sm:py-16 md:py-16 "
           style={{ minHeight: "auto" }}
         >
           <RubiksCube3D />
