@@ -87,7 +87,8 @@ const projectsData = [
   },
   {
     id: 4,
-    titAdvanced portfolio featuring AI-powered voice & text chatbot, REST API email service, and modern animated UI. Cloud deployed with light/dark mode support, smooth animations, and fully responsive design for all devices.",
+    title: "Advanced Portfolio",
+    description: "Advanced portfolio featuring AI-powered voice & text chatbot, REST API email service, and modern animated UI. Cloud deployed with light/dark mode support, smooth animations, and fully responsive design for all devices.",
     image: "/assets/images/websiteImg.png",
     technologies: ["React", "Tailwind CSS", "JavaScript", "REST API", "AI Chatbot", "Cloud Deployment"],
     liveLink: "https://anubhav.nav-code.com/",
@@ -98,7 +99,7 @@ const projectsData = [
       "Interactive Animations",
       "Light/Dark Mode",
       "Cloud Deployed",
-      "Performance Optimized"
+      "Performance Optimized",
       "Modern UI",
       "Performance Optimized",
     ],
@@ -107,7 +108,7 @@ const projectsData = [
   {
     id: 5,
     title: "Airbnb Clone",
-    description:secure authentication, property listings with photos, advanced search & filter, complete booking system with reviews. Cloud deployed with scalable backend and optimized performance.",
+    description: "Secure authentication, property listings with photos, advanced search & filter, complete booking system with reviews. Cloud deployed with scalable backend and optimized performance.",
     image: "/assets/images/Airbnb.png",
     technologies: [
       "React",
@@ -128,12 +129,12 @@ const projectsData = [
       "Booking System",
       "Cloud Deployed"
     ],
-    completion: 100
     completion: 95,
   },
   {
     id: 6,
-    titA typing test platform designed to improve typing speed and accuracy with real-time performance tracking. Features a clean, distraction-free interface with detailed analytics. Cloud deployed on Vercel for fast, reliable access.",
+    title: "TypingMaster",
+    description: "A typing test platform designed to improve typing speed and accuracy with real-time performance tracking. Features a clean, distraction-free interface with detailed analytics. Cloud deployed on Vercel for fast, reliable access.",
     image: "/assets/images/typeMaster.png",
     technologies: ["React", "CSS3", "JavaScript", "Vercel"],
     liveLink: "https://typing-master-eta.vercel.app/",
@@ -145,8 +146,6 @@ const projectsData = [
       "Detailed Analytics",
       "Cloud Deployed",
       "Fast Load Times"
-    ],
-    completion: 10e Summary After Each Test",
     ],
     completion: 90,
   },

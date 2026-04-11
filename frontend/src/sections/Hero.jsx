@@ -57,17 +57,9 @@ function Hero({ onResumeClick, onAssistantClick }) {
     // Debug: Check if video exists
     const video = document.querySelector("video");
     if (video) {
-      video.addEventListener("loadstart", () =>{
-
-      }
-        
-      );
-      video.addEventListener("canplay", () => {
-
-    });
-      video.addEventListener("error", (e) =>{
-
-    });
+      video.addEventListener("loadstart", () => {});
+      video.addEventListener("canplay", () => {});
+      video.addEventListener("error", (e) => {});
     }
   }, []);
 
@@ -83,10 +75,10 @@ function Hero({ onResumeClick, onAssistantClick }) {
       }}
     >
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 text-center z-20 relative pt-20 pb-32 md:pb-40">
+      <div className="max-w-4xl mx-auto px-4 md:px-8 text-center z-20 relative pt-20 pb-32 md:pb-40 w-full">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight"
         >
           <span className="title-word block text-white drop-shadow-lg">
             Welcome
@@ -99,11 +91,11 @@ function Hero({ onResumeClick, onAssistantClick }) {
           </span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-neon-cyan font-medium mb-4 drop-shadow-lg">
+        <p className="text-lg sm:text-xl md:text-2xl text-neon-cyan font-medium mb-4 drop-shadow-lg">
           Full Stack Developer | MERN Specialist | AI Enthusiast
         </p>
 
-        <p className="text-lg text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
+        <p className="text-base sm:text-lg md:text-lg text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
           Crafting innovative digital solutions with cutting-edge technology and
           creative design
         </p>
@@ -111,23 +103,23 @@ function Hero({ onResumeClick, onAssistantClick }) {
         {/* Call-to-Action Buttons */}
         <div
           ref={buttonsRef}
-          className="flex flex-wrap gap-4 justify-center mb-12"
+          className="flex flex-wrap gap-2 sm:gap-4 justify-center mb-12"
         >
           <button
             onClick={() => scrollTo("projects")}
-            className="px-8 py-3 bg-gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition flex items-center gap-2"
+            className="px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base bg-gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition flex items-center gap-2"
           >
             Explore Work <FaArrowDown />
           </button>
           <button
             onClick={() => scrollTo("contact")}
-            className="px-8 py-3 bg-neon-cyan text-white font-bold rounded-lg hover:shadow-lg transition"
+            className="px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base bg-neon-cyan text-white font-bold rounded-lg hover:shadow-lg transition"
           >
             Get In Touch
           </button>
           <button
             onClick={onResumeClick}
-            className="px-8 py-3 bg-neon-purple text-white font-bold rounded-lg hover:shadow-lg transition flex items-center gap-2"
+            className="px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base bg-neon-purple text-white font-bold rounded-lg hover:shadow-lg transition flex items-center gap-2"
           >
             Download <FaDownload />
           </button>
@@ -136,19 +128,25 @@ function Hero({ onResumeClick, onAssistantClick }) {
         {/* Stats */}
         <div
           ref={statsRef}
-          className="flex justify-center gap-8 md:gap-16 flex-wrap"
+          className="flex justify-center gap-4 md:gap-8 lg:gap-16 flex-wrap"
         >
           <div className="stat-item text-center">
-            <p className="text-4xl font-bold text-cyan-400">15+</p>
-            <p className="text-white drop-shadow-lg">Projects</p>
+            <p className="text-3xl sm:text-4xl font-bold text-cyan-400">15+</p>
+            <p className="text-sm md:text-base text-white drop-shadow-lg">
+              Projects
+            </p>
           </div>
           <div className="stat-item text-center">
-            <p className="text-4xl font-bold text-cyan-400">3+</p>
-            <p className="text-white drop-shadow-lg">Years Exp</p>
+            <p className="text-3xl sm:text-4xl font-bold text-cyan-400">3+</p>
+            <p className="text-sm md:text-base text-white drop-shadow-lg">
+              Years Exp
+            </p>
           </div>
           <div className="stat-item text-center">
-            <p className="text-4xl font-bold text-cyan-400">700+</p>
-            <p className="text-white drop-shadow-lg">Problems Solved</p>
+            <p className="text-3xl sm:text-4xl font-bold text-cyan-400">700+</p>
+            <p className="text-sm md:text-base text-white drop-shadow-lg">
+              Problems Solved
+            </p>
           </div>
         </div>
       </div>
