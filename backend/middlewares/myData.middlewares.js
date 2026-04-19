@@ -7,17 +7,18 @@ export const myDB = `
     "location": "Varanasi, India",
     "experienceYears": 3,
     "projectsCompleted": 20,
-    "problemsSolvedInLeetcode": 700,
+    "problemsSolvedInLeetcode": 900,
     "availability": "Available for Projects",
     "DOB": "05 June 2005",
     "currentAge": "20 years"
+    "leetcode streak maintain": 450days+
   },
 
   "about": {
     "summary": "I am a passionate Full Stack Developer specializing in MERN stack and AI-driven applications. I focus on building scalable, clean, and high-performance web solutions that provide real-world value.",
     "highlights": [
       "15+ full-stack projects deployed",
-      "700+ coding problems solved",
+      "850+ coding problems solved",
       "5-Star C++ rating on HackerRank",
       "Strong frontend & backend expertise",
       "Focus on scalability, performance, and clean code"

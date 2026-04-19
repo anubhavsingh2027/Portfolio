@@ -155,7 +155,7 @@ function App() {
               </div>
               <div className="text-center lg:text-left">
                 <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-400">
-                  700+
+                  800+
                 </p>
                 <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-300 drop-shadow-lg">
                   Solved

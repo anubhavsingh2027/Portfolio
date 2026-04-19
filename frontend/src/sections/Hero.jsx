@@ -143,7 +143,7 @@ function Hero({ onResumeClick, onAssistantClick }) {
             </p>
           </div>
           <div className="stat-item text-center">
-            <p className="text-3xl sm:text-4xl font-bold text-cyan-400">700+</p>
+            <p className="text-3xl sm:text-4xl font-bold text-cyan-400">800+</p>
             <p className="text-sm md:text-base text-white drop-shadow-lg">
               Problems Solved
             </p>
