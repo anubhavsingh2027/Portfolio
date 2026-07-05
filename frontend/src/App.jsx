@@ -4,6 +4,7 @@ import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
+import WorkExperience from "./sections/WorkExperience";
 import Services from "./sections/Services";
 import Connect from "./sections/Connect";
 import Contact from "./sections/Contact";
@@ -185,6 +186,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <WorkExperience />
         <Services />
         <Connect />
         <Contact />
