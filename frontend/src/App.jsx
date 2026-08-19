@@ -91,9 +91,8 @@ function App() {
           backgroundColor: "#0a0a0f",
         }}
       >
-
         {/* Left Side - Content */}
-         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 pb-8 sm:pb-12 md:pb-16 relative z-10">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 pb-8 sm:pb-12 md:pb-16 relative z-10">
           <div className="w-full max-w-lg lg:max-w-xl">
             {/* Welcome Title */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">

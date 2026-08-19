@@ -1,5 +1,10 @@
 import React from "react";
-import { FaBriefcase, FaMapMarkerAlt, FaCalendarAlt, FaCode } from "react-icons/fa";
+import {
+  FaBriefcase,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaCode,
+} from "react-icons/fa";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const experienceData = {
