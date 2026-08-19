@@ -18,7 +18,7 @@ const projectsData = [
       "Redis",
       "Cloud Deployment",
     ],
-    liveLink: "https://real-time-chatting.nav-code.com/",
+    liveLink: "https://real-time-chatting.nav-code.com/?source=portfolio",
     codeLink: "https://github.com/anubhavsingh2027/Real-Time-Chatting",
     category: "mern",
     features: [
@@ -44,7 +44,7 @@ const projectsData = [
       "Express",
       "Cloud Security",
     ],
-    liveLink: "https://phishshield.nav-code.com/",
+    liveLink: "https://phishshield.nav-code.com/?source=portfolio",
     codeLink: "https://github.com/anubhavsingh2027/Phishsheild",
     category: "mern",
     features: [
@@ -71,7 +71,7 @@ const projectsData = [
       "Express",
       "Cloud Hosting",
     ],
-    liveLink: "https://kashiroute.nav-code.com/",
+    liveLink: "https://kashiroute.nav-code.com/?source=portfolio",
     codeLink: "https://github.com/anubhavsingh2027/KashiRoute",
     category: "fullStack",
     features: [
@@ -100,7 +100,7 @@ const projectsData = [
       "Voice & Chat",
       "Cloud Deployment",
     ],
-    liveLink: "https://anubhav.nav-code.com/",
+    liveLink: "https://anubhav.nav-code.com/?source=portfolio",
     codeLink: "https://github.com/anubhavsingh2027/Portfolio",
     category: "mern",
     features: [
