@@ -31,6 +31,14 @@ export const contact = async (req, res) => {
       });
     }
 
+    if (!/^\S+@\S+\.\S+$/.test(email) || message.length > 4000) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Enter a valid email and keep your message under 4000 characters",
+      });
+    }
+
     const payload = {
       username: name,
       customerEmail: email,

@@ -14,9 +14,9 @@ import handleRoutes from "./routes/handle.routes.js";
 
 // ===== App & DB setup =====
 const app = express();
-const mongoUrl = process.env.dbUrl;
-const port = process.env.port;
-
+const mongoUrl = process.env.MONGO_URI;
+const port = process.env.PORT || process.env.port || 5000;
+const environment=process.env.state;
 // ===== Middleware =====
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use(cookieParser());
 // ===== CORS setup (CRITICAL) =====
 app.use(
   cors({
-    origin: [process.env.state==="development"?"http://127.0.0.1:5500":"https://anubhav.nav-code.com"],
+    origin: [environment=="development"?"https://anubhav.nav-code.com":"http://localhost:5173"]
   }),
 );
 
@@ -33,7 +33,9 @@ app.use(
 
 // ===== ROUTES =====
 app.get("/", (req, res) => {
-  res.status(200).json("Anubhav Portfolio backend for more visit anubhavsingh.nav-code.com");
+  res
+    .status(200)
+    .json("Anubhav Portfolio backend for more visit anubhavsingh.nav-code.com");
 });
 app.use("/portfolio", handleRoutes);
 
@@ -42,10 +44,13 @@ mongoose
   .connect(mongoUrl)
   .then(() => {
     console.log("<======== MongoDB Connected Successfully =======>");
-    app.listen(port, () => {
-      console.log(`Server Running At http://localhost:${process.env.port}`);
-    });
   })
-  .catch((err) => console.log("Error connecting MongoDB", err));
+  .catch((err) =>
+    console.log("MongoDB unavailable; running without database", err.message),
+  );
+
+app.listen(port, () => {
+  console.log(`Server Running At http://localhost:${port}`);
+});
 
 export default app;

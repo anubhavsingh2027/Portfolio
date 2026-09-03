@@ -4,13 +4,13 @@ import chatAssist from "../model/chatAssistant.js";
 
 export const chatAssistant = async (req, res) => {
   try {
-    const { question } = req.body;
+    const { question, history = [] } = req.body;
 
     if (!question) {
       return res.status(400).json({ error: "Question is required" });
     }
 
-   const query = `
+    const query = `
     You are made answer like for chat assistant .
 
 Strict rules you must follow:
@@ -29,6 +29,15 @@ Strict rules you must follow:
 - Write the answer in English with a neutral tone.
 - You may include relevant links if they are useful.
 
+Recent Conversation:
+${history
+  .slice(-10)
+  .map(
+    ({ sender, text }) =>
+      `${sender === "user" ? "User" : "Assistant"}: ${text}`,
+  )
+  .join("\n")}
+
 User Question:
 ${question}
 
@@ -39,10 +48,9 @@ ${myDB}
     const answer = await groqcalling(query);
     const data = new chatAssist({
       question,
-      answer
+      answer,
     });
     await data.save();
-
 
     res.json({ answer });
   } catch (error) {
