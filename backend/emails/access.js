@@ -74,3 +74,20 @@ export function TemplateOfAssistantAccess(data) {
   </div>
   `;
 }
+
+export function TemplateOfVisitorAccess(data) {
+  const { name, email, visitorType } = data;
+
+  return `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; border: 1px solid #dbeafe; border-radius: 12px; background: #ffffff; color: #1e293b;">
+    <h1 style="color: #0891b2; margin-bottom: 20px; font-size: 22px; text-align: center;">New Portfolio Visitor</h1>
+    <p style="font-size: 15px; line-height: 1.6;">Someone just opened your portfolio and shared a little context.</p>
+    <div style="padding: 16px; background: #f0fdfa; border-radius: 8px; margin: 20px 0;">
+      <p style="margin: 0 0 8px; font-size: 14px;"><strong>Visitor type:</strong> ${visitorType}</p>
+      <p style="margin: 0 0 8px; font-size: 14px;"><strong>Name:</strong> ${name}</p>
+      <p style="margin: 0; font-size: 14px;"><strong>Email:</strong> ${email}</p>
+    </div>
+    <p style="font-size: 13px; color: #64748b;">This notification was sent from the portfolio welcome experience.</p>
+  </div>
+  `;
+}

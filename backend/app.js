@@ -14,7 +14,7 @@ import handleRoutes from "./routes/handle.routes.js";
 
 // ===== App & DB setup =====
 const app = express();
-const mongoUrl = process.env.MONGO_URI;
+const mongoUrl = process.env.dbUrl;
 const port = process.env.PORT || process.env.port || 5000;
 const environment=process.env.state;
 // ===== Middleware =====
@@ -25,7 +25,7 @@ app.use(cookieParser());
 // ===== CORS setup (CRITICAL) =====
 app.use(
   cors({
-    origin: [environment=="development"?"https://anubhav.nav-code.com":"http://localhost:5173"]
+    origin: [environment=="production"?"https://anubhav.nav-code.com":"http://localhost:5173"]
   }),
 );
 

@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   const source = params.get("source");
-  fetch(`https://app.chatting.nav-code.com/detector/newUser/portfolio?source=${source || Direct}`, {
+  fetch(`https://app.chatting.nav-code.com/detector/newUser/portfolio?source=${source || 'Direct'}`, {
     method: "GET",
   })
     .then((res) => res.json())

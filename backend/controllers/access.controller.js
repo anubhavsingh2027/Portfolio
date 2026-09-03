@@ -1,6 +1,7 @@
 import {
   TemplateOfAssistantAccess,
   TemplateOfResumeAccess,
+  TemplateOfVisitorAccess,
 } from "../emails/access.js";
 import { sendMail } from "../middlewares/mail.middlewares.js";
 
@@ -67,6 +68,34 @@ export const assistantAccess = async (req, res) => {
         message: "Failed to send email",
       });
     }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const visitorAccess = async (req, res) => {
+  const { name, email, visitorType } = req.body;
+
+  try {
+    const emailTemplate = TemplateOfVisitorAccess({
+      name: name || "A visitor",
+      email: email || "Not provided",
+      visitorType: visitorType || "curious",
+    });
+    const response = await sendMail({
+      to: "anubhavsinghcustomer@gmail.com",
+      subject: `New portfolio visitor: ${visitorType || "curious"}`,
+      websiteName: "Portfolio",
+      message: emailTemplate,
+    });
+
+    return res.status(response.success ? 200 : 400).json({
+      success: response.success,
+      message: response.success ? "Visitor noted" : "Failed to send email",
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

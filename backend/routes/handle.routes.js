@@ -9,16 +9,18 @@ import { contact, speedMail } from "../controllers/contactMail.controller.js";
 import {
   assistantAccess,
   resumeAccess,
+  visitorAccess,
 } from "../controllers/access.controller.js";
 
-handleAcess.get("/health",(req,res,next)=>{
-return res.status(200).json({status:true});
-})
+handleAcess.get("/health", (req, res, next) => {
+  return res.status(200).json({ status: true });
+});
 handleAcess.post("/chatAssistant", chatAssistant);
 handleAcess.post("/voiceAssistant", voiceAssistant);
 handleAcess.post("/contact", contact);
 handleAcess.post("/speedResponse", speedMail);
 handleAcess.post("/resumeAccess", resumeAccess);
 handleAcess.post("/assitantAccess", assistantAccess);
+handleAcess.post("/visitorAccess", visitorAccess);
 
 export default handleAcess;

@@ -48,6 +48,12 @@ export const assistantAccess = (data) =>
     body: JSON.stringify(data),
   });
 
+export const visitorAccess = (data) =>
+  handleFetch("visitorAccess", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+
 export const resumeAccess = (data) =>
   handleFetch("resumeAccess", {
     method: "POST",

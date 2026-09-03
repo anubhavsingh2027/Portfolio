@@ -13,11 +13,14 @@ import Chatbot from "./components/Chatbot";
 import VoiceAssistant from "./components/VoiceAssistant";
 import ResumePreviewModal from "./components/ResumePreviewModal";
 import CommandPalette from "./components/CommandPalette";
+import VisitorWelcomeModal from "./components/VisitorWelcomeModal";
+import CustomCursor from "./components/CustomCursor";
 
 import { useScrollIntoView } from "./hooks/useScrollIntoView";
 import RubiksCube3D from "./components/RubiksCube3D";
 
 function App() {
+  const [showVisitorWelcome, setShowVisitorWelcome] = useState(false);
   const [showResumePreviewModal, setShowResumePreviewModal] = useState(false);
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [showVoiceAssistant, setShowVoiceAssistant] = useState(false);
@@ -26,6 +29,15 @@ function App() {
   const scrollTo = useScrollIntoView();
   const normalizedPath = currentPath.replace(/\/+$/, "").toLowerCase() || "/";
   const isChatbotRoute = normalizedPath === "/chatbot";
+
+  useEffect(() => {
+    const visitorWelcomeKey = "anubhav-visitor-welcomed-v2";
+
+    if (!localStorage.getItem(visitorWelcomeKey)) {
+      const timer = window.setTimeout(() => setShowVisitorWelcome(true), 450);
+      return () => window.clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
@@ -101,6 +113,11 @@ function App() {
   if (isChatbotRoute) {
     return (
       <div className="min-h-screen bg-dark-bg text-gray-900 font-poppins">
+        <CustomCursor />
+        <VisitorWelcomeModal
+          isOpen={showVisitorWelcome}
+          onClose={() => setShowVisitorWelcome(false)}
+        />
         <Navbar
           onResumeClick={handleResumeClick}
           onAssistantClick={handleAssistantClick}
@@ -151,6 +168,11 @@ function App() {
 
   return (
     <div className="bg-dark-bg text-gray-900 font-poppins min-h-screen relative">
+      <CustomCursor />
+      <VisitorWelcomeModal
+        isOpen={showVisitorWelcome}
+        onClose={() => setShowVisitorWelcome(false)}
+      />
       {/* Hero Section - Split Layout */}
       <section
         id="home"
