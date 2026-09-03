@@ -17,6 +17,100 @@ html {
 
 body {
   @apply bg-gradient-to-b from-blue-50 to-cyan-50 text-gray-900 font-poppins antialiased overflow-x-hidden;
+  background-image:
+    linear-gradient(rgba(8, 145, 178, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 51, 234, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, #f8fafc 0%, #eefafc 48%, #f8f6f3 100%);
+  background-size:
+    48px 48px,
+    48px 48px,
+    100% 100%;
+  background-attachment: fixed;
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #0891b2, #9333ea);
+  transition: width 120ms ease-out;
+}
+
+.quick-actions {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.5rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quick-actions button {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  border-radius: 0.75rem;
+  color: #0e7490;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.quick-actions button:hover {
+  color: white;
+  background: #0891b2;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .quick-actions {
+    right: 0.75rem;
+    bottom: 1rem;
+  }
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #0891b2;
+  outline-offset: 3px;
+}
+
+.chatbot-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 13rem);
+  min-height: 32rem;
+  max-height: 52rem;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .chatbot-page {
+    height: calc(100dvh - 12rem);
+    min-height: 30rem;
+  }
 }
 
 /* ============ CUSTOM UTILITY CLASSES ============ */

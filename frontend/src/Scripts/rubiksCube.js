@@ -7,13 +7,12 @@ const curAura = document.getElementById("cur-aura");
 const curRing = document.getElementById("cur-ring");
 const rubiksCube3DContainer = document.getElementById("rubiksCube3DContainer");
 
-let mx = 0,
-  my = 0,
-  cx = 0,
-  cy = 0,
-  trailCounter = 0;
+let mx = 0;
+let my = 0;
+let cx = 0;
+let cy = 0;
+let trailCounter = 0;
 
-// Cursor trail particles
 const trailParticles = [];
 const maxTrails = 8;
 
@@ -32,7 +31,8 @@ class CursorTrail {
     this.el.className = "cursor-trail";
     this.el.style.width = this.radius * 2 + "px";
     this.el.style.height = this.radius * 2 + "px";
-    this.el.style.background = `radial-gradient(circle at 35% 35%, rgba(255, 213, 0, 0.8), rgba(255, 88, 0, 0.4))`;
+    this.el.style.background =
+      "radial-gradient(circle at 35% 35%, rgba(255, 213, 0, 0.8), rgba(255, 88, 0, 0.4))";
     this.el.style.boxShadow = "0 0 6px rgba(255, 213, 0, 0.6)";
     this.el.style.left = this.x + "px";
     this.el.style.top = this.y + "px";
@@ -44,7 +44,7 @@ class CursorTrail {
     this.opacity = this.life / this.maxLife;
     this.x += this.vx;
     this.y += this.vy;
-    this.vy += 0.1; // gravity
+    this.vy += 0.1;
 
     this.el.style.left = this.x + "px";
     this.el.style.top = this.y + "px";
@@ -468,8 +468,23 @@ function setStatus(txt) {
 function setBtnsDisabled(v) {
   const b1 = document.getElementById("btnScramble");
   const b2 = document.getElementById("btnSolve");
+  const b3 = document.getElementById("btnResetView");
   if (b1) b1.disabled = v;
   if (b2) b2.disabled = v;
+  if (b3) b3.disabled = v;
+  document.querySelectorAll(".cube-move").forEach((button) => {
+    button.disabled = v;
+  });
+}
+
+function updateMoveCount() {
+  const el = document.getElementById("cubeMoves");
+  if (el) el.textContent = history.length;
+}
+
+function setMode(text) {
+  const el = document.getElementById("cubeMode");
+  if (el) el.textContent = text;
 }
 
 // ── Scramble ─────────────────────────────────────
@@ -479,6 +494,7 @@ async function scramble(n = 14, ms = 185) {
   setBtnsDisabled(true);
   setStatus("Scrambling...");
   history = [];
+  updateMoveCount();
 
   for (let i = 0; i < n; i++) {
     let m;
@@ -490,6 +506,7 @@ async function scramble(n = 14, ms = 185) {
       history[history.length - 1].slice === m.slice
     );
     history.push(m);
+    updateMoveCount();
     await rotateLayer(m.axis, m.slice, m.angle, ms);
     await sleep(18);
   }
@@ -511,9 +528,45 @@ async function solve(ms = 340) {
     await sleep(28);
   }
   history = [];
+  updateMoveCount();
   busy = false;
   setBtnsDisabled(false);
   setStatus("Solved! ✓");
+}
+
+const USER_MOVES = {
+  U: { axis: "y", slice: 1, angle: 90 },
+  "U'": { axis: "y", slice: 1, angle: -90 },
+  D: { axis: "y", slice: -1, angle: 90 },
+  "D'": { axis: "y", slice: -1, angle: -90 },
+  L: { axis: "x", slice: -1, angle: 90 },
+  "L'": { axis: "x", slice: -1, angle: -90 },
+  R: { axis: "x", slice: 1, angle: 90 },
+  "R'": { axis: "x", slice: 1, angle: -90 },
+  F: { axis: "z", slice: 1, angle: 90 },
+  "F'": { axis: "z", slice: 1, angle: -90 },
+  B: { axis: "z", slice: -1, angle: 90 },
+  "B'": { axis: "z", slice: -1, angle: -90 },
+};
+
+async function makeUserMove(notation) {
+  if (busy || !USER_MOVES[notation]) return;
+  busy = true;
+  setBtnsDisabled(true);
+  manualMode = true;
+  clearTimeout(manualTimer);
+  history.push(USER_MOVES[notation]);
+  updateMoveCount();
+  setStatus(`Move ${notation}`);
+  await rotateLayer(
+    USER_MOVES[notation].axis,
+    USER_MOVES[notation].slice,
+    USER_MOVES[notation].angle,
+    180,
+  );
+  busy = false;
+  setBtnsDisabled(false);
+  setStatus("Ready for next move");
 }
 
 async function startScrambleSolve(n = 10, ms = 360) {
@@ -548,6 +601,20 @@ document.getElementById("btnSolve").addEventListener("click", () => {
     manualMode = false;
   }, 15000);
   solve(380);
+});
+
+document.getElementById("btnResetView").addEventListener("click", () => {
+  rotX = -22;
+  rotY = 45;
+  velX = 0;
+  velY = 0;
+  manualMode = false;
+  setMode("AUTO ORBIT");
+  setStatus(history.length ? "View reset" : "Solved! ✓");
+});
+
+document.querySelectorAll(".cube-move").forEach((button) => {
+  button.addEventListener("click", () => makeUserMove(button.dataset.move));
 });
 
 // ══════════════════════════════════════════════════
@@ -588,8 +655,9 @@ function applyRot() {
 
 // Mouse drag
 const cubeVP = document.querySelector(".cube-viewport");
-cubeVP.addEventListener("mousedown", (e) => {
+cubeVP.addEventListener("pointerdown", (e) => {
   dragging = true;
+  cubeVP.setPointerCapture?.(e.pointerId);
   lx2 = e.clientX;
   ly2 = e.clientY;
   velX = 0;
@@ -597,10 +665,11 @@ cubeVP.addEventListener("mousedown", (e) => {
   lastDx = 0;
   lastDy = 0;
   manualMode = true;
+  setMode("MANUAL ORBIT");
   clearTimeout(manualTimer);
   e.preventDefault();
 });
-document.addEventListener("mousemove", (e) => {
+cubeVP.addEventListener("pointermove", (e) => {
   if (!dragging) return;
   lastDx = (e.clientX - lx2) * 0.45;
   lastDy = (e.clientY - ly2) * 0.45;
@@ -610,52 +679,62 @@ document.addEventListener("mousemove", (e) => {
   lx2 = e.clientX;
   ly2 = e.clientY;
 });
-document.addEventListener("mouseup", () => {
+cubeVP.addEventListener("pointerup", (e) => {
   if (!dragging) return;
   dragging = false;
+  cubeVP.releasePointerCapture?.(e.pointerId);
   // Pass final delta as launch velocity for inertia
   velY = lastDx * 0.85;
   velX = -lastDy * 0.85;
   manualTimer = setTimeout(() => {
     manualMode = false;
+    setMode("AUTO ORBIT");
   }, 8000);
 });
 
-// Touch drag
+cubeVP.addEventListener("pointercancel", () => {
+  dragging = false;
+});
+
 cubeVP.addEventListener(
-  "touchstart",
+  "wheel",
   (e) => {
-    dragging = true;
-    lx2 = e.touches[0].clientX;
-    ly2 = e.touches[0].clientY;
-    velX = 0;
-    velY = 0;
-    lastDx = 0;
-    lastDy = 0;
+    e.preventDefault();
     manualMode = true;
     clearTimeout(manualTimer);
-  },
-  { passive: true },
-);
-document.addEventListener(
-  "touchmove",
-  (e) => {
-    if (!dragging) return;
-    lastDx = (e.touches[0].clientX - lx2) * 0.45;
-    lastDy = (e.touches[0].clientY - ly2) * 0.45;
-    rotY += lastDx;
-    rotX -= lastDy;
+    rotY += e.deltaX * 0.25 + e.deltaY * 0.08;
+    rotX -= e.deltaY * 0.05;
     rotX = Math.max(-65, Math.min(65, rotX));
-    lx2 = e.touches[0].clientX;
-    ly2 = e.touches[0].clientY;
+    setMode("MANUAL ORBIT");
+    manualTimer = setTimeout(() => {
+      manualMode = false;
+      setMode("AUTO ORBIT");
+    }, 5000);
   },
-  { passive: true },
+  { passive: false },
 );
-document.addEventListener("touchend", () => {
-  dragging = false;
-  velY = lastDx * 0.85;
-  velX = -lastDy * 0.85;
-  manualTimer = setTimeout(() => {
-    manualMode = false;
-  }, 8000);
+
+cubeVP.addEventListener("dblclick", () => {
+  if (!busy) scramble(14, 150);
+});
+
+window.addEventListener("keydown", (e) => {
+  if (
+    e.target instanceof HTMLInputElement ||
+    e.target instanceof HTMLTextAreaElement
+  )
+    return;
+  const key = e.key.toUpperCase();
+  if (USER_MOVES[key] || USER_MOVES[`${key}'`]) {
+    makeUserMove(e.shiftKey ? `${key}'` : key);
+    return;
+  }
+  if (key === "S") scramble(14, 150);
+  if (key === "0") {
+    rotX = -22;
+    rotY = 45;
+    velX = 0;
+    velY = 0;
+    setMode("AUTO ORBIT");
+  }
 });

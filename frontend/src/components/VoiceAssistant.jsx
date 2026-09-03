@@ -39,7 +39,7 @@ const WaveformVisualizer = ({ isActive, isSpeaking }) => {
   );
 };
 
-function VoiceAssistant({ isOpen, onClose, serverAwake }) {
+function VoiceAssistant({ isOpen, onClose }) {
   const [status, setStatus] = useState("Tap mic to speak");
   const [response, setResponse] = useState("");
   const [micActive, setMicActive] = useState(false);
@@ -133,7 +133,7 @@ function VoiceAssistant({ isOpen, onClose, serverAwake }) {
           <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/10 via-transparent to-neon-cyan/10 pointer-events-none" />
         )}
 
-        {/* Server Status Bar */}
+        {/* Assistant status bar */}
         <div
           className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border transition-all duration-300 relative z-10 ${
             isExpanded
@@ -141,13 +141,8 @@ function VoiceAssistant({ isOpen, onClose, serverAwake }) {
               : "bg-dark-tertiary border-neon-purple/20 w-full"
           }`}
         >
-          <div
-            className={`w-2.5 h-2.5 rounded-full ${serverAwake ? "bg-green-400 animate-pulse" : "bg-red-400 animate-pulse"}`}
-          />
-          <span
-            className={`text-xs font-bold tracking-wide ${serverAwake ? "text-green-400" : "text-red-400"}`}
-          >
-            {serverAwake ? "✓ SERVER READY" : "⏳ CONNECTING..."}
+          <span className="text-xs font-bold tracking-wide text-neon-cyan">
+            VOICE ASSISTANT
           </span>
         </div>
 

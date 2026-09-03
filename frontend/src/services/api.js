@@ -12,16 +12,16 @@ const handleFetch = async (endpoint, options = {}) => {
     return await response.json();
   } catch (error) {
     console.error(`API Error (${endpoint}):`, error);
+    if (error.name === "AbortError") throw error;
     return { error: true, message: "Network Error" };
   }
 };
 
-export const wakeup = () => handleFetch("");
-
 export const chatAssistant = (data) =>
   handleFetch("chatAssistant", {
     method: "POST",
-    body: JSON.stringify({ question: data.question }),
+    body: JSON.stringify({ question: data.question, history: data.history }),
+    signal: data.signal,
   });
 
 export const voiceAssistant = (data) =>

@@ -35,6 +35,12 @@ function RubiksCube3D() {
           </div>
           <div className="cube-ui">
             <div id="cubeStatus" className="cube-status"></div>
+            <div className="cube-metrics" aria-live="polite">
+              <span>
+                <strong id="cubeMoves">0</strong> moves
+              </span>
+              <span id="cubeMode">AUTO ORBIT</span>
+            </div>
             <div className="cube-btns">
               <button
                 id="btnScramble"
@@ -48,9 +54,43 @@ function RubiksCube3D() {
               >
                 Solve
               </button>
+              <button
+                id="btnResetView"
+                className="cbtn px-4 py-2 border border-cyan-600/30 bg-cyan-600/5 text-cyan-700 rounded-lg font-semibold text-sm cursor-pointer transition-all hover:border-cyan-600 hover:text-cyan-700 disabled:opacity-35 disabled:cursor-not-allowed"
+              >
+                Reset view
+              </button>
+            </div>
+            <div className="cube-move-panel" aria-label="Cube face controls">
+              <span className="cube-move-label">Make a move</span>
+              <div className="cube-move-grid">
+                {[
+                  ["U", "U"],
+                  ["U'", "U reverse"],
+                  ["D", "D"],
+                  ["D'", "D reverse"],
+                  ["L", "L"],
+                  ["L'", "L reverse"],
+                  ["R", "R"],
+                  ["R'", "R reverse"],
+                  ["F", "F"],
+                  ["F'", "F reverse"],
+                  ["B", "B"],
+                  ["B'", "B reverse"],
+                ].map(([move, label]) => (
+                  <button
+                    key={move}
+                    className="cube-move"
+                    data-move={move}
+                    aria-label={`Turn ${label}`}
+                  >
+                    {move}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="cube-hint text-xs text-gray-500 letter-spacing-0.3px">
-              Drag to rotate • Click buttons to scramble/solve
+              Drag to orbit • U D L R F B keys • Double-click to scramble
             </div>
           </div>
         </div>

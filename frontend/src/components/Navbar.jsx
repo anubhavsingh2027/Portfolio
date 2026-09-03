@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaTerminal } from "react-icons/fa";
 import { useScrollIntoView } from "../hooks/useScrollIntoView";
 
 const navLinks = [
@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Contact", section: "contact" },
 ];
 
-function Navbar({ onResumeClick, onAssistantClick }) {
+function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -96,6 +96,15 @@ function Navbar({ onResumeClick, onAssistantClick }) {
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-3">
           <button
+            onClick={onCommandClick}
+            className="flex items-center gap-2 rounded-lg border border-slate-300/70 bg-white/40 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-neon-cyan hover:text-neon-cyan"
+            aria-label="Open command palette"
+            title="Open command palette (Ctrl K)"
+          >
+            <FaTerminal size={12} aria-hidden="true" />
+            <span>Ctrl K</span>
+          </button>
+          <button
             onClick={onResumeClick}
             className="px-4 py-2 bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 rounded-lg font-medium transition"
           >
@@ -138,6 +147,15 @@ function Navbar({ onResumeClick, onAssistantClick }) {
               </li>
             ))}
             <li className="pt-2 border-t border-neon-cyan/20">
+              <button
+                onClick={() => {
+                  onCommandClick();
+                  setIsMenuOpen(false);
+                }}
+                className="mb-2 flex w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-neon-cyan transition hover:bg-neon-cyan/10"
+              >
+                <FaTerminal size={12} aria-hidden="true" /> Command palette
+              </button>
               <button
                 onClick={() => {
                   onResumeClick();

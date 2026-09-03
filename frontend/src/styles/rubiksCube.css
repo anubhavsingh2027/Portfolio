@@ -382,6 +382,8 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: none;
+  user-select: none;
 }
 
 /* Mobile Responsive - Smaller cube on mobile */
@@ -518,6 +520,27 @@ button,
   text-shadow: 0 0 12px rgba(255, 213, 0, 0.4);
 }
 
+.cube-metrics {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: -4px 0 12px;
+  color: var(--dim);
+  font:
+    600 0.68rem "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.cube-metrics strong {
+  color: var(--yellow);
+}
+
+.cube-metrics span:last-child {
+  color: var(--green);
+}
+
 .cube-ui {
   text-align: center;
   margin-top: 80px;
@@ -544,6 +567,55 @@ button,
   gap: 10px;
   justify-content: center;
   margin-bottom: 9px;
+}
+
+.cube-move-panel {
+  width: min(100%, 270px);
+  margin: 0 auto 10px;
+}
+
+.cube-move-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--dim);
+  font:
+    600 0.62rem "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cube-move-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+
+.cube-move {
+  min-width: 0;
+  padding: 0.4rem 0.2rem;
+  border: 1px solid rgba(0, 155, 72, 0.35);
+  border-radius: 5px;
+  color: var(--green);
+  background: rgba(0, 155, 72, 0.06);
+  font:
+    700 0.72rem "JetBrains Mono",
+    monospace;
+  transition:
+    transform 160ms ease,
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.cube-move:hover {
+  color: #fff;
+  background: var(--green);
+  transform: translateY(-2px);
+}
+
+.cube-move:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
 }
 
 .cube-hint {

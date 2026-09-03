@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FaArrowUp, FaComments, FaEnvelope } from "react-icons/fa";
 import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Projects from "./sections/Projects";
@@ -11,49 +11,63 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import Chatbot from "./components/Chatbot";
 import VoiceAssistant from "./components/VoiceAssistant";
-import Modal from "./components/Modal";
 import ResumePreviewModal from "./components/ResumePreviewModal";
+import CommandPalette from "./components/CommandPalette";
 
 import { useScrollIntoView } from "./hooks/useScrollIntoView";
-import { wakeup } from "./services/api";
-import RubixCube from "./sections/RubixCube";
 import RubiksCube3D from "./components/RubiksCube3D";
 
 function App() {
   const [showResumePreviewModal, setShowResumePreviewModal] = useState(false);
-  const [showAssistantModeModal, setShowAssistantModeModal] = useState(false);
-  const [showChatbot, setShowChatbot] = useState(false);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [showVoiceAssistant, setShowVoiceAssistant] = useState(false);
-  const [serverAwake, setServerAwake] = useState(false);
-  const [checkingServer, setCheckingServer] = useState(true);
+  const [showCommandPalette, setShowCommandPalette] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollTo = useScrollIntoView();
+  const normalizedPath = currentPath.replace(/\/+$/, "").toLowerCase() || "/";
+  const isChatbotRoute = normalizedPath === "/chatbot";
 
-  // Check server status on component mount
   useEffect(() => {
-    const checkServerStatus = async () => {
-      try {
-        setCheckingServer(true);
-        const response = await wakeup();
-        // If we get a response without error, server is awake
-        if (response && !response.error) {
-          setServerAwake(true);
-        } else {
-          setServerAwake(false);
-        }
-      } catch (error) {
-        console.error("Server status check failed:", error);
-        setServerAwake(false);
-      } finally {
-        setCheckingServer(false);
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(
+        scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0,
+      );
+    };
+    updateScrollProgress();
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleCommandShortcut = (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setShowCommandPalette((isOpen) => !isOpen);
       }
     };
-
-    checkServerStatus();
-
-    // Periodically check server status every 2 minutes
-    const interval = setInterval(checkServerStatus, 120000);
-    return () => clearInterval(interval);
+    window.addEventListener("keydown", handleCommandShortcut);
+    return () => window.removeEventListener("keydown", handleCommandShortcut);
   }, []);
+
+  const navigateTo = (path) => {
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, "", path);
+    }
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleResumeClick = () => {
     // Show preview modal instead of direct download
@@ -67,19 +81,73 @@ function App() {
   };
 
   const handleAssistantClick = () => {
-    // Show mode selection directly
-    setShowAssistantModeModal(true);
+    navigateTo("/chatbot");
   };
 
-  const handleChatMode = () => {
-    setShowAssistantModeModal(false);
-    setShowChatbot(true);
+  const handleCommand = (action) => {
+    setShowCommandPalette(false);
+    if (action.type === "scroll") {
+      if (isChatbotRoute) {
+        navigateTo("/");
+        window.setTimeout(() => scrollTo(action.value), 0);
+      } else {
+        scrollTo(action.value);
+      }
+    }
+    if (action.type === "assistant") handleAssistantClick();
+    if (action.type === "resume") handleResumeClick();
   };
 
-  const handleVoiceMode = () => {
-    setShowAssistantModeModal(false);
-    setShowVoiceAssistant(true);
-  };
+  if (isChatbotRoute) {
+    return (
+      <div className="min-h-screen bg-dark-bg text-gray-900 font-poppins">
+        <Navbar
+          onResumeClick={handleResumeClick}
+          onAssistantClick={handleAssistantClick}
+          onCommandClick={() => setShowCommandPalette(true)}
+        />
+        <main className="min-h-[100dvh] px-3 pt-28 pb-6 sm:px-4 md:px-8 md:pb-10">
+          <div className="mx-auto flex max-w-5xl flex-col">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <div>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-neon-cyan">
+                  Portfolio intelligence
+                </p>
+                <h1 className="text-3xl font-extrabold text-gray-900 md:text-5xl">
+                  Ask me anything.
+                </h1>
+                <p className="mt-2 max-w-xl text-sm text-gray-600 md:text-base">
+                  Explore Anubhav’s projects, experience, and technical approach
+                  in a focused conversation.
+                </p>
+              </div>
+              <button
+                onClick={() => navigateTo("/")}
+                className="hidden rounded-lg border border-neon-cyan/30 px-4 py-2 text-sm font-semibold text-neon-cyan transition hover:bg-neon-cyan/10 sm:block"
+              >
+                Back to portfolio
+              </button>
+            </div>
+            <Chatbot
+              isOpen
+              isPage
+              onClose={() => navigateTo("/")}
+              onVoiceSwitch={() => setShowVoiceAssistant(true)}
+            />
+            <VoiceAssistant
+              isOpen={showVoiceAssistant}
+              onClose={() => setShowVoiceAssistant(false)}
+            />
+            <CommandPalette
+              isOpen={showCommandPalette}
+              onClose={() => setShowCommandPalette(false)}
+              onCommand={handleCommand}
+            />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-dark-bg text-gray-900 font-poppins min-h-screen relative">
@@ -94,6 +162,10 @@ function App() {
         {/* Left Side - Content */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 pb-8 sm:pb-12 md:pb-16 relative z-10">
           <div className="w-full max-w-lg lg:max-w-xl">
+            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 text-[11px] uppercase tracking-[0.18em] text-neon-cyan">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Available for select collaborations
+            </div>
             {/* Welcome Title */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
               <span className="block text-white drop-shadow-lg">Welcome</span>
@@ -178,7 +250,12 @@ function App() {
       <Navbar
         onResumeClick={handleResumeClick}
         onAssistantClick={handleAssistantClick}
+        onCommandClick={() => setShowCommandPalette(true)}
       />
+
+      <div className="scroll-progress" aria-hidden="true">
+        <span style={{ width: `${scrollProgress}%` }} />
+      </div>
 
       {/* Main Sections */}
       <main>
@@ -194,64 +271,41 @@ function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Chatbot */}
-      <Chatbot
-        isOpen={showChatbot}
-        onClose={() => {
-          setShowChatbot(false);
-          setShowVoiceAssistant(false);
-        }}
-        onVoiceSwitch={() => {
-          setShowChatbot(false);
-          setShowVoiceAssistant(true);
-        }}
-        serverAwake={serverAwake}
-      />
-
-      {/* Voice Assistant */}
-      <VoiceAssistant
-        isOpen={showVoiceAssistant}
-        onClose={() => {
-          setShowVoiceAssistant(false);
-          setShowChatbot(false);
-        }}
-        serverAwake={serverAwake}
-      />
-
-      {/* Assistant Mode Selection Modal */}
-      <Modal
-        isOpen={showAssistantModeModal}
-        onClose={() => setShowAssistantModeModal(false)}
-        title="Choose Your AI Assistant Mode"
-      >
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            onClick={handleChatMode}
-            className="p-4 bg-dark-secondary border border-neon-cyan/30 hover:border-neon-cyan rounded-lg transition text-center hover:shadow-neon-cyan"
-          >
-            <div className="text-3xl mb-2">💬</div>
-            <p className="font-bold text-gray-900">Chat Mode</p>
-            <p className="text-gray-700 text-sm mt-1">
-              Text-based conversations
-            </p>
-          </button>
-          <button
-            onClick={handleVoiceMode}
-            className="p-4 bg-dark-secondary border border-neon-purple/30 hover:border-neon-purple rounded-lg transition text-center hover:shadow-neon-purple"
-          >
-            <div className="text-3xl mb-2">🎤</div>
-            <p className="font-bold text-gray-900">Voice Mode</p>
-            <p className="text-gray-700 text-sm mt-1">Voice conversations</p>
-          </button>
-        </div>
-      </Modal>
-
       {/* Resume Preview Modal */}
       <ResumePreviewModal
         isOpen={showResumePreviewModal}
         onClose={() => setShowResumePreviewModal(false)}
         onDownload={handleResumeDownload}
       />
+      <CommandPalette
+        isOpen={showCommandPalette}
+        onClose={() => setShowCommandPalette(false)}
+        onCommand={handleCommand}
+      />
+
+      <div className="quick-actions" aria-label="Quick actions">
+        <button
+          onClick={handleAssistantClick}
+          aria-label="Open AI assistant"
+          title="Ask the AI assistant"
+        >
+          <FaComments aria-hidden="true" />
+        </button>
+        <button
+          onClick={() => scrollTo("contact")}
+          aria-label="Go to contact"
+          title="Start a conversation"
+        >
+          <FaEnvelope aria-hidden="true" />
+        </button>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+          title="Back to top"
+        >
+          <FaArrowUp aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 }

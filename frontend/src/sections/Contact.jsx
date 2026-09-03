@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useServerStatus } from "../hooks/useServerStatus";
 import { contact } from "../services/api";
 import {
   FaPhone,
@@ -13,7 +12,6 @@ import { gsap } from "gsap";
 
 function Contact() {
   const [ref, isVisible] = useIntersectionObserver();
-  const { serverAwake } = useServerStatus();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -123,21 +121,6 @@ function Contact() {
           <div className="h-1 w-24 bg-gradient-to-r from-neon-cyan to-neon-purple mx-auto" />
         </div>
 
-        {/* Availability Status */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-2 px-4 py-2 bg-neon-cyan/10 rounded-full border border-neon-cyan/30">
-            <div
-              className={`w-2 h-2 rounded-full animate-pulse ${serverAwake ? "bg-neon-cyan" : "bg-red-500"}`}
-            />
-            <span
-              className={`font-medium ${serverAwake ? "text-neon-cyan" : "text-red-500"}`}
-            >
-              {serverAwake ? "Available for Projects" : "Server Loading..."}
-            </span>
-          </div>
-          <p className="text-black">Within 12 hours response time</p>
-        </div>
-
         {/* Content Grid */}
         {isVisible && (
           <div className="grid md:grid-cols-2 gap-12">
@@ -215,28 +198,6 @@ function Contact() {
                   Send me a Message
                 </h3>
                 <div className="flex items-center gap-3">
-                  {/* Server Status Badge */}
-                  <div
-                    className={`flex items-center gap-2 px-3 py-2 rounded-full border ${
-                      serverAwake
-                        ? "bg-neon-cyan/10 border-neon-cyan/30"
-                        : "bg-red-500/10 border-red-500/30"
-                    }`}
-                  >
-                    <div
-                      className={`w-2 h-2 rounded-full ${
-                        serverAwake ? "bg-neon-cyan" : "bg-red-500"
-                      } animate-pulse`}
-                    />
-                    <span
-                      className={`text-xs font-medium ${
-                        serverAwake ? "text-neon-cyan" : "text-red-400"
-                      }`}
-                    >
-                      {serverAwake ? "Active" : "Loading..."}
-                    </span>
-                  </div>
-
                   {/* Message Counter Badge */}
                   {messageCount > 0 && (
                     <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-neon-purple/10 border border-neon-purple/30">
@@ -323,7 +284,7 @@ function Contact() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={isSubmitting || !serverAwake}
+                  disabled={isSubmitting}
                   className="w-full px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-purple text-white font-bold rounded-lg hover:shadow-lg hover:shadow-neon-cyan/50 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
@@ -337,12 +298,6 @@ function Contact() {
                     </>
                   )}
                 </button>
-
-                {!serverAwake && (
-                  <p className="text-xs text-red-400 text-center">
-                    ⚠️ Server is loading. Please wait a moment before sending.
-                  </p>
-                )}
               </form>
             </div>
           </div>
