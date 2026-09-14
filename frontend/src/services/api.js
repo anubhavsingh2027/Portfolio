@@ -59,3 +59,5 @@ export const resumeAccess = (data) =>
     method: "POST",
     body: JSON.stringify(data),
   });
+
+export const leetCodeStats = () => handleFetch("leetcode/stats");

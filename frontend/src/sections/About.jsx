@@ -219,7 +219,7 @@ function About() {
             <p className="text-neon-cyan font-semibold text-sm uppercase tracking-widest">
               Expertise
             </p>
-            <p className="text-black text-sm mt-1">Full Stack Development</p>
+            <p className="text-black text-sm mt-1">Software Development || System Designer</p>
           </div>
         </div>
       </div>

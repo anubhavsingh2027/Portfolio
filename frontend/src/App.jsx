@@ -3,6 +3,7 @@ import { FaArrowUp, FaComments, FaEnvelope } from "react-icons/fa";
 import Navbar from "./components/Navbar";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
+import LeetCodeStats from "./sections/LeetCodeStats";
 import Projects from "./sections/Projects";
 import WorkExperience from "./sections/WorkExperience";
 import Services from "./sections/Services";
@@ -283,6 +284,7 @@ function App() {
       <main>
         <About />
         <Skills />
+        <LeetCodeStats />
         <Projects />
         <WorkExperience />
         <Services />

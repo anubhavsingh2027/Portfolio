@@ -11,6 +11,7 @@ import {
   resumeAccess,
   visitorAccess,
 } from "../controllers/access.controller.js";
+import { leetCodeStats } from "../controllers/leetcode.controller.js";
 
 handleAcess.get("/health", (req, res, next) => {
   return res.status(200).json({ status: true });
@@ -22,5 +23,6 @@ handleAcess.post("/speedResponse", speedMail);
 handleAcess.post("/resumeAccess", resumeAccess);
 handleAcess.post("/assitantAccess", assistantAccess);
 handleAcess.post("/visitorAccess", visitorAccess);
+handleAcess.get("/leetcode/stats", leetCodeStats);
 
 export default handleAcess;

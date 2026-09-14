@@ -110,7 +110,9 @@ textarea:focus-visible {
   display: block;
   pointer-events: none;
   opacity: 0;
-  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  translate: -100px -100px;
+  transform: translate(-50%, -50%);
+  will-change: translate, transform, opacity;
   transition:
     opacity 180ms ease,
     width 240ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -121,24 +123,6 @@ textarea:focus-visible {
 
 .site-cursor--visible {
   opacity: 1;
-}
-
-.site-cursor__aura {
-  width: 76px;
-  height: 76px;
-  border: 1px solid rgba(8, 145, 178, 0.24);
-  border-radius: 999px;
-  box-shadow: 0 0 32px rgba(8, 145, 178, 0.12);
-  animation: siteCursorAura 3s ease-in-out infinite;
-}
-
-.site-cursor__ring {
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(147, 51, 234, 0.68);
-  border-radius: 999px;
-  box-shadow: 0 0 14px rgba(147, 51, 234, 0.22);
-  animation: siteCursorSpin 5s linear infinite;
 }
 
 .site-cursor__orb {
@@ -170,36 +154,8 @@ textarea:focus-visible {
     inset 0 0 14px rgba(34, 211, 238, 0.2);
 }
 
-.site-cursor--hover.site-cursor__ring {
-  width: 58px;
-  height: 58px;
-  border-color: rgba(34, 211, 238, 0.9);
-}
-
-.site-cursor--hover.site-cursor__aura {
-  width: 96px;
-  height: 96px;
-  border-color: rgba(147, 51, 234, 0.3);
-}
-
 .site-cursor--click.site-cursor__orb {
   animation: siteCursorClick 420ms ease-out;
-}
-
-@keyframes siteCursorAura {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes siteCursorSpin {
-  to {
-    rotate: 360deg;
-  }
 }
 
 @keyframes siteCursorClick {
@@ -221,8 +177,6 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-cursor__aura,
-  .site-cursor__ring,
   .site-cursor--click.site-cursor__orb {
     animation: none;
   }

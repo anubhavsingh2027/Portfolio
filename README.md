@@ -1,109 +1,130 @@
-# 🌐 Anubhav Singh's Portfolio
+# Anubhav Singh's Portfolio
 
-Welcome to my **personal portfolio website**!
-I'm **Anubhav Singh**, a passionate **Web Developer** from _Varanasi, India_, focused on building dynamic, user-friendly, and visually engaging digital experiences.
+Personal portfolio website for Anubhav Singh, a full-stack developer from Varanasi, India. The portfolio includes project and skills sections, an AI chatbot, voice assistance, contact forms, and live LeetCode progress.
 
-This portfolio showcases my **skills**, **projects**, and **achievements** — built with clean code, modern UI/UX, and an interactive **AI Chatbot** that shares my personal and professional details in real time.
+## Live Demo
 
----
-
-## 🚀 Live Demo
-
-🎯 **Visit Now:** [https://anubhav.nav-code.com/](https://anubhav.nav-code.com/)
-
+[anubhav.nav-code.com](https://anubhav.nav-code.com/)
 🖼️ **Preview:**
 ![Portfolio Preview](https://anubhav.nav-code.com/assets/images/websiteImg.png)
 
----
+## Features
 
-## 🛠️ Built With
+- Responsive React portfolio with Tailwind CSS and animated sections
+- AI text and voice assistants powered by the backend API
+- Contact and access tracking endpoints
+- Live LeetCode profile statistics
+- Latest ten accepted LeetCode submissions with direct problem links
+- Resume preview and download flow
+- Vite frontend and Express backend
 
-| Category                   | Technologies                                                                        |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| 🎨 **Frontend**            | React, Vite, Tailwind CSS, JavaScript, Responsive Design                            |
-| 🔌 **Backend**             | Node.js, Express, RESTful APIs, Redis Cache, Load Balancing, Scalable Architecture  |
-| 🤖 **Interactive Feature** | AI Chatbot (Voice & Text), WebSocket for Real-Time Updates, AI Integration          |
-| 🧰 **Version Control**     | Git & GitHub for code management                                                    |
-| 📬 **Email Service**       | Custom Mail Service using Node.js & Nodemailer                                      |
-| ☁️ **Cloud Deployment**    | Vercel (Frontend), Render/Custom Cloud Hosting (Backend), Full Cloud Infrastructure |
+## Tech Stack
 
----
+| Area         | Technologies                                |
+| ------------ | ------------------------------------------- |
+| Frontend     | React, Vite, Tailwind CSS, JavaScript       |
+| Backend      | Node.js, Express, Mongoose, REST APIs       |
+| Integrations | LeetCode GraphQL, Groq, custom mail service |
+| Deployment   | Vercel frontend, cloud-hosted backend       |
 
-## ✨ Features
+## Project Structure
 
-- 💎 **Fully Responsive Design** — Works perfectly on desktop, tablet, and mobile with modern UI.
-- 🧠 **AI Chatbot** — Voice & Text interactive chatbot powered by Groq API for real-time responses.
-- 📬 **Contact Form** — Integrated with custom email service for direct communication.
-- 🎨 **Modern UI/UX** — Smooth animations, elegant layout, light/dark mode toggle, and intuitive navigation.
-- 🧱 **Scalable Architecture** — Redis caching, load balancing, and optimized database queries for production.
-- ⚡ **Fast Performance** — Optimized loading, real-time WebSocket updates, and efficient API responses.
-- ☁️ **Cloud Deployment** — All projects deployed on cloud infrastructure with continuous availability.
+```text
+Portfolio/
+├── backend/
+│   ├── app.js
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── model/
+│   └── routes/
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       ├── sections/
+│       ├── services/
+│       └── styles/
+├── vercel.json
+└── README.md
+```
 
----
+## Requirements
 
-## 🧠 Skills & Technologies
+- Node.js 18 or newer
+- npm
+- MongoDB connection string
 
-### 💻 Frontend Development
+## Local Setup
 
-- HTML5
-- CSS3 (Animations, Transitions, Flexbox, Grid)
-- JavaScript (ES6+)
+1. Install backend dependencies:
 
-### 🌐 APIs & Backend Integration
+   ```bash
+   cd backend
+   npm install
+   ```
 
-- RESTful API creation & consumption
-- Custom Mail Service (Node.js + Nodemailer)
+2. Create `backend/.env` with the required values:
 
-### 🧩 Tools & Platforms
+   ```env
+   dbUrl=your_mongodb_connection_string
+   port=8000
+   state=development
+   LEETCODE_URL=https://leetcode.com/graphql/
+   groq=your_groq_api_key
+   emailLink=your_mail_service_url
+   ```
 
-- Git & GitHub
-- VS Code
-- **Cloud Platforms:** Vercel (Frontend), Render, Custom Cloud Hosting
-- **Backend Tools:** Redis, Load Balancers, MongoDB Atlas
-- **Real-Time:** WebSockets, AI APIs (Groq, OpenAI)
+   Keep `.env` private and never commit API keys or database credentials.
 
----
+3. Start the backend:
 
-## 🧩 Project Structure
+   ```bash
+   npm start
+   ```
 
-portfolio/
-│
-├── index.html # Main page
-├── /css/ # Stylesheets
-├── /js/ # Scripts and chatbot logic
-├── //source/source/image/ # /source/source/images and assets
-└── mailer/ # REST API mail handling
+4. Install and start the frontend in a second terminal:
 
-yaml
-Copy code
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
 
----
+The frontend runs on `http://localhost:5173` and the backend runs on the configured port, normally `http://localhost:8000`.
 
-## 🔮 Recent Improvements
+## API
 
-- ✅ **Enhanced Frontend** — Modern React-based UI with Tailwind CSS, animations, and responsive design
-- ✅ **Scalable Backend** — Redis caching, load balancing, and optimized data handling
-- ✅ **Real-Time Features** — WebSockets for instant messaging and live updates
-- ✅ **Cloud Deployment** — All projects now running on cloud infrastructure
-- ✅ **Dark/Light Mode** — Full theme toggle support for accessibility
+Backend routes are mounted under `/portfolio`.
 
----
+| Method | Endpoint                    | Purpose                                                                                   |
+| ------ | --------------------------- | ----------------------------------------------------------------------------------------- |
+| `GET`  | `/portfolio/health`         | Health check                                                                              |
+| `GET`  | `/portfolio/leetcode/stats` | LeetCode totals, difficulty counts, beat percentages, and latest ten accepted submissions |
+| `POST` | `/portfolio/chatAssistant`  | Text assistant                                                                            |
+| `POST` | `/portfolio/voiceAssistant` | Voice assistant                                                                           |
+| `POST` | `/portfolio/contact`        | Contact form                                                                              |
 
-## 📫 Contact Me
+The LeetCode endpoint accepts an optional username query parameter:
 
-📧 **Email:** [anubhavsingh2027@gmail.com](mailto:anubhavsingh2027@gmail.com)
+```text
+GET /portfolio/leetcode/stats?username=anubhav_singh_6966
+```
 
-💼 **LinkedIn:** [linkedin.com/in/anubhav-singh-09b71829b](https://www.linkedin.com/in/anubhav-singh-09b71829b)
+The response is cached for five minutes. Recent submissions contain the problem title, slug, Unix timestamp, and ISO `solvedAt` date. If the recent-submissions query is temporarily unavailable, the endpoint still returns the profile totals with an empty `recentSolvedQuestions` array.
 
-🐙 **GitHub:** [github.com/anubhavsingh2027](https://github.com/anubhavsingh2027)
+## Frontend Commands
 
----
+Run these commands from `frontend/`:
 
-## 🏁 Conclusion
+```bash
+npm run dev       # Start the Vite development server
+npm run build     # Create a production build
+npm run preview   # Preview the production build locally
+npm run lint      # Run ESLint
+```
 
-My portfolio represents my journey in web development — a blend of creativity, logic, and design.
-It’s not just a static website, but a dynamic reflection of how I approach **innovation, interactivity, and clean coding**.
+## Contact
 
-> “Code is art — and every project is a canvas.” — _Anubhav Singh_
-
-⭐ **If you like this project, please give it a star on GitHub!**
+- Email: [anubhavsingh2027@gmail.com](mailto:anubhavsingh2027@gmail.com)
+- LinkedIn: [linkedin.com/in/anubhav-singh-09b71829b](https://www.linkedin.com/in/anubhav-singh-09b71829b)
+- GitHub: [github.com/anubhavsingh2027](https://github.com/anubhavsingh2027)

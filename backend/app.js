@@ -1,6 +1,5 @@
 // ===== Core modules =====
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 import express from "express";
 
 // ===== External modules =====
@@ -16,7 +15,7 @@ import handleRoutes from "./routes/handle.routes.js";
 const app = express();
 const mongoUrl = process.env.dbUrl;
 const port = process.env.PORT || process.env.port || 5000;
-const environment=process.env.state;
+const environment = process.env.state;
 // ===== Middleware =====
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,7 +24,11 @@ app.use(cookieParser());
 // ===== CORS setup (CRITICAL) =====
 app.use(
   cors({
-    origin: [environment=="production"?"https://anubhav.nav-code.com":"http://localhost:5173"]
+    origin: [
+      environment == "production"
+        ? "https://anubhav.nav-code.com"
+        : "http://localhost:5173",
+    ],
   }),
 );
 
@@ -40,17 +43,8 @@ app.get("/", (req, res) => {
 app.use("/portfolio", handleRoutes);
 
 // ===== Start server =====
-mongoose
-  .connect(mongoUrl)
-  .then(() => {
-    console.log("<======== MongoDB Connected Successfully =======>");
-  })
-  .catch((err) =>
-    console.log("MongoDB unavailable; running without database", err.message),
-  );
+await mongoose.connect(mongoUrl)
 
-app.listen(port, () => {
-  console.log(`Server Running At http://localhost:${port}`);
-});
+app.listen(port);
 
 export default app;

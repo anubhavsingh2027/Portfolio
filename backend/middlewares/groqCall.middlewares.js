@@ -62,7 +62,6 @@ export const groqcalling = async (contentData, retries = 2) => {
     );
 
   } catch (error) {
-    console.log(error);
     clearTimeout(timeout);
 
     // ⏳ Timeout case
