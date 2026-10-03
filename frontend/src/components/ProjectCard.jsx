@@ -9,13 +9,11 @@ function ProjectCard({
   liveLink,
   codeLink,
   features = [],
-  completion = 100,
 }) {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Add entrance animation
     if (cardRef.current) {
       cardRef.current.classList.add("card-entrance");
     }
@@ -24,96 +22,61 @@ function ProjectCard({
   return (
     <div
       ref={cardRef}
-      className={`relative h-[520px] cursor-pointer group rounded-xl overflow-hidden transition-all duration-500 ${
-        isHovered ? "scale-105 shadow-2xl shadow-neon-cyan/30" : "shadow-lg"
+      className={`group relative h-[520px] overflow-hidden rounded-xl transition-all duration-500 ${
+        isHovered ? "scale-[1.01] shadow-2xl shadow-cyan-500/20" : "shadow-lg"
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-secondary/90 to-dark-secondary/70 backdrop-blur-sm" />
-
-      {/* Border glow animation */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-950/90 backdrop-blur-sm" />
       <div
-        className={`absolute inset-0 rounded-xl border transition-all duration-500 pointer-events-none ${
-          isHovered ? "border-neon-cyan/70" : "border-neon-cyan/30"
-        }`}
+        className={`absolute inset-0 rounded-xl border transition-all duration-500 ${isHovered ? "border-cyan-400/70" : "border-cyan-400/25"}`}
       />
 
-      {/* Main Content - Slides Up & Fades Out */}
       <div
-        className={`absolute inset-0 p-5 flex flex-col overflow-hidden transition-all duration-700 ${
-          isHovered
-            ? "opacity-0 translate-y-4 blur-sm"
-            : "opacity-100 translate-y-0 blur-none"
-        }`}
+        className={`absolute inset-0 flex flex-col overflow-hidden p-5 transition-all duration-700 ${isHovered ? "translate-y-4 opacity-0 blur-sm" : "translate-y-0 opacity-100 blur-none"}`}
       >
-        {/* Image Container */}
         {image && (
-          <div className="relative overflow-hidden rounded-lg mb-4 h-48 flex-shrink-0">
+          <div className="relative mb-4 h-48 flex-shrink-0 overflow-hidden rounded-lg">
             <img
               src={image}
               alt={title}
-              className={`w-full h-full object-cover transition-all duration-700 ${
-                isHovered ? "scale-95 blur-md" : "scale-100 blur-none"
-              }`}
+              className={`h-full w-full object-cover transition-all duration-700 ${isHovered ? "scale-95 blur-md" : "scale-100 blur-none"}`}
             />
             <div
-              className={`absolute inset-0 bg-gradient-to-t from-dark-secondary/40 to-transparent transition-all duration-500 ${
-                isHovered ? "opacity-80" : "opacity-20"
-              }`}
+              className={`absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent transition-all duration-500 ${isHovered ? "opacity-80" : "opacity-30"}`}
             />
           </div>
         )}
 
-        {/* Title */}
         <h3
-          className={`text-lg font-bold mb-2 transition-all duration-500 ${
-            isHovered ? "text-neon-purple" : "text-neon-cyan"
-          }`}
+          className={`mb-2 text-lg font-bold transition-colors duration-500 ${isHovered ? "text-violet-300" : "text-cyan-300"}`}
         >
           {title}
         </h3>
 
-        {/* Description */}
-        <p className="text-black text-sm mb-3 flex-grow leading-relaxed line-clamp-5">
+        <p className="mb-3 flex-grow text-sm leading-relaxed text-slate-200">
           {description}
         </p>
 
-        {/* Technologies */}
-        <div className="mb-3 flex flex-wrap gap-1.5">
-          {technologies.slice(0, 4).map((tech, idx) => (
+        <div className="mb-4 flex flex-wrap gap-1.5">
+          {technologies.slice(0, 8).map((tech, idx) => (
             <span
               key={idx}
-              className="text-xs bg-neon-cyan/25 text-neon-cyan px-2.5 py-1 rounded-full border border-neon-cyan/40 transition-all duration-300 hover:bg-neon-cyan/40"
+              className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-cyan-200"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        {/* Completion Progress */}
-        <div className="mb-3">
-          <div className="flex justify-between items-center text-xs mb-1.5">
-            <span className="text-white/60">Progress</span>
-            <span className="text-neon-cyan font-bold">{completion}%</span>
-          </div>
-          <div className="w-full h-2 bg-dark-bg/60 rounded-full overflow-hidden border border-neon-cyan/30">
-            <div
-              className="h-full bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-cyan rounded-full shadow-lg shadow-neon-cyan/50 transition-all duration-1000"
-              style={{ width: `${completion}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-2 pt-3 border-t border-neon-cyan/20">
+        <div className="flex gap-2 border-t border-cyan-400/20 pt-3">
           {liveLink && (
             <a
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 bg-neon-cyan/20 text-neon-cyan hover:bg-neon-cyan/40 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300 transform hover:scale-110 active:scale-95"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-cyan-400/15 py-2.5 text-xs font-semibold text-cyan-300 transition hover:bg-cyan-400/25"
             >
               <FaExternalLinkAlt /> Live
             </a>
@@ -123,7 +86,7 @@ function ProjectCard({
               href={codeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 bg-neon-purple/20 text-neon-purple hover:bg-neon-purple/40 py-2.5 rounded-lg text-xs font-semibold transition-all duration-300 transform hover:scale-110 active:scale-95"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-violet-500/15 py-2.5 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/25"
             >
               <FaCode /> Code
             </a>
@@ -131,52 +94,46 @@ function ProjectCard({
         </div>
       </div>
 
-      {/* Features Content - Slides Down & Fades In */}
       <div
-        className={`absolute inset-0 p-5 flex flex-col overflow-hidden transition-all duration-700 ${
-          isHovered
-            ? "opacity-100 translate-y-0 blur-none"
-            : "opacity-0 -translate-y-4 blur-sm"
-        }`}
+        className={`absolute inset-0 flex flex-col overflow-hidden p-5 transition-all duration-700 ${isHovered ? "translate-y-0 opacity-100 blur-none" : "-translate-y-4 opacity-0 blur-sm"}`}
       >
-        {/* Features Header */}
-        <div className="flex items-center gap-2 mb-4">
-          <FaStar className="text-neon-purple text-sm" />
-          <h3 className="text-lg font-bold text-neon-purple">Key Features</h3>
+        <div className="mb-4 flex items-center gap-2">
+          <FaStar className="text-violet-300" />
+          <h3 className="text-lg font-bold text-violet-300">
+            Technical Highlights
+          </h3>
         </div>
 
-        {/* Features List with Stagger */}
         <ul className="flex-grow space-y-2.5 overflow-y-auto pr-2">
-          {features && features.length > 0 ? (
+          {features.length > 0 ? (
             features.map((feature, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2.5 text-black text-sm transition-all duration-300 transform"
+                className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-200"
                 style={{
                   animation: isHovered
-                    ? `slideInFeature 0.6s ease-out ${idx * 0.08}s`
+                    ? `slideInFeature 0.5s ease-out ${idx * 0.08}s`
                     : "none",
-                  opacity: isHovered ? 1 : 0,
-                  transform: isHovered ? "translateX(0)" : "translateX(-10px)",
                 }}
               >
-                <FaCheck className="text-neon-purple text-xs mt-1.5 flex-shrink-0 transition-transform duration-300" />
-                <span className="leading-relaxed">{feature}</span>
+                <FaCheck className="mt-1.5 flex-shrink-0 text-violet-300" />
+                <span>{feature}</span>
               </li>
             ))
           ) : (
-            <li className="text-black text-sm italic">Hover to see features</li>
+            <li className="text-sm italic text-slate-400">
+              Detailed project highlights will appear here.
+            </li>
           )}
         </ul>
 
-        {/* Bottom Buttons */}
-        <div className="flex gap-2 pt-4 border-t border-neon-purple/20 mt-4">
+        <div className="mt-4 flex gap-2 border-t border-violet-400/20 pt-4">
           {liveLink && (
             <a
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1 bg-neon-cyan/25 text-neon-cyan hover:bg-neon-cyan/45 py-2 rounded-lg text-xs font-semibold transition-all duration-300 transform hover:scale-110 active:scale-95"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-cyan-400/15 py-2 text-xs font-semibold text-cyan-300 transition hover:bg-cyan-400/25"
             >
               <FaExternalLinkAlt /> Visit
             </a>
@@ -186,7 +143,7 @@ function ProjectCard({
               href={codeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1 bg-neon-purple/25 text-neon-purple hover:bg-neon-purple/45 py-2 rounded-lg text-xs font-semibold transition-all duration-300 transform hover:scale-110 active:scale-95"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-violet-500/15 py-2 text-xs font-semibold text-violet-300 transition hover:bg-violet-500/25"
             >
               <FaCode /> Repo
             </a>

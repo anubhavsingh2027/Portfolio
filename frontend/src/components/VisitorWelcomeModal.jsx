@@ -4,7 +4,6 @@ import {
   FaBriefcase,
   FaCode,
   FaRegCompass,
-  FaTimes,
   FaUserTie,
   FaUsers,
 } from "react-icons/fa";
@@ -58,40 +57,27 @@ function VisitorWelcomeModal({ isOpen, onClose }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!selectedType || isSending) return;
+    const name = contact.name.trim();
+    const email = contact.email.trim();
+    if (!selectedType || !name || !email || isSending) return;
 
     setIsSending(true);
     try {
-      await visitorAccess({
-        name: contact.name.trim(),
-        email: contact.email.trim(),
+      visitorAccess({
+        name,
+        email,
         visitorType: selectedType,
       });
     } finally {
-      localStorage.setItem("anubhav-visitor-welcomed-v2", "true");
       setIsSending(false);
       onClose();
     }
   };
 
-  const handleSkip = () => {
-    localStorage.setItem("anubhav-visitor-welcomed-v2", "true");
-    onClose();
-  };
-
   return (
-    <div className="visitor-welcome fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-[#05070d]/90 p-4 backdrop-blur-md sm:p-6">
+    <div className="visitor-welcome fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-slate-200/80 p-4 backdrop-blur-md sm:p-6">
       <div className="visitor-welcome__noise pointer-events-none absolute inset-0 opacity-30" />
-      <div className="visitor-welcome__panel relative my-auto w-full max-w-3xl overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-[#0b1120]/95 shadow-[0_24px_100px_rgba(8,145,178,0.22)]">
-        <button
-          type="button"
-          onClick={handleSkip}
-          className="absolute right-4 top-4 z-10 rounded-full border border-white/10 p-2.5 text-slate-400 transition hover:border-cyan-300/40 hover:text-white"
-          aria-label="Close welcome message"
-        >
-          <FaTimes />
-        </button>
-
+      <div className="visitor-welcome__panel relative my-auto w-full max-w-3xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_100px_rgba(15,23,42,0.18)]">
         <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
           <div className="visitor-welcome__intro relative flex flex-col justify-between overflow-hidden p-7 sm:p-10">
             <div className="relative z-10">
@@ -101,26 +87,26 @@ function VisitorWelcomeModal({ isOpen, onClose }) {
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-cyan-300">
                 A quick hello
               </p>
-              <h2 className="max-w-sm text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+              <h2 className="max-w-sm text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
                 Make yourself at home.
               </h2>
-              <p className="mt-4 max-w-sm text-sm leading-6 text-slate-300">
+              <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">
                 Tell me what brings you here and I&apos;ll tune the tour toward
                 what matters to you.
               </p>
             </div>
-            <div className="relative z-10 mt-10 flex items-center gap-3 text-xs text-slate-400">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+            <div className="relative z-10 mt-10 flex items-center gap-3 text-xs text-slate-500">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
               Anubhav Singh / full-stack engineer
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="p-7 sm:p-10">
             <div className="mb-6">
-              <p className="text-lg font-bold text-white">
+              <p className="text-lg font-bold text-slate-900">
                 Who are you visiting as?
               </p>
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm text-slate-500">
                 Choose the path that sounds most like you.
               </p>
             </div>
@@ -138,10 +124,10 @@ function VisitorWelcomeModal({ isOpen, onClose }) {
                       <Icon />
                     </span>
                     <span className="text-left">
-                      <span className="block font-bold text-white">
+                      <span className="block font-bold text-slate-900">
                         {label}
                       </span>
-                      <span className="mt-1 block text-xs leading-5 text-slate-400">
+                      <span className="mt-1 block text-xs leading-5 text-slate-500">
                         {description}
                       </span>
                     </span>
@@ -156,9 +142,10 @@ function VisitorWelcomeModal({ isOpen, onClose }) {
                 onChange={(event) =>
                   setContact({ ...contact, name: event.target.value })
                 }
-                placeholder="Your name (optional)"
+                placeholder="Your name"
                 className="visitor-input"
                 autoComplete="name"
+                required
               />
               <input
                 value={contact.email}
@@ -166,22 +153,22 @@ function VisitorWelcomeModal({ isOpen, onClose }) {
                   setContact({ ...contact, email: event.target.value })
                 }
                 type="email"
-                placeholder="Email (optional)"
+                placeholder="Email"
                 className="visitor-input"
                 autoComplete="email"
+                required
               />
             </div>
             <div className="mt-7 flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
-              <button
-                type="button"
-                onClick={handleSkip}
-                className="text-sm text-slate-400 transition hover:text-white"
-              >
-                Skip for now
-              </button>
+              <p className="text-xs text-slate-500">All fields are required.</p>
               <button
                 type="submit"
-                disabled={!selectedType || isSending}
+                disabled={
+                  !selectedType ||
+                  !contact.name.trim() ||
+                  !contact.email.trim() ||
+                  isSending
+                }
                 className="group flex w-full items-center justify-center gap-3 rounded-xl bg-cyan-300 px-5 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
               >
                 {isSending ? "Opening portfolio..." : "Let’s go"}

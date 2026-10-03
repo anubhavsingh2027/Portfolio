@@ -32,12 +32,8 @@ function App() {
   const isChatbotRoute = normalizedPath === "/chatbot";
 
   useEffect(() => {
-    const visitorWelcomeKey = "anubhav-visitor-welcomed-v2";
-
-    if (!localStorage.getItem(visitorWelcomeKey)) {
-      const timer = window.setTimeout(() => setShowVisitorWelcome(true), 450);
-      return () => window.clearTimeout(timer);
-    }
+    const timer = window.setTimeout(() => setShowVisitorWelcome(true), 450);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -83,12 +79,10 @@ function App() {
   };
 
   const handleResumeClick = () => {
-    // Show preview modal instead of direct download
     setShowResumePreviewModal(true);
   };
 
   const handleResumeDownload = () => {
-    // Download the resume PDF
     window.location.href =
       "/assets/pdf/Anubhav-singh-Resume -Software-Engineer.pdf";
   };
@@ -174,102 +168,92 @@ function App() {
         isOpen={showVisitorWelcome}
         onClose={() => setShowVisitorWelcome(false)}
       />
-      {/* Hero Section - Split Layout */}
       <section
         id="home"
         className="relative w-full flex flex-col lg:flex-row overflow-visible"
-        style={{
-          backgroundColor: "#0a0a0f",
-        }}
+        style={{ backgroundColor: "#0a0a0f" }}
       >
-        {/* Left Side - Content */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 md:px-10 pb-8 sm:pb-12 md:pb-16 relative z-10">
-          <div className="w-full max-w-lg lg:max-w-xl">
-            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 text-[11px] uppercase tracking-[0.18em] text-neon-cyan">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Available for select collaborations
+          <div className="w-full max-w-xl lg:max-w-2xl">
+            <div className="inline-flex items-center gap-2 mb-5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-neon-cyan sm:text-[11px]">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              B.Tech CSE (AI) student • Backend AI Engineering Intern
             </div>
-            {/* Welcome Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">
-              <span className="block text-white drop-shadow-lg">Welcome</span>
-              <span className="block text-neon-cyan drop-shadow-lg">to My</span>
-              <span className="block bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent drop-shadow-lg">
-                Portfolio
+
+            <h1 className="mb-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <span className="block">Backend & Full-Stack</span>
+              <span className="block text-neon-cyan">Developer building</span>
+              <span className="block bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent">
+                scalable APIs & AI products
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-xs sm:text-sm md:text-lg lg:text-xl text-neon-cyan font-medium mb-2 sm:mb-3 drop-shadow-lg leading-relaxed">
-              Full Stack Developer | MERN Specialist | AI Enthusiast
+            <p className="mb-6 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base lg:text-lg">
+              I’m Anubhav Singh, a B.Tech CSE (AI) student focused on backend
+              systems, real-time applications, and practical AI integrations.
+              I’m currently a Backend AI Engineering Intern and open to software
+              engineering internships and entry-level opportunities in backend,
+              full-stack, and AI-focused engineering.
             </p>
 
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 mb-6 sm:mb-8 drop-shadow-lg leading-relaxed">
-              Crafting innovative digital solutions with cutting-edge technology
-              and creative design
-            </p>
-
-            {/* Call-to-Action Buttons */}
-            <div className="flex flex-col xs:flex-col sm:flex-row gap-3 sm:gap-3 md:gap-4 mb-8 sm:mb-12 w-full">
+            <div className="mb-8 flex w-full flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => scrollTo("projects")}
-                className="flex-1 sm:flex-0 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2 whitespace-nowrap"
+                className="flex-1 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:shadow-lg sm:text-base"
               >
-                Explore Work ↓
-              </button>
-              <button
-                onClick={() => scrollTo("contact")}
-                className="flex-1 sm:flex-0 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base bg-neon-cyan text-gray-900 font-bold rounded-lg hover:shadow-lg transition whitespace-nowrap"
-              >
-                Get In Touch
+                View My Projects
               </button>
               <button
                 onClick={handleResumeClick}
-                className="flex-1 sm:flex-0 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base bg-neon-purple text-white font-bold rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2 whitespace-nowrap"
+                className="flex-1 rounded-lg bg-neon-cyan px-5 py-3 text-sm font-bold text-slate-900 transition hover:shadow-lg sm:text-base"
               >
-                Download ⬇
+                Download Resume
+              </button>
+              <button
+                onClick={() => scrollTo("contact")}
+                className="flex-1 rounded-lg bg-neon-purple px-5 py-3 text-sm font-bold text-white transition hover:shadow-lg sm:text-base"
+              >
+                Connect With Me
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-8">
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-400">
+                <p className="text-2xl font-bold text-cyan-400 sm:text-3xl">
                   15+
                 </p>
-                <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-300 drop-shadow-lg">
+                <p className="text-[11px] text-gray-300 sm:text-xs md:text-sm">
                   Projects
                 </p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-400">
-                  3+
+                <p className="text-2xl font-bold text-cyan-400 sm:text-3xl">
+                  800+
                 </p>
-                <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-300 drop-shadow-lg">
-                  Years
+                <p className="text-[11px] text-gray-300 sm:text-xs md:text-sm">
+                  DSA problems
                 </p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-400">
-                  800+
+                <p className="text-2xl font-bold text-cyan-400 sm:text-3xl">
+                  AI +
                 </p>
-                <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-300 drop-shadow-lg">
-                  Solved
+                <p className="text-[11px] text-gray-300 sm:text-xs md:text-sm">
+                  Backend
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Rubik's Cube (Responsive) */}
         <div
-          className="w-full lg:w-1/2 flex items-center justify-center relative py-12 sm:py-16 md:py-16 "
+          className="relative flex w-full items-center justify-center py-12 sm:py-16 lg:w-1/2 lg:py-16"
           style={{ minHeight: "auto" }}
         >
           <RubiksCube3D />
         </div>
       </section>
 
-      {/* Navbar */}
       <Navbar
         onResumeClick={handleResumeClick}
         onAssistantClick={handleAssistantClick}
@@ -280,7 +264,6 @@ function App() {
         <span style={{ width: `${scrollProgress}%` }} />
       </div>
 
-      {/* Main Sections */}
       <main>
         <About />
         <Skills />
@@ -292,10 +275,8 @@ function App() {
         <Contact />
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Resume Preview Modal */}
       <ResumePreviewModal
         isOpen={showResumePreviewModal}
         onClose={() => setShowResumePreviewModal(false)}

@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Skills", section: "skills" },
   { label: "Projects", section: "projects" },
   { label: "Experience", section: "experience" },
-  { label: "Services", section: "services" },
   { label: "Contact", section: "contact" },
 ];
 
@@ -35,6 +34,7 @@ function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
       }
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,46 +46,42 @@ function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-dark-tertiary/95 backdrop-blur-md shadow-lg"
-          : "bg-gradient-to-b from-dark-bg/80 to-dark-secondary/60"
+          ? "bg-slate-950/90 shadow-lg backdrop-blur-md"
+          : "bg-slate-950/70 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center shadow-neon-cyan">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
+        <div className="flex flex-shrink-0 items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-purple-600 shadow-lg shadow-cyan-500/30">
             <img
               src="/assets/images/nav-logo.png"
-              alt="Logo"
-              className="w-10 h-10 object-contain"
+              alt="Anubhav Singh logo"
+              className="h-9 w-9 object-contain"
               onError={(e) => (e.target.style.display = "none")}
             />
           </div>
-          <span className="hidden sm:inline font-bold text-lg text-neon-cyan tracking-wide">
+          <span className="hidden text-lg font-bold tracking-wide text-cyan-300 sm:inline">
             Anubhav Singh
           </span>
         </div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex gap-8 flex-1 justify-center">
+        <ul className="hidden flex-1 items-center justify-center gap-7 md:flex">
           {navLinks.map((link) => (
             <li key={link.section}>
               <button
                 onClick={() => handleNavClick(link.section)}
-                className={`transition-all duration-300 font-medium relative group ${
+                className={`relative font-medium transition-colors ${
                   activeSection === link.section
-                    ? "text-neon-cyan"
-                    : "text-gray-700 hover:text-neon-cyan"
+                    ? "text-cyan-300"
+                    : "text-slate-300 hover:text-cyan-300"
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-purple transition-all duration-300 ${
-                    activeSection === link.section
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-300 ${
+                    activeSection === link.section ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
               </button>
@@ -93,66 +89,53 @@ function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
           ))}
         </ul>
 
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           <button
             onClick={onCommandClick}
-            className="flex items-center gap-2 rounded-lg border border-slate-300/70 bg-white/40 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-neon-cyan hover:text-neon-cyan"
+            className="flex items-center gap-2 rounded-lg border border-slate-300/70 bg-white/5 px-3 py-2 text-sm font-medium text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
             aria-label="Open command palette"
             title="Open command palette (Ctrl K)"
           >
             <FaTerminal size={12} aria-hidden="true" />
             <span>Ctrl K</span>
           </button>
-          <button
-            onClick={onResumeClick}
-            className="px-4 py-2 bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 rounded-lg font-medium transition"
-          >
+          <button onClick={onResumeClick} className="rounded-lg bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-300 transition hover:bg-cyan-500/20">
             Resume
           </button>
-          <button
-            onClick={onAssistantClick}
-            className="px-4 py-2 bg-gradient-primary text-white hover:shadow-lg rounded-lg font-medium transition"
-          >
-            Assistant
+          <button onClick={onAssistantClick} className="rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:shadow-lg hover:shadow-cyan-500/20">
+            AI Guide
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-neon-cyan p-2"
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="rounded-lg p-2 text-cyan-300 md:hidden" aria-label="Toggle menu">
+          {isMenuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-dark-secondary/95 backdrop-blur-md border-t border-neon-cyan/20">
-          <ul className="flex flex-col p-4 space-y-2">
+        <div className="border-t border-cyan-500/20 bg-slate-950/95 md:hidden">
+          <ul className="flex flex-col space-y-2 p-4">
             {navLinks.map((link) => (
               <li key={link.section}>
                 <button
                   onClick={() => handleNavClick(link.section)}
-                  className={`w-full text-left px-4 py-2 rounded transition ${
+                  className={`w-full rounded px-4 py-2 text-left text-sm font-medium transition ${
                     activeSection === link.section
-                      ? "bg-neon-cyan/20 text-neon-cyan font-medium"
-                      : "text-gray-700 hover:bg-dark-secondary"
+                      ? "bg-cyan-500/10 text-cyan-300"
+                      : "text-slate-200 hover:bg-slate-800"
                   }`}
                 >
                   {link.label}
                 </button>
               </li>
             ))}
-            <li className="pt-2 border-t border-neon-cyan/20">
+            <li className="border-t border-cyan-500/20 pt-3">
               <button
                 onClick={() => {
                   onCommandClick();
                   setIsMenuOpen(false);
                 }}
-                className="mb-2 flex w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-neon-cyan transition hover:bg-neon-cyan/10"
+                className="mb-2 flex w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-cyan-300 transition hover:bg-cyan-500/10"
               >
                 <FaTerminal size={12} aria-hidden="true" /> Command palette
               </button>
@@ -161,20 +144,18 @@ function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
                   onResumeClick();
                   setIsMenuOpen(false);
                 }}
-                className="w-full px-4 py-2 bg-neon-cyan/10 text-neon-cyan rounded hover:bg-neon-cyan/20 font-medium transition"
+                className="mb-2 w-full rounded bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-300"
               >
                 Resume
               </button>
-            </li>
-            <li>
               <button
                 onClick={() => {
                   onAssistantClick();
                   setIsMenuOpen(false);
                 }}
-                className="w-full px-4 py-2 bg-gradient-primary text-white rounded hover:shadow-lg font-medium transition"
+                className="w-full rounded bg-gradient-to-r from-cyan-500 to-purple-600 px-4 py-2 text-sm font-medium text-white"
               >
-                Assistant
+                AI Guide
               </button>
             </li>
           </ul>
