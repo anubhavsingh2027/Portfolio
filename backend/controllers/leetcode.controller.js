@@ -155,17 +155,13 @@ export const leetCodeStats = async (req, res) => {
         : [];
 
     if (recentQuestionsResult.status === "rejected") {
-      console.error(
-        "Error fetching recent LeetCode submissions:",
-        recentQuestionsResult.reason.message,
-      );
+      
     }
 
     const data = { ...stats, recentSolvedQuestions };
     cachedStats = { username: userSlug, cachedAt: Date.now(), data };
     return res.status(200).json(data);
   } catch (error) {
-    console.error("Error fetching LeetCode stats:", error.message);
     return res.status(502).json({
       error: "Unable to load LeetCode stats right now",
       message: error.message,

@@ -118,7 +118,7 @@ function App() {
           onAssistantClick={handleAssistantClick}
           onCommandClick={() => setShowCommandPalette(true)}
         />
-        <main className="min-h-[100dvh] px-3 pt-28 pb-6 sm:px-4 md:px-8 md:pb-10">
+        <main className="min-h-[120dvh] px-3 pt-28 pb-6 sm:px-4 md:px-8 md:pb-10">
           <div className="mx-auto flex max-w-5xl flex-col">
             <div className="mb-6 flex items-end justify-between gap-4">
               <div>

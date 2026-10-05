@@ -1,20 +1,20 @@
-// Node 18+ (Render default) me fetch available hota hai
-
 let lastCallTime = 0;
 
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const groqcalling = async (contentData, retries = 2) => {
-  // 🔒 Basic rate limit (voice spam se bachane ke liye)
+export const groqcalling = async (
+  contentData,
+  retries = 2,
+  { skipRateLimit = false } = {},
+) => {
   const now = Date.now();
-  if (now - lastCallTime < 2000) {
+  if (!skipRateLimit && now - lastCallTime < 2000) {
     return "Please wait a moment before asking again.";
   }
-  lastCallTime = now;
+  if (!skipRateLimit) lastCallTime = now;
 
-  // ⏱ Timeout controller
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10000); // 10 sec
+  const timeout = setTimeout(() => controller.abort(), 10000);
 
   try {
     if (!process.env.groq) {
@@ -33,51 +33,35 @@ export const groqcalling = async (contentData, retries = 2) => {
         body: JSON.stringify({
           model: "openai/gpt-oss-20b",
           messages: [
-            {
-              role: "system",
-              content: "You are a helpful voice assistant.",
-            },
-            {
-              role: "user",
-              content: contentData,
-            },
+            { role: "system", content: "You are a helpful AI assistant." },
+            { role: "user", content: contentData },
           ],
         }),
-      }
+      },
     );
-
-    clearTimeout(timeout);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Groq API error:", response.status, errorText);
       throw new Error(`Groq API failed with status ${response.status}`);
     }
 
     const data = await response.json();
-
     return (
       data?.choices?.[0]?.message?.content ||
       "Sorry, I could not generate a response."
     );
-
   } catch (error) {
-    clearTimeout(timeout);
-
-    // ⏳ Timeout case
     if (error.name === "AbortError") {
-      console.error("Groq request timed out");
       return "AI is taking too long. Please try again.";
     }
 
-    // 🔁 Retry logic
     if (retries > 0) {
-      console.warn("Retrying Groq call...", retries);
       await sleep(1500);
-      return groqcalling(contentData, retries - 1);
+      return groqcalling(contentData, retries - 1, { skipRateLimit });
     }
 
-    console.error("Groq call failed:", error.message);
     return "AI is temporarily unavailable. Please try again later.";
+  } finally {
+    clearTimeout(timeout);
   }
 };

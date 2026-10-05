@@ -18,7 +18,6 @@ export async function sendMail(data) {
       };
     }
   } catch (err) {
-    console.error("Email sending error:", err);
     return {
       success: false,
       message: "Error sending email",

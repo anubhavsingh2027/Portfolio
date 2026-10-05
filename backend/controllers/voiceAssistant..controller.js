@@ -49,7 +49,6 @@ ${myDB}
         await data.save();
     res.json({ answer });
   } catch (error) {
-    console.error("Error in chatAssistant:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

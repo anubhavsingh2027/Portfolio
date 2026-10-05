@@ -21,7 +21,157 @@ const QUICK_PROMPTS = [
   "What can you build for my business?",
 ];
 
-// Component to render text with clickable links and typewriter effect
+const renderInlineMarkdown = (text, keyPrefix) => {
+  const tokenPattern = /(https?:\/\/[^\s<]+|`[^`]+`|\*\*[^*]+\*\*|__[^_]+__)/g;
+  const parts = text.split(tokenPattern);
+
+  return parts.map((part, index) => {
+    const key = `${keyPrefix}-${index}`;
+
+    if (/^https?:\/\//.test(part)) {
+      const trailingPunctuation = part.match(/[.,!?;:)]*$/)?.[0] || "";
+      const url = trailingPunctuation
+        ? part.slice(0, -trailingPunctuation.length)
+        : part;
+
+      return (
+        <React.Fragment key={key}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-700 hover:text-purple-700 underline underline-offset-2 break-all transition"
+          >
+            {url}
+          </a>
+          {trailingPunctuation}
+        </React.Fragment>
+      );
+    }
+
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return (
+        <code
+          key={key}
+          className="rounded bg-black/10 px-1.5 py-0.5 font-mono text-[0.9em] text-purple-900"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+
+    if (
+      (part.startsWith("**") && part.endsWith("**")) ||
+      (part.startsWith("__") && part.endsWith("__"))
+    ) {
+      return <strong key={key}>{part.slice(2, -2)}</strong>;
+    }
+
+    return <React.Fragment key={key}>{part}</React.Fragment>;
+  });
+};
+
+const renderMarkdown = (text) => {
+  const lines = text.replace(/\r\n?/g, "\n").split("\n");
+  const blocks = [];
+  let index = 0;
+
+  while (index < lines.length) {
+    const line = lines[index].trim();
+
+    if (!line) {
+      index += 1;
+      continue;
+    }
+
+    const heading = line.match(/^(#{1,6})\s+(.+)$/);
+    if (heading) {
+      const level = Math.min(heading[1].length, 6);
+      const Heading = `h${level}`;
+      blocks.push(
+        <Heading
+          key={`heading-${index}`}
+          className={`chat-markdown__heading chat-markdown__heading--${level}`}
+        >
+          {renderInlineMarkdown(heading[2], `heading-${index}`)}
+        </Heading>,
+      );
+      index += 1;
+      continue;
+    }
+
+    if (/^([-*_])(?:\s*\1){2,}$/.test(line)) {
+      blocks.push(<hr key={`rule-${index}`} className="chat-markdown__rule" />);
+      index += 1;
+      continue;
+    }
+
+    const unorderedItem = lines[index].match(/^(\s*)[-*+]\s+(.+)$/);
+    const orderedItem = lines[index].match(/^\s*\d+[.)]\s+(.+)$/);
+    if (unorderedItem || orderedItem) {
+      const isOrdered = Boolean(orderedItem);
+      const items = [];
+
+      while (index < lines.length) {
+        const match = isOrdered
+          ? lines[index].match(/^\s*\d+[.)]\s+(.+)$/)
+          : lines[index].match(/^(\s*)[-*+]\s+(.+)$/);
+        if (!match) break;
+
+        items.push({
+          text: isOrdered ? match[1] : match[2],
+          indent: isOrdered ? 0 : match[1].length,
+        });
+        index += 1;
+      }
+
+      const List = isOrdered ? "ol" : "ul";
+      blocks.push(
+        <List
+          key={`list-${index}`}
+          className={`chat-markdown__list ${
+            isOrdered ? "chat-markdown__list--ordered" : ""
+          }`}
+        >
+          {items.map((item, itemIndex) => (
+            <li
+              key={`list-${index}-${itemIndex}`}
+              style={{ marginLeft: item.indent ? `${Math.min(item.indent, 6)}rem` : undefined }}
+            >
+              {renderInlineMarkdown(item.text, `list-${index}-${itemIndex}`)}
+            </li>
+          ))}
+        </List>,
+      );
+      continue;
+    }
+
+    const paragraph = [line];
+    index += 1;
+    while (index < lines.length) {
+      const nextLine = lines[index].trim();
+      if (
+        !nextLine ||
+        /^(#{1,6})\s+/.test(nextLine) ||
+        /^([-*+])\s+/.test(nextLine) ||
+        /^\d+[.)]\s+/.test(nextLine)
+      ) {
+        break;
+      }
+      paragraph.push(nextLine);
+      index += 1;
+    }
+
+    blocks.push(
+      <p key={`paragraph-${index}`} className="chat-markdown__paragraph">
+        {renderInlineMarkdown(paragraph.join(" "), `paragraph-${index}`)}
+      </p>,
+    );
+  }
+
+  return blocks;
+};
+
 const TypewriterMessage = ({ text, isBot, animate, onComplete }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -54,33 +204,10 @@ const TypewriterMessage = ({ text, isBot, animate, onComplete }) => {
     return () => clearInterval(interval);
   }, [text, isBot, animate]);
 
-  // Parse and render links
-  const renderWithLinks = (str) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const parts = str.split(urlRegex);
-
-    return parts.map((part, idx) => {
-      if (/^https?:\/\//.test(part)) {
-        return (
-          <a
-            key={idx}
-            href={part}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-neon-cyan hover:text-neon-purple underline transition break-all"
-          >
-            {part}
-          </a>
-        );
-      }
-      return <span key={idx}>{part}</span>;
-    });
-  };
-
   return (
     <div className="flex items-end gap-2">
-      <div className="flex flex-col gap-1 flex-1">
-        <div>{renderWithLinks(displayedText)}</div>
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
+        <div className="chat-markdown">{renderMarkdown(displayedText)}</div>
         {!isComplete && isBot && (
           <span className="inline-block w-2 h-4 bg-neon-cyan animate-pulse" />
         )}
@@ -180,7 +307,6 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
       setActiveTypingId(botMessage.id);
     } catch (error) {
       if (error.name === "AbortError") return;
-      console.error("Chat error:", error);
       addMessage(
         "Sorry, something went wrong. Please try again in a moment.",
         "bot",
@@ -225,7 +351,6 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
       setCopiedId(message.id);
       setTimeout(() => setCopiedId(null), 1600);
     } catch (error) {
-      console.error("Copy failed:", error);
     }
   };
 
@@ -366,7 +491,7 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
             >
               <div
                 className={`px-5 py-3 rounded-2xl transition-all duration-300 ${
-                  isExpanded ? "max-w-2xl px-6 py-4 text-lg" : "max-w-xs"
+                  isExpanded ? "max-w-2xl px-6 py-4 text-lg" : "max-w-screen-sm"
                 } ${
                   msg.sender === "user"
                     ? "bg-gradient-to-r from-neon-cyan/30 to-neon-cyan/10 text-gray-100 rounded-br-none shadow-lg shadow-neon-cyan/10 border border-neon-cyan/30"

@@ -185,7 +185,7 @@ textarea:focus-visible {
 .chatbot-page {
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - 13rem);
+  height: calc(140dvh - 13rem);
   min-height: 32rem;
   max-height: 52rem;
   overflow: hidden;
@@ -864,6 +864,68 @@ textarea:focus-visible {
 
 .message-container {
   scrollbar-gutter: stable;
+}
+
+.chat-markdown {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #111827;
+  line-height: 1.65;
+}
+
+.chat-markdown__paragraph {
+  margin: 0;
+}
+
+.chat-markdown__paragraph + .chat-markdown__paragraph {
+  margin-top: 0.75rem;
+}
+
+.chat-markdown__heading {
+  margin: 0 0 0.5rem;
+  color: #172554;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.chat-markdown__heading--1 {
+  font-size: 1.35rem;
+}
+
+.chat-markdown__heading--2 {
+  font-size: 1.15rem;
+}
+
+.chat-markdown__heading--3,
+.chat-markdown__heading--4,
+.chat-markdown__heading--5,
+.chat-markdown__heading--6 {
+  font-size: 1rem;
+}
+
+.chat-markdown__list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.65rem 0;
+  padding-left: 1.4rem;
+}
+
+.chat-markdown__list--ordered {
+  list-style-type: decimal;
+}
+
+.chat-markdown__list:not(.chat-markdown__list--ordered) {
+  list-style-type: disc;
+}
+
+.chat-markdown__list li {
+  padding-left: 0.2rem;
+}
+
+.chat-markdown__rule {
+  margin: 0.85rem 0;
+  border: 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.15);
 }
 
 /* ============ DARK TERTIARY COLOR (NEW CLASS) ============ */

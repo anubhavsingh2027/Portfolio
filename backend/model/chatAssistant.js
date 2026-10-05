@@ -10,6 +10,11 @@ const chatSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    normalizedQuestion: {
+      type: String,
+      required: true,
+      index: true,
+    },
   },
   { timeStamp: true },
 );

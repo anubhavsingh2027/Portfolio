@@ -74,7 +74,6 @@ export const contact = async (req, res) => {
       "Failed to send confirmation email",
     );
   } catch (err) {
-    console.error("Contact form error:", err);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -109,7 +108,6 @@ export const speedMail = async (req, res) => {
       "Failed to send email",
     );
   } catch (err) {
-    console.error("Speed mail error:", err);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

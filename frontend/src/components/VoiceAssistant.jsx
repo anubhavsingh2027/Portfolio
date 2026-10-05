@@ -103,7 +103,6 @@ function VoiceAssistant({ isOpen, onClose }) {
       setStatus("Speaking...");
       speak(answer, { rate: 0.85, pitch: 1.3 });
     } catch (error) {
-      console.error("Voice error:", error);
       setResponse("Sorry, something went wrong. Please try again.");
       setStatus("Error. Tap mic to try again.");
     }
