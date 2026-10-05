@@ -144,7 +144,7 @@ ${JSON.stringify(intentData)}
     const data = new chatAssist({
       question: cleanQuestion,
       answer,
-      normalizedQuestion,
+      normalizedQuestion:analysis.updatedQuery,
     });
     await data.save();
 
