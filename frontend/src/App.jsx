@@ -13,6 +13,7 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import VisitorWelcomeModal from "./components/VisitorWelcomeModal";
 import CustomCursor from "./components/CustomCursor";
+import CommandPalette from "./components/CommandPalette";
 
 import { useScrollIntoView } from "./hooks/useScrollIntoView";
 import RubiksCube3D from "./components/RubiksCube3D";
