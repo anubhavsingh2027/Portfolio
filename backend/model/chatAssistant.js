@@ -10,13 +10,21 @@ const chatSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    normalizedQuestion: {
+    updatedQuery: {
       type: String,
       required: true,
-      index: true,
+    },
+    intent: {
+      type: String,
+      required: true,
+    },
+    entities: {
+      type: [String],
+      required: true,
+      default: [],
     },
   },
-  { timeStamp: true },
+  { timestamps: true },
 );
 
 export default mongoose.model("chatData", chatSchema);

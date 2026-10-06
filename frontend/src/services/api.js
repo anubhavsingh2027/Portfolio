@@ -1,4 +1,4 @@
-const API_URL = "https://anubhav-portfolio-backend.onrender.com/portfolio/";
+const API_URL = "http://localhost:8000/portfolio/";
 
 const handleFetch = async (endpoint, options = {}) => {
   try {

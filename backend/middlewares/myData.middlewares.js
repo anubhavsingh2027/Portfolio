@@ -2,9 +2,11 @@ export const myDB = `
 {
   "personalInfo": {
     "name": "Anubhav Singh",
-    "professionalTitle": "Software Engineer (Full-Stack) | Backend AI Engineering Intern @ FlyRank AI | MERN | Redis | Docker | AI | C++ (900+ DSA)",
+    "professionalTitle": "Software Engineer (Full-Stack) | MERN | Redis | Docker | AI | C++ (1000+ DSA)",
     "tagline": "Building scalable backend systems, AI-powered applications, and modern full-stack solutions.",
     "location": "Varanasi, Uttar Pradesh, India",
+    "portfolioUrl": "https://anubhav.nav-code.com/",
+    "resumeUrl": "https://anubhav.nav-code.com/resume",
     "dateOfBirth": "05 June 2005",
     "age": 20,
     "currentAge": "20 years",
@@ -12,9 +14,9 @@ export const myDB = `
     "experienceYears": 3,
     "projectsCompleted": 20,
     "fullStackProjects": 15,
-    "problemsSolvedInLeetcode": 900,
-    "leetcodeStreak": "450+ days",
-    "leetcodeStreakMaintain": "450days+",
+    "problemsSolvedInLeetcode": "1000+",
+    "leetcodeStreak": "600+ days",
+    "leetcodeStreakMaintain": "600+ days",
     "leetcodeContestRanking": "Top 15%",
     "hackerRankCPlusPlus": "5★",
     "learningExperienceYears": 3,
@@ -49,8 +51,8 @@ export const myDB = `
   "achievements": {
     "summary": "A results-driven engineer with strong competitive programming performance and hands-on project experience across backend, full-stack, and AI domains.",
     "items": [
-      "900+ DSA Problems Solved",
-      "450+ Day LeetCode Streak",
+      "1000+ LeetCode Problems Solved",
+      "600+ Day LeetCode Streak",
       "Top 15% LeetCode Contest Ranking",
       "5★ HackerRank (C++)",
       "20+ Projects Built",
@@ -66,15 +68,16 @@ export const myDB = `
       "role": "Backend AI Engineering Intern",
       "employmentType": "Internship",
       "mode": "Remote",
-      "duration": "July 2026 – Present",
-      "description": "Working as a Backend AI Engineering Intern at FlyRank AI, gaining hands-on experience in backend development, AI engineering, and modern software engineering through structured projects, technical assignments, mentorship, and industry-focused learning.",
+      "duration": "July 2026 – September 2026",
+      "status": "Completed",
+      "description": "Completed a Backend AI Engineering internship at FlyRank AI, gaining hands-on experience in backend development, AI engineering, and modern software engineering through structured projects, technical assignments, mentorship, and industry-focused learning.",
       "responsibilities": [
-        "Participating in a structured Backend AI Engineering internship program.",
-        "Building AI-powered backend applications and scalable REST APIs.",
-        "Learning modern backend architecture, system design, and AI integration.",
-        "Completing hands-on technical assignments and real-world engineering projects.",
-        "Collaborating with mentors and a global community of interns from 130+ countries.",
-        "Strengthening backend development, debugging, API design, software engineering, and problem-solving skills."
+        "Participated in a structured Backend AI Engineering internship program.",
+        "Built AI-powered backend applications and scalable REST APIs.",
+        "Applied modern backend architecture, system design, and AI integration.",
+        "Completed hands-on technical assignments and real-world engineering projects.",
+        "Collaborated with mentors and a global community of interns from 130+ countries.",
+        "Strengthened backend development, debugging, API design, software engineering, and problem-solving skills."
       ],
       "techStack": [
         "Node.js",
@@ -179,7 +182,7 @@ export const myDB = `
   "codingProfiles": {
     "github": "https://github.com/anubhavsingh2027",
     "linkedin": "https://www.linkedin.com/in/anubhav-singh-09b71829b/",
-    "leetcode": "https://leetcode.com/u/anubhavsingh2027/",
+    "leetcode": "https://leetcode.com/u/anubhav_singh_6966/",
     "hackerrank": "https://www.hackerrank.com/profile/anubhavsingh2027",
     "twitter": "https://x.com/Anubhav7355",
     "telegram": "https://t.me/Anubhav_singh7355",
@@ -194,17 +197,24 @@ export const myDB = `
       "name": "KashiRoute",
       "category": ["Full Stack", "Travel & Booking", "MERN"],
       "description": "A responsive travel and tour booking platform for Varanasi with service booking, user and admin dashboards, and secure payment workflows.",
-      "techStack": ["React", "Tailwind CSS", "JavaScript", "Node.js", "Express", "MongoDB", "Redis", "Razorpay"],
+      "techStack": ["React", "Tailwind CSS", "JavaScript", "Node.js", "Express.js", "MongoDB", "Mongoose", "Redis", "Razorpay", "Docker"],
       "features": [
         "AI Chatbot",
         "Redis Caching",
         "JWT Authentication",
         "RBAC",
         "Razorpay Payment Integration",
+        "Payment Verification",
         "Travel Package Booking",
         "Vehicle Booking",
+        "Booking History",
+        "OTP Email Verification",
+        "Booking Notifications",
         "Admin Dashboard",
         "User Dashboard",
+        "Role Management",
+        "HTTP-only Cookies",
+        "CORS Protection",
         "Responsive UI",
         "Scalable Backend",
         "REST APIs"
@@ -225,17 +235,20 @@ export const myDB = `
       "name": "Real Time Chat",
       "category": ["Full Stack", "Real-Time", "MERN"],
       "description": "A real-time messaging platform with online presence, typing indicators, and scalable backend services for interactive communication.",
-      "techStack": ["React", "JavaScript", "Node.js", "Express", "MongoDB", "Socket.IO", "Redis"],
+      "techStack": ["MERN", "Node.js", "Express.js", "MongoDB", "Socket.IO", "WebSockets", "Redis", "Redis Pub/Sub", "JWT", "RBAC", "Docker"],
       "features": [
         "Socket.IO",
-        "Redis",
-        "Authentication",
-        "Online Users",
+        "WebSockets",
+        "Redis Pub/Sub",
+        "JWT Authentication",
+        "RBAC",
+        "Rate Limiting",
+        "Secure Messaging",
+        "Online Presence",
         "Typing Indicators",
-        "Real-time Messaging",
-        "Scalable Backend",
-        "REST APIs",
-        "MongoDB"
+        "Real-time Notifications",
+        "Event-driven Architecture",
+        "Cloud Deployment"
       ],
       "architecture": "The application uses Socket.IO for bidirectional communication, Node.js and Express.js for server logic, MongoDB for chat persistence, and Redis for live-state efficiency.",
       "authentication": "User authentication is implemented to secure chat sessions and manage active users.",
@@ -280,14 +293,20 @@ export const myDB = `
     {
       "name": "PhishShield",
       "category": ["Cyber Security", "MERN"],
-      "description": "A phishing detection platform using real-time URL scanning APIs for threat analysis and digital safety assessment.",
-      "techStack": ["React", "JavaScript", "Node.js", "MongoDB", "Express"],
+      "description": "A URL threat detection platform using an XGBoost machine-learning model and Google Safe Browsing API for threat analysis and digital safety assessment.",
+      "techStack": ["React", "JavaScript", "Node.js", "MongoDB", "Express", "XGBoost", "Google Safe Browsing API"],
       "features": [
         "Real-time phishing detection",
         "User authentication",
         "Report download",
         "Secure system",
-        "Advanced threat analysis"
+        "Advanced threat analysis",
+        "XGBoost URL threat detection",
+        "Google Safe Browsing API",
+        "REST APIs",
+        "OTP authentication",
+        "Secure input validation",
+        "MongoDB indexing"
       ],
       "architecture": "A React UI is supported by a backend service that processes requests, evaluates threat data, and serves secure reporting features.",
       "authentication": "User authentication provides secure access to report and analysis workflows.",
@@ -465,7 +484,7 @@ export const myDB = `
   ],
   
   "moreInformation": {
-    "bestProjectCurrently": "Real Time Chat",
+    "bestProjectCurrently": "KashiRoute",
     "moreProjectsLocation": "Visit GitHub for more projects",
     "currentProjectWorking": "DSA Visualization"
   }

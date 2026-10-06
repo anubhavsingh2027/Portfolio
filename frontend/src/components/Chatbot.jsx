@@ -16,10 +16,59 @@ import {
 import { chatAssistant } from "../services/api";
 
 const QUICK_PROMPTS = [
-  "What projects best show your skills?",
-  "Tell me about your experience",
-  "What can you build for my business?",
+  "What projects best show Anubhav’s backend skills?",
+  "Tell me about his experience",
+  "What technologies does he use most?",
 ];
+
+const isHtmlMessage = (text) =>
+  /<\s*(?:p|strong|em|ul|ol|li|h[1-6]|a|br|div|table|thead|tbody|tr|th|td)\b[^>]*>/i.test(text);
+
+const sanitizeHtmlMessage = (html) => {
+  if (typeof window === "undefined") return "";
+
+  const document = new DOMParser().parseFromString(html, "text/html");
+  const allowedTags = new Set([
+    "P", "STRONG", "EM", "UL", "OL", "LI", "H1", "H2", "H3", "H4", "H5", "H6",
+    "A", "BR", "DIV", "TABLE", "THEAD", "TBODY", "TR", "TH", "TD",
+  ]);
+  const allowedClasses = new Set(["chat-answer-grid", "chat-answer-card", "chat-answer-table-wrap"]);
+
+  document.body.querySelectorAll("*").forEach((element) => {
+    if (!allowedTags.has(element.tagName)) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+
+    [...element.attributes].forEach((attribute) => {
+      if (
+        (element.tagName !== "A" || !["href", "target", "rel"].includes(attribute.name)) &&
+        (element.tagName !== "DIV" || attribute.name !== "class")
+      ) {
+        element.removeAttribute(attribute.name);
+      }
+    });
+
+    if (element.tagName === "DIV") {
+      const classes = (element.getAttribute("class") || "")
+        .split(/\s+/)
+        .filter((className) => allowedClasses.has(className));
+      if (classes.length) element.setAttribute("class", classes.join(" "));
+      else element.removeAttribute("class");
+    }
+
+    if (element.tagName === "A") {
+      const href = element.getAttribute("href") || "";
+      if (!href.startsWith("https://")) {
+        element.removeAttribute("href");
+      }
+      element.setAttribute("target", "_blank");
+      element.setAttribute("rel", "noopener noreferrer");
+    }
+  });
+
+  return document.body.innerHTML;
+};
 
 const renderInlineMarkdown = (text, keyPrefix) => {
   const tokenPattern = /(https?:\/\/[^\s<]+|`[^`]+`|\*\*[^*]+\*\*|__[^_]+__)/g;
@@ -176,12 +225,20 @@ const TypewriterMessage = ({ text, isBot, animate, onComplete }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const onCompleteRef = useRef(onComplete);
+  const htmlMessage = isHtmlMessage(text);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
   useEffect(() => {
+    if (htmlMessage) {
+      setDisplayedText(text);
+      setIsComplete(true);
+      onCompleteRef.current?.();
+      return undefined;
+    }
+
     if (!isBot || !animate) {
       setDisplayedText(text);
       setIsComplete(true);
@@ -202,12 +259,16 @@ const TypewriterMessage = ({ text, isBot, animate, onComplete }) => {
     }, 24);
 
     return () => clearInterval(interval);
-  }, [text, isBot, animate]);
+  }, [text, isBot, animate, htmlMessage]);
 
   return (
     <div className="flex items-end gap-2">
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <div className="chat-markdown">{renderMarkdown(displayedText)}</div>
+        <div className="chat-markdown">
+          {htmlMessage
+            ? <div dangerouslySetInnerHTML={{ __html: sanitizeHtmlMessage(displayedText) }} />
+            : renderMarkdown(displayedText)}
+        </div>
         {!isComplete && isBot && (
           <span className="inline-block w-2 h-4 bg-neon-cyan animate-pulse" />
         )}
@@ -226,7 +287,7 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
             {
               id: 1,
               sender: "bot",
-              text: "Hi! I’m Anubhav’s AI assistant. Ask me about projects, experience, or how we could work together.",
+              text: "Hi! I’m Anubhav Singh’s portfolio assistant. Ask me about his projects, skills, experience, or hiring fit.",
             },
           ];
     } catch {
@@ -234,7 +295,7 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
         {
           id: 1,
           sender: "bot",
-          text: "Hi! I’m Anubhav’s AI assistant. Ask me about projects, experience, or how we could work together.",
+          text: "Hi! I’m Anubhav Singh’s portfolio assistant. Ask me about his projects, skills, experience, or hiring fit.",
         },
       ];
     }
@@ -338,7 +399,7 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
     const welcome = {
       id: messageIdRef.current++,
       sender: "bot",
-      text: "Fresh start. What would you like to know about Anubhav’s work?",
+      text: "Fresh start. What would you like to know about Anubhav Singh’s portfolio?",
     };
     setMessages([welcome]);
     setVisibleStart(0);
@@ -491,11 +552,11 @@ function Chatbot({ isOpen, isPage = false, onClose, onVoiceSwitch }) {
             >
               <div
                 className={`px-5 py-3 rounded-2xl transition-all duration-300 ${
-                  isExpanded ? "max-w-2xl px-6 py-4 text-lg" : "max-w-screen-sm"
+                  isExpanded ? "max-w-screen-2xl px-6 py-4 text-lg" : "max-w-screen-2xl"
                 } ${
                   msg.sender === "user"
-                    ? "bg-gradient-to-r from-neon-cyan/30 to-neon-cyan/10 text-gray-100 rounded-br-none shadow-lg shadow-neon-cyan/10 border border-neon-cyan/30"
-                    : "bg-dark-tertiary text-black rounded-bl-none border border-neon-purple/20 shadow-lg shadow-neon-purple/5"
+                    ? "chat-user-message rounded-br-none"
+                    : "chat-bot-message rounded-bl-none"
                 }`}
               >
                 {msg.sender === "bot" ? (
