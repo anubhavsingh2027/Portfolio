@@ -12,6 +12,7 @@ import Connect from "./sections/Connect";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import VisitorWelcomeModal from "./components/VisitorWelcomeModal";
+import ChatbotPromptModal from "./components/ChatbotPromptModal";
 import CustomCursor from "./components/CustomCursor";
 import CommandPalette from "./components/CommandPalette";
 
@@ -69,6 +70,7 @@ function App() {
 
 function PortfolioHome({ showVisitorWelcome, onCloseWelcome }) {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
+  const [showChatbotPrompt, setShowChatbotPrompt] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const navigate = useNavigate();
   const scrollTo = useScrollIntoView();
@@ -80,6 +82,11 @@ function PortfolioHome({ showVisitorWelcome, onCloseWelcome }) {
     if (action.type === "assistant") handleAssistantClick();
     if (action.type === "resume") handleResumeClick();
   };
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowChatbotPrompt(true), 40000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleCommandShortcut = (event) => {
@@ -112,6 +119,11 @@ function PortfolioHome({ showVisitorWelcome, onCloseWelcome }) {
       <VisitorWelcomeModal
         isOpen={showVisitorWelcome}
         onClose={onCloseWelcome}
+      />
+      <ChatbotPromptModal
+        isOpen={showChatbotPrompt && !showVisitorWelcome}
+        onClose={() => setShowChatbotPrompt(false)}
+        onOpenChatbot={handleAssistantClick}
       />
       <section
         id="home"
