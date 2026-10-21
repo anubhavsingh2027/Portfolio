@@ -11,7 +11,7 @@ function About() {
   useEffect(() => {
     if (!isVisible) return;
 
-    const targets = [15, 800];
+    const targets = [15, 1000];
     targets.forEach((target, idx) => {
       if (numbersRef.current[idx]) {
         gsap.to(numbersRef.current[idx], {
@@ -110,24 +110,34 @@ function About() {
               </div>
               <div className="text-center md:text-left">
                 <p className="bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
-                  <span ref={(el) => (numbersRef.current[1] = el)}>800+</span>
+                  <span ref={(el) => (numbersRef.current[1] = el)}>1000+</span>
                 </p>
                 <p className="mt-2 text-sm font-semibold text-slate-600">DSA problems</p>
               </div>
             </div>
           </div>
 
-          <div className="order-1 flex items-center justify-center md:order-2">
-            <div className="group relative">
-              <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-r from-neon-cyan/30 via-neon-purple/25 to-neon-cyan/30 opacity-0 blur-2xl transition duration-500 group-hover:opacity-100" />
-              <div className="relative h-[380px] w-72 overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-slate-900 shadow-2xl shadow-cyan-500/10 md:h-[480px] md:w-80">
-                <img
-                  src="/assets/images/anubhavsingh.png"
-                  alt="Anubhav Singh"
-                  className="h-full w-full object-cover"
-                  onError={(e) => (e.target.src = "/assets/images/anubhavsingh.png")}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+          <div className="about-visual order-1 flex items-center justify-center md:order-2">
+            <div className="about-visual__stage group">
+              <div className="about-visual__glow" />
+              <div className="about-visual__orbit about-visual__orbit--one" />
+              <div className="about-visual__orbit about-visual__orbit--two" />
+              <div className="about-visual__cube about-visual__cube--cyan" />
+              <div className="about-visual__cube about-visual__cube--purple" />
+              <div className="about-visual__portrait">
+                <div className="about-visual__portrait-frame">
+                  <img
+                    src="/assets/images/anubhavsingh.png"
+                    alt="Anubhav Singh"
+                    className="h-full w-full object-cover"
+                    onError={(e) => (e.target.src = "/assets/images/anubhavsingh.png")}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  <div className="about-visual__label">
+                    <span className="about-visual__status" />
+                    <span>Building in 3D</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
