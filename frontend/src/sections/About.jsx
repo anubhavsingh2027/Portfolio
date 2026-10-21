@@ -133,10 +133,7 @@ function About() {
                     onError={(e) => (e.target.src = "/assets/images/anubhavsingh.png")}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                  <div className="about-visual__label">
-                    <span className="about-visual__status" />
-                    <span>Building in 3D</span>
-                  </div>
+                  
                 </div>
               </div>
             </div>
