@@ -4,7 +4,8 @@ export const myDB = `
     "name": "Anubhav Singh",
     "professionalTitle": "Software Engineer (Full-Stack) | MERN | Redis | Docker | AI | C++ (1000+ DSA)",
     "tagline": "Building scalable backend systems, AI-powered applications, and modern full-stack solutions.",
-    "location": "Varanasi, Uttar Pradesh, India",
+    "Home location": "Varanasi, Uttar Pradesh, India",
+    "current location":"Kanpur psit hostel",
     "portfolioUrl": "https://anubhav.nav-code.com/",
     "resumeUrl": "https://anubhav.nav-code.com/resume",
     "dateOfBirth": "05 June 2005",
@@ -39,15 +40,15 @@ export const myDB = `
     ]
   },
   "careerObjective": {
-    "summary": "To build impactful backend systems, scalable cloud applications, and AI-driven product experiences by combining software engineering fundamentals, modern architecture, and continuous learning.",
-    "focusAreas": [
-      "Backend Engineering",
-      "Software Engineering",
-      "AI Engineering",
-      "Distributed Systems",
-      "Cloud Applications"
-    ]
-  },
+  "summary": "To build impactful backend systems, scalable cloud applications, and AI-driven product experiences by combining software engineering fundamentals, modern architecture, and continuous learning. Actively seeking software engineering opportunities and open to relocation for the right role.",
+  "focusAreas": [
+    "Backend Engineering",
+    "Software Engineering",
+    "AI Engineering",
+    "Distributed Systems",
+    "Cloud Applications"
+  ]
+},
   "achievements": {
     "summary": "A results-driven engineer with strong competitive programming performance and hands-on project experience across backend, full-stack, and AI domains.",
     "items": [
@@ -102,7 +103,7 @@ export const myDB = `
       "field": "Computer Science & Engineering",
       "specialization": "Artificial Intelligence",
       "institution": "PSIT Kanpur",
-      "university": "AKTU",
+      "university": "AKTU Lucknow",
       "location": "Kanpur, Uttar Pradesh, India",
       "status": "Currently Pursuing",
       "expectedGraduation": 2027
@@ -482,7 +483,7 @@ export const myDB = `
     "Debugging",
     "Backend Development"
   ],
-  
+
   "moreInformation": {
     "bestProjectCurrently": "KashiRoute",
     "moreProjectsLocation": "Visit GitHub for more projects",

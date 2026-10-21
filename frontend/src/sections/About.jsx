@@ -60,59 +60,59 @@ function About() {
               About Me
             </span>
           </h2>
-          <p className="mx-auto max-w-3xl text-base text-slate-300 md:text-xl">
+          <p className="mx-auto max-w-3xl text-base font-medium leading-relaxed text-slate-600 md:text-xl">
             Backend & Full-Stack Developer • B.Tech CSE (AI) student • AI-focused problem solver
           </p>
           <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-neon-cyan to-neon-purple" />
         </div>
 
         <div className="grid items-center gap-12 md:grid-cols-2 lg:gap-16">
-          <div className="order-2 space-y-6 md:order-1">
-            <div ref={(el) => (textRefs.current[0] = el)} className="opacity-0">
+          <div className="order-2 space-y-6 rounded-3xl border border-slate-200/80 bg-white/55 p-5 shadow-xl shadow-slate-900/5 backdrop-blur-sm sm:p-7 md:order-1 md:p-8">
+            <div ref={(el) => (textRefs.current[0] = el)}>
               <div className="mb-4 flex items-start gap-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-neon-cyan/50 bg-neon-cyan/20">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-cyan-600/30 bg-cyan-100">
                   <FaCode className="text-lg text-neon-cyan" />
                 </div>
-                <p className="text-lg leading-relaxed text-slate-200">
-                  I’m <span className="font-bold text-white">Anubhav Singh</span>, a B.Tech CSE (AI) student building software that connects user experiences, APIs, and reliable backend systems.
+                <p className="text-base font-medium leading-7 text-slate-700 sm:text-lg">
+                  I’m <span className="font-bold text-slate-950">Anubhav Singh</span>, a B.Tech CSE (AI) student building software that connects user experiences, APIs, and reliable backend systems.
                 </p>
               </div>
             </div>
 
-            <div ref={(el) => (textRefs.current[1] = el)} className="opacity-0">
+            <div ref={(el) => (textRefs.current[1] = el)}>
               <div className="mb-4 flex items-start gap-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-neon-purple/50 bg-neon-purple/20">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-purple-600/30 bg-purple-100">
                   <FaRocket className="text-lg text-neon-purple" />
                 </div>
-                <p className="text-lg leading-relaxed text-slate-200">
+                <p className="text-base font-medium leading-7 text-slate-700 sm:text-lg">
                   My focus is backend development, full-stack product engineering, REST APIs, databases, authentication, and real-time systems. I enjoy turning ideas into maintainable builds that are practical, fast, and production-minded.
                 </p>
               </div>
             </div>
 
-            <div ref={(el) => (textRefs.current[2] = el)} className="opacity-0">
+            <div ref={(el) => (textRefs.current[2] = el)}>
               <div className="mb-6 flex items-start gap-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-cyan-400/50 bg-cyan-400/10">
-                  <FaHeart className="text-lg text-cyan-300" />
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-cyan-600/30 bg-cyan-100">
+                  <FaHeart className="text-lg text-cyan-700" />
                 </div>
-                <p className="text-lg leading-relaxed text-slate-200">
+                <p className="text-base font-medium leading-7 text-slate-700 sm:text-lg">
                   I’m currently growing through a Backend AI Engineering internship and building projects around real APIs, scalable services, and AI-enabled workflows, with a strong interest in DSA and problem solving.
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 border-t border-neon-cyan/30 pt-8">
+            <div className="grid grid-cols-2 gap-6 border-t border-cyan-700/20 pt-8">
               <div className="text-center md:text-left">
                 <p className="bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                   <span ref={(el) => (numbersRef.current[0] = el)}>15+</span>
                 </p>
-                <p className="mt-2 text-sm font-medium text-slate-300">Projects shipped</p>
+                <p className="mt-2 text-sm font-semibold text-slate-600">Projects shipped</p>
               </div>
               <div className="text-center md:text-left">
                 <p className="bg-gradient-to-r from-neon-purple to-neon-cyan bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                   <span ref={(el) => (numbersRef.current[1] = el)}>800+</span>
                 </p>
-                <p className="mt-2 text-sm font-medium text-slate-300">DSA problems</p>
+                <p className="mt-2 text-sm font-semibold text-slate-600">DSA problems</p>
               </div>
             </div>
           </div>
