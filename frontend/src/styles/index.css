@@ -15,6 +15,10 @@ html {
   overflow-x: hidden;
 }
 
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   @apply bg-gradient-to-b from-blue-50 to-cyan-50 text-gray-900 font-poppins antialiased overflow-x-hidden;
   background-image:

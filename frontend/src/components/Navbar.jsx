@@ -46,7 +46,7 @@ function Navbar({ onResumeClick, onAssistantClick, onCommandClick }) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
           ? "bg-slate-950/90 shadow-lg backdrop-blur-md"
           : "bg-slate-950/70 backdrop-blur-sm"

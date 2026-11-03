@@ -34,7 +34,7 @@ function ChatbotPage() {
         onAssistantClick={() => navigate("/chatbot")}
         onCommandClick={() => setShowCommandPalette(true)}
       />
-      <main className="min-h-[120dvh] px-3 pb-6 pt-28 sm:px-4 md:px-8 md:pb-10">
+      <main className="min-h-[120dvh] px-3 pb-6 pt-8 sm:px-4 md:px-8 md:pb-10">
         <div className="mx-auto flex max-w-5xl flex-col">
           <div className="mb-6 flex items-end justify-between gap-4">
             <div>

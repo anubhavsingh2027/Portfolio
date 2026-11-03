@@ -99,6 +99,11 @@ function PortfolioHome() {
         onClose={() => setShowChatbotPrompt(false)}
         onOpenChatbot={handleAssistantClick}
       />
+      <Navbar
+        onResumeClick={handleResumeClick}
+        onAssistantClick={handleAssistantClick}
+        onCommandClick={() => setShowCommandPalette(true)}
+      />
       <section
         id="home"
         className="relative w-full flex flex-col lg:flex-row overflow-visible"
@@ -196,12 +201,6 @@ function PortfolioHome() {
           <RubiksCube3D />
         </div>
       </section>
-
-      <Navbar
-        onResumeClick={handleResumeClick}
-        onAssistantClick={handleAssistantClick}
-        onCommandClick={() => setShowCommandPalette(true)}
-      />
 
       <div className="scroll-progress" aria-hidden="true">
         <span style={{ width: `${scrollProgress}%` }} />
