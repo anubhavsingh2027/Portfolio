@@ -178,6 +178,10 @@ function Footer() {
           <p className="text-black text-xs md:text-sm opacity-70">
             © {new Date().getFullYear()} Anubhav Singh. All rights reserved.
           </p>
+          <p className="text-black text-xs opacity-60">
+            Anonymous page-view analytics may record referral source. No name or
+            email is collected unless you choose to use the contact form.
+          </p>
         </div>
 
         {/* Scroll to Top Button */}

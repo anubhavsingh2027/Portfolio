@@ -13,18 +13,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>,
 );
 
-// Track new user visit
+// Track one anonymous visit per page load without collecting contact details.
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
-  const source = params.get("source");
-  fetch(`https://app.chatting.nav-code.com/detector/newUser/portfolio?source=${source || 'Direct'}`, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      // User visited
-    })
-    .catch((err) => {
-      // Visit tracking failed
-    });
+  const rawSource = params.get("source")?.trim();
+  const source = rawSource ? rawSource.slice(0, 100) : "Direct";
+  const analyticsUrl = new URL(
+    "https://app.chatting.nav-code.com/detector/newUser/portfolio",
+  );
+  analyticsUrl.search = new URLSearchParams({ source }).toString();
+
+  fetch(analyticsUrl.toString(), { method: "GET" }).catch(() => {
+    // Analytics failure must never affect portfolio access.
+  });
 });

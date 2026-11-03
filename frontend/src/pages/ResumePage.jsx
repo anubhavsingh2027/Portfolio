@@ -1,9 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import VisitorWelcomeModal from "../components/VisitorWelcomeModal";
 import CustomCursor from "../components/CustomCursor";
 
-function ResumePage({ showVisitorWelcome, onCloseWelcome }) {
+function ResumePage() {
   const navigate = useNavigate();
 
   const handleDownload = () => {

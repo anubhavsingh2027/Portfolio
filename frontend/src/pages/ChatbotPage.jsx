@@ -4,10 +4,9 @@ import Navbar from "../components/Navbar";
 import Chatbot from "../components/Chatbot";
 import VoiceAssistant from "../components/VoiceAssistant";
 import CommandPalette from "../components/CommandPalette";
-import VisitorWelcomeModal from "../components/VisitorWelcomeModal";
 import CustomCursor from "../components/CustomCursor";
 
-function ChatbotPage({ showVisitorWelcome, onCloseWelcome }) {
+function ChatbotPage() {
   const navigate = useNavigate();
   const [showVoiceAssistant, setShowVoiceAssistant] = useState(false);
   const [showCommandPalette, setShowCommandPalette] = useState(false);
@@ -30,7 +29,6 @@ function ChatbotPage({ showVisitorWelcome, onCloseWelcome }) {
   return (
     <div className="min-h-screen bg-dark-bg font-poppins text-gray-900">
       <CustomCursor />
-      <VisitorWelcomeModal isOpen={showVisitorWelcome} onClose={onCloseWelcome} />
       <Navbar
         onResumeClick={() => navigate("/resume")}
         onAssistantClick={() => navigate("/chatbot")}

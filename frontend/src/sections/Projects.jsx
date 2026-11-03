@@ -6,7 +6,7 @@ import { FaSearch, FaSlidersH } from "react-icons/fa";
 const projectsData = [
   {
     id: 1,
-    title: "Kashiroute",
+    title: "KashiRoute",
     description:
       "Kashiroute is a full-stack travel discovery platform with an intent-aware chatbot that helps users explore Varanasi experiences and plan trips around verified local offerings.",
     image: "/assets/images/kashiRoute.png",
